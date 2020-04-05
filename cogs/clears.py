@@ -526,7 +526,9 @@ For Wanderer: {list_wand}
                 noppie += 1
         embed = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
         while x <= len(namae):
-            embed.add_field(name = f"Field {x}", f"{namae[x]} - {kurasu[x]} - {stat[x]}", inline = False})
+            embed.add_field(name = "IGN", value = namae[x], inline = True)
+            embed.add_field(name = "Class", value = kurasu[x], inline = True)
+            embed.add_field(name = "Answer", value = stat[x], inline = True)
             x = x + 1
         await ctx.send(embed)
         #return

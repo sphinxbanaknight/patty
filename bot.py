@@ -7,6 +7,7 @@ import pprint
 from oauth2client import file as oauth_file, client, tools
 from apiclient.discovery import build
 from httplib2 import Http
+from boto.s3.connection import S3Connection
 
 from discord.ext import commands, tasks
 
@@ -62,4 +63,4 @@ async def on_command_error(ctx, error):
 
 
 
-client.run('Njk0Mjg1NTE0NTc2MjMyNTE5.XoJZ0g.BSzbWRetqBta_RNNzNYDG6m73FE', reconnect = True)
+client.run(os.environ['token'], reconnect = True)

@@ -17,7 +17,7 @@ scope = ['https://spreadsheets.google.com/feeds',
 basedir = os.path.abspath(os.path.dirname(__file__))
 data_json = basedir+'/client_secret.json'
 
-creds = ServiceAccountCredentials.from_json_keyfile_name(data_json, scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name(os.environ['secret'], scope)
 gc = gspread.authorize(creds)
 
 sheet = gc.open('Copy of BK ROSTER').sheet1

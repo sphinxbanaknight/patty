@@ -30,4 +30,4 @@ uritemplate==3.0.1
 urllib3==1.25.8
 websockets==8.1
 yarl==1.4.2
-git+https://github.com/burnash/gspread
+git+https://github.com/burnash/gspread.git

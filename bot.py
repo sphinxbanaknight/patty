@@ -7,7 +7,7 @@ import pprint
 from oauth2client import file as oauth_file, client, tools
 from apiclient.discovery import build
 from httplib2 import Http
-from boto.s3.connection import S3Connection
+#from boto.s3.connection import S3Connection
 
 from discord.ext import commands, tasks
 

@@ -6,3 +6,4 @@ BKbotv2.py
 BKbot.py
 __pycache__/
 .idea/
+prefixes.json

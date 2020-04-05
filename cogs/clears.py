@@ -524,10 +524,11 @@ For Wanderer: {list_wand}
                 yuppie += 1
             else:
                 noppie += 1
-        await ctx.send('CURRENT WOE ROSTER:')
+        embed = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
         while x <= len(namae):
-            await ctx.send(f'{namae[x]} - {kurasu[x]} - {stat[x]}')
+            embed.add_field(name = f"Field {x}", f"{namae[x]} - {kurasu[x]} - {stat[x]}", inline = False})
             x = x + 1
+        await ctx.send(embed)
         #return
         await ctx.send(f'No. of players who said yes: {yuppie}')
         await ctx.send(f'No. of players who said no: {noppie}')

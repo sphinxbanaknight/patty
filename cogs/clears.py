@@ -67,16 +67,32 @@ class Clears(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+
+
+#    async def sorted(self, ctx):
+#        channel = ctx.message.channel
+#        commander = ctx.author.name
+#        if channel.id == botinit_id:
+#            cell_list = sheet.range(guild_range)
+#            sheet.sort((4, 'asc'), range=guild_range)
+#            cell_list = sheet.range(roster_range)
+#            sheet.sort((9, 'des'), (8, 'asc'), range=roster_range)
+#            await ctx.send(f'{commander} has sorted the sheets.')
+#        else:
+#            await ctx.send(f'Wrong channel! Please use #bot.')
+
     @commands.command()
     async def sorted(self, ctx):
         channel = ctx.message.channel
         commander = ctx.author.name
+            #await ctx.send('test')
         if channel.id == botinit_id:
-            cell_list = sheet.range(guild_range)
-            sheet.sort((4, 'asc'), range=guild_range)
-            cell_list = sheet.range(roster_range)
-            sheet.sort((9, 'des'), (8, 'asc'), range=roster_range)
+            cell_list = sheet.range("B3:E46")
+            sheet.sort((4, 'asc'), range="B3:E46")
+            cell_list = sheet.range("G3:J46")
+            sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
             await ctx.send(f'{commander} has sorted the sheets.')
+
         else:
             await ctx.send(f'Wrong channel! Please use #bot.')
 

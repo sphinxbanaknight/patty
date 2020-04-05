@@ -529,6 +529,7 @@ For Wanderer: {list_wand}
         except Exception as e:
             print(e)
             return
+        x = 0
         while x <= len(namae):
             try:
                 embed.add_field(name = "IGN", value = namae[x], inline = True)

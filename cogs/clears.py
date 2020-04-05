@@ -90,7 +90,11 @@ class Clears(commands.Cog):
             await ctx.send('debug1')
             cell_list = sheet.range("B3:E46")
             await ctx.send('debug2')
-            sheet.sort((4, 'asc'), range = "B3:E46")
+            try:
+                sheet.sort((4, 'asc'), range = "B3:E46")
+            except Exception as e:
+                print(e)
+                return
             await ctx.send('debug3')
             cell_list = sheet.range("G3:J46")
             await ctx.send('debug4')

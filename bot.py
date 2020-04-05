@@ -16,7 +16,7 @@ prefix = ["!", "$", "-", "/"]
 description = "A bot for sheet+discord linking/automation."
 client = commands.Bot(command_prefix = prefix, description = description)
 
-bot.remove_command('help')
+client.remove_command('help')
 
 #pp = pprint.PrettyPrinter()
 

@@ -4,6 +4,7 @@ import os
 import json
 import gspread
 import pprint
+import models
 from oauth2client import file as oauth_file, client, tools
 from apiclient.discovery import build
 from httplib2 import Http
@@ -91,7 +92,7 @@ class Clears(commands.Cog):
             cell_list = sheet.range("B3:E46")
             await ctx.send('debug2')
             try:
-                sheet.sort((4, 'asc'), range = "B3:E46")
+                sheet.models.sort((4, 'asc'), range = "B3:E46")
             except Exception as e:
                 print(e)
                 return

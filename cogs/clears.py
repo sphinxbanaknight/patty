@@ -15,7 +15,7 @@ scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-data_json = basedir+'/client_secret.json'
+#data_json = basedir+'/client_secret.json'
 
 creds = ServiceAccountCredentials.from_json_keyfile_name(os.environ['secret'], scope)
 gc = gspread.authorize(creds)

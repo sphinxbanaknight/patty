@@ -527,17 +527,17 @@ For Wanderer: {list_wand}
         try:
             embed = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
         except Exception as e:
-            print(e)
+            print(f'discord embed returned {e}')
             return
         x = 0
         while x <= len(namae):
             try:
-                embed.add_field(name = "IGN", value = namae[x], inline = True)
+                embed.add_field(name = "IGN", value = f'{namae[x]}', inline = True)
             except Exception as e:
-                print(e)
+                print(f'embed add field returned {e}')
                 return
-            embed.add_field(name = "Class", value = kurasu[x], inline = True)
-            embed.add_field(name = "Answer", value = stat[x], inline = True)
+            embed.add_field(name = "Class", value = f'{kurasu[x]}, inline = True)
+            embed.add_field(name = "Answer", value = f'{stat[x]}, inline = True)
             x = x + 1
         await ctx.send(embed)
         #return

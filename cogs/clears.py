@@ -524,9 +524,17 @@ For Wanderer: {list_wand}
                 yuppie += 1
             else:
                 noppie += 1
-        embed = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
+        try:
+            embed = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
+        except Exception as e:
+            print(e)
+            return
         while x <= len(namae):
-            embed.add_field(name = "IGN", value = namae[x], inline = True)
+            try:
+                embed.add_field(name = "IGN", value = namae[x], inline = True)
+            except Exception as e:
+                print(e)
+                return
             embed.add_field(name = "Class", value = kurasu[x], inline = True)
             embed.add_field(name = "Answer", value = stat[x], inline = True)
             x = x + 1

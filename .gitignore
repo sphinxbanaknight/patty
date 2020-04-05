@@ -1,3 +1,8 @@
 backup/
 client_secret.json
 venv/
+BC_roster.json
+BKbotv2.py
+BKbotv2.py
+__pycache__/
+.idea/

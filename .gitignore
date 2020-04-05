@@ -3,6 +3,6 @@ client_secret.json
 venv/
 BC_roster.json
 BKbotv2.py
-BKbotv2.py
+BKbot.py
 __pycache__/
 .idea/

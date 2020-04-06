@@ -65,7 +65,7 @@ async def on_ready():
 
     try:
         wsheet = gc.open('Copy of BK Roster').sheet5
-    except gspread.exceptions.WorksheetNotFound:
+    except gspread.exceptions.SpreadsheetNotFound:
         await ctx.send(f'Could not find 5th sheet in our GSheets, creating one now.')
         spreadsheet = gc.open('Copy of BK Roster')
         wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive')
@@ -96,7 +96,7 @@ async def on_ready():
         ph_time_now = ph_location.strftime(format)
         await asyncio.sleep(1)
         await ctx.send(ph_time_now)
-        if ph_time_now == "05:53:00:Tuesday":
+        if ph_time_now == "05:57:00:Tuesday":
             await ctx.send('kek')
         else:
             continue

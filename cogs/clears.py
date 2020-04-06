@@ -524,6 +524,11 @@ For Wanderer: {list_wand}
                 yuppie += 1
             else:
                 noppie += 1
+
+        if yuppie == 0 and noppie == 0:
+            await ctx.send('Attendance not found. Please use /att y/n to register your attendance')
+            return
+
         try:
             embeded = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
         except Exception as e:
@@ -544,7 +549,7 @@ For Wanderer: {list_wand}
             print(f'add field returned {e}')
             return
         embeded.add_field(name="Class", value=f'{fullclass}', inline=True)
-        embeded.add_field(name="Answer", value=f'{fullstat}', inline=True)
+        embeded.add_field(name="Status", value=f'{fullstat}', inline=True)
 
         try:
             await ctx.send(embed=embeded)

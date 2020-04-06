@@ -93,20 +93,22 @@ async def on_ready():
     except gspread.exceptions.WorksheetNotFound:
         await botinitsk.send(f'Could not find 5th sheet in our GSheets, creating one now.')
         spreadsheet = gc.open('Copy of BK ROSTER')
-        wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive')
+        wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive', rows = 1000, cols = 10, index = 5)
 
     print("Automated Clear Roster Begins!")
     format = "%H:%M:%S:%A"
 
-
+    ph_time = pytz.timezone('Asia/Manila')
+    ph_time_now = datetime.now(ph_time)
+    await botinitsk.send(ph_time_now)
 
 
     while True:
         ph_time = pytz.timezone('Asia/Manila')
         ph_time_now = datetime.now(ph_time)
         await asyncio.sleep(1)
-        await ctx.send(ph_time_now)
-        if ph_time_now == "06:57:00:Tuesday":
+        await botinisk.send(ph_time_now)
+        if ph_time_now == "07:05:00:Tuesday":
             await botinitsk.send('kek')
         else:
             continue

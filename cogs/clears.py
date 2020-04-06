@@ -525,7 +525,7 @@ For Wanderer: {list_wand}
             else:
                 noppie += 1
         try:
-            embed = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
+            embeded = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
         except Exception as e:
             print(f'discord embed returned {e}')
             return
@@ -536,11 +536,15 @@ For Wanderer: {list_wand}
             except Exception as e:
                 print(f'embed add field returned {e}')
                 return
-            embed.add_field(name = "Class", value = f'{kurasu[x]}', inline = True)
-            embed.add_field(name = "Answer", value = f'{stat[x]}', inline = True)
+            embeded.add_field(name = "Class", value = f'{kurasu[x]}', inline = True)
+            embeded.add_field(name = "Answer", value = f'{stat[x]}', inline = True)
+        try:
+            await ctx.send(embed=embeded)
+        except Exception as e:
+            print(f'send embed returned {e}')
         await ctx.send(f'Total no. of Yes answers: {yuppie}')
         await ctx.send(f'Total no. of No answers: {noppie}')
-        await ctx.send(embed = embed)
+
         #return
 
 

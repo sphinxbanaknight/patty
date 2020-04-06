@@ -215,7 +215,7 @@ class Clears(commands.Cog):
             arglist = [x.strip() for x in arguments.split(',')]
             no_of_args = len(arglist)
             if no_of_args < 2:
-                await ctx.send('Please send the proper syntax: `/enlist IGN, role, (optional other classes that you use)`')
+                await ctx.send(f'{ctx.author.mention} Please send the proper syntax: `/enlist IGN, role, (optional other classes that you use)`')
                 return
             else:
                 if arglist[1].lower() in list_ab:
@@ -302,13 +302,13 @@ For Wanderer: {list_wand}
                                 cell.value = ""
                             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
-                                f'```I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                                f'```{ctx.author.mention} I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
                             change = 0
                         else:
                             await ctx.send(f'```Please use /att y/n to register your attendance!```')
                             change = 0
                     else:
-                        await ctx.send(f'```Please use /att y/n to register your attendance!```')
+                        await ctx.send(f'```{ctx.author.mention} Please use /att y/n to register your attendance!```')
                 else:
                     for cell in cell_list:
                         if count == 0:
@@ -332,7 +332,7 @@ For Wanderer: {list_wand}
                                 cell.value = ""
                             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
-                                f'```I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                                f'```{ctx.author.mention} I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
                             change = 0
                         else:
                             await ctx.send(f'```Please use /att y/n to register your attendance!```')
@@ -376,7 +376,7 @@ For Wanderer: {list_wand}
                 next_row = uname.row
             except gspread.exceptions.CellNotFound:
                 await ctx.send(
-                    'You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional other classes that you use)`')
+                    f'{ctx.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional other classes that you use)`')
                 return
             # await ctx.send('test1')
 
@@ -564,6 +564,7 @@ For Wanderer: {list_wand}
             fullstat = ''
             for x in range(len(namae)):
                 if namae[x] == "" or kurasu[x] == "" or stat[x] == "":
+                    await ctx.send("debug")
                     continue
                 else:
                     fullname += namae[x] + '\n'

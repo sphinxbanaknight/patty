@@ -87,7 +87,7 @@ async def on_ready():
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Getting scolded by Jia'))
 
 
-        shit = gc.open('Copy of BK ROSTER')
+    shit = gc.open('Copy of BK ROSTER')
     try:
         wsheet = shit.get_worksheet(4)
     except gspread.exceptions.WorksheetNotFound:

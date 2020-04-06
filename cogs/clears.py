@@ -26,8 +26,11 @@ sheet = gc.open('Copy of BK ROSTER').sheet1
 ################ Channel, Server, and User IDs ###########################
 sphinx_id = 108381986166431744
 sphinxk_id = 401186250335322113
-botinit_id = 401212001239564288
+botinit_id = [401212001239564288, 691205255664500757]
 authorized_id = [108381986166431744]
+BK_id = 691130488483741756
+
+
 ################ Cell placements ###########################
 guild_range = "B3:E47"
 roster_range = "G3:J47"
@@ -87,7 +90,7 @@ class Clears(commands.Cog):
         channel = ctx.message.channel
         commander = ctx.author.name
             #await ctx.send('test')
-        if channel.id == botinit_id:
+        if channel.id in botinit_id:
             await ctx.send('debug1')
             cell_list = sheet.range("B3:E46")
             await ctx.send('debug2')
@@ -109,7 +112,7 @@ class Clears(commands.Cog):
         channel = ctx.message.channel
         commander_name = ctx.author.name
         commander = ctx.author
-        if channel.id == botinit_id:
+        if channel.id in botinit_id:
             if commander.id in authorized_id:
                 cell_list = sheet.range(guild_range)
                 for cell in cell_list:
@@ -129,7 +132,7 @@ class Clears(commands.Cog):
         channel = ctx.message.channel
         commander_name = ctx.author.name
         commander = ctx.author
-        if channel.id == botinit_id:
+        if channel.id in botinit_id:
             if commander.id in authorized_id:
                 cell_list = sheet.range(roster_range)
 
@@ -149,7 +152,7 @@ class Clears(commands.Cog):
         channel = ctx.message.channel
         commander_name = ctx.author.name
         commander = ctx.author
-        if channel.id == botinit_id:
+        if channel.id in botinit_id:
             if commander.id in authorized_id:
                 cell_list = sheet.range(matk_range)
 
@@ -206,7 +209,7 @@ class Clears(commands.Cog):
         channel = ctx.message.channel
         commander = ctx.author
         commander_name = commander.name
-        if channel.id == botinit_id:
+        if channel.id in botinit_id:
             arglist = [x.strip() for x in arguments.split(',')]
             no_of_args = len(arglist)
             if no_of_args < 2:
@@ -343,7 +346,7 @@ For Wanderer: {list_wand}
         channel = ctx.message.channel
         commander = ctx.author
         commander_name = commander.name
-        if channel.id == botinit_id:
+        if channel.id in botinit_id:
             arglist = [x.strip() for x in arguments.split(',')]
 
             no_of_args = len(arglist)
@@ -508,60 +511,62 @@ For Wanderer: {list_wand}
 
     @commands.command()
     async def list(self, ctx):
+        channel = ctx.message.channel
+        commander = ctx.author
+        commander_name = commander.name
+        if channel.id in botinit_id:
+            check = [item for item in sheet.col_values(7)]
 
-        check = [item for item in sheet.col_values(7)]
+            namae = [item for item in sheet.col_values(7) if item and item != 'IGN']
+            kurasu = [item for item in sheet.col_values(8) if item and item != 'Class' and item != 'WoE Roster']
+            stat = [item for item in sheet.col_values(9) if item and item != 'Attendance']
+            komento = [item for item in sheet.col_values(10) if item and item != 'Comments']
+            x = 0
+            a = 0
+            yuppie = 0
+            noppie = 0
+            for a in stat:
+                if a == 'Yes':
+                    yuppie += 1
+                else:
+                    noppie += 1
 
-        namae = [item for item in sheet.col_values(7) if item and item != 'IGN']
-        kurasu = [item for item in sheet.col_values(8) if item and item != 'Class' and item != 'WoE Roster']
-        stat = [item for item in sheet.col_values(9) if item and item != 'Attendance']
-        komento = [item for item in sheet.col_values(10) if item and item != 'Comments']
-        x = 0
-        a = 0
-        yuppie = 0
-        noppie = 0
-        for a in stat:
-            if a == 'Yes':
-                yuppie += 1
-            else:
-                noppie += 1
+            if yuppie == 0 and noppie == 0:
+                await ctx.send('Attendance not found. Please use /att y/n to register your attendance')
+                return
 
-        if yuppie == 0 and noppie == 0:
-            await ctx.send('Attendance not found. Please use /att y/n to register your attendance')
-            return
+            try:
+                embeded = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
+            except Exception as e:
+                print(f'discord embed returned {e}')
+                return
+            x = 0
+            fullname = ''
+            fullclass = ''
+            fullstat = ''
+            for x in range(len(namae)):
+                fullname += namae[x] + '\n'
+                fullclass += kurasu[x] + '\n'
+                fullstat += stat[x] + '\n'
 
-        try:
-            embeded = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
-        except Exception as e:
-            print(f'discord embed returned {e}')
-            return
-        x = 0
-        fullname = ''
-        fullclass = ''
-        fullstat = ''
-        for x in range(len(namae)):
-            fullname += namae[x] + '\n'
-            fullclass += kurasu[x] + '\n'
-            fullstat += stat[x] + '\n'
+            try:
+                embeded.add_field(name="IGN", value=f'{fullname}', inline=True)
+            except Exception as e:
+                print(f'add field returned {e}')
+                return
+            embeded.add_field(name="Class", value=f'{fullclass}', inline=True)
+            embeded.add_field(name="Status", value=f'{fullstat}', inline=True)
 
-        try:
-            embeded.add_field(name="IGN", value=f'{fullname}', inline=True)
-        except Exception as e:
-            print(f'add field returned {e}')
-            return
-        embeded.add_field(name="Class", value=f'{fullclass}', inline=True)
-        embeded.add_field(name="Status", value=f'{fullstat}', inline=True)
+            try:
+                await ctx.send(embed=embeded)
+            except Exception as e:
+                print(f'send embed returned {e}')
+            await ctx.send(f'Total no. of Yes answers: {yuppie}')
+            await ctx.send(f'Total no. of No answers: {noppie}')
 
-        try:
-            await ctx.send(embed=embeded)
-        except Exception as e:
-            print(f'send embed returned {e}')
-        await ctx.send(f'Total no. of Yes answers: {yuppie}')
-        await ctx.send(f'Total no. of No answers: {noppie}')
-
-        #return
-
-
-
+            #return
+        else:
+            await ctx.send("Wrong channel! Please use #bot.")
 
 def setup(client):
     client.add_cog(Clears(client))

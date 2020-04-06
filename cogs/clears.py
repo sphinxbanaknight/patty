@@ -532,7 +532,7 @@ For Wanderer: {list_wand}
         x = 0
         for x in range(len(namae)):
             try:
-                embed.add_field(name = "IGN", value = f'{namae[x]}', inline = True)
+                embeded.add_field(name = "IGN", value = f'{namae[x]}', inline = True)
             except Exception as e:
                 print(f'embed add field returned {e}')
                 return

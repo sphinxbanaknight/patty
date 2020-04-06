@@ -265,7 +265,7 @@ For Wanderer: {list_wand}
 ```
                                     ''')
                     return
-
+                change = 0
                 try:
                     uname = sheet.find(commander_name)
                     if uname:

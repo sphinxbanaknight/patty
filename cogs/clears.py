@@ -302,13 +302,13 @@ For Wanderer: {list_wand}
                                 cell.value = ""
                             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
-                                f'```{ctx.author.mention} I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
                             change = 0
                         else:
                             await ctx.send(f'```Please use /att y/n to register your attendance!```')
                             change = 0
                     else:
-                        await ctx.send(f'```{ctx.message.author.mention} Please use /att y/n to register your attendance!```')
+                        await ctx.send(f'{ctx.message.author.mention}``` Please use /att y/n to register your attendance!```')
                 else:
                     for cell in cell_list:
                         if count == 0:
@@ -332,7 +332,7 @@ For Wanderer: {list_wand}
                                 cell.value = ""
                             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
-                                f'```{ctx.message.author.mention} I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
                             change = 0
                         else:
                             await ctx.send(f'```Please use /att y/n to register your attendance!```')

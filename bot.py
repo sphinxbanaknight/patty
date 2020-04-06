@@ -59,7 +59,7 @@ client = commands.Bot(command_prefix = prefix, description = description)
 client.remove_command('help')
 
 @client.event
-async def on_ready():
+async def on_ready(ctx):
     print('Bot is online.')
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Getting scolded by Jia'))
 
@@ -96,7 +96,7 @@ async def on_ready():
         ph_time_now = ph_location.strftime(format)
         await asyncio.sleep(1)
         await ctx.send(ph_time_now)
-        if ph_time_now == "05:57:00:Tuesday":
+        if ph_time_now == "06:00:00:Tuesday":
             await ctx.send('kek')
         else:
             continue

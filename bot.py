@@ -61,7 +61,7 @@ client.remove_command('help')
 @client.event
 async def on_ready():
     print('Bot is online.')
-    await self.client.change_presence(status=discord.Status.dnd, activity=discord.Game('Getting scolded by Jia'))
+    await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Getting scolded by Jia'))
 
     try:
         wsheet = gc.open('Copy of BK Roster').sheet5
@@ -95,8 +95,8 @@ async def on_ready():
         ph_location = ph_time.normalize(ph_time, localize(datetime.now() + timedelta(hours = 8)))
         ph_time_now = ph_location.strftime(format)
         await asyncio.sleep(1)
-
-        if ph_time_now == "05:50:00:Wednesday":
+        await ctx.send(ph_time_now)
+        if ph_time_now == "05:53:00:Tuesday":
             await ctx.send('kek')
         else:
             continue

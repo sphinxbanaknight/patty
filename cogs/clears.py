@@ -535,10 +535,10 @@ For Wanderer: {list_wand}
         if channel.id in botinit_id:
             check = [item for item in sheet.col_values(7)]
 
-            namae = [item for item in sheet.col_values(7) if item and item != 'IGN']
-            kurasu = [item for item in sheet.col_values(8) if item and item != 'Class' and item != 'WoE Roster']
-            stat = [item for item in sheet.col_values(9) if item and item != 'Attendance']
-            komento = [item for item in sheet.col_values(10) if item and item != 'Comments']
+            namae = [item for item in sheet.col_values(7) if item != 'IGN']
+            kurasu = [item for item in sheet.col_values(8) if item != 'Class' and item != 'WoE Roster']
+            stat = [item for item in sheet.col_values(9) if item != 'Attendance']
+            komento = [item for item in sheet.col_values(10) if item != 'Comments']
             x = 0
             a = 0
             yuppie = 0

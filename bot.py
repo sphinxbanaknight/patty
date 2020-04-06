@@ -9,6 +9,7 @@ from apiclient.discovery import build
 from httplib2 import Http
 import datetime
 import pytz
+import asyncio
 
 from oauth2client.service_account import ServiceAccountCredentials
 from discord.ext import commands, tasks
@@ -80,8 +81,8 @@ async def on_ready():
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Getting scolded by Jia'))
 
     try:
-        wsheet = gc.open('Copy of BK Roster').sheet5
-    except gspread.exceptions.SpreadsheetNotFound:
+        wsheet = gc.open('Copy of BK ROSTER').sheet5
+    except gspread.exceptions.WorksheetNotFound:
         await botinitsk.send(f'Could not find 5th sheet in our GSheets, creating one now.')
         spreadsheet = gc.open('Copy of BK Roster')
         wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive')
@@ -98,7 +99,7 @@ async def on_ready():
         ph_time_now = ph_location.strftime(format)
         await asyncio.sleep(1)
         await ctx.send(ph_time_now)
-        if ph_time_now == "06:15:00:Tuesday":
+        if ph_time_now == "06:25:00:Tuesday":
             await botinitsk.send('kek')
         else:
             continue

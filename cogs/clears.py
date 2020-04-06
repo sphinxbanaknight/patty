@@ -541,9 +541,6 @@ For Wanderer: {list_wand}
                 row_n = next_available_row(sheet, 7)
                 row_c = next_available_row(sheet, 8)
                 row_a = next_available_row(sheet, 9)
-                await ctx.send(row_n)
-                await ctx.send(row_c)
-                await ctx.send(row_a)
                 if row_n < row_c:
                     if row_n < row_a:
                         cell_list = sheet.range(row_n, 7, row_n, 9)

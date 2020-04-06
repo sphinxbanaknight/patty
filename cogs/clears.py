@@ -531,30 +531,18 @@ For Wanderer: {list_wand}
             return
         x = 0
         for x in range(len(namae)):
-            namae = [item for item in sheet.col_values(7) if item and item != 'IGN']
-            kurasu = [item for item in sheet.col_values(8) if item and item != 'Class' and item != 'WoE Roster']
-            stat = [item for item in sheet.col_values(9) if item and item != 'Attendance']
-            komento = [item for item in sheet.col_values(10) if item and item != 'Comments']
-            while x <= len(namae):
-                embed.add_field(name='Name', value="" % (namae[x]), inline=True)
-            embed.add_field(name='Class', value="" % (kurasu[x]), inline=True
-            embed.add_field(name='Status', value="" % (stat[x]), inline=True
-            await self.bot.send_message(ctx.message.channel, embed=embed)
-            #x = x + 1
-
-            #try:
-            #    embed.add_field(name = "IGN", value = f'{namae[x]}', inline = True)
-            #except Exception as e:
-            #    print(f'embed add field returned {e}')
-            #    return
-            #embed.add_field(name = "Class", value = f'{kurasu[x]}', inline = True)
-            #embed.add_field(name = "Answer", value = f'{stat[x]}', inline = True)
-            #embed.add_field(name = "Comments", value = f'{komento[x]}', inline = True)
-        #embed.add_field(name = 'No. of '
-        #await ctx.send(embed = embed)
-        ##return
-        #wait ctx.send(f'No. of players who said yes: {yuppie}')
-        #await ctx.send(f'No. of players who said no: {noppie}')
+            try:
+                embed.add_field(name = "IGN", value = f'{namae[x]}', inline = True)
+            except Exception as e:
+                print(f'embed add field returned {e}')
+                return
+            embed.add_field(name = "Class", value = f'{kurasu[x]}', inline = True)
+            embed.add_field(name = "Answer", value = f'{stat[x]}', inline = True)
+            embed.add_field(name = "Comments", value = f'{komento[x]}', inline = True)
+        embed.add_field(name = 'No. of Yes', value = f'{yuppie}', inline = True)
+        embed.add_field(name = 'No of No', value = f'{noppie}', inline = True)
+        await ctx.send(embed = embed)
+        #return
 
 
 

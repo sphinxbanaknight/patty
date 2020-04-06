@@ -8,6 +8,7 @@ import pprint
 from oauth2client import file as oauth_file, client, tools
 from apiclient.discovery import build
 from httplib2 import Http
+import time
 
 from oauth2client.service_account import ServiceAccountCredentials
 from discord.ext import commands, tasks
@@ -25,7 +26,9 @@ sheet = gc.open('Copy of BK ROSTER').sheet1
 
 ################ Channel, Server, and User IDs ###########################
 sphinx_id = 108381986166431744
-sphinxk_id = 401186250335322113
+servers = [401186250335322113, 691130488483741756]
+#sphinxk = 401186250335322113
+#BK = 691130488483741756
 botinit_id = [401212001239564288, 691205255664500757]
 authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 437617764484513802, 127795095121559552, 437618826897522690, 352073289155346442]
 #Asi = 127778244383473665
@@ -34,7 +37,6 @@ authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 437
 #haclime = 127795095121559552
 #marvs = 437618826897522690
 #red = 352073289155346442
-BK_id = 691130488483741756
 
 
 ################ Cell placements ###########################
@@ -623,6 +625,9 @@ For Wanderer: {list_wand}
             #return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
+
+
+
 
 def setup(client):
     client.add_cog(Clears(client))

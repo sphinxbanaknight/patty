@@ -530,6 +530,9 @@ For Wanderer: {list_wand}
             print(f'discord embed returned {e}')
             return
         x = 0
+        fullname = ''
+        fullclass = ''
+        fullstat = ''
         for x in range(len(namae)):
             fullname += namae[x] + '\n'
             fullclass += kurasu[x] + '\n'

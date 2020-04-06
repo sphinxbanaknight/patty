@@ -563,9 +563,12 @@ For Wanderer: {list_wand}
             fullclass = ''
             fullstat = ''
             for x in range(len(namae)):
-                fullname += namae[x] + '\n'
-                fullclass += kurasu[x] + '\n'
-                fullstat += stat[x] + '\n'
+                if namae[x] == "" or kurasu[x] == "" or stat[x] == "":
+                    continue
+                else:
+                    fullname += namae[x] + '\n'
+                    fullclass += kurasu[x] + '\n'
+                    fullstat += stat[x] + '\n'
 
             try:
                 embeded.add_field(name="IGN", value=f'{fullname}', inline=True)

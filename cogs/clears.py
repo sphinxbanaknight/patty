@@ -537,7 +537,7 @@ For Wanderer: {list_wand}
             row_c = next_available_row(sheet, 8)
             row_a = next_available_row(sheet, 9)
             msg = await ctx.send(f'`Please wait... I am parsing a list of our WOE Roster. Refrain from entering any other commands.`')
-            await asyncio.sleep(10)
+            #await asyncio.sleep(10)
             while row_n != row_c or row_n != row_a:
                 row_n = next_available_row(sheet, 7)
                 row_c = next_available_row(sheet, 8)

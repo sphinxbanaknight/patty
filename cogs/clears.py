@@ -536,8 +536,8 @@ For Wanderer: {list_wand}
             except Exception as e:
                 print(f'embed add field returned {e}')
                 return
-            embed.add_field(name = "Class", value = f'{kurasu[x]}, inline = True)
-            embed.add_field(name = "Answer", value = f'{stat[x]}, inline = True)
+            embed.add_field(name = "Class", value = f'{kurasu[x]}', inline = True)
+            embed.add_field(name = "Answer", value = f'{stat[x]}', inline = True)
             x = x + 1
         await ctx.send(embed)
         #return

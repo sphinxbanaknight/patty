@@ -117,7 +117,7 @@ async def on_ready():
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
         await asyncio.sleep(1)
-        if ph_time_formated == "07:45:00:Tuesday":
+        if ph_time_formated == "07:50:00:Tuesday":
             await botinitsk.send('`Automatically cleared the roster! Please use /att y/n again to register your attendance.`')
             await botinitsk.send('`An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.`')
 
@@ -134,10 +134,12 @@ async def on_ready():
             ph_time_formated = ph_time_unformated.strftime(newformat)
 
             for copy in copy_list:
+                data_pasted = copy.value
+            for paste in paste_list:
                 if count == 0:
-                    paste_list.value = f'{ph_time_formated} WOE'
+                    paste.value = f'{ph_time_formated} WOE'
                 else:
-                    paste_list.value = copy_list.value
+                    paste.value = data_pasted[count - 1]
                 count += 1
             wsheet.update_cells(paste_list, value_input_option='USER_ENTERED')
 

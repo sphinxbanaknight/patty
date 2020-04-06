@@ -96,7 +96,7 @@ async def on_ready():
         ph_time_now = ph_location.strftime(format)
         await asyncio.sleep(1)
 
-        if ph_time_now == "05:35:00:Wednesday":
+        if ph_time_now == "05:50:00:Wednesday":
             await ctx.send('kek')
         else:
             continue

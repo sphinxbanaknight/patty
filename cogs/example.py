@@ -10,6 +10,8 @@ from apiclient.discovery import build
 from httplib2 import Http
 import time
 
+from discord.ext import commands, tasks
+
 class Example(commands.Cog):
     def __init__(self, client):
         self.client = client

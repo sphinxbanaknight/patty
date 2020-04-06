@@ -89,7 +89,7 @@ async def on_ready():
 
     shit = gc.open('Copy of BK ROSTER')
     try:
-        wsheet = shit.get_worksheet(4)
+        wsheet = shit.worksheet('WoE Roster Archive')
     except gspread.exceptions.WorksheetNotFound:
         await botinitsk.send(f'Could not find 5th sheet in our GSheets, creating one now.')
         spreadsheet = gc.open('Copy of BK ROSTER')
@@ -103,10 +103,10 @@ async def on_ready():
 
     while True:
         ph_time = pytz.timezone('Asia/Manila')
-        ph_time_now = datetime.now(tz)
+        ph_time_now = datetime.now(ph_time)
         await asyncio.sleep(1)
         await ctx.send(ph_time_now)
-        if ph_time_now == "06:55:00:Tuesday":
+        if ph_time_now == "06:57:00:Tuesday":
             await botinitsk.send('kek')
         else:
             continue

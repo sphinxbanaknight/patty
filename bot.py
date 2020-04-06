@@ -102,7 +102,7 @@ async def on_ready():
     ph_time_unformated = datetime.now(ph_time)
     ph_time_formated = ph_time_unformated.strftime(format)
 
-    await botinitsk.send(ph_time_now)
+    await botinitsk.send(ph_time_formated)
 
 
     while True:
@@ -110,8 +110,8 @@ async def on_ready():
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
         await asyncio.sleep(1)
-        await botinitsk.send(ph_time_now)
-        if ph_time_formated == "07:05:00:Tuesday":
+        await botinitsk.send(ph_time_formated)
+        if ph_time_formated == "07:07:00:Tuesday":
             await botinitsk.send('kek')
         else:
             continue

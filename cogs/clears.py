@@ -349,6 +349,7 @@ For Wanderer: {list_wand}
             return
         cell_list = sheet.range("G3:J46")
         sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
+        await ctx.send("debug1")
 
 
     @commands.command()

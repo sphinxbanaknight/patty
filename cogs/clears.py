@@ -538,6 +538,9 @@ For Wanderer: {list_wand}
             row_a = next_available_row(sheet, 9)
 
             while row_n != row_c and row_n != row_a:
+                row_n = next_available_row(sheet, 7)
+                row_c = next_available_row(sheet, 8)
+                row_a = next_available_row(sheet, 9)
                 if row_n < row_c:
                     if row_n < row_a:
                         cell_list = sheet.range(row_n, 7, row_n, 9)

@@ -538,8 +538,16 @@ For Wanderer: {list_wand}
                 return
             embed.add_field(name = "Class", value = f'{kurasu[x]}', inline = True)
             embed.add_field(name = "Answer", value = f'{stat[x]}', inline = True)
-            embed.add_field(name = "Comments", value = f'{komento[x]}', inline = True)
-        embed.add_field(name = 'No. of Yes', value = f'{yuppie}', inline = True)
+            try:
+                embed.add_field(name = "Comments", value = f'{komento[x]}', inline = True)
+            except Exception as e:
+                print(f'embed komento returned {e}')
+                return
+        try:
+            embed.add_field(name = 'No. of Yes', value = f'{yuppie}', inline = True)
+        except Exception as e:
+            print (f'Embed yuppie returned {e}')
+            return
         embed.add_field(name = 'No of No', value = f'{noppie}', inline = True)
         await ctx.send(embed = embed)
         #return

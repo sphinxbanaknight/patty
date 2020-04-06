@@ -59,21 +59,7 @@ client = commands.Bot(command_prefix = prefix, description = description)
 client.remove_command('help')
 
 @client.event
-async def on_ready(ctx):
-    print('Bot is online.')
-    await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Getting scolded by Jia'))
-
-    try:
-        wsheet = gc.open('Copy of BK Roster').sheet5
-    except gspread.exceptions.SpreadsheetNotFound:
-        await ctx.send(f'Could not find 5th sheet in our GSheets, creating one now.')
-        spreadsheet = gc.open('Copy of BK Roster')
-        wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive')
-
-    print("Automated Clear Roster Begins!")
-    format = "%H:%M:%S:%A"
-
-
+async def on_ready():
     for server in client.guilds:
         if server.id == sk_server:
             sphinx = server
@@ -90,14 +76,30 @@ async def on_ready(ctx):
     #    if channel.id == bk_bot:
     #        botinitbk = channel
 
+    print('Bot is online.')
+    await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Getting scolded by Jia'))
+
+    try:
+        wsheet = gc.open('Copy of BK Roster').sheet5
+    except gspread.exceptions.SpreadsheetNotFound:
+        await botinitsk.send(f'Could not find 5th sheet in our GSheets, creating one now.')
+        spreadsheet = gc.open('Copy of BK Roster')
+        wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive')
+
+    print("Automated Clear Roster Begins!")
+    format = "%H:%M:%S:%A"
+
+
+
+
     while True:
         ph_time = pytz.timezone('Asia/Manila')
         ph_location = ph_time.normalize(ph_time, localize(datetime.now() + timedelta(hours = 8)))
         ph_time_now = ph_location.strftime(format)
         await asyncio.sleep(1)
         await ctx.send(ph_time_now)
-        if ph_time_now == "06:00:00:Tuesday":
-            await ctx.send('kek')
+        if ph_time_now == "06:15:00:Tuesday":
+            await botinitsk.send('kek')
         else:
             continue
 

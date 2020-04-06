@@ -101,7 +101,7 @@ async def on_ready():
 
     while True:
         ph_time = pytz.timezone('Asia/Manila')
-        ph_location = ph_time.normalize(ph_time, localize(datetime.now() + timedelta(hours = 8)))
+        ph_location = ph_time.normalize(ph_time, cst.localize(datetime.now() + timedelta(hours = 8)))
         ph_time_now = ph_location.strftime(format)
         await asyncio.sleep(1)
         await ctx.send(ph_time_now)

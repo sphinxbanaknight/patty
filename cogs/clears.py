@@ -532,10 +532,14 @@ For Wanderer: {list_wand}
         x = 0
         for x in range(len(namae)):
             fullname += namae[x] + '\n'
-            fullclass += kurasu[x] + 'n'
-            fullstat += stat[x] + 'n'
+            fullclass += kurasu[x] + '\n'
+            fullstat += stat[x] + '\n'
 
-        embeded.add_field(name="IGN", value=f'{fullname}', inline=True)
+        try:
+            embeded.add_field(name="IGN", value=f'{fullname}', inline=True)
+        except Exception as e:
+            print(f'add field returned {e}')
+            return
         embeded.add_field(name="Class", value=f'{fullclass}', inline=True)
         embeded.add_field(name="Answer", value=f'{fullstat}', inline=True)
 

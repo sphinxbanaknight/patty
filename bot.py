@@ -71,7 +71,6 @@ async def on_ready():
 
     for channel in sphinx.channels:
         if channel.id == sk_bot:
-            print('lmaooooo')
             botinitsk = channel
             break
     #for channel in burger.channels:
@@ -81,7 +80,13 @@ async def on_ready():
     print('Bot is online.')
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Getting scolded by Jia'))
 
-    wsheet = gc.open('Copy of BK ROSTER').sheet5
+    try:
+        shit = gc.open('Copy of BK ROSTER')
+        wsheet = shit.get_worksheet(4)
+    except gspread.exceptions.WorksheetNotFound:
+        await botinitsk.send(f'Could not find 5th sheet in our GSheets, creating one now.')
+        spreadsheet = gc.open('Copy of BK ROSTER')
+        wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive')
 
     print("Automated Clear Roster Begins!")
     format = "%H:%M:%S:%A"
@@ -94,8 +99,8 @@ async def on_ready():
         ph_location = ph_time.normalize(ph_time, localize(datetime.now() + timedelta(hours = 8)))
         ph_time_now = ph_location.strftime(format)
         await asyncio.sleep(1)
-        await botinitsk.send(ph_time_now)
-        if ph_time_now == "06:25:00:Tuesday":
+        await ctx.send(ph_time_now)
+        if ph_time_now == "06:35:00:Tuesday":
             await botinitsk.send('kek')
         else:
             continue

@@ -530,7 +530,7 @@ For Wanderer: {list_wand}
             print(f'discord embed returned {e}')
             return
         x = 0
-        while x <= len(namae):
+        for x in range(len(namae)):
             try:
                 embed.add_field(name = "IGN", value = f'{namae[x]}', inline = True)
             except Exception as e:
@@ -538,7 +538,6 @@ For Wanderer: {list_wand}
                 return
             embed.add_field(name = "Class", value = f'{kurasu[x]}', inline = True)
             embed.add_field(name = "Answer", value = f'{stat[x]}', inline = True)
-            x = x + 1
         await ctx.send(embed)
         #return
         await ctx.send(f'No. of players who said yes: {yuppie}')

@@ -64,6 +64,10 @@ client = commands.Bot(command_prefix = prefix, description = description)
 
 client.remove_command('help')
 
+def next_available_row(sheet, column):
+    cols = sheet.range(3, column, 47, column)
+    return max([cell.row for cell in cols if cell.value]) + 1
+
 @client.event
 async def on_ready():
     for server in client.guilds:
@@ -76,7 +80,6 @@ async def on_ready():
 
     for channel in sphinx.channels:
         if channel.id == sk_bot:
-            print('lmao')
             botinitsk = channel
             break
     #for channel in burger.channels:
@@ -93,7 +96,7 @@ async def on_ready():
     except gspread.exceptions.WorksheetNotFound:
         await botinitsk.send(f'Could not find 5th sheet in our GSheets, creating one now.')
         spreadsheet = gc.open('Copy of BK ROSTER')
-        wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive', rows = 1000, cols = 10, index = 5)
+        wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive', rows = 1000, cols = 10)
 
     print("Automated Clear Roster Begins!")
     format = "%H:%M:%S:%A"
@@ -110,9 +113,33 @@ async def on_ready():
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
         await asyncio.sleep(1)
-        #await botinitsk.send(ph_time_formated)
-        if ph_time_formated == "07:07:00:Tuesday":
-            await botinitsk.send('kek')
+        if ph_time_formated == "07:30:00:Tuesday":
+            await botinitsk.send('`Automatically cleared the roster! Please use /att y/n again to register your attendance.`')
+            await botinitsk.send('`An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.`')
+
+            next_row = next_available_row(wsheet, 1)
+            copy_list = sheet.range(1, 6, 48, 11)
+            paste_list = sheet.range(next_row, 1, next_row + 48, 6)
+            count = 0
+            newformat = "%d %B %Y - %a"
+            ph_time = pytz.timezone('Asia/Manila')
+            ph_time_unformated = datetime.now(ph_time)
+            ph_time_formated = ph_time_unformated.strftime(newformat)
+
+            for copy in copy_list:
+                if count == 0:
+                    paste_list.value = f'{ph_time_formated} WOE'
+                else:
+                    paste_list.value = copy_list.value
+                count += 1
+            wsheet.update_cells(paste_list, value_input_option='USER_ENTERED')
+
+            cell_list = sheet.range(roster_range)
+
+            for cell in cell_list:
+                cell.value = ""
+
+            sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
         else:
             continue
 

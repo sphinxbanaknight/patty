@@ -12,6 +12,10 @@ import datetime
 import pytz
 import asyncio
 
+
+from pytz import timezone
+from datetime import datetime, timedelta
+
 from oauth2client.service_account import ServiceAccountCredentials
 from discord.ext import commands, tasks
 
@@ -83,7 +87,7 @@ async def on_ready():
 
     try:
         shit = gc.open('Copy of BK ROSTER')
-        wsheet = shit.get_worksheet(4)
+        wsheet = shit.get_worksheet(5)
     except gspread.exceptions.WorksheetNotFound:
         await botinitsk.send(f'Could not find 5th sheet in our GSheets, creating one now.')
         spreadsheet = gc.open('Copy of BK ROSTER')

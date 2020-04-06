@@ -531,13 +531,14 @@ For Wanderer: {list_wand}
             return
         x = 0
         for x in range(len(namae)):
-            try:
-                embeded.add_field(name = "IGN", value = f'{namae[x]}', inline = True)
-            except Exception as e:
-                print(f'embed add field returned {e}')
-                return
-            embeded.add_field(name = "Class", value = f'{kurasu[x]}', inline = True)
-            embeded.add_field(name = "Answer", value = f'{stat[x]}', inline = True)
+            fullname += namae[x] + '\n'
+            fullclass += kurasu[x] + 'n'
+            fullstat += stat[x] + 'n'
+
+        embeded.add_field(name="IGN", value=f'{fullname}', inline=True)
+        embeded.add_field(name="Class", value=f'{fullclass}', inline=True)
+        embeded.add_field(name="Answer", value=f'{fullstat}', inline=True)
+
         try:
             await ctx.send(embed=embeded)
         except Exception as e:

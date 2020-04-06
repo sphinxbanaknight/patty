@@ -321,7 +321,7 @@ For Wanderer: {list_wand}
                             cell.value = ""
                         count += 1
                     sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}.```')
+                    await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]} change: {change}.```')
                     if change == 1:
                         finding_column = sheet.range("G3:G{}".format(sheet.row_count))
                         foundign = [found for found in finding_column if found.value == ign.value]
@@ -349,7 +349,6 @@ For Wanderer: {list_wand}
             return
         cell_list = sheet.range("G3:J46")
         sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
-        await ctx.send("debug1")
 
 
     @commands.command()

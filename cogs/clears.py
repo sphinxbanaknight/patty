@@ -563,7 +563,7 @@ For Wanderer: {list_wand}
             fullclass = ''
             fullstat = ''
             for x in range(len(namae)):
-                if namae[x] == "" or kurasu[x] == "" or stat[x] is None:
+                if namae[x].value == "" or kurasu[x].value == "" or stat[x].value is "":
                     await ctx.send("debug")
                     continue
                 else:

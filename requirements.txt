@@ -11,7 +11,7 @@ google-auth==1.12.0
 google-auth-httplib2==0.0.3
 google-auth-oauthlib==0.4.1
 googleapis-common-protos==1.51.0
-gspread==3.3.0
+gspread==3.4.1
 httplib2==0.17.0
 idna==2.9
 multidict==4.7.5
@@ -30,4 +30,3 @@ uritemplate==3.0.1
 urllib3==1.25.8
 websockets==8.1
 yarl==1.4.2
-git+https://github.com/burnash/gspread.git

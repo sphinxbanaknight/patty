@@ -99,16 +99,19 @@ async def on_ready():
     format = "%H:%M:%S:%A"
 
     ph_time = pytz.timezone('Asia/Manila')
-    ph_time_now = datetime.now(ph_time)
+    ph_time_unformated = datetime.now(ph_time)
+    ph_time_formated = ph_time_unformated.strftime(format)
+
     await botinitsk.send(ph_time_now)
 
 
     while True:
         ph_time = pytz.timezone('Asia/Manila')
-        ph_time_now = datetime.now(ph_time)
+        ph_time_unformated = datetime.now(ph_time)
+        ph_time_formated = ph_time_unformated.strftime(format)
         await asyncio.sleep(1)
-        await botinisk.send(ph_time_now)
-        if ph_time_now == "07:05:00:Tuesday":
+        await botinitsk.send(ph_time_now)
+        if ph_time_formated == "07:05:00:Tuesday":
             await botinitsk.send('kek')
         else:
             continue

@@ -576,7 +576,12 @@ For Wanderer: {list_wand}
                 print(f'add field returned {e}')
                 return
             embeded.add_field(name="Class", value=f'{fullclass}', inline=True)
-            embeded.add_field(name="Status", value=f'{fullstat}', inline=True)
+            try:
+                embeded.add_field(name="Status", value=f'{fullstat}', inline=True)
+            except Exception as e:
+                print(f'add field returned {e}')
+                return
+
 
             try:
                 await ctx.send(embed=embeded)

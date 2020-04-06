@@ -69,7 +69,7 @@ answeryes = ['y', 'yes', 'ya', 'yup', 'ye']
 answerno = ['n', 'no', 'nah', 'na', 'nope', 'nuh']
 
 def next_available_row(sheet, column):
-    cols = sheet.range(1, column, 47, column)
+    cols = sheet.range(3, column, 47, column)
     return max([cell.row for cell in cols if cell.value]) + 1
 
 
@@ -533,8 +533,37 @@ For Wanderer: {list_wand}
         commander = ctx.author
         commander_name = commander.name
         if channel.id in botinit_id:
-            check = [item for item in sheet.col_values(7)]
-            await ctx.send(check)
+            row_n = next_available_row(sheet, 7)
+            row_c = next_available_row(sheet, 8)
+            row_a = next_available_row(sheet, 9)
+
+            while row_n != row_c and row_n != row_a:
+                if row_n < row_c:
+                    if row_n < row_a:
+                        cell_list = sheet.range(row_n, 7, row_n, 9)
+                        for cell in cell_list:
+                            cell.value = ""
+                        sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
+                    else:
+                        cell_list = sheet.range(row_a, 7, row_a, 9)
+                        for cell in cell_list:
+                            cell.value = ""
+                        sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
+                elif row_c < row_a:
+                    cell_list = sheet.range(row_c, 7, row_c, 9)
+                    for cell in cell_list:
+                        cell.value = ""
+                    sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                    sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
+                else:
+                    cell_list = sheet.range(row_a, 7, row_a, 9)
+                    for cell in cell_list:
+                        cell.value = ""
+                    sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                    sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
+
             namae = [item for item in sheet.col_values(7) if item and item != 'IGN']
             kurasu = [item for item in sheet.col_values(8) if item and item != 'Class' and item != 'WoE Roster']
             stat = [item for item in sheet.col_values(9) if item and item != 'Attendance']

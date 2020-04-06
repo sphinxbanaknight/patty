@@ -97,19 +97,15 @@ class Clears(commands.Cog):
         commander = ctx.author.name
             #await ctx.send('test')
         if channel.id in botinit_id:
-            await ctx.send('debug1')
             cell_list = sheet.range("B3:E46")
-            await ctx.send('debug2')
             try:
                 sheet.sort((4, 'asc'), range = "B3:E46")
             except Exception as e:
                 print(e)
                 return
-            await ctx.send('debug3')
             cell_list = sheet.range("G3:J46")
-            await ctx.send('debug4')
             sheet.sort((9, 'des'), (8, 'asc'), range = "G3:J46")
-            await ctx.send(f'{commander} has sorted the sheets.')
+            await ctx.send(f'`{commander} has sorted the sheets.`')
         else:
             await ctx.send(f'Wrong channel! Please use #bot.')
 
@@ -345,6 +341,14 @@ For Wanderer: {list_wand}
                         await ctx.send(f'```Please use /att y/n to register your attendance!```')
         else:
             await ctx.send("Wrong channel! Please use #bot.")
+        cell_list = sheet.range("B3:E46")
+        try:
+            sheet.sort((4, 'asc'), range="B3:E46")
+        except Exception as e:
+            print(e)
+            return
+        cell_list = sheet.range("G3:J46")
+        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
 
 
     @commands.command()
@@ -511,6 +515,14 @@ For Wanderer: {list_wand}
                 count = 0
                 yes = 0
                 no = 0
+                cell_list = sheet.range("B3:E46")
+                try:
+                    sheet.sort((4, 'asc'), range="B3:E46")
+                except Exception as e:
+                    print(e)
+                    return
+                cell_list = sheet.range("G3:J46")
+                sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 

@@ -97,7 +97,7 @@ async def on_ready():
         await botinitsk.send(f'Could not find 5th sheet in our GSheets, creating one now.')
         spreadsheet = gc.open('Copy of BK ROSTER')
         wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive', rows = 1000, cols = 10)
-        kekerino = worksheet.range("A1:J10000")
+        kekerino = wsheet.range("A1:J10000")
         for kek in kekerino:
             kek.value = ''
         wsheet.update_cells(kekerino, value_input_option='USER_ENTERED')
@@ -117,7 +117,7 @@ async def on_ready():
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
         await asyncio.sleep(1)
-        if ph_time_formated == "07:37:00:Tuesday":
+        if ph_time_formated == "07:39:00:Tuesday":
             await botinitsk.send('`Automatically cleared the roster! Please use /att y/n again to register your attendance.`')
             await botinitsk.send('`An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.`')
 

@@ -97,7 +97,7 @@ async def on_ready():
         await botinitsk.send(f'Could not find 5th sheet in our GSheets, creating one now.')
         spreadsheet = gc.open('Copy of BK ROSTER')
         wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive', rows = 1000, cols = 10)
-        kekerino = wsheet.range("A1:J10000")
+        kekerino = wsheet.range("A1:J1000")
         for kek in kekerino:
             kek.value = ''
         wsheet.update_cells(kekerino, value_input_option='USER_ENTERED')

@@ -515,16 +515,16 @@ For Wanderer: {list_wand}
                 count = 0
                 yes = 0
                 no = 0
-                cell_list = sheet.range("B3:E46")
-                try:
-                    sheet.sort((4, 'asc'), range="B3:E46")
-                except Exception as e:
-                    print(e)
-                    return
-                cell_list = sheet.range("G3:J46")
-                sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
         else:
             await ctx.send("Wrong channel! Please use #bot.")
+        cell_list = sheet.range("B3:E46")
+        try:
+            sheet.sort((4, 'asc'), range="B3:E46")
+        except Exception as e:
+            print(e)
+            return
+        cell_list = sheet.range("G3:J46")
+        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
 
 
     @commands.command()

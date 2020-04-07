@@ -634,7 +634,7 @@ For Wanderer: {list_wand}
         commander = ctx.author
         commander_name = commander.name
         if channel.id in botinit_id:
-            await ctx.send("""```Bot commands:
+            await ctx.send("""```BOT COMMANDS:
 /enlist IGN, class, optional comment = enlists your Discord ID, IGN, Class, and optional comment in the GSheets
 /att y/n, optional comment = registers your attendance (either yes or no) in the GSheets
 /clearguild = clears guild list (ADMIN COMMAND)

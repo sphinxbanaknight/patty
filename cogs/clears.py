@@ -651,6 +651,7 @@ For Wanderer: {list_wand}
 /clearroster = clears attendance list (ADMIN COMMAND)
 /clearparty = clears party list (ADMIN COMMAND)
 /list = parses a list of the current attendance list
+/listpt = parses a list of the current party list divided into ATK, MATK, and THIRD GUILD
 /sorted = sorts the gsheets```\n""")
         else:
             await ctx.send("Wrong channel! Please use #bot.")

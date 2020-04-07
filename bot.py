@@ -117,7 +117,7 @@ async def on_ready():
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
         await asyncio.sleep(1)
-        if ph_time_formated == "07:59:00:Tuesday":
+        if ph_time_formated == "08:05:00:Tuesday":
             await botinitsk.send('`Automatically cleared the roster! Please use /att y/n again to register your attendance.`')
             await botinitsk.send('`An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.`')
 
@@ -125,7 +125,7 @@ async def on_ready():
                 next_row = next_available_row(wsheet, 3)
             except ValueError:
                 next_row = 1
-            copy_list = sheet.range(1, 6, 48, 11)
+            copy_list = sheet.range(roster_range)
             paste_list = sheet.range(next_row, 1, next_row + 47, 6)
             count = 0
             newformat = "%d %B %Y - %a"

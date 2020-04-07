@@ -698,10 +698,6 @@ For Wanderer: {list_wand}
             x = 0
             for x in range(len(THIRD_names)):
                 THIRDpt += THIRD_names[x] + '\n'
-
-            await ctx.send(ATKpt)
-            await ctx.send(MATKpt)
-            await ctx.send(THIRDpt)
             try:
                 embeded.add_field(name="ATK Party", value=f'{ATKpt}', inline=True)
             except Exception as e:

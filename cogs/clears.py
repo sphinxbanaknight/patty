@@ -627,7 +627,23 @@ For Wanderer: {list_wand}
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 
+    @commands.command()
+    async def help(self, ctx):
 
+        channel = ctx.message.channel
+        commander = ctx.author
+        commander_name = commander.name
+        if channel.id in botinit_id:
+            await ctx.send("```Bot commands:```\n" +
+                           "`/enlist IGN, class, optional comment = `\n"
+                           "`/att y/n, optional comment = `\n"
+                           "`/clearguild = clears guild list (ADMIN COMMAND)`\n"
+                           "`/clearroster = clears attendance list (ADMIN COMMAND)`\n"
+                           "`/clearparty = clears party list (ADMIN COMMAND)`\n"
+                           "`/list = parses a list of the current attendance list`\n"
+                           "`/sorted = sorts the gsheets`\n")
+        else:
+            await ctx.send("Wrong channel! Please use #bot.")
 
 
 def setup(client):

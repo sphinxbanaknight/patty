@@ -138,11 +138,11 @@ async def on_ready():
                 if count == 0:
                     if ph_time_formated == "08:00:00:Saturday":
                         paste.value = f'{ph_time_formated} AM SAT WOE'
-                    elif ph_time_formated = "00:00:00:Sunday":
+                    elif ph_time_formated == "00:00:00:Sunday":
                         paste.value = f'{ph_time_formated} PM SAT WOE'
-                    elif ph_time_formated = "08:00:00:Sunday":
+                    elif ph_time_formated == "08:00:00:Sunday":
                         paste.value = f'{ph_time_formated} AM SUN WOE'
-                    elif ph_time_formated = "00:00:00:Monday":
+                    elif ph_time_formated == "00:00:00:Monday":
                         paste.value = f'{ph_time_formated} PM SUN WOE'
                 elif count == 1:
                     paste.value = ""

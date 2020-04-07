@@ -65,7 +65,7 @@ client = commands.Bot(command_prefix = prefix, description = description)
 client.remove_command('help')
 
 def next_available_row(sheet, column):
-    cols = sheet.range(3, column, 47, column)
+    cols = sheet.range(3, column, 1000, column)
     return max([cell.row for cell in cols if cell.value]) + 1
 
 @client.event
@@ -117,12 +117,12 @@ async def on_ready():
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
         await asyncio.sleep(1)
-        if ph_time_formated == "08:35:00:Tuesday":
+        if ph_time_formated == "08:40:00:Tuesday":
             await botinitsk.send('`Automatically cleared the roster! Please use /att y/n again to register your attendance.`')
             await botinitsk.send('`An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.`')
 
             try:
-                next_row = next_available_row(wsheet, 3)
+                next_row = next_available_row(wsheet, 1)
             except ValueError as e:
                 print(f'next_row returned {e}')
                 next_row = 1

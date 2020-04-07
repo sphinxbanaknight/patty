@@ -74,17 +74,17 @@ async def on_ready():
         if server.id == sk_server:
             sphinx = server
             continue
-        # if server.id == bk_server:
-        #    burger = server
-        #    continue
+         if server.id == bk_server:
+            burger = server
+            continue
 
     for channel in sphinx.channels:
         if channel.id == sk_bot:
             botinitsk = channel
             break
-    #for channel in burger.channels:
-    #    if channel.id == bk_bot:
-    #        botinitbk = channel
+    for channel in burger.channels:
+        if channel.id == bk_bot:
+            botinitbk = channel
 
     print('Bot is online.')
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Getting scolded by Jia'))
@@ -95,6 +95,7 @@ async def on_ready():
         wsheet = shit.worksheet('WoE Roster Archive')
     except gspread.exceptions.WorksheetNotFound:
         await botinitsk.send(f'Could not find 5th sheet in our GSheets, creating one now.')
+        await botinitbk.send(f'Could not find 5th sheet in our GSheets, creating one now.')
         spreadsheet = gc.open('Copy of BK ROSTER')
         wsheet = spreadsheet.add_worksheet(title='WoE Roster Archive', rows = 1000, cols = 10)
         kekerino = wsheet.range("A1:J1000")
@@ -119,6 +120,8 @@ async def on_ready():
         if ph_time_formated == "08:00:00:Saturday" or ph_time_formated == "00:00:00:Sunday" or  ph_time_formated == "08:00:00:Sunday" or  ph_time_formated == "00:00:00:Monday":
             await botinitsk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
             await botinitsk.send('```An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.```')
+            await botinitbk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
+            await botinitbk.send('```An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.```')
             try:
                 next_row = next_available_row(wsheet, 1)
             except ValueError as e:

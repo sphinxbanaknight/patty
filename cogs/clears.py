@@ -622,7 +622,7 @@ For Wanderer: {list_wand}
                 print(f'send embed returned {e}')
             await ctx.send(f'Total no. of Yes answers: {yuppie}')
             await ctx.send(f'Total no. of No answers: {noppie}')
-            await ctx.delete_message(msg)
+            await msg.delete()
             #return
         else:
             await ctx.send("Wrong channel! Please use #bot.")

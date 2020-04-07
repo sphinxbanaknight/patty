@@ -691,13 +691,13 @@ For Wanderer: {list_wand}
             MATKpt = ''
             THIRDpt = ''
             for x in range(len(MATK_names)):
-                MATKpt += MATK_names + '\n'
+                MATKpt += MATK_names[x] + '\n'
             x = 0
             for x in range(len(ATK_names)):
-                ATKpt += ATK_names + '\n'
+                ATKpt += ATK_names[x] + '\n'
             x = 0
             for x in range(len(THIRD_names)):
-                THIRDpt += THIRD_names + '\n'
+                THIRDpt += THIRD_names[x] + '\n'
 
             await ctx.send(ATKpt)
             await ctx.send(MATKpt)

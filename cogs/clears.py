@@ -74,6 +74,16 @@ def next_available_row(sheet, column):
     cols = sheet.range(3, column, 47, column)
     return max([cell.row for cell in cols if cell.value]) + 1
 
+def next_available_row_p1(sheet, column):
+    cols = sheet.range(3, column, 14, column)
+    return max([cell.row for cell in cols if cell.value]) + 1
+
+def next_available_row_p2(sheet, column):
+    cols = sheet.range(17, column, 28, column)
+    return max([cell.row for cell in cols if cell.value]) + 1
+def next_available_row_p3(sheet, column):
+    cols = sheet.range(32, column, 43, column)
+    return max([cell.row for cell in cols if cell.value]) + 1
 
 class Clears(commands.Cog):
     def __init__(self, client):
@@ -642,6 +652,69 @@ For Wanderer: {list_wand}
 /clearparty = clears party list (ADMIN COMMAND)
 /list = parses a list of the current attendance list
 /sorted = sorts the gsheets```\n""")
+        else:
+            await ctx.send("Wrong channel! Please use #bot.")
+
+    @commands.command()
+    async def listpt(self, ctx):
+        channel = ctx.message.channel
+        commander = ctx.author
+        commander_name = commander.name
+        if channel.id in botinit_id:
+            msg = await ctx.send(
+                f'`Please wait... I am parsing a list of our Party List. Refrain from entering any other commands.`')
+            cell_list = sheet.range("M3:M14")
+            get_MATK = [""]
+            for cell in cell_list:
+                get_MATK.append(cell.value)
+            cell_list = sheet.range("M17:M28")
+            get_ATK = [""]
+            for cell in cell_list:
+                get_ATK.append(cell.value)
+            cell_list = sheet.range("M32:M43")
+            get_third = [""]
+            for cell in cell_list:
+                get_third.append(cell.value)
+
+            MATK_names = [item for item in get_MATK if item]
+            ATK_names = [item for item in get_ATK if item]
+            THIRD_names = [item for item in get_third if item]
+
+            try:
+                embeded = discord.Embed(title="Current Party List", description="A list of our Current Party List",
+                                        color=0x00FF00)
+            except Exception as e:
+                print(f'discord embed returned {e}')
+                return
+            x = 0
+            ATKpt = ''
+            MATKpt = ''
+            THIRDpt = ''
+            for x in range(len(MATK_names)):
+                MATKpt += MATK_names + '\n'
+            x = 0
+            for x in range(len(ATK_names)):
+                ATKpt += ATK_names + '\n'
+            x = 0
+            for x in range(len(THIRD_names)):
+                THIRDpt += THIRD_names + '\n'
+            try:
+                embeded.add_field(name="ATK Party", value=f'{ATKpt}', inline=True)
+            except Exception as e:
+                print(f'add field returned {e}')
+                return
+            embeded.add_field(name="MATK Party", value=f'{MATKpt}', inline=True)
+            try:
+                embeded.add_field(name="THIRD GUILD Party", value=f'{THIRDpt}', inline=True)
+            except Exception as e:
+                print(f'add field returned {e}')
+                return
+            try:
+                await ctx.send(embed=embeded)
+            except Exception as e:
+                print(f'send embed returned {e}')
+            await msg.delete()
+            # return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 

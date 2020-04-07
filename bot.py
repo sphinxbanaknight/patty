@@ -116,10 +116,9 @@ async def on_ready():
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
         await asyncio.sleep(1)
-        if ph_time_formated == "08:40:00:Tuesday":
+        if ph_time_formated == "08:00:00:Saturday" or ph_time_formated == "00:00:00:Sunday" or  ph_time_formated == "08:00:00:Sunday" or  ph_time_formated == "00:00:00:Monday":
             await botinitsk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
             await botinitsk.send('```An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.```')
-
             try:
                 next_row = next_available_row(wsheet, 1)
             except ValueError as e:
@@ -128,7 +127,7 @@ async def on_ready():
             copy_list = sheet.range("G2:I47")
             paste_list = sheet.range(next_row, 1, next_row + 45, 3)
             count = 0
-            newformat = "%d %B %Y - %a"
+            newformat = "%d %B %Y"
             ph_time = pytz.timezone('Asia/Manila')
             ph_time_unformated = datetime.now(ph_time)
             ph_time_formated = ph_time_unformated.strftime(newformat)
@@ -137,7 +136,14 @@ async def on_ready():
                 data_pasted.append(copy.value)
             for paste in paste_list:
                 if count == 0:
-                    paste.value = f'{ph_time_formated} WOE'
+                    if ph_time_formated == "08:00:00:Saturday":
+                        paste.value = f'{ph_time_formated} AM SAT WOE'
+                    elif ph_time_formated = "00:00:00:Sunday":
+                        paste.value = f'{ph_time_formated} PM SAT WOE'
+                    elif ph_time_formated = "08:00:00:Sunday":
+                        paste.value = f'{ph_time_formated} AM SUN WOE'
+                    elif ph_time_formated = "00:00:00:Monday":
+                        paste.value = f'{ph_time_formated} PM SUN WOE'
                 elif count == 1:
                     paste.value = ""
                 else:

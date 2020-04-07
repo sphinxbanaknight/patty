@@ -680,6 +680,10 @@ For Wanderer: {list_wand}
             ATK_names = [item for item in get_ATK if item]
             THIRD_names = [item for item in get_third if item]
 
+            await ctx.send(MATK_names)
+            await ctx.send(ATK_names)
+            await ctx.send(THIRD_names)
+
             try:
                 embeded = discord.Embed(title="Current Party List", description="A list of our Current Party List",
                                         color=0x00FF00)

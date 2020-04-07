@@ -529,6 +529,7 @@ For Wanderer: {list_wand}
         sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
 
 
+
     @commands.command()
     async def list(self, ctx):
         channel = ctx.message.channel
@@ -621,7 +622,7 @@ For Wanderer: {list_wand}
                 print(f'send embed returned {e}')
             await ctx.send(f'Total no. of Yes answers: {yuppie}')
             await ctx.send(f'Total no. of No answers: {noppie}')
-            await client.delete_message(msg)
+            await ctx.delete_message(msg)
             #return
         else:
             await ctx.send("Wrong channel! Please use #bot.")

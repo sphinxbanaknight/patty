@@ -109,7 +109,6 @@ async def on_ready():
     ph_time_unformated = datetime.now(ph_time)
     ph_time_formated = ph_time_unformated.strftime(format)
 
-    await botinitsk.send(ph_time_formated)
 
     data_pasted = [""]
     while True:
@@ -136,8 +135,6 @@ async def on_ready():
 
             for copy in copy_list:
                 data_pasted.append(copy.value)
-            await botinitsk.send(len(data_pasted))
-            await botinitsk.send(len(paste_list))
             for paste in paste_list:
                 if count == 0:
                     paste.value = f'{ph_time_formated} WOE'

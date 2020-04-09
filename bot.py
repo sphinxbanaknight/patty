@@ -74,7 +74,7 @@ async def on_ready():
         if server.id == sk_server:
             sphinx = server
             continue
-         if server.id == bk_server:
+        if server.id == bk_server:
             burger = server
             continue
 
@@ -85,6 +85,7 @@ async def on_ready():
     for channel in burger.channels:
         if channel.id == bk_bot:
             botinitbk = channel
+            break
 
     print('Bot is online.')
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Getting scolded by Jia'))

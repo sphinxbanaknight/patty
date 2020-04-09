@@ -468,7 +468,7 @@ For Wanderer: {list_wand}
                 cell_list = sheet.range(change_row, 7, change_row, 10)
 
                 if arglist[0].lower() in answeryes or arglist[0].lower() in answerno:
-                print('debug2')
+                    print('debug2')
                     count = 0
                     #cell_list = sheet.range(next_row, 7, next_row, 10)
                     if no_of_args > 1:

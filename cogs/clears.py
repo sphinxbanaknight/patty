@@ -467,8 +467,7 @@ For Wanderer: {list_wand}
                     change_row = next_available_row(sheet, 7)
                 except ValueError as e:
                     change_row = 3
-                    return
-                cell_list = sheet.range(                print('debugging')
+                cell_list = sheet.range(change_row, 7, change_row, 10)
                 if arglist[0].lower() in answeryes or arglist[0].lower() in answerno:
                     count = 0
                     #cell_list = sheet.range(next_row, 7, next_row, 10)
@@ -512,6 +511,8 @@ For Wanderer: {list_wand}
                                     yes = 1
                                 else:
                                     cell.value = 'No'
+                            elif count == 3:
+                                cell.value = ""
                             count += 1
                         sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                         # await ctx.send(f'{yes}')

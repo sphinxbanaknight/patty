@@ -469,7 +469,7 @@ For Wanderer: {list_wand}
                 if arglist[0].lower() in answeryes or arglist[0].lower() in answerno:
 
                     count = 0
-                    # cell_list = sheet.range(next_row, 7, next_row, 10)
+                    cell_list = sheet.range(next_row, 7, next_row, 10)
                     if no_of_args > 1:
                         # await ctx.send('test2')
                         for cell in cell_list:

@@ -463,16 +463,13 @@ For Wanderer: {list_wand}
                 yes = 0
                 no = 0
             else:
-                print('debug1')
                 try:
                     change_row = next_available_row(sheet, 7)
-                except Exception as e:
-                    print(f'{e}')
+                except ValueError as e:
+                    change_row = 3
                     return
-                cell_list = sheet.range(change_row, 7, change_row, 10)
-                print('debugging')
+                cell_list = sheet.range(                print('debugging')
                 if arglist[0].lower() in answeryes or arglist[0].lower() in answerno:
-                    print('debug2')
                     count = 0
                     #cell_list = sheet.range(next_row, 7, next_row, 10)
                     if no_of_args > 1:
@@ -499,7 +496,6 @@ For Wanderer: {list_wand}
                             await ctx.send(
                                 f'```{ctx.author.name} said No with IGN: {ign.value}, Class: {role.value}, with Comment: {arglist[1]}.```')
                     else:
-                        print('debug3')
                         # await ctx.send('test2')
                         for cell in cell_list:
                             # await ctx.send(f'test3 {ign.value} {role.value} {count}')
@@ -552,9 +548,18 @@ For Wanderer: {list_wand}
         commander = ctx.author
         commander_name = commander.name
         if channel.id in botinit_id:
-            row_n = next_available_row(sheet, 7)
-            row_c = next_available_row(sheet, 8)
-            row_a = next_available_row(sheet, 9)
+            try:
+                row_n = next_available_row(sheet, 7)
+            except ValueError:
+                row_n = 3
+            try:
+                row_c = next_available_row(sheet, 8)
+            except ValueError:
+                row_c = 3
+            try:
+                row_a = next_available_row(sheet, 9)
+            except ValueError:
+                row_a = 3
             msg = await ctx.send(f'`Please wait... I am parsing a list of our WOE Roster. Refrain from entering any other commands.`')
             #await asyncio.sleep(10)
             while row_n != row_c or row_n != row_a:

@@ -467,7 +467,7 @@ For Wanderer: {list_wand}
                 try:
                     change_row = next_available_row(sheet, 7)
                 except Exception as e:
-                    print(e)
+                    print(f'{e}')
                     return
                 cell_list = sheet.range(change_row, 7, change_row, 10)
                 print('debugging')

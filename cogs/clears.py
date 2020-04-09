@@ -67,7 +67,7 @@ list_mech = ['mech', 'mechanic', 'mado']
 list_ranger = ['ranger', 'range']
 
 ############# Responses #####################################
-answeryes = ['y', 'yes', 'ya', 'yup', 'ye']
+answeryes = ['y', 'yes', 'ya', 'yup', 'ye', 'in', 'g']
 answerno = ['n', 'no', 'nah', 'na', 'nope', 'nuh']
 
 def next_available_row(sheet, column):
@@ -525,7 +525,7 @@ For Wanderer: {list_wand}
                         # await ctx.send('hello')
 
                 else:
-                    await ctx.send('Please send a proper syntax: ``attendance y/n, (optional comment)`')
+                    await ctx.send('Please send a proper syntax: `/attendance y/n, (optional comment)`')
                     return
                 count = 0
                 yes = 0
@@ -665,7 +665,9 @@ For Wanderer: {list_wand}
 /clearparty = clears party list (ADMIN COMMAND)
 /list = parses a list of the current attendance list
 /listpt = parses a list of the current party list divided into ATK, MATK, and THIRD GUILD
-/sorted = sorts the gsheets```\n""")
+/sorted = sorts the gsheets
+PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT. 
+Thank you!```\n""")
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 

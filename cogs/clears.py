@@ -463,13 +463,14 @@ For Wanderer: {list_wand}
                 yes = 0
                 no = 0
             else:
+                print('debug1')
                 change_row = next_available_row(sheet, 7)
                 cell_list = sheet.range(change_row, 7, change_row, 10)
 
                 if arglist[0].lower() in answeryes or arglist[0].lower() in answerno:
-
+                print('debug2')
                     count = 0
-                    cell_list = sheet.range(next_row, 7, next_row, 10)
+                    #cell_list = sheet.range(next_row, 7, next_row, 10)
                     if no_of_args > 1:
                         # await ctx.send('test2')
                         for cell in cell_list:
@@ -494,6 +495,7 @@ For Wanderer: {list_wand}
                             await ctx.send(
                                 f'```{ctx.author.name} said No with IGN: {ign.value}, Class: {role.value}, with Comment: {arglist[1]}.```')
                     else:
+                        print('debug3')
                         # await ctx.send('test2')
                         for cell in cell_list:
                             # await ctx.send(f'test3 {ign.value} {role.value} {count}')

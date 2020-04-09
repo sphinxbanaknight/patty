@@ -466,7 +466,7 @@ For Wanderer: {list_wand}
                 print('debug1')
                 change_row = next_available_row(sheet, 7)
                 cell_list = sheet.range(change_row, 7, change_row, 10)
-
+                print('debugging')
                 if arglist[0].lower() in answeryes or arglist[0].lower() in answerno:
                     print('debug2')
                     count = 0

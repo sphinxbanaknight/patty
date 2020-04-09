@@ -464,7 +464,11 @@ For Wanderer: {list_wand}
                 no = 0
             else:
                 print('debug1')
-                change_row = next_available_row(sheet, 7)
+                try:
+                    change_row = next_available_row(sheet, 7)
+                except Exception as e:
+                    print(e)
+                    return
                 cell_list = sheet.range(change_row, 7, change_row, 10)
                 print('debugging')
                 if arglist[0].lower() in answeryes or arglist[0].lower() in answerno:

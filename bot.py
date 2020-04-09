@@ -131,7 +131,7 @@ async def on_ready():
             copy_list = sheet.range("G2:I47")
             paste_list = sheet.range(next_row, 1, next_row + 45, 3)
             count = 0
-            newformat = "%d %B %Y"
+            newformat = "%B %Y"
             ph_time = pytz.timezone('Asia/Manila')
             ph_time_unformated = datetime.now(ph_time)
             ph_time_formated = ph_time_unformated.strftime(newformat)
@@ -141,13 +141,19 @@ async def on_ready():
             for paste in paste_list:
                 if count == 0:
                     if ph_time_formated == "08:00:00:Saturday":
-                        paste.value = f'{ph_time_formated} AM SAT WOE'
+                        today = date.today()
+                        d = today.strftime("%d")
+                        d -= 1
+                        paste.value = f'{d} {ph_time_formated} AM SAT WOE'
                     elif ph_time_formated == "00:00:00:Sunday":
                         paste.value = f'{ph_time_formated} PM SAT WOE'
                     elif ph_time_formated == "08:00:00:Sunday":
                         paste.value = f'{ph_time_formated} AM SUN WOE'
                     elif ph_time_formated == "00:00:00:Monday":
-                        paste.value = f'{ph_time_formated} PM SUN WOE'
+                        today = date.today()
+                        d = today.strftime("%d")
+                        d -= 1
+                        paste.value = f'{d} {ph_time_formated} PM SUN WOE'
                 elif count == 1:
                     paste.value = ""
                 else:

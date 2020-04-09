@@ -609,6 +609,7 @@ For Wanderer: {list_wand}
 
             if yuppie == 0 and noppie == 0:
                 await ctx.send('`Attendance not found. Please use /att y/n to register your attendance`')
+                await msg.delete()
                 return
 
             try:

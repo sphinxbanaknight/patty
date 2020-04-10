@@ -60,7 +60,7 @@ list_sc = ['sc', 'shadow chaser']
 list_obo = ['obo', 'oboro', 'ninja']
 list_rebel = ['rebel', 'reb', 'rebellion']
 list_doram = ['cat', 'doram']
-list_sorc = ['sorc', 'sorceror']
+list_sorc = ['sorc', 'sorcerer']
 list_sura = ['sura', 'shura', 'asura', 'ashura']
 list_wl = ['wl', 'warlock', 'tetra', 'crimson rock', 'cr']
 list_mech = ['mech', 'mechanic', 'mado']
@@ -329,7 +329,7 @@ For Wanderer: {list_wand}
                             cell.value = arglist[0]
                         elif count == 2:
                             cell.value = darole
-                        elif     count == 3:
+                        elif count == 3:
                             cell.value = ""
                         count += 1
                     sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
@@ -395,7 +395,7 @@ For Wanderer: {list_wand}
             ign = sheet.cell(next_row, 3)
             role = sheet.cell(next_row, 4)
 
-            finding_column = sheet.range("G3:G{}".format(sheet.row_count))
+            finding_column = sheet.range("G3:G47".format(sheet.row_count))
 
             foundign = [found for found in finding_column if found.value == ign.value]
 

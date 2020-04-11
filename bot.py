@@ -144,7 +144,7 @@ async def on_ready():
                         today = date.today()
                         d = today.strftime("%d")
                         d -= 1
-                        paste.value = f'{d}     {ph_time_formated} PM SAT WOE'
+                        paste.value = f'{d} {ph_time_formated} PM SAT WOE'
                     elif ph_time_formated == "00:00:00:Monday":
                         today = date.today()
                         d = today.strftime("%d")

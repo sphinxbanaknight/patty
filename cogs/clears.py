@@ -292,6 +292,7 @@ For Wanderer: {list_wand}
                 for cell in cell_list:
                     if cell.value == commander_name:
                         change = 1
+                        ign = sheet.cell(next_row, 3)
                         break
                     next_row += 1
                 if change == 0:

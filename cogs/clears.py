@@ -278,15 +278,24 @@ For Wanderer: {list_wand}
                                     ''')
                     return
                 change = 0
-                try:
-                    uname = sheet.find(commander_name)
-                    if uname:
-                        next_row = uname.row
-                        ign = sheet.cell(next_row, 3)
-                        change = 1
-                except gspread.exceptions.CellNotFound:
-                    next_row = next_available_row(sheet, 2)
+                #try:
+                #    uname = sheet.find(commander_name)
+                #    if uname:
+                #        next_row = uname.row
+                #        ign = sheet.cell(next_row, 3)
+                #        change = 1
+                #except gspread.exceptions.CellNotFound:
+                #    next_row = next_available_row(sheet, 2)
                     #list_entry = sheet.range(next_row, 3, next_row, 4)
+                next_row = 3
+                cell_list = sheet.range("B3:B47")
+                for cell in cell_list:
+                    if cell.value == commander_name:
+                        change = 1
+                        break
+                    next_row += 1
+                if change == 0:
+                    next_row = next_available_row(sheet, 2)
 
                 count = 0
 
@@ -382,15 +391,25 @@ For Wanderer: {list_wand}
             #    await ctx.send('Please send the proper syntax: ``attendance y/n, (optional comment)`')
             #    return
             # else:
-
-            try:
-                uname = sheet.find(ctx.author.name)
-                next_row = uname.row
-            except gspread.exceptions.CellNotFound:
-                await ctx.send(
-                    f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional other classes that you use)`')
+            next_row = 3
+            found = 0
+            cell_list = sheet.range("B3:B47")
+            for cell in cell_list:
+                if cell.value == commander_name:
+                    found = 1
+                    break
+                next_row += 1
+            if found == 0:
+                await ctx.send(f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional other classes that you use)`')
                 return
-            # await ctx.send('test1')
+            #try:
+            #    uname = sheet.find(ctx.author.name)
+            #    next_row = uname.row
+            #except gspread.exceptions.CellNotFound:
+            #    await ctx.send(
+            #        f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional other classes that you use)`')
+            #    return
+            #        await ctx.send('test1')
 
             ign = sheet.cell(next_row, 3)
             role = sheet.cell(next_row, 4)

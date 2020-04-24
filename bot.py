@@ -58,7 +58,7 @@ p3_range = "L32:M43"
 p3role_range = "P32:P43"
 
 
-prefix = ["!", "$", "-", "/"]
+prefix = ["/"]
 description = "A bot for sheet+discord linking/automation."
 client = commands.Bot(command_prefix = prefix, description = description)
 
@@ -118,7 +118,7 @@ async def on_ready():
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
         await asyncio.sleep(1)
-        if ph_time_formated == "08:00:00:Saturday" or ph_time_formated == "00:00:00:Sunday":
+        if ph_time_formated == "00:00:00:Monday" or ph_time_formated == "00:00:00:Sunday":
             await botinitsk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
             await botinitsk.send('```An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.```')
             await botinitbk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
@@ -128,13 +128,13 @@ async def on_ready():
             except ValueError as e:
                 print(f'next_row returned {e}')
                 next_row = 1
-            copy_list = sheet.range("G2:I47")
+            copy_list = sheet.range("G3:I47")
             paste_list = sheet.range(next_row, 1, next_row + 45, 3)
             count = 0
             newformat = "%B %Y"
             ph_time = pytz.timezone('Asia/Manila')
             ph_time_unformated = datetime.now(ph_time)
-            ph_time_formated = ph_time_unformated.strftime(newformat)
+            ph_time_new_formated = ph_time_unformated.strftime(newformat)
 
             for copy in copy_list:
                 data_pasted.append(copy.value)
@@ -144,12 +144,12 @@ async def on_ready():
                         today = date.today()
                         d = today.strftime("%d")
                         d -= 1
-                        paste.value = f'{d} {ph_time_formated} PM SAT WOE'
+                        paste.value = f'{d} {ph_time_new_formated} PM SAT WOE'
                     elif ph_time_formated == "00:00:00:Monday":
                         today = date.today()
                         d = today.strftime("%d")
                         d -= 1
-                        paste.value = f'{d} {ph_time_formated} PM SUN WOE'
+                        paste.value = f'{d} {ph_time_new_formated} PM SUN WOE'
                 elif count == 1:
                     paste.value = ""
                 else:
@@ -166,7 +166,6 @@ async def on_ready():
                 cell.value = ""
 
             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-        else:
             continue
 
 

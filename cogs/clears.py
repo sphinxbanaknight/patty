@@ -40,8 +40,8 @@ authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 437
 
 
 ################ Cell placements ###########################
-guild_range = "B3:E47"
-roster_range = "G3:J47"
+guild_range = "B3:E50"
+roster_range = "G3:J50"
 matk_range = "L3:M14"
 p1role_range = "P3:P14"
 atk_range = "L17:M28"
@@ -70,8 +70,16 @@ list_ranger = ['ranger', 'range']
 answeryes = ['y', 'yes', 'ya', 'yup', 'ye', 'in', 'g']
 answerno = ['n', 'no', 'nah', 'na', 'nope', 'nuh']
 
+######################### CELERY RESPONSES ####################
+
+answerzeny = ['zeny', 'zen', 'money', 'moneh', 'moolah']
+answer10 = ['10', 'ten', 'plus ten', 'plusten', '10food', '+10']
+answer20 = ['20', 'twenty', 'plus twenty', 'plustwenty', '20food', '+20']
+
+###############################################################
+
 def next_available_row(sheet, column):
-    cols = sheet.range(3, column, 47, column)
+    cols = sheet.range(3, column, 50, column)
     return max([cell.row for cell in cols if cell.value]) + 1
 
 def next_available_row_p1(sheet, column):
@@ -288,7 +296,7 @@ For Wanderer: {list_wand}
                 #    next_row = next_available_row(sheet, 2)
                     #list_entry = sheet.range(next_row, 3, next_row, 4)
                 next_row = 3
-                cell_list = sheet.range("B3:B47")
+                cell_list = sheet.range("B3:B50")
                 for cell in cell_list:
                     if cell.value == commander_name:
                         change = 1
@@ -363,14 +371,14 @@ For Wanderer: {list_wand}
                         await ctx.send(f'```Please use /att y/n to register your attendance!```')
         else:
             await ctx.send("Wrong channel! Please use #bot.")
-        cell_list = sheet.range("B3:E46")
+        cell_list = sheet.range("B3:E50")
         try:
-            sheet.sort((4, 'asc'), range="B3:E46")
+            sheet.sort((4, 'asc'), range="B3:E50")
         except Exception as e:
             print(e)
             return
-        cell_list = sheet.range("G3:J46")
-        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
+        cell_list = sheet.range("G3:J50")
+        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
 
 
     @commands.command()
@@ -394,7 +402,7 @@ For Wanderer: {list_wand}
             # else:
             next_row = 3
             found = 0
-            cell_list = sheet.range("B3:B47")
+            cell_list = sheet.range("B3:B50")
             for cell in cell_list:
                 if cell.value == commander_name:
                     found = 1
@@ -415,7 +423,7 @@ For Wanderer: {list_wand}
             ign = sheet.cell(next_row, 3)
             role = sheet.cell(next_row, 4)
 
-            finding_column = sheet.range("G3:G47".format(sheet.row_count))
+            finding_column = sheet.range("G3:G50".format(sheet.row_count))
 
             foundign = [found for found in finding_column if found.value == ign.value]
 
@@ -669,6 +677,16 @@ For Wanderer: {list_wand}
             #return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
+
+    #@commands.command()
+    #async def celery(self, ctx, *, arguments):
+    #    channel = ctx.message.channel
+    #    commander = ctx.author
+    #    commander_name = commander.name
+    #    if channel.id in botinit_id:
+    #
+    #    else:
+    #        await ctx.send("Wrong channel! Please use #bot.")
 
     @commands.command()
     async def help(self, ctx):

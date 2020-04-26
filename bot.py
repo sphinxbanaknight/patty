@@ -48,8 +48,8 @@ authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 437
 
 
 ################ Cell placements ###########################
-guild_range = "B3:E47"
-roster_range = "G3:J47"
+guild_range = "B3:E50"
+roster_range = "G3:J50"
 matk_range = "L3:M14"
 p1role_range = "P3:P14"
 atk_range = "L17:M28"
@@ -128,7 +128,7 @@ async def on_ready():
             except ValueError as e:
                 print(f'next_row returned {e}')
                 next_row = 1
-            copy_list = sheet.range("G3:I47")
+            copy_list = sheet.range("G3:I50")
             paste_list = sheet.range(next_row, 1, next_row + 45, 3)
             count = 0
             newformat = "%B %Y"
@@ -141,14 +141,16 @@ async def on_ready():
             for paste in paste_list:
                 if count == 0:
                     if ph_time_formated == "00:00:00:Sunday":
-                        today = date.today()
-                        d = today.strftime("%d")
+                        d = ph_time_unformated.strftime("%d")
+                        d = int(d)
                         d -= 1
+                        d = str(d)
                         paste.value = f'{d} {ph_time_new_formated} PM SAT WOE'
                     elif ph_time_formated == "00:00:00:Monday":
-                        today = date.today()
-                        d = today.strftime("%d")
+                        d = ph_time_unformated.strftime("%d")
+                        d = int(d)
                         d -= 1
+                        d = str(d)
                         paste.value = f'{d} {ph_time_new_formated} PM SUN WOE'
                 elif count == 1:
                     paste.value = ""
@@ -168,6 +170,10 @@ async def on_ready():
             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
             continue
 
+@client.event
+async def on_member_join(member):
+    role = discord.utils.get(member.guild.roles, id="703643328406880287")
+    await member.add_roles(role)
 
 @client.command()
 async def load(ctx, extension):
@@ -194,7 +200,7 @@ for filename in os.listdir('./cogs'):
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send('Please pass in all required arguments.')
-    if isinstance(error, commands.CommandNotFound):
+    if isinstance(error, commands.CommandN              otFound):
         await ctx.send('Invalid command used.')
 
 

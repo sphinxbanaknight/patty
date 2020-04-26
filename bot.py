@@ -200,7 +200,7 @@ for filename in os.listdir('./cogs'):
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send('Please pass in all required arguments.')
-    if isinstance(error, commands.CommandN              otFound):
+    if isinstance(error, commands.CommandNotFound):
         await ctx.send('Invalid command used.')
 
 

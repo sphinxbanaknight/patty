@@ -705,7 +705,10 @@ For Wanderer: {list_wand}
                     plustwenty = 1
                 if args.lower in answernone:
                     none = 1
-
+            print(zeny)
+            print(plusten)
+            print(plustwenty)
+            print(none)
             if zeny == 0 and plusten == 0 and plustwenty == 0 and none == 0:
                 await ctx.send("```Please use the correct syntax /celery zeny, plusten, plustwenty. MIND THE COMMA.```")
 

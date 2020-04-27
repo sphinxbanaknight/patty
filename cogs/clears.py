@@ -696,14 +696,14 @@ For Wanderer: {list_wand}
             arglist = [x.strip() for x in arguments.split(',')]
 
             for args in arglist:
-                print(args)
-                if args.lower in answerzeny:
+                print(args.lower())
+                if args.lower() in answerzeny:
                     zeny = 1
-                if args.lower in answer10:
+                if args.lower() in answer10:
                     plusten = 1
-                if args.lower in answer20:
+                if args.lower() in answer20:
                     plustwenty = 1
-                if args.lower in answernone:
+                if args.lower() in answernone:
                     none = 1
             print(zeny)
             print(plusten)

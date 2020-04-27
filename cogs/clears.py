@@ -766,31 +766,46 @@ For Wanderer: {list_wand}
                     change_row = 3
                 cell_list = celesheet.range(change_row, 2, change_row, 7)
                 for cell in cell_list:
-                    if count == 0:
-                        cell.value = commander_name
-                    elif count == 1:
-                        cell.value = ign.value
-                    elif count == 2:
-                        cell.value = role.value
-                    elif count == 3:
-                        if zeny == 1:
-                            cell.value = "Yes"
-                        else:
+                    if none == 1:
+                        if count == 0:
+                            cell.value = commander_name
+                        elif count == 1:
+                            cell.value = ign.value
+                        elif count == 2:
+                            cell.value = role.value
+                        elif count == 3:
                             cell.value = "No"
-                    elif count == 4:
-                        if plusten == 1:
-                            cell.value = "Yes"
-                        else:
+                        elif count == 4:
                             cell.value = "No"
-                    elif count == 5:
-                        if plustwenty == 1:
-                            cell.value = "Yes"
-                        else:
+                        elif count == 5:
                             cell.value = "No"
+                    else:
+                        if count == 0:
+                            cell.value = commander_name
+                        elif count == 1:
+                            cell.value = ign.value
+                        elif count == 2:
+                            cell.value = role.value
+                        elif count == 3:
+                            if zeny == 1:
+                                cell.value = "Yes"
+                            else:
+                                cell.value = "No"
+                        elif count == 4:
+                            if plusten == 1:
+                                cell.value = "Yes"
+                            else:
+                                cell.value = "No"
+                        elif count == 5:
+                            if plustwenty == 1:
+                                cell.value = "Yes"
+                            else:
+                                cell.value = "No"
                     count += 1
                 celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                 celery_list = celesheet.cell(foundign[0].row, 8).value
-                await ctx.send(f'```{ctx.author.name}  wanted {celery_list} with IGN: {ign.value}, and Class: {role.value}.```')
+                await ctx.send(f'```{ctx.author.name} wanted {celery_list} with IGN: {ign.value}, and Class: {role.value}.```')
+                cell_list = celesheet.range("B3:G48")
                 celesheet.sort((4, 'asc'), range="B3:G48")
         else:
             await ctx.send("Wrong channel! Please use #bot.")

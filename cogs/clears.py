@@ -806,7 +806,11 @@ For Wanderer: {list_wand}
                 celery_list = celesheet.cell(foundign[0].row, 8).value
                 await ctx.send(f'```{ctx.author.name} wanted {celery_list} with IGN: {ign.value}, and Class: {role.value}.```')
                 cell_list = celesheet.range("B3:G48")
-                celesheet.sort((4, 'asc'), range="B3:G48")
+                try:
+                    celesheet.sort((4, 'asc'), range="B3:G48")
+                except Exception as e:
+                    print(f'celesheet sort has returned {e}')
+                    return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 

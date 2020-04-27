@@ -696,6 +696,7 @@ For Wanderer: {list_wand}
             arglist = [x.strip() for x in arguments.split(',')]
 
             for args in arglist:
+                print(args)
                 if args.lower in answerzeny:
                     zeny = 1
                 if args.lower in answer10:

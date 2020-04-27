@@ -172,9 +172,13 @@ async def on_ready():
 
 @client.event
 async def on_member_join(member):
-    role = discord.utils.get(member.guild.roles, id="703643328406880287")
+    try:
+        role = discord.utils.get(member.guild.roles, id=703643328406880287)
+    except AttributeError as e:
+        print(f'autorole returned as {e}')
+        role = discord.utils.get(member.guild.roles, name="new recruit")
     await member.add_roles(role)
-
+        
 @client.command()
 async def load(ctx, extension):
     client.load_extension(f'cogs.{extension}')

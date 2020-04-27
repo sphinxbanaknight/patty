@@ -739,17 +739,17 @@ For Wanderer: {list_wand}
                     elif count == 2:
                         cell.value = role.value
                     elif count == 3:
-                        if zeny = 1:
+                        if zeny == 1:
                             cell.value = "Yes"
                         else:
                             cell.value = "No"
                     elif count == 4:
-                        if plusten = 1:
+                        if plusten == 1:
                             cell.value = "Yes"
                         else:
                             cell.value = "No"
                     elif count == 5:
-                        if plustwenty = 1:
+                        if plustwenty == 1:
                             cell.value = "Yes"
                         else:
                             cell.value = "No"

@@ -791,6 +791,7 @@ For Wanderer: {list_wand}
                 celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                 celery_list = celesheet.cell(foundign[0].row, 8).value
                 await ctx.send(f'```{ctx.author.name}  wanted {celery_list} with IGN: {ign.value}, and Class: {role.value}.```')
+                celesheet.sort((4, 'asc'), range="B3:G48")
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 

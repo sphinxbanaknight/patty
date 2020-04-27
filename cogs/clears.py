@@ -696,7 +696,6 @@ For Wanderer: {list_wand}
             arglist = [x.strip() for x in arguments.split(',')]
 
             for args in arglist:
-                print(args.lower())
                 if args.lower() in answerzeny:
                     zeny = 1
                 if args.lower() in answer10:
@@ -705,10 +704,6 @@ For Wanderer: {list_wand}
                     plustwenty = 1
                 if args.lower() in answernone:
                     none = 1
-            print(zeny)
-            print(plusten)
-            print(plustwenty)
-            print(none)
             if zeny == 0 and plusten == 0 and plustwenty == 0 and none == 0:
                 await ctx.send("```Please use the correct syntax /celery zeny, plusten, plustwenty. MIND THE COMMA.```")
 
@@ -730,10 +725,13 @@ For Wanderer: {list_wand}
             role = sheet.cell(next_row, 4)
             count = 0
 
-            finding_column = celesheet.range("B3:B50".format(celesheet.row_count))
+            finding_column = celesheet.range("C3:C50".format(celesheet.row_count))
             foundign = [found for found in finding_column if found.value == ign.value]
 
             if foundign:
+                cell_list = celesheet.range(foundign[0].row, 2, foundign[0].row, 7)
+                for cell in cell_list:
+                    cell.value = ""
                 cell_list = celesheet.range(foundign[0].row, 2, foundign[0].row, 7)
                 for cell in cell_list:
                     if count == 0:

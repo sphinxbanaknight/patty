@@ -706,7 +706,7 @@ For Wanderer: {list_wand}
                     none = 1
 
             if zeny == 0 and plusten == 0 and plustwenty == 0 and none == 0:
-                await ctx.send{f'```Please use the correct syntax /celery zeny, plusten, plustwenty. MIND THE COMMA```'}
+                await ctx.send{"```Please use the correct syntax /celery zeny, plusten, plustwenty. MIND THE COMMA```"}
 
 
             no_of_args = len(arglist)

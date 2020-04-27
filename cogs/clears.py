@@ -23,6 +23,8 @@ creds = ServiceAccountCredentials.from_json_keyfile_name(data_json, scope)
 gc = gspread.authorize(creds)
 
 sheet = gc.open('Copy of BK ROSTER').sheet1
+shite = gc.open('Copy of BK ROSTER')
+celesheet = shite.worksheet('Celery Preferences')
 
 ################ Channel, Server, and User IDs ###########################
 sphinx_id = 108381986166431744
@@ -75,6 +77,7 @@ answerno = ['n', 'no', 'nah', 'na', 'nope', 'nuh']
 answerzeny = ['zeny', 'zen', 'money', 'moneh', 'moolah']
 answer10 = ['10', 'ten', 'plus ten', 'plusten', '10food', '+10']
 answer20 = ['20', 'twenty', 'plus twenty', 'plustwenty', '20food', '+20']
+answernone = ['none', 'nada', 'nah', 'nothing']
 
 ###############################################################
 
@@ -678,15 +681,116 @@ For Wanderer: {list_wand}
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 
-    #@commands.command()
-    #async def celery(self, ctx, *, arguments):
-    #    channel = ctx.message.channel
-    #    commander = ctx.author
-    #    commander_name = commander.name
-    #    if channel.id in botinit_id:
-    #
-    #    else:
-    #        await ctx.send("Wrong channel! Please use #bot.")
+    @commands.command()
+    async def celery(self, ctx, *, arguments):
+        channel = ctx.message.channel
+        commander = ctx.author
+        commander_name = commander.name
+
+        zeny = 0
+        plusten = 0
+        plustwenty = 0
+        none = 0
+
+        if channel.id in botinit_id:
+            arglist = [x.strip() for x in arguments.split(',')]
+
+            for args in arglist:
+                if args.lower in answerzeny:
+                    zeny = 1
+                if args.lower in answer10:
+                    plusten = 1
+                if args.lower in answer20:
+                    plustwenty = 1
+                if args.lower in answernone:
+                    none = 1
+
+            if zeny == 0 and plusten == 0 and plustwenty == 0 and none == 0:
+                await ctx.send{f'```Please use the correct syntax /celery zeny, plusten, plustwenty. MIND THE COMMA```'}
+
+
+            no_of_args = len(arglist)
+            found = 0
+            next_row = 3
+            cell_list = sheet.range("B3:B50")
+            for cell in cell_list:
+                if cell.value == commander_name:
+                    found = 1
+                    break
+                next_row += 1
+            if found == 0:
+                await ctx.send(f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional other classes that you use)`')
+                return
+
+            ign = sheet.cell(next_row, 3)
+            role = sheet.cell(next_row, 4)
+            count = 0
+
+            finding_column = celesheet.range("B3:B50".format(celesheet.row_count))
+            foundign = [found for found in finding_column if found.value == ign.value]
+
+            if foundign:
+                cell_list = celesheet.range(foundign[0].row, 2, foundign[0].row, 7)
+                for cell in cell_list:
+                    if count == 0:
+                        cell.value = commander_name
+                    elif count == 1:
+                        cell.value = ign.value
+                    elif count == 2:
+                        cell.value = role.value
+                    elif count == 3:
+                        if zeny = 1:
+                            cell.value = "Yes"
+                        else:
+                            cell.value = "No"
+                    elif count == 4:
+                        if plusten = 1:
+                            cell.value = "Yes"
+                        else:
+                            cell.value = "No"
+                    elif count == 5:
+                        if plustwenty = 1:
+                            cell.value = "Yes"
+                        else:
+                            cell.value = "No"
+                    count += 1
+                celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                celery_list = celesheet.cell(foundign[0].row, 8).value
+                await ctx.send(f'```{ctx.author.name}  wanted {celery_list} with IGN: {ign.value}, and Class: {role.value}.```')
+            else:
+                try:
+                    change_row = next_available_row(celesheet, 2)
+                except ValueError as e:
+                    change_row = 3
+                cell_list = celesheet.range(change_row, 2, change_row, 7)
+                for cell in cell_list:
+                    if count == 0:
+                        cell.value = commander_name
+                    elif count == 1:
+                        cell.value = ign.value
+                    elif count == 2:
+                        cell.value = role.value
+                    elif count == 3:
+                        if zeny = 1:
+                            cell.value = "Yes"
+                        else:
+                            cell.value = "No"
+                    elif count == 4:
+                        if plusten = 1:
+                            cell.value = "Yes"
+                        else:
+                            cell.value = "No"
+                    elif count == 5:
+                        if plustwenty = 1:
+                            cell.value = "Yes"
+                        else:
+                            cell.value = "No"
+                    count += 1
+                celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                celery_list = celesheet.cell(foundign[0].row, 8).value
+                await ctx.send(f'```{ctx.author.name}  wanted {celery_list} with IGN: {ign.value}, and Class: {role.value}.```')
+        else:
+            await ctx.send("Wrong channel! Please use #bot.")
 
     @commands.command()
     async def help(self, ctx):

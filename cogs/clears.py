@@ -426,6 +426,8 @@ For Wanderer: {list_wand}
             return
         cell_list = sheet.range("G3:J50")
         sheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
+        cell_list = celesheet.range("B3:T48")
+        celesheet.sort((4, 'asc'), range = "B3:T48")
 
 
     @commands.command()

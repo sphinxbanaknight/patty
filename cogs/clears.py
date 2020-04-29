@@ -1200,11 +1200,11 @@ For Wanderer: {list_wand}
                 celery_list = celesheet.cell(change_row, 20).value
                 await ctx.send(f'```{ctx.author.name} wanted {celery_list}with IGN: {ign.value}, and Class: {role.value}.```')
         cell_list = celesheet.range("B3:T48")
-        try:
-            celesheet.sort((4, 'asc'), range = "B3:T48")
-        except Exception as e:
-            print(f'celesheet sort has returned {e}')
-            return
+            try:
+                celesheet.sort((4, 'asc'), range = "B3:T48")
+            except Exception as e:
+                print(f'celesheet sort has returned {e}')
+                return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
         await msg.delete()
@@ -1212,7 +1212,7 @@ For Wanderer: {list_wand}
     @commands.command()
     async def help(self, ctx):
 
-        channel = ctx.message.channel
+        channel = ctx.message.chann el
         commander = ctx.author
         commander_name = commander.name
         if channel.id in botinit_id:

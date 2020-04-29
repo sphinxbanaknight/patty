@@ -1308,14 +1308,18 @@ Thank you!```\n""")
             classlist = ''
             preflist = ''
 
+            no_of_pref = [x.strip() for x in pref[x].split(';')]
+
             for x in range(len(ign)):
                 ignlist += ign[x] + '\n'
-                if len(pref) > 8:
+                no_of_pref = [x.strip() for x in pref[x].split(';')]
+                if no_of_pref > 8:
                     ignlist += '\n'
             x = 0
             for x in range(len(role)):
                 classlist += role[x] + '\n'
-                if len(pref) > 8:
+                no_of_pref = [x.strip() for x in pref[x].split(';')]
+                if no_of_pref > 8:
                     classlist += '\n'
             x = 0
             for x in range(len(pref)):

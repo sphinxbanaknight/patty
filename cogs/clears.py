@@ -1281,7 +1281,51 @@ Thank you!```\n""")
         commander_name = commander.name
         if channel.id in botinit_id:
             msg = await ctx.send(f'`Please wait... I am parsing a list of our Party List. Refrain from entering any other commands.`')
-            
+            cell_list = celesheet.range("C3:C48")
+            get_ign = [""]
+            for cell in cell_list:
+                get_ign.append(cell.value)
+            cell_list = celesheet.range("D3:D48")
+            get_class = [""]
+            for cell in cell_list:
+                get_class.append(cell.value)
+            cell_list = celesheet.range("T3:T48")
+            get_pref = [""]
+            for cell in cell_list:
+                get_pref.append(cell.value)
+
+            ign = [item for item in get_ign if item]
+            role = [item for item in get_class if item]
+            pref = [item for item in get_pref if item]
+
+            try:
+                embeded = discord.Embed(title="Salary Preferences", description="A list of our Salary Preferences", color=0x00FF00)
+            except Exception as e:
+                printf(f'discord embed retturned {e}')
+                return
+            x = 0
+            ignlist = ''
+            classlist = ''
+            preflist = ''
+
+            for x in range(len(ign)):
+                ignlist += ign[x] + '\n'
+            x = 0
+            for x in range(len(role)):
+                classlist += role[x] + '\n'
+            x = 0
+            for x in range(len(pref)):
+                preflist += pref[x] + '\n'
+            x = 0
+
+            embeded.add_field(name="IGN", value=f'{ignlist}', inline=True)
+            embeded.add_field(name="CLASS", value=f'{classlist}', inline=True)
+            embeded.add_field(name="PREFERENCES", value=f'{preflist}', inline=True)
+
+            await ctx.send(embed=embeded)
+
+            await msg.delete()
+
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 

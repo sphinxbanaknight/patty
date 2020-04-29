@@ -987,9 +987,9 @@ For Wanderer: {list_wand}
                             cell.value = "No"
                     elif count == 18:
                         if every == 1:
-                            cell.value = "EVERYTHING"
+                            cell.value = "EVERYTHING "
                         elif none == 1:
-                            cell.value = "NONE"
+                            cell.value = "NONE "
                         # if zeny == 1:
                         #     if plusten == 1:
                         #         if plustwenty == 1:
@@ -1137,9 +1137,9 @@ For Wanderer: {list_wand}
                             cell.value = "No"
                     elif count == 18:
                         if every == 1:
-                            cell.value = "EVERYTHING"
+                            cell.value = "EVERYTHING "
                         elif none == 1:
-                            cell.value = "NONE"
+                            cell.value = "NONE "
                         # if zeny == 1:
                         #     if plusten == 1:
                         #         if plustwenty == 1:
@@ -1412,8 +1412,7 @@ Zeny x {zeny}
 +20 Dex x {dex20}
 +20 Luk x {luk20}
 White Pots x {whites}
-Blue Pots x {blues}
-                            ```''')
+Blue Pots x {blues}```''')
 
             await msg.delete()
         else:

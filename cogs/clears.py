@@ -1031,7 +1031,7 @@ For Wanderer: {list_wand}
                     count += 1
                 celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                 celery_list = celesheet.cell(foundign[0].row, 20).value
-                await ctx.send(f'```{ctx.author.name} wanted{celery_list} with IGN: {ign.value}, and Class: {role.value}.```')
+                await ctx.send(f'```{ctx.author.name} wanted {celery_list}with IGN: {ign.value}, and Class: {role.value}.```')
             else:
                 try:
                     change_row = next_available_row(celesheet, 2)
@@ -1180,7 +1180,7 @@ For Wanderer: {list_wand}
                     count += 1
                 celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                 celery_list = celesheet.cell(foundign[0].row, 20).value
-                await ctx.send(f'```{ctx.author.name} wanted{celery_list} with IGN: {ign.value}, and Class: {role.value}.```')
+                await ctx.send(f'```{ctx.author.name} wanted {celery_list}with IGN: {ign.value}, and Class: {role.value}.```')
                 cell_list = celesheet.range("B3:G48")
                 try:
                     celesheet.sort((4, 'asc'), range = "B3:G48")
@@ -1337,6 +1337,87 @@ Thank you!```\n""")
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 
+    @commands.command()
+    async def totalcelery(self, ctx):
+        channel = ctx.message.channel
+        commander = ctx.author
+        commander_name = commander.name
+        if channel.id in botinit_id:
+            msg = await ctx.send(f'`Please wait... I am parsing a list of our Total Salary Preferences. Refrain from entering any other commands.`')
+            cell_list = celesheet.range("E49:S49")
+
+            count = 0
+            zeny = 0
+            str10 = 0
+            agi10 = 0
+            vit10 = 0
+            int10 = 0
+            dex10 = 0
+            luk10 = 0
+            str20 = 0
+            agi20 = 0
+            vit20 = 0
+            int20 = 0
+            dex20 = 0
+            luk20 = 0
+            whites = 0
+            blues = 0
+
+
+            for cell in cell_list:
+                if count == 0:
+                    zeny = cell.value
+                if count == 1:
+                    str10 = cell.value
+                if count == 2:
+                    agi10 = cell.value
+                if count == 3:
+                    vit10 = cell.value
+                if count == 4:
+                    int10 = cell.value
+                if count == 5:
+                    dex10 = cell.value
+                if count == 6:
+                    luk10 = cell.value
+                if count == 7:
+                    str20 = cell.value
+                if count == 8:
+                    agi20 = cell.value
+                if count == 9:
+                    vit20 = cell.value
+                if count == 10:
+                    int20 = cell.value
+                if count == 11:
+                    dex20 = cell.value
+                if count == 12:
+                    luk20 = cell.value
+                if count == 13:
+                    whites = cell.value
+                if count == 14:
+                    blues = cell.value
+                count += 1
+
+            await ctx.send(f'''```Right now, the guild needs to provide:
+Zeny x {zeny}
++10 Str x {str10}
++10 Agi x {agi10}
++10 Vit x {vit10}
++10 Int x {int10}
++10 Dex x {dex10}
++10 Luk x {luk10}
++20 Str x {str20}
++20 Agi x {agi20}
++20 Vit x {vit20}
++20 Int x {int20}
++20 Dex x {dex20}
++20 Luk x {luk20}
+White Pots x {whites}
+Blue Pots x {blues}
+                            ```''')
+
+            await msg.delete()
+        else:
+            await ctx.send("Wrong channel! Please use #bot.")
 
 def setup(client):
     client.add_cog(Clears(client))

@@ -1197,9 +1197,7 @@ For Wanderer: {list_wand}
                             cell.value = totalstr
                     count += 1
                 celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                print("debug2")
-                celery_list = celesheet.cell(foundign[0].row, 20).value
-                print("debug3")
+                celery_list = celesheet.cell(change_row, 20).value
                 await ctx.send(f'```{ctx.author.name} wanted {celery_list}with IGN: {ign.value}, and Class: {role.value}.```')
                 cell_list = celesheet.range("B3:G48")
                 try:

@@ -1206,6 +1206,11 @@ For Wanderer: {list_wand}
 /list = parses a list of the current attendance list
 /listpt = parses a list of the current party list divided into ATK, MATK, and THIRD GUILD
 /sorted = sorts the gsheets
+/celery zeny, +10 (you can specify which food) , +20 (you can specify which food), whites, blues = specific salary preferences
+/celery everything = if you prefer all salary
+/celery none = if you want to waive your salary
+/listcelery = list of the salary preferences
+/totalcelery = total list of each of the salary preferences
 PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT. 
 Thank you!```\n""")
         else:

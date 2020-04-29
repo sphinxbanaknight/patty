@@ -361,13 +361,17 @@ For Wanderer: {list_wand}
                             for cell in cell_list:
                                 cell.value = ""
                             celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            await ctx.send(f'{ctx.message.author.mention}``` I found another character of yours that answered celery preferences already, I have cleared that. Please use /celery again in order to list your preferred salary.```')
+                            await ctx.send(f'``` I found another character of yours that answered celery preferences already, I have cleared that. Please use /celery again in order to list your preferred salary.```')
                             change = 0
                         else:
-                            await ctx.send(f'```Please use /att y/n to register your attendance!```')
+                            if not foundign:
+                                await ctx.send(f'```Please use /att y/n to register your attendance!```')
+                            if not foundign2:
+                                await ctx.send(f'```Please use /celery to list your salary preferences!```')
                             change = 0
                     else:
                         await ctx.send(f'{ctx.message.author.mention}``` Please use /att y/n to register your attendance!```')
+                        await ctx.send(f'```Please use /celery to list your salary preferences!```')
                 else:
                     for cell in cell_list:
                         if count == 0:
@@ -383,7 +387,9 @@ For Wanderer: {list_wand}
                     await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}.```')
                     if change == 1:
                         finding_column = sheet.range("G3:G{}".format(sheet.row_count))
+                        finding_column2 = celesheet.range("C3:C{}".format(celesheet.row_count))
                         foundign = [found for found in finding_column if found.value == ign.value]
+                        foundign2 = [found for found in finding_column2 if found.value == ign.value]
 
                         if foundign:
                             cell_list = sheet.range(foundign[0].row, 7, foundign[0].row, 10)
@@ -393,11 +399,23 @@ For Wanderer: {list_wand}
                             await ctx.send(
                                 f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
                             change = 0
+                        if foundign2:
+                            cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
+                            for cell in cell_list:
+                                cell.value = ""
+                            celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            await ctx.send(f'``` I found another character of yours that answered celery preferences already, I have cleared that. Please use /celery again in order to list your preferred salary.```')
+                            change = 0
                         else:
-                            await ctx.send(f'```Please use /att y/n to register your attendance!```')
+                            if not foundign:
+                                await ctx.send(f'```Please use /att y/n to register your attendance!```')
+                            if not foundign2:
+                                await ctx.send(f'```Please use /celery to list your salary preferences!```')
                             change = 0
                     else:
-                        await ctx.send(f'```Please use /att y/n to register your attendance!```')
+                        await ctx.send(f'{ctx.message.author.mention}``` Please use /att y/n to register your attendance!```')
+                        await ctx.send(f'```Please use /celery to list your salary preferences!```')
+
         else:
             await ctx.send("Wrong channel! Please use #bot.")
         cell_list = sheet.range("B3:E50")

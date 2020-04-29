@@ -1212,7 +1212,7 @@ For Wanderer: {list_wand}
     @commands.command()
     async def help(self, ctx):
 
-        channel = ctx.message.chann el
+        channel = ctx.message.channel
         commander = ctx.author
         commander_name = commander.name
         if channel.id in botinit_id:

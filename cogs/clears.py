@@ -1199,7 +1199,7 @@ For Wanderer: {list_wand}
                 celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                 celery_list = celesheet.cell(change_row, 20).value
                 await ctx.send(f'```{ctx.author.name} wanted {celery_list}with IGN: {ign.value}, and Class: {role.value}.```')
-        cell_list = celesheet.range("B3:T48")
+            cell_list = celesheet.range("B3:T48")
             try:
                 celesheet.sort((4, 'asc'), range = "B3:T48")
             except Exception as e:

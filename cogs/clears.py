@@ -75,9 +75,26 @@ answerno = ['n', 'no', 'nah', 'na', 'nope', 'nuh']
 ######################### CELERY RESPONSES ####################
 
 answerzeny = ['zeny', 'zen', 'money', 'moneh', 'moolah']
-answer10 = ['10', 'ten', 'plus ten', 'plusten', '10food', '+10']
-answer20 = ['20', 'twenty', 'plus twenty', 'plustwenty', '20food', '+20']
-answernone = ['none', 'nada', 'nah', 'nothing']
+answer10 = ['10', 'ten', 'plus ten', 'plusten', '10food', '+10', 'plustens', 'plus tens', '+10s']
+answer20 = ['20', 'twenty', 'plus twenty', 'plustwenty', '20food', '+20', 'plustwentys', 'plus twentys', '+20s']
+answernone = ['none', 'nada', 'nah', 'nothing', 'waive', 'waived']
+answerevery = ['everything', 'all']
+answerstr10 = ['+10 str', '+10str']
+answeragi10 = ['+10 agi', '+10agi']
+answervit10 = ['+10 vit', '+10vit']
+answerint10 = ['+10 int', '+10int']
+answerdex10 = ['+10 dex', '+10dex']
+answerluk10 = ['+10 luk', '+10luk']
+answerstr20 = ['+20 str', '+20str']
+answeragi20 = ['+20 agi', '+20agi']
+answervit20 = ['+20 vit', '+20vit']
+answerint20 = ['+20 int', '+20int']
+answerdex20 = ['+20 dex', '+20dex']
+answerluk20 = ['+20 luk', '+20luk']
+answerwhites = ['whites', 'hp pots', 'siege whites', 'white', 'siege white']
+answerblues = ['blues', 'sp pots', 'siege blues', 'blue', 'siege blue']
+
+
 
 ###############################################################
 
@@ -691,11 +708,32 @@ For Wanderer: {list_wand}
         plusten = 0
         plustwenty = 0
         none = 0
+        every = 0
+        str10 = 0
+        agi10 = 0
+        vit10 = 0
+        int10 = 0
+        dex10 = 0
+        luk10 = 0
+        str20 = 0
+        agi20 = 0
+        vit20 = 0
+        int20 = 0
+        dex20 = 0
+        luk20 = 0
+        whites = 0
+        blues = 0
+        noargs = 0
+        totalstr = ""
 
         if channel.id in botinit_id:
             arglist = [x.strip() for x in arguments.split(',')]
 
             for args in arglist:
+                if args.lower() in answerevery:
+                    every = 1
+                if args.lower() in answernone:
+                    none = 1
                 if args.lower() in answerzeny:
                     zeny = 1
                 if args.lower() in answer10:
@@ -704,7 +742,115 @@ For Wanderer: {list_wand}
                     plustwenty = 1
                 if args.lower() in answernone:
                     none = 1
-            if zeny == 0 and plusten == 0 and plustwenty == 0 and none == 0:
+                if args.lower() in answerstr10:
+                    str10 = 1
+                if args.lower() in answeragi10:
+                    agi10 = 1
+                if args.lower() in answervit10:
+                    vit10 = 1
+                if args.lower() in answerint10:
+                    int10 = 1
+                if args.lower() in answerdex10:
+                    dex10 = 1
+                if args.lower() in answerluk10:
+                    luk10 = 1
+                if args.lower() in answerstr20:
+                    str20 = 1
+                if args.lower() in answeragi20:
+                    agi20 = 1
+                if args.lower() in answervit20:
+                    vit20 = 1
+                if args.lower() in answerint20:
+                    int20 = 1
+                if args.lower() in answerdex20:
+                    dex20 = 1
+                if args.lower() in answerluk20:
+                    luk20 = 1
+                if args.lower() in answerwhites:
+                    whites = 1
+                if args.lower() in answerblues:
+                    blues = 1
+                if args.lower() in answer10:
+                    plusten = 1
+                if args.lower() in answer20:
+                    plustwenty = 1
+
+            if plusten == 1:
+                str10 = 0
+                agi10 = 0
+                vit10 = 0
+                int10 = 0
+                dex10 = 0
+                luk10 = 0
+            if plustwenty == 1:
+                str20 = 0
+                agi20 = 0
+                vit20 = 0
+                int20 = 0
+                dex20 = 0
+                luk20 = 0
+            if str10 == 1 and agi10 == 1 and vit10 == 1 and int10 == 1 and dex10 == 1 and luk10 == 1:
+                plusten = 1
+                str10 = 0
+                agi10 = 0
+                vit10 = 0
+                int10 = 0
+                dex10 = 0
+                luk10 = 0
+            if str20 == 1 and agi20 == 1 and vit20 == 1 and int20 == 1 and dex20 == 1 and luk20 == 1:
+                plustwenty = 1
+                str20 = 0
+                agi20 = 0
+                vit20 = 0
+                int20 = 0
+                dex20 = 0
+                luk20 = 0
+            if plustwenty == 1 and plusten == 1 and whites = 1 and blues = 1 and zeny = 1:
+                every = 1
+
+            if every == 1:
+                none = 0
+                zeny = 0
+                str10 = 0
+                agi10 = 0
+                vit10 = 0
+                int10 = 0
+                dex10 = 0
+                luk10 = 0
+                str20 = 0
+                agi20 = 0
+                vit20 = 0
+                int20 = 0
+                dex20 = 0
+                luk20 = 0
+                whites = 0
+                blues = 0
+                plusten = 0
+                plustwenty = 0
+            elif none == 1:
+                none = 0
+                every = 0
+                str10 = 0
+                agi10 = 0
+                vit10 = 0
+                int10 = 0
+                dex10 = 0
+                luk10 = 0   
+                str20 = 0
+                agi20 = 0
+                vit20 = 0
+                int20 = 0
+                dex20 = 0
+                luk20 = 0
+                whites = 0
+                blues = 0
+                plustwenty = 0
+
+
+            if zeny == 0 and plusten == 0 and plustwenty == 0 and none == 0 and every == 0 and str10 == 0 and agi10 == 0 and vit10 == 0 and int10 == 0 and dex10 == 0 and luk10 == 0 and str20 == 0 and agi20 == 0 and vit20 == 0 and int20 == 0 and dex20 == 0 and luk20 == 0 and whites == 0 and blues == 0:
+                noargs = 1
+
+            if noargs == 1:
                 await ctx.send("```Please use the correct syntax /celery zeny, plusten, plustwenty. MIND THE COMMA.```")
 
 
@@ -729,10 +875,10 @@ For Wanderer: {list_wand}
             foundign = [found for found in finding_column if found.value == ign.value]
 
             if foundign:
-                cell_list = celesheet.range(foundign[0].row, 2, foundign[0].row, 7)
+                cell_list = celesheet.range(foundign[0].row, 2, foundign[0].row, 26)
                 for cell in cell_list:
                     cell.value = ""
-                cell_list = celesheet.range(foundign[0].row, 2, foundign[0].row, 7)
+                cell_list = celesheet.range(foundign[0].row, 2, foundign[0].row, 26)
                 for cell in cell_list:
                     if count == 0:
                         cell.value = commander_name
@@ -741,20 +887,138 @@ For Wanderer: {list_wand}
                     elif count == 2:
                         cell.value = role.value
                     elif count == 3:
-                        if zeny == 1:
+                        if zeny == 1 or every == 1:
                             cell.value = "Yes"
+                            totalstr += "ZENY; "
                         else:
                             cell.value = "No"
                     elif count == 4:
-                        if plusten == 1:
+                        if str10 == 1 or every == 1 or plusten == 1:
                             cell.value = "Yes"
+                            totalstr+= "+10 STR; "
                         else:
                             cell.value = "No"
                     elif count == 5:
-                        if plustwenty == 1:
+                        if agi10 == 1 or every == 1 or plusten == 1:
                             cell.value = "Yes"
+                            totalstr += "+10 AGI; "
                         else:
                             cell.value = "No"
+                    elif count == 6:
+                        if vit10 == 1 or every == 1 or plusten == 1:
+                            cell.value = "Yes"
+                            totalstr += "+10 VIT; "
+                        else:
+                            cell.value = "No"
+                    elif count == 7:
+                        if int10 == 1 or every == 1 or plusten == 1:
+                            cell.value = "Yes"
+                            totalstr += "+10 INT; "
+                        else:
+                            cell.value = "No"
+                    elif count == 8:
+                        if dex10 == 1 or every == 1 or plusten == 1:
+                            cell.value = "Yes"
+                            totalstr += "+10 DEX; "
+                        else:
+                            cell.value = "No"
+                    elif count == 9:
+                        if luk10 == 1 or every == 1 or plusten == 1:
+                            cell.value = "Yes"
+                            totalstr += "+10 LUK; "
+                        else:
+                            cell.value = "No"
+                    elif count == 10:
+                        if str20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 STR; "
+                        else:
+                            cell.value = "No"
+                    elif count == 11:
+                        if agi20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 AGI; "
+                        else:
+                            cell.value = "No"
+                    elif count == 12:
+                        if vit20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 VIT; "
+                        else:
+                            cell.value = "No"
+                    elif count == 13:
+                        if int20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 INT; "
+                        else:
+                            cell.value = "No"
+                    elif count == 14:
+                        if dex20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 DEDX; "
+                        else:
+                            cell.value = "No"
+                    elif count == 15:
+                        if luk20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 LUK; "
+                        else:
+                            cell.value = "No"
+                    elif count == 16:
+                        if whites == 1 or every == 1:
+                            cell.value = "Yes"
+                            totalstr += "WHITES; "
+                        else:
+                            cell.value = "No"
+                    elif count == 17:
+                        if blues == 1 or every == 1:
+                            cell.value = "Yes"
+                            totalstr += "BLUES; "
+                        else:
+                            cell.value = "No"
+                    elif count == 18:
+                        if every == 1:
+                            cell.value = "EVERYTHING"
+                        elif none == 1:
+                            cell.value = "NONE"
+                        # if zeny == 1:
+                        #     if plusten == 1:
+                        #         if plustwenty == 1:
+                        #             if whites == 1:
+                        #                 if blues == 1:
+                        #                     cell.value = "EVERYTHING"
+                        #                 else:
+                        #                     cell.value = "ZENY; ALL +10; ALL +20; WHITES;"
+                        #             else:
+                        #                 if blues == 1:
+                        #                     cell.value = "ZENY; ALL +10; ALL +20; BLUES;"
+                        #                 else:
+                        #                     cell.value = "ZENY; ALL +10; ALL +20;"
+                        #         else:
+                        #             if whites == 1:
+                        #                 if blues == 1:
+                        #                     cell.value = "ZENY; ALL +10; WHITES; BLUES;"
+                        #                 else:
+                        #                     cell.value = "ZENY; ALL +10; ALL +20; WHITES;"
+                        #             else:
+                        #                 if blues == 1:
+                        #                     cell.value = "ZENY; ALL +10; ALL +20; BLUES;"
+                        #                 else:
+                        #                     cell.value = "ZENY; ALL +10;"
+                        #     else:
+                        #         if whites == 1:
+                        #             if blues == 1:
+                        #                 cell.value = "ZENY; ALL +10; WHITES; BLUES;"
+                        #             else:
+                        #                 cell.value = "ZENY; ALL +10; ALL +20; WHITES;"
+                        #         else:
+                        #             if blues == 1:
+                        #                 cell.value = "ZENY; ALL +10; ALL +20; BLUES;"
+                        #             else:
+                        #                 cell.value = "ZENY; ALL +10;"
+                        else:
+                            cell.value = totalstr
+
                     count += 1
                 celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                 celery_list = celesheet.cell(foundign[0].row, 8).value
@@ -764,46 +1028,149 @@ For Wanderer: {list_wand}
                     change_row = next_available_row(celesheet, 2)
                 except ValueError as e:
                     change_row = 3
-                cell_list = celesheet.range(change_row, 2, change_row, 7)
+                cell_list = celesheet.range(change_row, 2, change_row, 26)
                 for cell in cell_list:
-                    if none == 1:
-                        if count == 0:
-                            cell.value = commander_name
-                        elif count == 1:
-                            cell.value = ign.value
-                        elif count == 2:
-                            cell.value = role.value
-                        elif count == 3:
+                    if count == 0:
+                        cell.value = commander_name
+                    elif count == 1:
+                        cell.value = ign.value
+                    elif count == 2:
+                        cell.value = role.value
+                    elif count == 3:
+                        if zeny == 1 or every == 1:
+                            cell.value = "Yes"
+                            totalstr += "ZENY; "
+                        else:
                             cell.value = "No"
-                        elif count == 4:
+                    elif count == 4:
+                        if str10 == 1 or every == 1 or plusten == 1:
+                            cell.value = "Yes"
+                            totalstr += "+10 STR; "
+                        else:
                             cell.value = "No"
-                        elif count == 5:
+                    elif count == 5:
+                        if agi10 == 1 or every == 1 or plusten == 1:
+                            cell.value = "Yes"
+                            totalstr += "+10 AGI; "
+                        else:
                             cell.value = "No"
-                    else:
-                        if count == 0:
-                            cell.value = commander_name
-                        elif count == 1:
-                            cell.value = ign.value
-                        elif count == 2:
-                            cell.value = role.value
-                        elif count == 3:
-                            if zeny == 1:
-                                cell.value = "Yes"
-                            else:
-                                cell.value = "No"
-                        elif count == 4:
-                            if plusten == 1:
-                                cell.value = "Yes"
-                            else:
-                                cell.value = "No"
-                        elif count == 5:
-                            if plustwenty == 1:
-                                cell.value = "Yes"
-                            else:
-                                cell.value = "No"
+                    elif count == 6:
+                        if vit10 == 1 or every == 1 or plusten == 1:
+                            cell.value = "Yes"
+                            totalstr += "+10 VIT; "
+                        else:
+                            cell.value = "No"
+                    elif count == 7:
+                        if int10 == 1 or every == 1 or plusten == 1:
+                            cell.value = "Yes"
+                            totalstr += "+10 INT; "
+                        else:
+                            cell.value = "No"
+                    elif count == 8:
+                        if dex10 == 1 or every == 1 or plusten == 1:
+                            cell.value = "Yes"
+                            totalstr += "+10 DEX; "
+                        else:
+                            cell.value = "No"
+                    elif count == 9:
+                        if luk10 == 1 or every == 1 or plusten == 1:
+                            cell.value = "Yes"
+                            totalstr += "+10 LUK; "
+                        else:
+                            cell.value = "No"
+                    elif count == 10:
+                        if str20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 STR; "
+                        else:
+                            cell.value = "No"
+                    elif count == 11:
+                        if agi20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 AGI; "
+                        else:
+                            cell.value = "No"
+                    elif count == 12:
+                        if vit20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 VIT; "
+                        else:
+                            cell.value = "No"
+                    elif count == 13:
+                        if int20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 INT; "
+                        else:
+                            cell.value = "No"
+                    elif count == 14:
+                        if dex20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 DEDX; "
+                        else:
+                            cell.value = "No"
+                    elif count == 15:
+                        if luk20 == 1 or every == 1 or plustwenty == 1:
+                            cell.value = "Yes"
+                            totalstr += "+20 LUK; "
+                        else:
+                            cell.value = "No"
+                    elif count == 16:
+                        if whites == 1 or every == 1:
+                            cell.value = "Yes"
+                            totalstr += "WHITES; "
+                        else:
+                            cell.value = "No"
+                    elif count == 17:
+                        if blues == 1 or every == 1:
+                            cell.value = "Yes"
+                            totalstr += "BLUES; "
+                        else:
+                            cell.value = "No"
+                    elif count == 18:
+                        if every == 1:
+                            cell.value = "EVERYTHING"
+                        elif none == 1:
+                            cell.value = "NONE"
+                        # if zeny == 1:
+                        #     if plusten == 1:
+                        #         if plustwenty == 1:
+                        #             if whites == 1:
+                        #                 if blues == 1:
+                        #                     cell.value = "EVERYTHING"
+                        #                 else:
+                        #                     cell.value = "ZENY; ALL +10; ALL +20; WHITES;"
+                        #             else:
+                        #                 if blues == 1:
+                        #                     cell.value = "ZENY; ALL +10; ALL +20; BLUES;"
+                        #                 else:
+                        #                     cell.value = "ZENY; ALL +10; ALL +20;"
+                        #         else:
+                        #             if whites == 1:
+                        #                 if blues == 1:
+                        #                     cell.value = "ZENY; ALL +10; WHITES; BLUES;"
+                        #                 else:
+                        #                     cell.value = "ZENY; ALL +10; ALL +20; WHITES;"
+                        #             else:
+                        #                 if blues == 1:
+                        #                     cell.value = "ZENY; ALL +10; ALL +20; BLUES;"
+                        #                 else:
+                        #                     cell.value = "ZENY; ALL +10;"
+                        #     else:
+                        #         if whites == 1:
+                        #             if blues == 1:
+                        #                 cell.value = "ZENY; ALL +10; WHITES; BLUES;"
+                        #             else:
+                        #                 cell.value = "ZENY; ALL +10; ALL +20; WHITES;"
+                        #         else:
+                        #             if blues == 1:
+                        #                 cell.value = "ZENY; ALL +10; ALL +20; BLUES;"
+                        #             else:
+                        #                 cell.value = "ZENY; ALL +10;"
+                        else:
+                            cell.value = totalstr
                     count += 1
                 celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                celery_list = celesheet.cell(foundign[0].row, 8).value
+                celery_list = celesheet.cell(foundign[0].row, 20).value
                 await ctx.send(f'```{ctx.author.name} wanted {celery_list} with IGN: {ign.value}, and Class: {role.value}.```')
                 cell_list = celesheet.range("B3:G48")
                 try:

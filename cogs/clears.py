@@ -1280,7 +1280,7 @@ Thank you!```\n""")
         commander = ctx.author
         commander_name = commander.name
         if channel.id in botinit_id:
-            msg = await ctx.send(f'`Please wait... I am parsing a list of our Party List. Refrain from entering any other commands.`')
+            msg = await ctx.send(f'`Please wait... I am parsing a list of our Salary Preferences List. Refrain from entering any other commands.`')
             cell_list = celesheet.range("C3:C48")
             get_ign = [""]
             for cell in cell_list:
@@ -1310,9 +1310,13 @@ Thank you!```\n""")
 
             for x in range(len(ign)):
                 ignlist += ign[x] + '\n'
+                if len(pref) > 8:
+                    ignlist += '\n'
             x = 0
             for x in range(len(role)):
                 classlist += role[x] + '\n'
+                if len(pref) > 8:
+                    classlist += '\n'
             x = 0
             for x in range(len(pref)):
                 preflist += pref[x] + '\n'

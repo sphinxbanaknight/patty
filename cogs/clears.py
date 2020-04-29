@@ -895,73 +895,73 @@ For Wanderer: {list_wand}
                     elif count == 4:
                         if str10 == 1 or every == 1 or plusten == 1:
                             cell.value = "Yes"
-                            totalstr+= "+10 STR; "
+                            totalstr+= "STR10; "
                         else:
                             cell.value = "No"
                     elif count == 5:
                         if agi10 == 1 or every == 1 or plusten == 1:
                             cell.value = "Yes"
-                            totalstr += "+10 AGI; "
+                            totalstr += "AGI10; "
                         else:
                             cell.value = "No"
                     elif count == 6:
                         if vit10 == 1 or every == 1 or plusten == 1:
                             cell.value = "Yes"
-                            totalstr += "+10 VIT; "
+                            totalstr += "VIT10; "
                         else:
                             cell.value = "No"
                     elif count == 7:
                         if int10 == 1 or every == 1 or plusten == 1:
                             cell.value = "Yes"
-                            totalstr += "+10 INT; "
+                            totalstr += "INT10; "
                         else:
                             cell.value = "No"
                     elif count == 8:
                         if dex10 == 1 or every == 1 or plusten == 1:
                             cell.value = "Yes"
-                            totalstr += "+10 DEX; "
+                            totalstr += "DEX10; "
                         else:
                             cell.value = "No"
                     elif count == 9:
                         if luk10 == 1 or every == 1 or plusten == 1:
                             cell.value = "Yes"
-                            totalstr += "+10 LUK; "
+                            totalstr += "LUK10; "
                         else:
                             cell.value = "No"
                     elif count == 10:
                         if str20 == 1 or every == 1 or plustwenty == 1:
                             cell.value = "Yes"
-                            totalstr += "+20 STR; "
+                            totalstr += "STR20; "
                         else:
                             cell.value = "No"
                     elif count == 11:
                         if agi20 == 1 or every == 1 or plustwenty == 1:
                             cell.value = "Yes"
-                            totalstr += "+20 AGI; "
+                            totalstr += "AGI20; "
                         else:
                             cell.value = "No"
                     elif count == 12:
                         if vit20 == 1 or every == 1 or plustwenty == 1:
                             cell.value = "Yes"
-                            totalstr += "+20 VIT; "
+                            totalstr += "VIT20; "
                         else:
                             cell.value = "No"
                     elif count == 13:
                         if int20 == 1 or every == 1 or plustwenty == 1:
                             cell.value = "Yes"
-                            totalstr += "+20 INT; "
+                            totalstr += "INT20; "
                         else:
                             cell.value = "No"
                     elif count == 14:
                         if dex20 == 1 or every == 1 or plustwenty == 1:
                             cell.value = "Yes"
-                            totalstr += "+20 DEDX; "
+                            totalstr += "DEX20; "
                         else:
                             cell.value = "No"
                     elif count == 15:
                         if luk20 == 1 or every == 1 or plustwenty == 1:
                             cell.value = "Yes"
-                            totalstr += "+20 LUK; "
+                            totalstr += "LUK20; "
                         else:
                             cell.value = "No"
                     elif count == 16:

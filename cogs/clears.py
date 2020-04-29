@@ -805,7 +805,7 @@ For Wanderer: {list_wand}
                 int20 = 0
                 dex20 = 0
                 luk20 = 0
-            if plustwenty == 1 and plusten == 1 and whites = 1 and blues = 1 and zeny = 1:
+            if plustwenty == 1 and plusten == 1 and whites == 1 and blues == 1 and zeny == 1:
                 every = 1
 
             if every == 1:

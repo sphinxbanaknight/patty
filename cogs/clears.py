@@ -1204,7 +1204,7 @@ For Wanderer: {list_wand}
 /clearroster = clears attendance list (ADMIN COMMAND)
 /clearparty = clears party list (ADMIN COMMAND)
 /list = parses a list of the current attendance list
-/listpt = parses a list of the current party list divided into ATK, MATK, and THIRD GUILD
+/listpt = parses a list of the current party list divided into ATK, MATK, and SECOND GUILD
 /sorted = sorts the gsheets
 /celery zeny, +10 (you can specify which food) , +20 (you can specify which food), whites, blues = specific salary preferences
 /celery everything = if you prefer all salary
@@ -1266,7 +1266,7 @@ Thank you!```\n""")
                 return
             embeded.add_field(name="MATK Party", value=f'{MATKpt}', inline=True)
             try:
-                embeded.add_field(name="THIRD GUILD Party", value=f'{THIRDpt}', inline=True)
+                embeded.add_field(name="SECOND GUILD Party", value=f'{THIRDpt}', inline=True)
             except Exception as e:
                 print(f'add field returned {e}')
                 return

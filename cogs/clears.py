@@ -1444,5 +1444,19 @@ Blue Pots x {blues}```''')
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 
+    @commands.command()
+    async def celeryhelp(self):
+        await ctx.send(f'''```Currently we are giving out the following as salary:
+Zeny
++10 Str, +20 Str
++10 Agi, +20 Agi
++10 Vit, +20 Vit
++10 Int, +20 Int
++10 Dex, +20 Dex
++10 Luk, +20 Luk
+Siege Whites
+Siege Blues
+```''')
+
 def setup(client):
     client.add_cog(Clears(client))

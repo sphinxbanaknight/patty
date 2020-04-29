@@ -837,7 +837,6 @@ For Wanderer: {list_wand}
                 plusten = 0
                 plustwenty = 0
             elif none == 1:
-                none = 0
                 every = 0
                 str10 = 0
                 agi10 = 0
@@ -861,6 +860,7 @@ For Wanderer: {list_wand}
 
             if noargs == 1:
                 await ctx.send("```Please use the correct syntax /celery zeny, plusten, plustwenty. MIND THE COMMA.```")
+                return
 
 
             no_of_args = len(arglist)

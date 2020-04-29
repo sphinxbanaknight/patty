@@ -730,7 +730,7 @@ For Wanderer: {list_wand}
         channel = ctx.message.channel
         commander = ctx.author
         commander_name = commander.name
-
+        msg = await ctx.send(f'`I am currently listing your salary preferences. Please refrain from entering any other commands.`')
         zeny = 0
         plusten = 0
         plustwenty = 0
@@ -1207,6 +1207,7 @@ For Wanderer: {list_wand}
                     return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
+        await msg.delete()
 
     @commands.command()
     async def help(self, ctx):

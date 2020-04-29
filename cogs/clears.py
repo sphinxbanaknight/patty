@@ -1313,15 +1313,13 @@ Thank you!```\n""")
             for x in range(len(ign)):
                 ignlist += ign[x] + '\n'
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
-                await ctx.send(no_of_pref)
-                if no_of_pref > 8:
+                if no_of_pref > 9:
                     ignlist += '\n'
             x = 0
             for x in range(len(role)):
                 classlist += role[x] + '\n'
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
-                await ctx.send(no_of_pref)
-                if no_of_pref > 8:
+                if no_of_pref > 9:
                     classlist += '\n'
             x = 0
             for x in range(len(pref)):

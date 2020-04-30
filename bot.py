@@ -28,7 +28,8 @@ data_json = basedir+'/cogs/client_secret.json'
 creds = ServiceAccountCredentials.from_json_keyfile_name(data_json, scope)
 gc = gspread.authorize(creds)
 
-sheet = gc.open('Copy of BK ROSTER').sheet1
+takte = gc.open('Copy of BK ROSTER')
+sheet = takte.worksheet('WoE Roster')
 
 ################ Channel, Server, and User IDs ###########################
 sphinx_id = 108381986166431744

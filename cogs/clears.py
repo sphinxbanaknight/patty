@@ -1457,5 +1457,5 @@ Zeny
 Siege Whites
     Siege Blues```''')
     
-    def setup(client):
-        client.add_cog(Clears(client))
+def setup(client):
+    client.add_cog(Clears(client))

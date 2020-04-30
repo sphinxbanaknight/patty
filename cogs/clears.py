@@ -1340,20 +1340,17 @@ Thank you!```\n""")
             for x in range(len(ign)):
                 ignlist += ign[x] + '\n'
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
-                if no_of_pref > 4:
+                if no_of_pref > 6:
                     ignlist += '\n'
             x = 0
             for x in range(len(role)):
                 classlist += role[x] + '\n'
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
-                if no_of_pref > 4:
+                if no_of_pref > 6:
                     classlist += '\n'
             x = 0
             for x in range(len(pref)):
                 preflist += pref[x] + '\n'
-                no_of_pref = len([x.strip() for x in pref[x].split(';')])
-                if no_of_pref > 4:
-                    classlist += '\n'
             x = 0
 
             embeded.add_field(name="IGN", value=f'{ignlist}', inline=True)

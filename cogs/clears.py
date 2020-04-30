@@ -1245,15 +1245,15 @@ Thank you!```\n""")
         if channel.id in botinit_id:
             msg = await ctx.send(
                 f'`Please wait... I am parsing a list of our Party List. Refrain from entering any other commands.`')
-            cell_list = sheet.range("M3:M14")
+            cell_list = sheet.range("M4:M15")
             get_MATK = [""]
             for cell in cell_list:
                 get_MATK.append(cell.value)
-            cell_list = sheet.range("M17:M28")
+            cell_list = sheet.range("M19:M30")
             get_ATK = [""]
             for cell in cell_list:
                 get_ATK.append(cell.value)
-            cell_list = sheet.range("M32:M43")
+            cell_list = sheet.range("M34:M45")
             get_third = [""]
             for cell in cell_list:
                 get_third.append(cell.value)
@@ -1339,13 +1339,13 @@ Thank you!```\n""")
             for x in range(len(ign)):
                 ignlist += ign[x] + '\n'
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
-                if no_of_pref > 9:
+                if no_of_pref > 6:
                     ignlist += '\n'
             x = 0
             for x in range(len(role)):
                 classlist += role[x] + '\n'
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
-                if no_of_pref > 9:
+                if no_of_pref > 6:
                     classlist += '\n'
             x = 0
             for x in range(len(pref)):
@@ -1455,7 +1455,7 @@ Zeny
 +10 Dex, +20 Dex
 +10 Luk, +20 Luk
 Siege Whites
-Siege Blues```''')
-
-def setup(client):
-    client.add_cog(Clears(client))
+    Siege Blues```''')
+    
+    def setup(client):
+        client.add_cog(Clears(client))

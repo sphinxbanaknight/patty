@@ -170,6 +170,8 @@ async def on_ready():
             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
             continue
 
+
+
 @client.event
 async def on_member_join(member):
     try:

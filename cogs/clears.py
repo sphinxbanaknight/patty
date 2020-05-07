@@ -146,6 +146,7 @@ class Clears(commands.Cog):
                 return
             cell_list = sheet.range("G3:J46")
             sheet.sort((9, 'des'), (8, 'asc'), range = "G3:J46")
+            celesheet.sort((3, 'asc'), range = "B3:T48")
             await ctx.send(f'`{commander} has sorted the sheets.`')
         else:
             await ctx.send(f'Wrong channel! Please use #bot.')
@@ -1204,7 +1205,7 @@ For Wanderer: {list_wand}
                 await ctx.send(f'```{ctx.author.name} wanted {celery_list}with IGN: {ign.value}, and Class: {role.value}.```')
             cell_list = celesheet.range("B3:T48")
             try:
-                celesheet.sort((4, 'asc'), range = "B3:T48")
+                celesheet.sort((3, 'asc'), range = "B3:T48")
             except Exception as e:
                 print(f'celesheet sort has returned {e}')
                 return
@@ -1340,13 +1341,13 @@ Thank you!```\n""")
             for x in range(len(ign)):
                 ignlist += ign[x] + '\n'
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
-                if no_of_pref > 6:
+                if no_of_pref > 7:
                     ignlist += '\n'
             x = 0
             for x in range(len(role)):
                 classlist += role[x] + '\n'
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
-                if no_of_pref > 6:
+                if no_of_pref > 7:
                     classlist += '\n'
             x = 0
             for x in range(len(pref)):

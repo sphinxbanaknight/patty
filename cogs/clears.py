@@ -709,11 +709,13 @@ For Wanderer: {list_wand}
             fullname = ''
             fullclass = ''
             fullstat = ''
+
+            print(range(len(namae)))
+
             for x in range(len(namae)):
                 fullname += namae[x] + '\n'
                 fullclass += kurasu[x] + '\n'
                 fullstat += stat[x] + '\n'
-            print("test")
             try:
                 embeded.add_field(name="IGN", value=f'{fullname}', inline=True)
             except Exception as e:

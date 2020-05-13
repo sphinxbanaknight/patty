@@ -643,12 +643,13 @@ For Wanderer: {list_wand}
             msg = await ctx.send(f'`Please wait... I am parsing a list of our WOE Roster. Refrain from entering any other commands.`')
             #await asyncio.sleep(10)
             while row_n != row_c or row_n != row_a:
-                row_n = next_available_row(sheet, 7)
-                row_c = next_available_row(sheet, 8)
-                row_a = next_available_row(sheet, 9)
                 print(row_n)
                 print(row_c)
                 print(row_a)
+                row_n = next_available_row(sheet, 7)
+                row_c = next_available_row(sheet, 8)
+                row_a = next_available_row(sheet, 9)
+
                 if row_n < row_c:
                     if row_n < row_a:
                         cell_list = sheet.range(row_n, 7, row_n, 9)

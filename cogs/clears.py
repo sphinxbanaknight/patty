@@ -685,6 +685,7 @@ For Wanderer: {list_wand}
                 stat = [item for item in sheet.col_values(9) if item and item != 'Attendance']
             except Exception as e:
                 print(f'stat returned {e}')
+            print('ayyy')
             #komento = [item for item in sheet.col_values(10) if item and item != 'Comments']
             x = 0
             a = 0

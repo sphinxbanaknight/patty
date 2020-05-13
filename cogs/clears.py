@@ -672,6 +672,7 @@ For Wanderer: {list_wand}
                         cell.value = ""
                     sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                     sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
+            print('test')
             try:
                 namae = [item for item in sheet.col_values(7) if item and item != 'IGN']
             except Exception as e:

@@ -672,7 +672,9 @@ For Wanderer: {list_wand}
                         cell.value = ""
                     sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                     sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
-
+            print(row_n)
+            print(row_c)
+            print(row_a)
             namae = [item for item in sheet.col_values(7) if item and item != 'IGN']
             kurasu = [item for item in sheet.col_values(8) if item and item != 'Class' and item != 'WoE Roster']
             stat = [item for item in sheet.col_values(9) if item and item != 'Attendance']

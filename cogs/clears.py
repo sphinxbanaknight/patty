@@ -689,6 +689,7 @@ For Wanderer: {list_wand}
             a = 0
             yuppie = 0
             noppie = 0
+            print (stat)
             for a in stat:
                 if a == 'Yes':
                     yuppie += 1
@@ -699,7 +700,7 @@ For Wanderer: {list_wand}
                 await ctx.send('`Attendance not found. Please use /att y/n to register your attendance`')
                 await msg.delete()
                 return
-            print("test")
+
             try:
                 embeded = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
             except Exception as e:

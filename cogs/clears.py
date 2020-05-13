@@ -643,9 +643,6 @@ For Wanderer: {list_wand}
             msg = await ctx.send(f'`Please wait... I am parsing a list of our WOE Roster. Refrain from entering any other commands.`')
             #await asyncio.sleep(10)
             while row_n != row_c or row_n != row_a:
-                print(row_n)
-                print(row_c)
-                print(row_a)
                 row_n = next_available_row(sheet, 7)
                 row_c = next_available_row(sheet, 8)
                 row_a = next_available_row(sheet, 9)
@@ -679,7 +676,7 @@ For Wanderer: {list_wand}
             namae = [item for item in sheet.col_values(7) if item and item != 'IGN']
             kurasu = [item for item in sheet.col_values(8) if item and item != 'Class' and item != 'WoE Roster']
             stat = [item for item in sheet.col_values(9) if item and item != 'Attendance']
-            komento = [item for item in sheet.col_values(10) if item and item != 'Comments']
+            #komento = [item for item in sheet.col_values(10) if item and item != 'Comments']
             x = 0
             a = 0
             yuppie = 0

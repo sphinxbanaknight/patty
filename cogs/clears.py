@@ -699,7 +699,7 @@ For Wanderer: {list_wand}
                 await ctx.send('`Attendance not found. Please use /att y/n to register your attendance`')
                 await msg.delete()
                 return
-
+            print("test")
             try:
                 embeded = discord.Embed(title = "Current WOE Roster", description = "A list of our Current WOE Roster", color = 0x00FF00)
             except Exception as e:
@@ -713,7 +713,6 @@ For Wanderer: {list_wand}
                 fullname += namae[x] + '\n'
                 fullclass += kurasu[x] + '\n'
                 fullstat += stat[x] + '\n'
-            print("test")
             try:
                 embeded.add_field(name="IGN", value=f'{fullname}', inline=True)
             except Exception as e:

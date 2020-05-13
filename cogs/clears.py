@@ -710,7 +710,7 @@ For Wanderer: {list_wand}
             fullclass = ''
             fullstat = ''
 
-            print(range(len(namae)))
+            print(len(namae))
 
             for x in range(len(namae)):
                 fullname += namae[x] + '\n'

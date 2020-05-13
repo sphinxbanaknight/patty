@@ -646,31 +646,34 @@ For Wanderer: {list_wand}
                 row_n = next_available_row(sheet, 7)
                 row_c = next_available_row(sheet, 8)
                 row_a = next_available_row(sheet, 9)
+                print(row_n)
+                print(row_c)
+                print(row_a)
                 if row_n < row_c:
                     if row_n < row_a:
                         cell_list = sheet.range(row_n, 7, row_n, 9)
                         for cell in cell_list:
                             cell.value = ""
                         sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
+                        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                     else:
                         cell_list = sheet.range(row_a, 7, row_a, 9)
                         for cell in cell_list:
                             cell.value = ""
                         sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
+                        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                 elif row_c < row_a:
                     cell_list = sheet.range(row_c, 7, row_c, 9)
                     for cell in cell_list:
                         cell.value = ""
                     sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
+                    sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                 else:
                     cell_list = sheet.range(row_a, 7, row_a, 9)
                     for cell in cell_list:
                         cell.value = ""
                     sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    sheet.sort((9, 'des'), (8, 'asc'), range="G3:J46")
+                    sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
 
             namae = [item for item in sheet.col_values(7) if item and item != 'IGN']
             kurasu = [item for item in sheet.col_values(8) if item and item != 'Class' and item != 'WoE Roster']

@@ -689,7 +689,6 @@ For Wanderer: {list_wand}
             a = 0
             yuppie = 0
             noppie = 0
-            print (stat)
             for a in stat:
                 if a == 'Yes':
                     yuppie += 1
@@ -714,6 +713,7 @@ For Wanderer: {list_wand}
                 fullname += namae[x] + '\n'
                 fullclass += kurasu[x] + '\n'
                 fullstat += stat[x] + '\n'
+            print("test")
             try:
                 embeded.add_field(name="IGN", value=f'{fullname}', inline=True)
             except Exception as e:

@@ -672,7 +672,6 @@ For Wanderer: {list_wand}
                         cell.value = ""
                     sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                     sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
-            print('test')
             try:
                 namae = [item for item in sheet.col_values(7) if item and item != 'IGN']
             except Exception as e:
@@ -685,7 +684,6 @@ For Wanderer: {list_wand}
                 stat = [item for item in sheet.col_values(9) if item and item != 'Attendance']
             except Exception as e:
                 print(f'stat returned {e}')
-            print('ayyy')
             #komento = [item for item in sheet.col_values(10) if item and item != 'Comments']
             x = 0
             a = 0
@@ -715,7 +713,7 @@ For Wanderer: {list_wand}
                 fullname += namae[x] + '\n'
                 fullclass += kurasu[x] + '\n'
                 fullstat += stat[x] + '\n'
-
+            print("test")
             try:
                 embeded.add_field(name="IGN", value=f'{fullname}', inline=True)
             except Exception as e:

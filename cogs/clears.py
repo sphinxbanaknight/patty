@@ -673,11 +673,11 @@ For Wanderer: {list_wand}
                     sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                     sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
             try:
-                namae = [item for item in sheet.col_values(7) if item and item != 'IGN']
+                namae = [item for item in sheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
             except Exception as e:
                 print(f'namae returned {e}')
             try:
-                kurasu = [item for item in sheet.col_values(8) if item and item != 'Class' and item != 'WoE Roster']
+                kurasu = [item for item in sheet.col_values(8) if item and item != 'Class' and item != 'Silk 2' and item != 'Silk 4']
             except Exception as e:
                 print(f'kurasu returned {e}')
             try:
@@ -709,8 +709,6 @@ For Wanderer: {list_wand}
             fullname = ''
             fullclass = ''
             fullstat = ''
-
-            print(f'{len(namae)} \n {namae}')
 
             for x in range(len(namae)):
                 fullname += namae[x] + '\n'

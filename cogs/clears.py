@@ -671,9 +671,11 @@ For Wanderer: {list_wand}
         except Exception as e:
             print(e)
             return
-        cell_list = sheet.range("G3:J46")
+        cell_list = sheet.range("G3:J50")
         sheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
+        cell_list = silk2.range("B3:E50")
         silk2.sort((4, 'des'), (3, 'asc'), range="B3:E50")
+        cell_list = silk4.range("B3:E50")
         silk4.sort((4, 'des'), (3, 'asc'), range="B3:E50")
         count = 0
         yes = 0

@@ -673,8 +673,8 @@ For Wanderer: {list_wand}
             return
         cell_list = sheet.range("G3:J46")
         sheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
-        silk2.sort((3, 'des'), (2, 'asc'), range="B3:E50")
-        silk4.sort((3, 'des'), (2, 'asc'), range="B3:E50")
+        silk2.sort((4, 'des'), (3, 'asc'), range="B3:E50")
+        silk4.sort((4, 'des'), (3, 'asc'), range="B3:E50")
         count = 0
         yes = 0
         no = 0

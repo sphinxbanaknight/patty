@@ -30,8 +30,8 @@ gc = gspread.authorize(creds)
 
 takte = gc.open('Copy of BK ROSTER')
 sheet = takte.worksheet('WoE Roster')
-silk2 = takte.worksheet('Roster 2')
-silk4 = takte.worksheet('Roster 4')
+silk2 = takte.worksheet('WoE Roster 2') 
+silk4 = takte.worksheet('WoE Roster 4')
 
 ################ Channel, Server, and User IDs ###########################
 sphinx_id = 108381986166431744

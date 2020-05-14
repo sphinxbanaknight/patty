@@ -490,7 +490,7 @@ For Wanderer: {list_wand}
                         for cell in cell_list:
                             if count == 0:
                                 cell.value = ign.value
-                            elif count == 1:
+                            elif count == 1:    
                                 cell.value = role.value
                             elif count == 2:
                                 if arglist[0].lower() in answeryes:
@@ -543,6 +543,7 @@ For Wanderer: {list_wand}
                 else:
                     await ctx.send('Please send a proper syntax: `/attendance y/n, y/n`')
                     return
+                yes = 0
                 if arglist[1].lower() in answeryes or arglist[1].lower() in answerno:
                     if foundign4:
                         cell_list = silk4.range(foundign4[0].row, 2, foundign4[0].row, 4)
@@ -604,7 +605,7 @@ For Wanderer: {list_wand}
                 else:
                     await ctx.send('Please send a proper syntax: `/attendance y/n, y/n`')
                     return
-
+                yes = 0
             else:
                 if arglist[0].lower() in answeryes or arglist[0].lower() in answerno:
                     if foundign2:
@@ -671,7 +672,7 @@ For Wanderer: {list_wand}
         except Exception as e:
             print(e)
             return
-        cell_list = sheet.range("G3:J50")
+        cell_list = sheet.range("G3:J50")   
         sheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
         cell_list = silk2.range("B3:E50")
         silk2.sort((4, 'des'), (3, 'asc'), range="B3:E50")

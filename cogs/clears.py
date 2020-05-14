@@ -26,8 +26,8 @@ takte = gc.open('Copy of BK ROSTER')
 sheet = takte.worksheet('WoE Roster')
 shite = gc.open('Copy of BK ROSTER')
 celesheet = shite.worksheet('Celery Preferences')
-silk2 = shite.worksheet('Copy of WoE Roster 2')
-silk4 = shite.worksheet('Copy of WoE Roster 4')
+silk2 = shite.worksheet('WoE Roster 2')
+silk4 = shite.worksheet('WoE Roster 4')
 
 ################ Channel, Server, and User IDs ###########################
 sphinx_id = 108381986166431744

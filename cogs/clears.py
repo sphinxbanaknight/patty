@@ -562,10 +562,10 @@ For Wanderer: {list_wand}
                         silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
                         if yes == 1:
                             await ctx.send(
-                                f'```{ctx.author.name} said Yes for SILK 2 with IGN: {ign.value}, Class: {role.value}.```')
+                                f'```{ctx.author.name} said Yes for SILK 4 with IGN: {ign.value}, Class: {role.value}.```')
                         else:
                             await ctx.send(
-                                f'```{ctx.author.name} said No for SILK 2 with IGN: {ign.value}, Class: {role.value}.```')
+                                f'```{ctx.author.name} said No for SILK 4 with IGN: {ign.value}, Class: {role.value}.```')
                     else:
                         try:
                             change_row = next_available_row(silk4, 2)
@@ -596,10 +596,10 @@ For Wanderer: {list_wand}
                         # await ctx.send(f'{yes}')
                         if yes == 1:
                             await ctx.send(
-                                f'```{ctx.author.name} said Yes for SILK 2 with IGN: {ign.value}, and Class: {role.value}.```')
+                                f'```{ctx.author.name} said Yes for SILK 4 with IGN: {ign.value}, and Class: {role.value}.```')
                         else:
                             await ctx.send(
-                                f'```{ctx.author.name} said No for SILK 2 with IGN: {ign.value}, and Class: {role.value}.```')
+                                f'```{ctx.author.name} said No for SILK 4 with IGN: {ign.value}, and Class: {role.value}.```')
                     
                 else:
                     await ctx.send('Please send a proper syntax: `/attendance y/n, y/n`')

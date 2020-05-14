@@ -30,6 +30,8 @@ gc = gspread.authorize(creds)
 
 takte = gc.open('Copy of BK ROSTER')
 sheet = takte.worksheet('WoE Roster')
+silk2 = takte.worksheet('Copy of WoE Roster 2')
+silk4 = takte.worksheet('Copy of WoE Roster 4')
 
 ################ Channel, Server, and User IDs ###########################
 sphinx_id = 108381986166431744
@@ -50,7 +52,7 @@ authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 437
 
 ################ Cell placements ###########################
 guild_range = "B3:E50"
-roster_range = "G3:J50"
+roster_range = "G3:I50"
 matk_range = "L3:M14"
 p1role_range = "P3:P14"
 atk_range = "L17:M28"
@@ -147,12 +149,20 @@ async def on_ready():
                         d -= 1
                         d = str(d)
                         paste.value = f'{d} {ph_time_new_formated} PM SAT WOE'
+                        cell_list = silk2.range("B4:D50")
+                        for cell in cell_list:
+                            cell.value = ""
+                        silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
                     elif ph_time_formated == "00:00:00:Monday":
                         d = ph_time_unformated.strftime("%d")
                         d = int(d)
                         d -= 1
                         d = str(d)
                         paste.value = f'{d} {ph_time_new_formated} PM SUN WOE'
+                        cell_list = silk4.range("B4:D50")
+                        for cell in cell_list:
+                            cell.value = ""
+                        silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
                 elif count == 1:
                     paste.value = ""
                 else:

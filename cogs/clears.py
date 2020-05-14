@@ -571,7 +571,7 @@ For Wanderer: {list_wand}
                         try:
                             change_row = next_available_row(silk4, 2)
                         except ValueError as e:
-                            change_row = 3
+                            change_row = 4
                         cell_list = silk4.range(change_row, 2, change_row, 4)
                         count = 0
                         # await ctx.send('test2')
@@ -634,7 +634,7 @@ For Wanderer: {list_wand}
                         try:
                             change_row = next_available_row(silk2, 2)
                         except ValueError as e:
-                            change_row = 3
+                            change_row = 4
                         cell_list = silk2.range(change_row, 2, change_row, 4)
                         count = 0
                         # await ctx.send('test2')
@@ -674,10 +674,10 @@ For Wanderer: {list_wand}
             return
         cell_list = sheet.range("G3:J50")   
         sheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
-        cell_list = silk2.range("B3:E50")
-        silk2.sort((4, 'des'), (3, 'asc'), range="B3:E50")
-        cell_list = silk4.range("B3:E50")
-        silk4.sort((4, 'des'), (3, 'asc'), range="B3:E50")
+        cell_list = silk2.range("B4:E50")
+        silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+        cell_list = silk4.range("B4:E50")
+        silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
         count = 0
         yes = 0
         no = 0

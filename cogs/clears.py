@@ -140,12 +140,12 @@ class Clears(commands.Cog):
         if channel.id in botinit_id:
             cell_list = sheet.range("B3:E46")
             try:
-                sheet.sort((4, 'asc'), range = "B3:E46")
+                sheet.sort((4, 'asc'), range = "B3:E50")
             except Exception as e:
                 print(e)
                 return
-            cell_list = sheet.range("G3:J46")
-            sheet.sort((9, 'des'), (8, 'asc'), range = "G3:J46")
+            cell_list = sheet.range("G3:J50")
+            sheet.sort((9, 'des'), (8, 'asc'), range = "G3:J50")
             celesheet.sort((3, 'asc'), range = "B3:T48")
             await ctx.send(f'`{commander} has sorted the sheets.`')
         else:
@@ -345,8 +345,8 @@ For Wanderer: {list_wand}
                     sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                     await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}, and Comment: {arglist[2]}.```')
                     if change == 1:
-                        finding_column = sheet.range("G3:G{}".format(sheet.row_count))
-                        finding_column2 = celesheet.range("C3:C{}".format(celesheet.row_count))
+                        finding_column = sheet.range("G3:G50".format(sheet.row_count))
+                        finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
                         foundign = [found for found in finding_column if found.value == ign.value]
                         foundign2 = [found for found in finding_column2 if found.value == ign.value]
 
@@ -388,8 +388,8 @@ For Wanderer: {list_wand}
                     sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                     await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}.```')
                     if change == 1:
-                        finding_column = sheet.range("G3:G{}".format(sheet.row_count))
-                        finding_column2 = celesheet.range("C3:C{}".format(celesheet.row_count))
+                        finding_column = sheet.range("G3:G50".format(sheet.row_count))
+                        finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
                         foundign = [found for found in finding_column if found.value == ign.value]
                         foundign2 = [found for found in finding_column2 if found.value == ign.value]
 
@@ -441,6 +441,7 @@ For Wanderer: {list_wand}
             arglist = [x.strip() for x in arguments.split(',')]
 
             no_of_args = len(arglist)
+
 
             # await ctx.send(arglist)
             # await ctx.send(no_of_args)
@@ -1460,7 +1461,7 @@ Blue Pots x {blues}```''')
         await ctx.send(f'''```Currently we are giving out the following as salary:
 Zeny
 +10 Str, +20 Str
-+10 Agi, +20 Agi
++10 Agi, +20 Agi        
 +10 Vit, +20 Vit
 +10 Int, +20 Int
 +10 Dex, +20 Dex

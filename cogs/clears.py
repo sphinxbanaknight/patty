@@ -743,7 +743,7 @@ For Wanderer: {list_wand}
             except Exception as e:
                 print(f'kurasu returned {e}')
             try:
-                stat = [item for item in sheet.col_values(9) if item and item != 'Attendance']
+                stat = [item for item in sheet.col_values(9) if item and item != 'Att.']
             except Exception as e:
                 print(f'stat returned {e}')
             #komento = [item for item in sheet.col_values(10) if item and item != 'Comments']

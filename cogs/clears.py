@@ -553,7 +553,7 @@ For Wanderer: {list_wand}
                             elif count == 1:
                                 cell.value = role.value
                             elif count == 2:
-                                if arglist[0].lower() in answeryes:
+                                if arglist[1].lower() in answeryes:
                                     cell.value = 'Yes'
                                     yes = 1
                                 else:
@@ -584,7 +584,7 @@ For Wanderer: {list_wand}
                                 cell.value = role.value
                             elif count == 2:
                                 # await ctx.send(f'test6 {ign.value} {role.value} {count}')
-                                if arglist[0].lower() in answeryes:
+                                if arglist[1].lower() in answeryes:
                                     cell.value = 'Yes'
                                     yes = 1
                                 else:

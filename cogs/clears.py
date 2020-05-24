@@ -99,7 +99,12 @@ answerblues = ['blues', 'sp pots', 'siege blues', 'blue', 'siege blue']
 
 
 
-###############################################################
+############################# FEEDBACKS #############################
+
+feedback_attplz = '```Please use /att y/n, y/n to register your attendance.```';
+feedback_celeryplz = '```Please use /celery to list your salary preferences.```';
+
+#####################################################################
 
 def next_available_row(sheet, column):
     cols = sheet.range(3, column, 50, column)
@@ -358,7 +363,7 @@ For Wanderer: {list_wand}
                                 cell.value = ""
                             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
-                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
                             change = 0
                         if foundign2:
                             cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
@@ -369,13 +374,13 @@ For Wanderer: {list_wand}
                             change = 0
                         else:
                             if not foundign:
-                                await ctx.send(f'```Please use /att y/n to register your attendance!```')
+                                await ctx.send(f'{feedback_attplz}')
                             if not foundign2:
-                                await ctx.send(f'```Please use /celery to list your salary preferences!```')
+                                await ctx.send(f'{feedback_celeryplz}')
                             change = 0
                     else:
-                        await ctx.send(f'{ctx.message.author.mention}``` Please use /att y/n to register your attendance!```')
-                        await ctx.send(f'```Please use /celery to list your salary preferences!```')
+                        await ctx.send(f'{ctx.message.author.mention} {feedback_attplz}')
+                        await ctx.send(f'{feedback_celeryplz}')
                 else:
                     for cell in cell_list:
                         if count == 0:
@@ -412,13 +417,13 @@ For Wanderer: {list_wand}
                             change = 0
                         else:
                             if not foundign:
-                                await ctx.send(f'```Please use /att y/n to register your attendance!```')
+                                await ctx.send(f'{feedback_attplz}')
                             if not foundign2:
-                                await ctx.send(f'```Please use /celery to list your salary preferences!```')
+                                await ctx.send(f'{feedback_celeryplz}')
                             change = 0
                     else:
-                        await ctx.send(f'{ctx.message.author.mention}``` Please use /att y/n to register your attendance!```')
-                        await ctx.send(f'```Please use /celery to list your salary preferences!```')
+                        await ctx.send(f'{ctx.message.author.mention} {feedback_attplz}')
+                        await ctx.send(f'{feedback_celeryplz}')
 
         else:
             await ctx.send("Wrong channel! Please use #bot.")
@@ -758,7 +763,7 @@ For Wanderer: {list_wand}
                     noppie += 1
 
             if yuppie == 0 and noppie == 0:
-                await ctx.send('`Attendance not found. Please use /att y/n to register your attendance`')
+                await ctx.send('`Attendance not found. `\n{feedback_attplz}')
                 await msg.delete()
                 return
 
@@ -1293,7 +1298,7 @@ For Wanderer: {list_wand}
         if channel.id in botinit_id:
             await ctx.send("""```BOT COMMANDS:
 /enlist IGN, class, optional comment = enlists your Discord ID, IGN, Class, and optional comment in the GSheets
-/att y/n, optional comment = registers your attendance (either yes or no) in the GSheets
+/att y/n, y/n = registers your attendance (either yes or no) in the GSheets, for silk 2 and 4 respectively.
 /clearguild = clears guild list (ADMIN COMMAND)
 /clearroster = clears attendance list (ADMIN COMMAND)
 /clearparty = clears party list (ADMIN COMMAND)

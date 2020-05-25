@@ -363,7 +363,7 @@ For Wanderer: {list_wand}
                         foundignsilk4 = [found for found in finding_columnsilk4 if found.value == ign.value]
 
                         if foundignsilk2:
-                            cell_list = silk2.range(foundign[0].row, 2, foundign[0].row, 4)
+                            cell_list = silk2.range(foundignsilk2[0].row, 2, foundignsilk2[0].row, 4)
                             for cell in cell_list:
                                 cell.value = ""
                             silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
@@ -375,7 +375,7 @@ For Wanderer: {list_wand}
                             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             change = 0
                         if foundignsilk4:
-                            cell_list = silk4.range(foundign[0].row, 2, foundign[0].row, 4)
+                            cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
                             for cell in cell_list:
                                 cell.value = ""
                             silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
@@ -426,7 +426,7 @@ For Wanderer: {list_wand}
                         foundignsilk4 = [found for found in finding_columnsilk4 if found.value == ign.value]
 
                         if foundignsilk2:
-                            cell_list = silk2.range(foundign[0].row, 2, foundign[0].row, 4)
+                            cell_list = silk2.range(foundignsilk2[0].row, 2, foundignsilk2[0].row, 4)
                             for cell in cell_list:
                                 cell.value = ""
                             silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
@@ -438,7 +438,7 @@ For Wanderer: {list_wand}
                             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             change = 0
                         if foundignsilk4:
-                            cell_list = silk4.range(foundign[0].row, 2, foundign[0].row, 4)
+                            cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
                             for cell in cell_list:
                                 cell.value = ""
                             silk4.update_cells(cell_list, value_input_option='USER_ENTERED')

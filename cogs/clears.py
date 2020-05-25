@@ -469,8 +469,10 @@ For Wanderer: {list_wand}
         sheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
         cell_list = celesheet.range("B3:T48")
         celesheet.sort((4, 'asc'), range = "B3:T48")
-        silk2.sort((4, 'dex'), (3, 'asc'), range="B4:E51")
-        silk4.sort((4, 'dex'), (3, 'asc'), range="B4:E51")
+        cell_list = silk2.range("B4:E50")
+        silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+        cell_list = silk4.range("B4:E50")
+        silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
 
     @commands.command()
     async def att(self, ctx, *, arguments):

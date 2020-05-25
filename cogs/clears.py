@@ -28,6 +28,7 @@ shite = gc.open('Copy of BK ROSTER')
 celesheet = shite.worksheet('Celery Preferences')
 silk2 = shite.worksheet('WoE Roster 2')
 silk4 = shite.worksheet('WoE Roster 4')
+crsheet = shite.worksheet('Change Requests')
 
 ################ Channel, Server, and User IDs ###########################
 sphinx_id = 108381986166431744
@@ -103,6 +104,7 @@ answerblues = ['blues', 'sp pots', 'siege blues', 'blue', 'siege blue']
 
 feedback_attplz = '```Please use /att y/n, y/n to register your attendance.```'
 feedback_celeryplz = '```Please use /celery to list your salary preferences.```'
+feedback_properplz = 'Please send a proper syntax: '
 
 
 #####################################################################
@@ -265,7 +267,7 @@ class Clears(commands.Cog):
             arglist = [x.strip() for x in arguments.split(',')]
             no_of_args = len(arglist)
             if no_of_args < 2:
-                await ctx.send(f'{ctx.message.author.mention} Please send the proper syntax: `/enlist IGN, role, (optional other classes that you use)`')
+                await ctx.send(f'{ctx.message.author.mention} {feedback_properplz}`/enlist IGN, role, (optional comment)`')
                 return
             else:
                 if arglist[1].lower() in list_ab:
@@ -301,7 +303,7 @@ class Clears(commands.Cog):
                 elif arglist[1].lower() in list_wand:
                     darole = 'Wanderer'
                 else:
-                    await ctx.send(f'''Here are the following allowable classes: 
+                    await ctx.send(f'''Here are the allowed classes: 
 ```
 For Doram: {list_doram}
 For Genetic: {list_gene}
@@ -368,7 +370,7 @@ For Wanderer: {list_wand}
                                 cell.value = ""
                             silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
-                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
                             cell_list = sheet.range(foundign[0].row, 7, foundign[0].row, 10)
                             for cell in cell_list:
                                 cell.value = ""
@@ -380,7 +382,7 @@ For Wanderer: {list_wand}
                                 cell.value = ""
                             silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
-                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
                             cell_list = sheet.range(foundign[0].row, 7, foundign[0].row, 10)
                             for cell in cell_list:
                                 cell.value = ""
@@ -490,7 +492,7 @@ For Wanderer: {list_wand}
             yes = 0
 
             # if no_of_args < 1:
-            #    await ctx.send('Please send the proper syntax: ``attendance y/n, (optional comment)`')
+            #    await ctx.send('{feedback_properplz}``/att y/n, y/n`')
             #    return
             # else:
             next_row = 3
@@ -502,14 +504,14 @@ For Wanderer: {list_wand}
                     break
                 next_row += 1
             if found == 0:
-                await ctx.send(f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional other classes that you use)`')
+                await ctx.send(f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional comment)`')
                 return
             #try:
             #    uname = sheet.find(ctx.author.name)
             #    next_row = uname.row
             #except gspread.exceptions.CellNotFound:
             #    await ctx.send(
-            #        f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional other classes that you use)`')
+            #        f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional comment)`')
             #    return
             #        await ctx.send('test1')
 
@@ -581,7 +583,7 @@ For Wanderer: {list_wand}
                             await ctx.send(
                                 f'```{ctx.author.name} said No for SILK 2 with IGN: {ign.value}, and Class: {role.value}.```')
                 else:
-                    await ctx.send('Please send a proper syntax: `/attendance y/n, y/n`')
+                    await ctx.send('{feedback_properplz}`/att y/n, y/n`')
                     return
                 yes = 0
                 if arglist[1].lower() in answeryes or arglist[1].lower() in answerno:
@@ -643,7 +645,7 @@ For Wanderer: {list_wand}
                                 f'```{ctx.author.name} said No for SILK 4 with IGN: {ign.value}, and Class: {role.value}.```')
                     
                 else:
-                    await ctx.send('Please send a proper syntax: `/attendance y/n, y/n`')
+                    await ctx.send('{feedback_properplz}`/att y/n, y/n`')
                     return
                 yes = 0
             else:
@@ -1006,7 +1008,7 @@ For Wanderer: {list_wand}
                     break
                 next_row += 1
             if found == 0:
-                await ctx.send(f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional other classes that you use)`')
+                await ctx.send(f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional comment)`')
                 return
 
             ign = sheet.cell(next_row, 3)
@@ -1570,5 +1572,216 @@ Zeny
 Siege Whites
     Siege Blues```''')
     
+# #### jytest incomplete!!!
+    # @commands.command()
+    # async def changerequest(self, ctx, *, arguments):
+        # await ctx.send(f'''```Not implemented yet!```''')
+        # channel = ctx.message.channel
+        # commander = ctx.author
+        # commander_name = commander.name
+        # if channel.id in botinit_id:
+            # arglist = [x.strip() for x in arguments.split(',')]
+            # no_of_args = len(arglist)
+            # if no_of_args = 0:
+                # await ctx.send(f'{ctx.message.author.mention} {feedback_properplz}`/changerequest newrole, (optional comment)`')
+                # return
+            # else:
+                # if arglist[0].lower() in list_ab:
+                    # darole = 'AB'
+                # elif arglist[0].lower() in list_doram:
+                    # darole = 'Doram'
+                # elif arglist[0].lower() in list_gene:
+                    # darole = 'Genetic'
+                # elif arglist[0].lower() in list_mech:
+                    # darole = 'Mado'
+                # elif arglist[0].lower() in list_mins:
+                    # darole = 'Minstrel'
+                # elif arglist[0].lower() in list_ranger:
+                    # darole = 'Ranger'
+                # elif arglist[0].lower() in list_rg:
+                    # darole = 'RG'
+                # elif arglist[0].lower() in list_rk:
+                        # darole = 'RK'
+                # elif arglist[0].lower() in list_sc:
+                    # darole = 'SC'
+                # elif arglist[0].lower() in list_sorc:
+                    # darole = 'Sorc'
+                # elif arglist[0].lower() in list_sura:
+                    # darole = 'Sura'
+                # elif arglist[0].lower() in list_wl:
+                    # darole = 'WL'
+                # elif arglist[0].lower() in list_obo:
+                    # darole = 'Oboro'
+                # elif arglist[0].lower() in list_rebel:
+                    # darole = 'Rebel'
+                # elif arglist[0].lower() in list_gx:
+                    # darole = 'GX'
+                # elif arglist[0].lower() in list_wand:
+                    # darole = 'Wanderer'
+                # else:
+                    # await ctx.send(f'''Here are the allowed classes: 
+# ```
+# For Doram: {list_doram}
+# For Genetic: {list_gene}
+# For Mechanic: {list_mech}
+# For Minstrel: {list_mins}
+# For Ranger: {list_ranger}
+# For Sorcerer: {list_sorc}
+# For Oboro: {list_obo}
+# For Rebellion: {list_rebel}
+# For Wanderer: {list_wand}
+# ```
+                                    # ''')
+                    # return
+                # change = 0
+                # next_row = 3
+                # cell_list = crsheet.range("B3:B50")
+                # for cell in cell_list:
+                    # if cell.value == commander_name:
+                        # change = 1
+                        # ign = crsheet.cell(next_row, 3)
+                        # break
+                    # next_row += 1
+                # if change == 0:
+                    # next_row = next_available_row(crsheet, 2)
+
+                # count = 0
+
+                # cell_list = crsheet.range(next_row, 2, next_row, 5)
+                # if no_of_args > 2:
+                    # for cell in cell_list:
+                        # if count == 0:
+                            # cell.value = commander_name
+                        # elif count == 1:
+                            # cell.value = arglist[0]
+                        # elif count == 2:
+                            # cell.value = darole
+                        # elif count == 3:
+                            # cell.value = arglist[2]
+                        # count += 1
+                    # crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                    # await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}, and Comment: {arglist[2]}.```')
+                    # if change == 1:
+                        # finding_column = crsheet.range("G3:G50".format(crsheet.row_count))
+                        # finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
+                        # finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
+                        # finding_columnsilk4 = silk4.range("B4:B51".format(silk4.row_count))
+                        # foundign = [found for found in finding_column if found.value == ign.value]
+                        # foundign2 = [found for found in finding_column2 if found.value == ign.value]
+                        # foundignsilk2 = [found for found in finding_columnsilk2 if found.value == ign.value]
+                        # foundignsilk4 = [found for found in finding_columnsilk4 if found.value == ign.value]
+
+                        # if foundignsilk2:
+                            # cell_list = silk2.range(foundignsilk2[0].row, 2, foundignsilk2[0].row, 4)
+                            # for cell in cell_list:
+                                # cell.value = ""
+                            # silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            # await ctx.send(
+                                # f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
+                            # cell_list = crsheet.range(foundign[0].row, 7, foundign[0].row, 10)
+                            # for cell in cell_list:
+                                # cell.value = ""
+                            # crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            # change = 0
+                        # if foundignsilk4:
+                            # cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
+                            # for cell in cell_list:
+                                # cell.value = ""
+                            # silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            # await ctx.send(
+                                # f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
+                            # cell_list = crsheet.range(foundign[0].row, 7, foundign[0].row, 10)
+                            # for cell in cell_list:
+                                # cell.value = ""
+                            # crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            # change = 0
+                        # if foundign2:
+                            # cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
+                            # for cell in cell_list:
+                                # cell.value = ""
+                            # celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            # await ctx.send(f'``` I found another character of yours that answered celery preferences already, I have cleared that. Please use /celery again in order to list your preferred salary.```')
+                            # change = 0
+                        # else:
+                            # if not foundign:
+                                # await ctx.send(f'{feedback_attplz}')
+                            # if not foundign2:
+                                # await ctx.send(f'{feedback_celeryplz}')
+                            # change = 0
+                    # else:
+                        # await ctx.send(f'{ctx.message.author.mention} {feedback_attplz}')
+                        # await ctx.send(f'{feedback_celeryplz}')
+                # else:
+                    # for cell in cell_list:
+                        # if count == 0:
+                            # cell.value = commander_name
+                        # elif count == 1:
+                            # cell.value = arglist[0]
+                        # elif count == 2:
+                            # cell.value = darole
+                        # elif count == 3:
+                            # cell.value = ""
+                        # count += 1
+                    # crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                    # await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}.```')
+                    # if change == 1:
+                        # finding_column = crsheet.range("G3:G50".format(crsheet.row_count))
+                        # finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
+                        # finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
+                        # finding_columnsilk4 = silk4.range("B4:B51".format(silk4.row_count))
+                        # foundign = [found for found in finding_column if found.value == ign.value]
+                        # foundign2 = [found for found in finding_column2 if found.value == ign.value]
+                        # foundignsilk2 = [found for found in finding_columnsilk2 if found.value == ign.value]
+                        # foundignsilk4 = [found for found in finding_columnsilk4 if found.value == ign.value]
+
+                        # if foundignsilk2:
+                            # cell_list = silk2.range(foundignsilk2[0].row, 2, foundignsilk2[0].row, 4)
+                            # for cell in cell_list:
+                                # cell.value = ""
+                            # silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            # await ctx.send(
+                                # f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                            # change = 0
+                        # if foundignsilk4:
+                            # cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
+                            # for cell in cell_list:
+                                # cell.value = ""
+                            # silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            # await ctx.send(f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                            # change = 0
+                        # if foundign2:
+                            # cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
+                            # for cell in cell_list:
+                                # cell.value = ""
+                            # celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            # await ctx.send(f'``` I found another character of yours that answered celery preferences already, I have cleared that. Please use /celery again in order to list your preferred salary.```')
+                            # change = 0
+                        # else:
+                            # if not foundign:
+                                # await ctx.send(f'{feedback_attplz}')
+                            # if not foundign2:
+                                # await ctx.send(f'{feedback_celeryplz}')
+                            # change = 0
+                    # else:
+                        # await ctx.send(f'{ctx.message.author.mention} {feedback_attplz}')
+                        # await ctx.send(f'{feedback_celeryplz}')
+
+        # else:
+            # await ctx.send("Wrong channel! Please use #bot.")
+        # cell_list = crsheet.range("B3:E50")
+        # try:
+            # crsheet.sort((4, 'asc'), range="B3:E50")
+        # except Exception as e:
+            # print(e)
+            # return
+        # cell_list = crsheet.range("G3:J50")
+        # crsheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
+        # cell_list = celesheet.range("B3:T48")
+        # celesheet.sort((4, 'asc'), range = "B3:T48")
+        # cell_list = silk2.range("B4:E50")
+        # silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+        # cell_list = silk4.range("B4:E50")
+        # silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+
 def setup(client):
     client.add_cog(Clears(client))

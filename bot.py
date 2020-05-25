@@ -131,16 +131,20 @@ async def on_ready():
             except ValueError as e:
                 print(f'next_row returned {e}')
                 next_row = 1
-            copy_list = sheet.range("G3:I50")
+            copy_list2 = silk2.range("B4:D51")
+            copy_list4 = silk4.range("B4:D51")
             paste_list = sheet.range(next_row, 1, next_row + 45, 3)
             count = 0
             newformat = "%B %Y"
             ph_time = pytz.timezone('Asia/Manila')
             ph_time_unformated = datetime.now(ph_time)
             ph_time_new_formated = ph_time_unformated.strftime(newformat)
-
-            for copy in copy_list:
-                data_pasted.append(copy.value)
+            if ph_time_formated == "00:00:00:Sunday":
+                for copy in copy_list2:
+                    data_pasted.append(copy.value)
+            elif ph_time_formated == "00:00:00:Monday":
+                for copy in copy_list4:
+                    data_pasted.append(copy.value)
             for paste in paste_list:
                 if count == 0:
                     if ph_time_formated == "00:00:00:Sunday":

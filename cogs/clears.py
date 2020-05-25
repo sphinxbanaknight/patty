@@ -432,22 +432,13 @@ For Wanderer: {list_wand}
                             silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
                                 f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
-                            cell_list = sheet.range(foundign[0].row, 7, foundign[0].row, 10)
-                            for cell in cell_list:
-                                cell.value = ""
-                            sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             change = 0
                         if foundignsilk4:
                             cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
                             for cell in cell_list:
                                 cell.value = ""
                             silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            await ctx.send(
-                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
-                            cell_list = sheet.range(foundign[0].row, 7, foundign[0].row, 10)
-                            for cell in cell_list:
-                                cell.value = ""
-                            sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            await ctx.send(f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
                             change = 0
                         if foundign2:
                             cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
@@ -478,7 +469,8 @@ For Wanderer: {list_wand}
         sheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
         cell_list = celesheet.range("B3:T48")
         celesheet.sort((4, 'asc'), range = "B3:T48")
-
+        silk2.sort((4, 'dex'), (3, 'asc'), range="B4:E51")
+        silk4.sort((4, 'dex'), (3, 'asc'), range="B4:E51")
 
     @commands.command()
     async def att(self, ctx, *, arguments):

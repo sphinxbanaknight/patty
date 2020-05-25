@@ -355,16 +355,36 @@ For Wanderer: {list_wand}
                     if change == 1:
                         finding_column = sheet.range("G3:G50".format(sheet.row_count))
                         finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
+                        finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
+                        finding_columnsilk4 = silk4.range("B4:B51".format(silk4.row_count))
                         foundign = [found for found in finding_column if found.value == ign.value]
                         foundign2 = [found for found in finding_column2 if found.value == ign.value]
+                        foundignsilk2 = [found for found in finding_columnsilk2 if found.value == ign.value]
+                        foundignsilk4 = [found for found in finding_columnsilk4 if found.value == ign.value]
 
-                        if foundign:
+                        if foundignsilk2:
+                            cell_list = silk2.range(foundign[0].row, 2, foundign[0].row, 4)
+                            for cell in cell_list:
+                                cell.value = ""
+                            silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            await ctx.send(
+                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
                             cell_list = sheet.range(foundign[0].row, 7, foundign[0].row, 10)
                             for cell in cell_list:
                                 cell.value = ""
                             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            change = 0
+                        if foundignsilk4:
+                            cell_list = silk4.range(foundign[0].row, 2, foundign[0].row, 4)
+                            for cell in cell_list:
+                                cell.value = ""
+                            silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
-                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
+                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                            cell_list = sheet.range(foundign[0].row, 7, foundign[0].row, 10)
+                            for cell in cell_list:
+                                cell.value = ""
+                            sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             change = 0
                         if foundign2:
                             cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
@@ -398,16 +418,36 @@ For Wanderer: {list_wand}
                     if change == 1:
                         finding_column = sheet.range("G3:G50".format(sheet.row_count))
                         finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
+                        finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
+                        finding_columnsilk4 = silk4.range("B4:B51".format(silk4.row_count))
                         foundign = [found for found in finding_column if found.value == ign.value]
                         foundign2 = [found for found in finding_column2 if found.value == ign.value]
+                        foundignsilk2 = [found for found in finding_columnsilk2 if found.value == ign.value]
+                        foundignsilk4 = [found for found in finding_columnsilk4 if found.value == ign.value]
 
-                        if foundign:
+                        if foundignsilk2:
+                            cell_list = silk2.range(foundign[0].row, 2, foundign[0].row, 4)
+                            for cell in cell_list:
+                                cell.value = ""
+                            silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            await ctx.send(
+                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
                             cell_list = sheet.range(foundign[0].row, 7, foundign[0].row, 10)
                             for cell in cell_list:
                                 cell.value = ""
                             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            change = 0
+                        if foundignsilk4:
+                            cell_list = silk4.range(foundign[0].row, 2, foundign[0].row, 4)
+                            for cell in cell_list:
+                                cell.value = ""
+                            silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
-                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
+                            cell_list = sheet.range(foundign[0].row, 7, foundign[0].row, 10)
+                            for cell in cell_list:
+                                cell.value = ""
+                            sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             change = 0
                         if foundign2:
                             cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)

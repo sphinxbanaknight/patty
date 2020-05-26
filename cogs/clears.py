@@ -23,7 +23,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name(data_json, scope)
 gc = gspread.authorize(creds)
 
 takte = gc.open('Copy of BK ROSTER')
-sheet = takte.worksheet('WoE Roster')
+rostersheet = takte.worksheet('WoE Roster')
 shite = gc.open('Copy of BK ROSTER')
 celesheet = shite.worksheet('Celery Preferences')
 silk2 = shite.worksheet('WoE Roster 2')
@@ -134,10 +134,10 @@ class Clears(commands.Cog):
 #        channel = ctx.message.channel
 #        commander = ctx.author.name
 #        if channel.id == botinit_id:
-#            cell_list = sheet.range(guild_range)
-#            sheet.sort((4, 'asc'), range=guild_range)
-#            cell_list = sheet.range(roster_range)
-#            sheet.sort((9, 'des'), (8, 'asc'), range=roster_range)
+#            cell_list = rostersheet.range(guild_range)
+#            rostersheet.sort((4, 'asc'), range=guild_range)
+#            cell_list = rostersheet.range(roster_range)
+#            rostersheet.sort((9, 'des'), (8, 'asc'), range=roster_range)
 #            await ctx.send(f'{commander} has sorted the sheets.')
 #        else:
 #            await ctx.send(f'Wrong channel! Please use #bot.')
@@ -148,14 +148,14 @@ class Clears(commands.Cog):
         commander = ctx.author.name
             #await ctx.send('test')
         if channel.id in botinit_id:
-            cell_list = sheet.range("B3:E46")
+            cell_list = rostersheet.range("B3:E46")
             try:
-                sheet.sort((4, 'asc'), range = "B3:E50")
+                rostersheet.sort((4, 'asc'), range = "B3:E50")
             except Exception as e:
                 print(e)
                 return
-            cell_list = sheet.range("G3:J50")
-            sheet.sort((9, 'des'), (8, 'asc'), range = "G3:J50")
+            cell_list = rostersheet.range("G3:J50")
+            rostersheet.sort((9, 'des'), (8, 'asc'), range = "G3:J50")
             celesheet.sort((3, 'asc'), range = "B3:T48")
             await ctx.send(f'`{commander} has sorted the sheets.`')
         else:
@@ -168,10 +168,10 @@ class Clears(commands.Cog):
         commander = ctx.author
         if channel.id in botinit_id:
             if commander.id in authorized_id:
-                cell_list = sheet.range(guild_range)
+                cell_list = rostersheet.range(guild_range)
                 for cell in cell_list:
                     cell.value = ""
-                sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                 await ctx.send(f'{commander_name} has cleared the guild list.')
             else:
                 await ctx.send(f'This command is unavailable for you!')
@@ -188,12 +188,12 @@ class Clears(commands.Cog):
         commander = ctx.author
         if channel.id in botinit_id:
             if commander.id in authorized_id:
-                cell_list = sheet.range(roster_range)
+                cell_list = rostersheet.range(roster_range)
 
                 for cell in cell_list:
                     cell.value = ""
 
-                sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
 
                 await ctx.send(f'{commander_name} has cleared the WoE Roster.')
             else:
@@ -208,49 +208,49 @@ class Clears(commands.Cog):
         commander = ctx.author
         if channel.id in botinit_id:
             if commander.id in authorized_id:
-                cell_list = sheet.range(matk_range)
+                cell_list = rostersheet.range(matk_range)
 
                 for cell in cell_list:
                     cell.value = ""
 
-                #sheet.update_cells(cell_list)
+                #rostersheet.update_cells(cell_list)
 
-                sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
 
-                cell_list = sheet.range(p1role_range)
-
-                for cell in cell_list:
-                    cell.value = ""
-
-                sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-
-                cell_list = sheet.range(atk_range)
+                cell_list = rostersheet.range(p1role_range)
 
                 for cell in cell_list:
                     cell.value = ""
 
-                sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
 
-                cell_list = sheet.range(p2role_range)
-
-                for cell in cell_list:
-                    cell.value = ""
-
-                sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-
-                cell_list = sheet.range(p3_range)
+                cell_list = rostersheet.range(atk_range)
 
                 for cell in cell_list:
                     cell.value = ""
 
-                sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
 
-                cell_list = sheet.range(p3role_range)
+                cell_list = rostersheet.range(p2role_range)
 
                 for cell in cell_list:
                     cell.value = ""
 
-                sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+
+                cell_list = rostersheet.range(p3_range)
+
+                for cell in cell_list:
+                    cell.value = ""
+
+                rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+
+                cell_list = rostersheet.range(p3role_range)
+
+                for cell in cell_list:
+                    cell.value = ""
+
+                rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
 
                 await ctx.send(f'{commander_name} has cleared the Party List.')
             else:
@@ -319,28 +319,28 @@ For Wanderer: {list_wand}
                     return
                 change = 0
                 #try:
-                #    uname = sheet.find(commander_name)
+                #    uname = rostersheet.find(commander_name)
                 #    if uname:
                 #        next_row = uname.row
-                #        ign = sheet.cell(next_row, 3)
+                #        ign = rostersheet.cell(next_row, 3)
                 #        change = 1
                 #except gspread.exceptions.CellNotFound:
-                #    next_row = next_available_row(sheet, 2)
-                    #list_entry = sheet.range(next_row, 3, next_row, 4)
+                #    next_row = next_available_row(rostersheet, 2)
+                    #list_entry = rostersheet.range(next_row, 3, next_row, 4)
                 next_row = 3
-                cell_list = sheet.range("B3:B50")
+                cell_list = rostersheet.range("B3:B50")
                 for cell in cell_list:
                     if cell.value == commander_name:
                         change = 1
-                        ign = sheet.cell(next_row, 3)
+                        ign = rostersheet.cell(next_row, 3)
                         break
                     next_row += 1
                 if change == 0:
-                    next_row = next_available_row(sheet, 2)
+                    next_row = next_available_row(rostersheet, 2)
 
                 count = 0
 
-                cell_list = sheet.range(next_row, 2, next_row, 5)
+                cell_list = rostersheet.range(next_row, 2, next_row, 5)
                 if no_of_args > 2:
                     for cell in cell_list:
                         if count == 0:
@@ -352,10 +352,10 @@ For Wanderer: {list_wand}
                         elif count == 3:
                             cell.value = arglist[2]
                         count += 1
-                    sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                    rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                     await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}, and Comment: {arglist[2]}.```')
                     if change == 1:
-                        finding_column = sheet.range("G3:G50".format(sheet.row_count))
+                        finding_column = rostersheet.range("G3:G50".format(rostersheet.row_count))
                         finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
                         finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
                         finding_columnsilk4 = silk4.range("B4:B51".format(silk4.row_count))
@@ -371,10 +371,10 @@ For Wanderer: {list_wand}
                             silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
                                 f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
-                            cell_list = sheet.range(foundign[0].row, 7, foundign[0].row, 10)
+                            cell_list = rostersheet.range(foundign[0].row, 7, foundign[0].row, 10)
                             for cell in cell_list:
                                 cell.value = ""
-                            sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             change = 0
                         if foundignsilk4:
                             cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
@@ -383,10 +383,10 @@ For Wanderer: {list_wand}
                             silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
                             await ctx.send(
                                 f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
-                            cell_list = sheet.range(foundign[0].row, 7, foundign[0].row, 10)
+                            cell_list = rostersheet.range(foundign[0].row, 7, foundign[0].row, 10)
                             for cell in cell_list:
                                 cell.value = ""
-                            sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                            rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                             change = 0
                         if foundign2:
                             cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
@@ -415,10 +415,10 @@ For Wanderer: {list_wand}
                         elif count == 3:
                             cell.value = ""
                         count += 1
-                    sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                    rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                     await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}.```')
                     if change == 1:
-                        finding_column = sheet.range("G3:G50".format(sheet.row_count))
+                        finding_column = rostersheet.range("G3:G50".format(rostersheet.row_count))
                         finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
                         finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
                         finding_columnsilk4 = silk4.range("B4:B51".format(silk4.row_count))
@@ -461,14 +461,14 @@ For Wanderer: {list_wand}
 
         else:
             await ctx.send("Wrong channel! Please use #bot.")
-        cell_list = sheet.range("B3:E50")
+        cell_list = rostersheet.range("B3:E50")
         try:
-            sheet.sort((4, 'asc'), range="B3:E50")
+            rostersheet.sort((4, 'asc'), range="B3:E50")
         except Exception as e:
             print(e)
             return
-        cell_list = sheet.range("G3:J50")
-        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
+        cell_list = rostersheet.range("G3:J50")
+        rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
         cell_list = celesheet.range("B3:T48")
         celesheet.sort((4, 'asc'), range = "B3:T48")
         cell_list = silk2.range("B4:E50")
@@ -497,7 +497,7 @@ For Wanderer: {list_wand}
             # else:
             next_row = 3
             found = 0
-            cell_list = sheet.range("B3:B50")
+            cell_list = rostersheet.range("B3:B50")
             for cell in cell_list:
                 if cell.value == commander_name:
                     found = 1
@@ -507,7 +507,7 @@ For Wanderer: {list_wand}
                 await ctx.send(f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional comment)`')
                 return
             #try:
-            #    uname = sheet.find(ctx.author.name)
+            #    uname = rostersheet.find(ctx.author.name)
             #    next_row = uname.row
             #except gspread.exceptions.CellNotFound:
             #    await ctx.send(
@@ -515,11 +515,11 @@ For Wanderer: {list_wand}
             #    return
             #        await ctx.send('test1')
 
-            ign = sheet.cell(next_row, 3)
-            role = sheet.cell(next_row, 4)
+            ign = rostersheet.cell(next_row, 3)
+            role = rostersheet.cell(next_row, 4)
 
-            finding_column2 = silk2.range("B3:B50".format(sheet.row_count))
-            finding_column4 = silk4.range("B3:B50".format(sheet.row_count))
+            finding_column2 = silk2.range("B3:B50".format(rostersheet.row_count))
+            finding_column4 = silk4.range("B3:B50".format(rostersheet.row_count))
 
             foundign2 = [found for found in finding_column2 if found.value == ign.value]
             foundign4 = [found for found in finding_column4 if found.value == ign.value]
@@ -708,14 +708,14 @@ For Wanderer: {list_wand}
                                 f'```{ctx.author.name} said No for SILK 2 with IGN: {ign.value}, and Class: {role.value}.```')
         else:
             await ctx.send("Wrong channel! Please use #bot.")
-        cell_list = sheet.range("B3:E46")
+        cell_list = rostersheet.range("B3:E46")
         try:
-            sheet.sort((4, 'asc'), range="B3:E50")
+            rostersheet.sort((4, 'asc'), range="B3:E50")
         except Exception as e:
             print(e)
             return
-        cell_list = sheet.range("G3:J50")   
-        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
+        cell_list = rostersheet.range("G3:J50")   
+        rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
         cell_list = silk2.range("B4:E50")
         silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
         cell_list = silk4.range("B4:E50")
@@ -733,62 +733,62 @@ For Wanderer: {list_wand}
         commander_name = commander.name
         if channel.id in botinit_id:
             try:
-                row_n = next_available_row(sheet, 7)
+                row_n = next_available_row(rostersheet, 7)
             except ValueError:
                 row_n = 3
             try:
-                row_c = next_available_row(sheet, 8)
+                row_c = next_available_row(rostersheet, 8)
             except ValueError:
                 row_c = 3
             try:
-                row_a = next_available_row(sheet, 9)
+                row_a = next_available_row(rostersheet, 9)
             except ValueError:
                 row_a = 3
             msg = await ctx.send(f'`Please wait... I am parsing a list of our WOE Roster. Refrain from entering any other commands.`')
             #await asyncio.sleep(10)
             while row_n != row_c or row_n != row_a:
-                row_n = next_available_row(sheet, 7)
-                row_c = next_available_row(sheet, 8)
-                row_a = next_available_row(sheet, 9)
+                row_n = next_available_row(rostersheet, 7)
+                row_c = next_available_row(rostersheet, 8)
+                row_a = next_available_row(rostersheet, 9)
 
                 if row_n < row_c:
                     if row_n < row_a:
-                        cell_list = sheet.range(row_n, 7, row_n, 9)
+                        cell_list = rostersheet.range(row_n, 7, row_n, 9)
                         for cell in cell_list:
                             cell.value = ""
-                        sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
+                        rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                        rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                     else:
-                        cell_list = sheet.range(row_a, 7, row_a, 9)
+                        cell_list = rostersheet.range(row_a, 7, row_a, 9)
                         for cell in cell_list:
                             cell.value = ""
-                        sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
+                        rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                        rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                 elif row_c < row_a:
-                    cell_list = sheet.range(row_c, 7, row_c, 9)
+                    cell_list = rostersheet.range(row_c, 7, row_c, 9)
                     for cell in cell_list:
                         cell.value = ""
-                    sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
+                    rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                    rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                 else:
-                    cell_list = sheet.range(row_a, 7, row_a, 9)
+                    cell_list = rostersheet.range(row_a, 7, row_a, 9)
                     for cell in cell_list:
                         cell.value = ""
-                    sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    sheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
+                    rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                    rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
             try:
-                namae = [item for item in sheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
+                namae = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
             except Exception as e:
                 print(f'namae returned {e}')
             try:
-                kurasu = [item for item in sheet.col_values(8) if item and item != 'Class' and item != 'Silk 2' and item != 'Silk 4']
+                kurasu = [item for item in rostersheet.col_values(8) if item and item != 'Class' and item != 'Silk 2' and item != 'Silk 4']
             except Exception as e:
                 print(f'kurasu returned {e}')
             try:
-                stat = [item for item in sheet.col_values(9) if item and item != 'Att.']
+                stat = [item for item in rostersheet.col_values(9) if item and item != 'Att.']
             except Exception as e:
                 print(f'stat returned {e}')
-            #komento = [item for item in sheet.col_values(10) if item and item != 'Comments']
+            #komento = [item for item in rostersheet.col_values(10) if item and item != 'Comments']
             x = 0
             a = 0
             yuppie = 0
@@ -1001,7 +1001,7 @@ For Wanderer: {list_wand}
             no_of_args = len(arglist)
             found = 0
             next_row = 3
-            cell_list = sheet.range("B3:B50")
+            cell_list = rostersheet.range("B3:B50")
             for cell in cell_list:
                 if cell.value == commander_name:
                     found = 1
@@ -1011,8 +1011,8 @@ For Wanderer: {list_wand}
                 await ctx.send(f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional comment)`')
                 return
 
-            ign = sheet.cell(next_row, 3)
-            role = sheet.cell(next_row, 4)
+            ign = rostersheet.cell(next_row, 3)
+            role = rostersheet.cell(next_row, 4)
             count = 0
 
             finding_column = celesheet.range("C3:C50".format(celesheet.row_count))
@@ -1360,15 +1360,15 @@ Thank you!```\n""")
         if channel.id in botinit_id:
             msg = await ctx.send(
                 f'`Please wait... I am parsing a list of our Party List. Refrain from entering any other commands.`')
-            cell_list = sheet.range("M4:M15")
+            cell_list = rostersheet.range("M4:M15")
             get_MATK = [""]
             for cell in cell_list:
                 get_MATK.append(cell.value)
-            cell_list = sheet.range("M19:M30")
+            cell_list = rostersheet.range("M19:M30")
             get_ATK = [""]
             for cell in cell_list:
                 get_ATK.append(cell.value)
-            cell_list = sheet.range("M34:M45")
+            cell_list = rostersheet.range("M34:M45")
             get_third = [""]
             for cell in cell_list:
                 get_third.append(cell.value)
@@ -1575,7 +1575,12 @@ Siege Whites
 # #### jytest incomplete!!!
     # @commands.command()
     # async def changerequest(self, ctx, *, arguments):
-        # await ctx.send(f'''```Not implemented yet!```''')
+		# format = "%d:%m:%Y"
+
+		# my_time = pytz.timezone('Asia/Kuala_Lumpur')
+		# my_time_unformated = datetime.now(my_time)
+		# my_time_formated = my_time_unformated.strftime(format)
+		
         # channel = ctx.message.channel
         # commander = ctx.author
         # commander_name = commander.name
@@ -1770,18 +1775,10 @@ Siege Whites
             # await ctx.send("Wrong channel! Please use #bot.")
         # cell_list = crsheet.range("B3:E50")
         # try:
-            # crsheet.sort((4, 'asc'), range="B3:E50")
+            # crsheet.sort((5, 'asc'), range="A4:G100")
         # except Exception as e:
             # print(e)
             # return
-        # cell_list = crsheet.range("G3:J50")
-        # crsheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
-        # cell_list = celesheet.range("B3:T48")
-        # celesheet.sort((4, 'asc'), range = "B3:T48")
-        # cell_list = silk2.range("B4:E50")
-        # silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
-        # cell_list = silk4.range("B4:E50")
-        # silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
 
 def setup(client):
     client.add_cog(Clears(client))

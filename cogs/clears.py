@@ -1655,7 +1655,7 @@ For Wanderer: {list_wand}
                         status = " [NEW]"
                         if change == 1:
                             cell.value = cell.value + " -->" + status
-                        else 
+                        else:
                             cell.value = status
                     count += 1
                 if debugger: await ctx.send(f'{feedback_debug} change={change} next_row={next_row}')

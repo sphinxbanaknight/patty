@@ -1529,7 +1529,7 @@ Siege Whites
         channel = ctx.message.channel
         commander = ctx.author
         commander_name = commander.name
-        
+        print(testlel)
         format = "%d/%m/%Y"
         my_time = pytz.timezone('Asia/Kuala_Lumpur')
         my_time_unformatted = datetime.now(my_time)

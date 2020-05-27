@@ -341,123 +341,71 @@ For Wanderer: {list_wand}
                 count = 0
 
                 cell_list = rostersheet.range(next_row, 2, next_row, 5)
-                if no_of_args > 2:
-                    for cell in cell_list:
-                        if count == 0:
-                            cell.value = commander_name
-                        elif count == 1:
-                            cell.value = arglist[0]
-                        elif count == 2:
-                            cell.value = darole
-                        elif count == 3:
+                for cell in cell_list:
+                    if count == 0:
+                        cell.value = commander_name
+                    elif count == 1:
+                        cell.value = arglist[0]
+                    elif count == 2:
+                        cell.value = darole
+                    elif count == 3:
+                        if no_of_args > 2:
                             cell.value = arglist[2]
-                        count += 1
-                    rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}, and Comment: {arglist[2]}.```')
-                    if change == 1:
-                        finding_column = rostersheet.range("G3:G50".format(rostersheet.row_count))
-                        finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
-                        finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
-                        finding_columnsilk4 = silk4.range("B4:B51".format(silk4.row_count))
-                        foundign = [found for found in finding_column if found.value == ign.value]
-                        foundign2 = [found for found in finding_column2 if found.value == ign.value]
-                        foundignsilk2 = [found for found in finding_columnsilk2 if found.value == ign.value]
-                        foundignsilk4 = [found for found in finding_columnsilk4 if found.value == ign.value]
-
-                        if foundignsilk2:
-                            cell_list = silk2.range(foundignsilk2[0].row, 2, foundignsilk2[0].row, 4)
-                            for cell in cell_list:
-                                cell.value = ""
-                            silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            await ctx.send(
-                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
-                            cell_list = rostersheet.range(foundign[0].row, 7, foundign[0].row, 10)
-                            for cell in cell_list:
-                                cell.value = ""
-                            rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            change = 0
-                        if foundignsilk4:
-                            cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
-                            for cell in cell_list:
-                                cell.value = ""
-                            silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            await ctx.send(
-                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
-                            cell_list = rostersheet.range(foundign[0].row, 7, foundign[0].row, 10)
-                            for cell in cell_list:
-                                cell.value = ""
-                            rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            change = 0
-                        if foundign2:
-                            cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
-                            for cell in cell_list:
-                                cell.value = ""
-                            celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            await ctx.send(f'``` I found another character of yours that answered celery preferences already, I have cleared that. Please use /celery again in order to list your preferred salary.```')
-                            change = 0
-                        else:
-                            if not foundign:
-                                await ctx.send(f'{feedback_attplz}')
-                            if not foundign2:
-                                await ctx.send(f'{feedback_celeryplz}')
-                            change = 0
-                    else:
-                        await ctx.send(f'{ctx.message.author.mention} {feedback_attplz}')
-                        await ctx.send(f'{feedback_celeryplz}')
-                else:
-                    for cell in cell_list:
-                        if count == 0:
-                            cell.value = commander_name
-                        elif count == 1:
-                            cell.value = arglist[0]
-                        elif count == 2:
-                            cell.value = darole
-                        elif count == 3:
+                            optionalcomment = arglist[2]
+                        else
                             cell.value = ""
-                        count += 1
-                    rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}.```')
-                    if change == 1:
-                        finding_column = rostersheet.range("G3:G50".format(rostersheet.row_count))
-                        finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
-                        finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
-                        finding_columnsilk4 = silk4.range("B4:B51".format(silk4.row_count))
-                        foundign = [found for found in finding_column if found.value == ign.value]
-                        foundign2 = [found for found in finding_column2 if found.value == ign.value]
-                        foundignsilk2 = [found for found in finding_columnsilk2 if found.value == ign.value]
-                        foundignsilk4 = [found for found in finding_columnsilk4 if found.value == ign.value]
+                            optionalcomment = ""
+                    count += 1
+                rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}, and Comment: {optionalcomment}.```')
+                if change == 1:
+                    finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
+                    finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
+                    finding_columnsilk4 = silk4.range("B4:B51".format(silk4.row_count))
+                    foundign2 = [found for found in finding_column2 if found.value == ign.value]
+                    foundignsilk2 = [found for found in finding_columnsilk2 if found.value == ign.value]
+                    foundignsilk4 = [found for found in finding_columnsilk4 if found.value == ign.value]
 
-                        if foundignsilk2:
-                            cell_list = silk2.range(foundignsilk2[0].row, 2, foundignsilk2[0].row, 4)
-                            for cell in cell_list:
-                                cell.value = ""
-                            silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            await ctx.send(
-                                f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
-                            change = 0
-                        if foundignsilk4:
-                            cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
-                            for cell in cell_list:
-                                cell.value = ""
-                            silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            await ctx.send(f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
-                            change = 0
-                        if foundign2:
-                            cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
-                            for cell in cell_list:
-                                cell.value = ""
-                            celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            await ctx.send(f'``` I found another character of yours that answered celery preferences already, I have cleared that. Please use /celery again in order to list your preferred salary.```')
-                            change = 0
-                        else:
-                            if not foundign:
-                                await ctx.send(f'{feedback_attplz}')
-                            if not foundign2:
-                                await ctx.send(f'{feedback_celeryplz}')
-                            change = 0
+                    if foundignsilk2:
+                        cell_list = silk2.range(foundignsilk2[0].row, 2, foundignsilk2[0].row, 4)
+                        for cell in cell_list:
+                            cell.value = ""
+                        silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
+                        await ctx.send(
+                            f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
+                        cell_list = rostersheet.range(foundign[0].row, 7, foundign[0].row, 10)
+                        for cell in cell_list:
+                            cell.value = ""
+                        rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                        change = 0
+                    if foundignsilk4:
+                        cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
+                        for cell in cell_list:
+                            cell.value = ""
+                        silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
+                        await ctx.send(
+                            f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
+                        cell_list = rostersheet.range(foundign[0].row, 7, foundign[0].row, 10)
+                        for cell in cell_list:
+                            cell.value = ""
+                        rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                        change = 0
+                    if foundign2:
+                        cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
+                        for cell in cell_list:
+                            cell.value = ""
+                        celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                        await ctx.send(f'``` I found another character of yours that answered celery preferences already, I have cleared that. Please use /celery again in order to list your preferred salary.```')
+                        change = 0
                     else:
-                        await ctx.send(f'{ctx.message.author.mention} {feedback_attplz}')
-                        await ctx.send(f'{feedback_celeryplz}')
+                        if not foundignsilk4 or not foundignsilk2:
+                            await ctx.send(f'{feedback_attplz}')
+                        if not foundign2:
+                            await ctx.send(f'{feedback_celeryplz}')
+                        change = 0
+                else:
+                    await ctx.send(f'{ctx.message.author.mention} {feedback_attplz}')
+                    await ctx.send(f'{feedback_celeryplz}')
 
         else:
             await ctx.send("Wrong channel! Please use #bot.")
@@ -467,8 +415,6 @@ For Wanderer: {list_wand}
         except Exception as e:
             print(e)
             return
-        cell_list = rostersheet.range("G3:J50")
-        rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J50")
         cell_list = celesheet.range("B3:T48")
         celesheet.sort((4, 'asc'), range = "B3:T48")
         cell_list = silk2.range("B4:E50")
@@ -1572,213 +1518,140 @@ Zeny
 Siege Whites
     Siege Blues```''')
     
-# #### jytest incomplete!!!
-    # @commands.command()
-    # async def changerequest(self, ctx, *, arguments):
-		# format = "%d:%m:%Y"
+    @commands.command()
+    async def changerequest(self, ctx, *, arguments):
+        channel = ctx.message.channel
+        commander = ctx.author
+        commander_name = commander.name
+        
+        format = "%d/%m/%Y"
+        my_time = pytz.timezone('Asia/Kuala_Lumpur')
+        my_time_unformatted = datetime.now(my_time)
+        my_time_formated = my_time_unformatted.strftime(format)
+        
+        if channel.id in botinit_id:
+            arglist = [x.strip() for x in arguments.split(',')]
+            # arg0 = role
+            # arg1 = optional comment
+            
+            no_of_args = len(arglist)
+            if no_of_args = 0:
+                await ctx.send(f'{ctx.message.author.mention} {feedback_properplz}`/changerequest newrole, (optional comment)`')
+                return
+            else:
+                if arglist[0].lower() in list_ab:
+                    darole = 'AB'
+                elif arglist[0].lower() in list_doram:
+                    darole = 'Doram'
+                elif arglist[0].lower() in list_gene:
+                    darole = 'Genetic'
+                elif arglist[0].lower() in list_mech:
+                    darole = 'Mado'
+                elif arglist[0].lower() in list_mins:
+                    darole = 'Minstrel'
+                elif arglist[0].lower() in list_ranger:
+                    darole = 'Ranger'
+                elif arglist[0].lower() in list_rg:
+                    darole = 'RG'
+                elif arglist[0].lower() in list_rk:
+                        darole = 'RK'
+                elif arglist[0].lower() in list_sc:
+                    darole = 'SC'
+                elif arglist[0].lower() in list_sorc:
+                    darole = 'Sorc'
+                elif arglist[0].lower() in list_sura:
+                    darole = 'Sura'
+                elif arglist[0].lower() in list_wl:
+                    darole = 'WL'
+                elif arglist[0].lower() in list_obo:
+                    darole = 'Oboro'
+                elif arglist[0].lower() in list_rebel:
+                    darole = 'Rebel'
+                elif arglist[0].lower() in list_gx:
+                    darole = 'GX'
+                elif arglist[0].lower() in list_wand:
+                    darole = 'Wanderer'
+                else:
+                    await ctx.send(f'''Here are the allowed classes: 
+```
+For Doram: {list_doram}
+For Genetic: {list_gene}
+For Mechanic: {list_mech}
+For Minstrel: {list_mins}
+For Ranger: {list_ranger}
+For Sorcerer: {list_sorc}
+For Oboro: {list_obo}
+For Rebellion: {list_rebel}
+For Wanderer: {list_wand}
+```
+                                    ''')
+                    return
+                change = 0
+                next_row = 3
+                cell_list = crsheet.range("A4:G100")
+                
+                # determine if this is update existing or new entry
+                for cell in cell_list:
+                    if cell.value == commander_name:
+                        change = 1
+                        ign = crsheet.cell(next_row, 3)
+                        break
+                    next_row += 1
+                if change == 0:
+                    next_row = next_available_row(crsheet, 2)
 
-		# my_time = pytz.timezone('Asia/Kuala_Lumpur')
-		# my_time_unformated = datetime.now(my_time)
-		# my_time_formated = my_time_unformated.strftime(format)
-		
-        # channel = ctx.message.channel
-        # commander = ctx.author
-        # commander_name = commander.name
-        # if channel.id in botinit_id:
-            # arglist = [x.strip() for x in arguments.split(',')]
-            # no_of_args = len(arglist)
-            # if no_of_args = 0:
-                # await ctx.send(f'{ctx.message.author.mention} {feedback_properplz}`/changerequest newrole, (optional comment)`')
-                # return
-            # else:
-                # if arglist[0].lower() in list_ab:
-                    # darole = 'AB'
-                # elif arglist[0].lower() in list_doram:
-                    # darole = 'Doram'
-                # elif arglist[0].lower() in list_gene:
-                    # darole = 'Genetic'
-                # elif arglist[0].lower() in list_mech:
-                    # darole = 'Mado'
-                # elif arglist[0].lower() in list_mins:
-                    # darole = 'Minstrel'
-                # elif arglist[0].lower() in list_ranger:
-                    # darole = 'Ranger'
-                # elif arglist[0].lower() in list_rg:
-                    # darole = 'RG'
-                # elif arglist[0].lower() in list_rk:
-                        # darole = 'RK'
-                # elif arglist[0].lower() in list_sc:
-                    # darole = 'SC'
-                # elif arglist[0].lower() in list_sorc:
-                    # darole = 'Sorc'
-                # elif arglist[0].lower() in list_sura:
-                    # darole = 'Sura'
-                # elif arglist[0].lower() in list_wl:
-                    # darole = 'WL'
-                # elif arglist[0].lower() in list_obo:
-                    # darole = 'Oboro'
-                # elif arglist[0].lower() in list_rebel:
-                    # darole = 'Rebel'
-                # elif arglist[0].lower() in list_gx:
-                    # darole = 'GX'
-                # elif arglist[0].lower() in list_wand:
-                    # darole = 'Wanderer'
-                # else:
-                    # await ctx.send(f'''Here are the allowed classes: 
-# ```
-# For Doram: {list_doram}
-# For Genetic: {list_gene}
-# For Mechanic: {list_mech}
-# For Minstrel: {list_mins}
-# For Ranger: {list_ranger}
-# For Sorcerer: {list_sorc}
-# For Oboro: {list_obo}
-# For Rebellion: {list_rebel}
-# For Wanderer: {list_wand}
-# ```
-                                    # ''')
-                    # return
-                # change = 0
-                # next_row = 3
-                # cell_list = crsheet.range("B3:B50")
-                # for cell in cell_list:
-                    # if cell.value == commander_name:
-                        # change = 1
-                        # ign = crsheet.cell(next_row, 3)
-                        # break
-                    # next_row += 1
-                # if change == 0:
-                    # next_row = next_available_row(crsheet, 2)
+                count = 0
 
-                # count = 0
+                ## Change Requests format ##
+                # 1 = Discord Tag (user id)
+                # 2 = Enlisted IGN (formula)
+                # 3 = Class (formula)
+                # 4 = Requested Class (arg0)
+                # 5 = Requested On (date stamp)
+                # 6 = Reason (arg1)
+                # 7 = Status (not maintained by bot)
+                cell_list = crsheet.range(next_row, 1, next_row, 6)
+                for cell in cell_list:
+                    if count == 0:
+                        cell.value = commander_name
+                    elif count == 1:
+                        cell.value = f'=VLOOKUP($A{next_row}, Enlistment, 2, FALSE )'
+                    elif count == 2:
+                        cell.value = f'=VLOOKUP($A{next_row}, Enlistment, 3, FALSE )'
+                    elif count == 3:
+                        cell.value = darole
+                    elif count == 4:
+                        cell.value = my_time_formated
+                    elif count == 5:
+                        if no_of_args > 1:
+                            cell.value = arglist[1]
+                            optionalcomment = arglist[1]
+                        else
+                            cell.value = ""
+                            optionalcomment = ""
+                    
+                    count += 1
+                crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                await ctx.send(f'```{ctx.author.name} has requested to change to {darole}, with Reason: {optionalcomment} on {my_time_formated}.```')
+                if change == 1:
+                    finding_column = crsheet.range("A4:G100".format(crsheet.row_count))
+                    foundign = [found for found in finding_column if found.value == ign.value]
 
-                # cell_list = crsheet.range(next_row, 2, next_row, 5)
-                # if no_of_args > 2:
-                    # for cell in cell_list:
-                        # if count == 0:
-                            # cell.value = commander_name
-                        # elif count == 1:
-                            # cell.value = arglist[0]
-                        # elif count == 2:
-                            # cell.value = darole
-                        # elif count == 3:
-                            # cell.value = arglist[2]
-                        # count += 1
-                    # crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    # await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}, and Comment: {arglist[2]}.```')
-                    # if change == 1:
-                        # finding_column = crsheet.range("G3:G50".format(crsheet.row_count))
-                        # finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
-                        # finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
-                        # finding_columnsilk4 = silk4.range("B4:B51".format(silk4.row_count))
-                        # foundign = [found for found in finding_column if found.value == ign.value]
-                        # foundign2 = [found for found in finding_column2 if found.value == ign.value]
-                        # foundignsilk2 = [found for found in finding_columnsilk2 if found.value == ign.value]
-                        # foundignsilk4 = [found for found in finding_columnsilk4 if found.value == ign.value]
+                    if foundign:
+                        cell_list = crsheet.range(foundign[0].row, 1, foundign[0].row, 7)
+                        for cell in cell_list:
+                            cell.value = ""
+                        crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+                        await ctx.send(f'``` I found your previous change request, I have cleared that.```')
+                    change = 0
 
-                        # if foundignsilk2:
-                            # cell_list = silk2.range(foundignsilk2[0].row, 2, foundignsilk2[0].row, 4)
-                            # for cell in cell_list:
-                                # cell.value = ""
-                            # silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            # await ctx.send(
-                                # f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
-                            # cell_list = crsheet.range(foundign[0].row, 7, foundign[0].row, 10)
-                            # for cell in cell_list:
-                                # cell.value = ""
-                            # crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            # change = 0
-                        # if foundignsilk4:
-                            # cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
-                            # for cell in cell_list:
-                                # cell.value = ""
-                            # silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            # await ctx.send(
-                                # f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
-                            # cell_list = crsheet.range(foundign[0].row, 7, foundign[0].row, 10)
-                            # for cell in cell_list:
-                                # cell.value = ""
-                            # crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            # change = 0
-                        # if foundign2:
-                            # cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
-                            # for cell in cell_list:
-                                # cell.value = ""
-                            # celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            # await ctx.send(f'``` I found another character of yours that answered celery preferences already, I have cleared that. Please use /celery again in order to list your preferred salary.```')
-                            # change = 0
-                        # else:
-                            # if not foundign:
-                                # await ctx.send(f'{feedback_attplz}')
-                            # if not foundign2:
-                                # await ctx.send(f'{feedback_celeryplz}')
-                            # change = 0
-                    # else:
-                        # await ctx.send(f'{ctx.message.author.mention} {feedback_attplz}')
-                        # await ctx.send(f'{feedback_celeryplz}')
-                # else:
-                    # for cell in cell_list:
-                        # if count == 0:
-                            # cell.value = commander_name
-                        # elif count == 1:
-                            # cell.value = arglist[0]
-                        # elif count == 2:
-                            # cell.value = darole
-                        # elif count == 3:
-                            # cell.value = ""
-                        # count += 1
-                    # crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    # await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}.```')
-                    # if change == 1:
-                        # finding_column = crsheet.range("G3:G50".format(crsheet.row_count))
-                        # finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
-                        # finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
-                        # finding_columnsilk4 = silk4.range("B4:B51".format(silk4.row_count))
-                        # foundign = [found for found in finding_column if found.value == ign.value]
-                        # foundign2 = [found for found in finding_column2 if found.value == ign.value]
-                        # foundignsilk2 = [found for found in finding_columnsilk2 if found.value == ign.value]
-                        # foundignsilk4 = [found for found in finding_columnsilk4 if found.value == ign.value]
-
-                        # if foundignsilk2:
-                            # cell_list = silk2.range(foundignsilk2[0].row, 2, foundignsilk2[0].row, 4)
-                            # for cell in cell_list:
-                                # cell.value = ""
-                            # silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            # await ctx.send(
-                                # f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
-                            # change = 0
-                        # if foundignsilk4:
-                            # cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
-                            # for cell in cell_list:
-                                # cell.value = ""
-                            # silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            # await ctx.send(f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n again in order to register your attendance.```')
-                            # change = 0
-                        # if foundign2:
-                            # cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
-                            # for cell in cell_list:
-                                # cell.value = ""
-                            # celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                            # await ctx.send(f'``` I found another character of yours that answered celery preferences already, I have cleared that. Please use /celery again in order to list your preferred salary.```')
-                            # change = 0
-                        # else:
-                            # if not foundign:
-                                # await ctx.send(f'{feedback_attplz}')
-                            # if not foundign2:
-                                # await ctx.send(f'{feedback_celeryplz}')
-                            # change = 0
-                    # else:
-                        # await ctx.send(f'{ctx.message.author.mention} {feedback_attplz}')
-                        # await ctx.send(f'{feedback_celeryplz}')
-
-        # else:
-            # await ctx.send("Wrong channel! Please use #bot.")
-        # cell_list = crsheet.range("B3:E50")
-        # try:
-            # crsheet.sort((5, 'asc'), range="A4:G100")
-        # except Exception as e:
-            # print(e)
-            # return
+        else:
+            await ctx.send("Wrong channel! Please use #bot.")
+        try:
+            crsheet.sort((5, 'asc'), range="A4:G100")
+        except Exception as e:
+            print(e)
+            return
 
 def setup(client):
     client.add_cog(Clears(client))

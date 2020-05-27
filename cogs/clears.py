@@ -146,6 +146,7 @@ class Clears(commands.Cog):
         if channel.id in botinit_id:
             if commander.id in authorized_id:
                 debugmode = not debugmode
+                await ctx.send(f'`Debugmode = {debugmode}`')
             else:
                 await ctx.send(f'*Nice try pleb.*')
         else:
@@ -1613,7 +1614,7 @@ For Wanderer: {list_wand}
                     next_row += 1
                 if change == 0:
                     next_row = next_available_row(crsheet, 2)
-                await ctx.send(f'{feedback_debug} change={change} next_row={next_row}')
+                if debugmode: await ctx.send(f'{feedback_debug} change={change} next_row={next_row} ign.value={ign.value}')
 
                 count = 0
 
@@ -1646,6 +1647,7 @@ For Wanderer: {list_wand}
                             optionalcomment = ""
                     
                     count += 1
+                if debugmode: await ctx.send(f'{feedback_debug} change={change} next_row={next_row}')
                 crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                 await ctx.send(f'```{ctx.author.name} has requested to change to {darole}{optionalcomment} on {my_time_formated}.```')
                 if change == 1:

@@ -1613,6 +1613,7 @@ For Wanderer: {list_wand}
                 
                 # determine if this is update existing or new entry
                 for cell in cell_list:
+                    if debugger: await ctx.send(f'{feedback_debug} cell.value={cell.value} commander_name={commander_name}')
                     if cell.value == commander_name:
                         change = 1
                         ign = crsheet.cell(next_row, 2)
@@ -1622,8 +1623,6 @@ For Wanderer: {list_wand}
                     next_row = next_available_row(crsheet, 2)
                 if debugger: await ctx.send(f'{feedback_debug} change={change} next_row={next_row} ign.value={ign.value}')
 
-                count = 0
-
                 ## Change Requests format ##
                 # 1 = Discord Tag (user id)
                 # 2 = Enlisted IGN (formula)
@@ -1632,6 +1631,7 @@ For Wanderer: {list_wand}
                 # 5 = Requested On (date stamp)
                 # 6 = Reason (arg1)
                 # 7 = Status (not maintained by bot)
+                count = 0
                 cell_list = crsheet.range(next_row, 1, next_row, 6)
                 for cell in cell_list:
                     if count == 0:
@@ -1651,8 +1651,8 @@ For Wanderer: {list_wand}
                         else:
                             cell.value = ""
                             optionalcomment = ""
-                    
                     count += 1
+                
                 if debugger: await ctx.send(f'{feedback_debug} change={change} next_row={next_row}')
                 crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                 await ctx.send(f'```{ctx.author.name} has requested to change to {darole}{optionalcomment} on {my_time_formated}.```')

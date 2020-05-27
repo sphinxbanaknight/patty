@@ -352,7 +352,7 @@ For Wanderer: {list_wand}
                         if no_of_args > 2:
                             cell.value = arglist[2]
                             optionalcomment = arglist[2]
-                        else
+                        else:
                             cell.value = ""
                             optionalcomment = ""
                     count += 1

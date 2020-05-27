@@ -1535,7 +1535,7 @@ Siege Whites
             # arg1 = optional comment
             
             no_of_args = len(arglist)
-            if no_of_args = 0:
+            if no_of_args == 0:
                 await ctx.send(f'{ctx.message.author.mention} {feedback_properplz}`/changerequest newrole, (optional comment)`')
                 return
             else:

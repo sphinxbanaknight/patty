@@ -1529,12 +1529,12 @@ Siege Whites
         channel = ctx.message.channel
         commander = ctx.author
         commander_name = commander.name
-        print(testlel)
+        #print('testlel')
         format = "%d/%m/%Y"
         my_time = pytz.timezone('Asia/Kuala_Lumpur')
         my_time_unformatted = datetime.now(my_time)
         my_time_formated = my_time_unformatted.strftime(format)
-        print(test1)
+        #print('test1')
         
         if channel.id in botinit_id:
             arglist = [x.strip() for x in arguments.split(',')]

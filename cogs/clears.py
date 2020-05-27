@@ -1626,7 +1626,7 @@ For Wanderer: {list_wand}
                         if no_of_args > 1:
                             cell.value = arglist[1]
                             optionalcomment = arglist[1]
-                        else
+                        else:
                             cell.value = ""
                             optionalcomment = ""
                     

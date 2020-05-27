@@ -145,7 +145,10 @@ class Clears(commands.Cog):
         commander = ctx.author
         if channel.id in botinit_id:
             if commander.id in authorized_id:
-                #debugger = not debugger
+                try:
+                    debugger = not debugger
+                except Exception as e:
+                    await ctx.send(e)
                 await ctx.send(f'`Debugmode = {debugger}`')
             else:
                 await ctx.send(f'*Nice try pleb.*')

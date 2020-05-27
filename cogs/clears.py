@@ -52,6 +52,9 @@ authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 352
 #jia = 143743232658898944
 
 
+############################## DEBUGMODE ##############################
+debugger = False
+
 ################ Cell placements ###########################
 guild_range = "B3:E50"
 roster_range = "G3:J50"
@@ -114,8 +117,7 @@ feedback_celeryplz = '```Please use /celery to list your salary preferences.```'
 feedback_properplz = 'Please send a proper syntax: '
 feedback_debug = '`[DEBUGINFO] `'
 
-############################## DEBUGMODE ##############################
-debugger = False
+
 
 
 def next_available_row(sheet, column):

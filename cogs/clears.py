@@ -42,13 +42,14 @@ servers = [401186250335322113, 691130488483741756]
 #sphinxk = 401186250335322113
 #BK = 691130488483741756
 botinit_id = [401212001239564288, 691205255664500757]
-authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 352073289155346442]
+authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 352073289155346442, 143743232658898944]
 #Asi = 127778244383473665
 #Eba = 130885439308431361
 #Marte = 437617764484513802
 #haclime = 127795095121559552
 #marvs = 437618826897522690
 #red = 352073289155346442
+#jia = 143743232658898944
 
 
 ################ Cell placements ###########################
@@ -111,9 +112,11 @@ answerblues = ['blues', 'sp pots', 'siege blues', 'blue', 'siege blue']
 feedback_attplz = '```Please use /att y/n, y/n to register your attendance.```'
 feedback_celeryplz = '```Please use /celery to list your salary preferences.```'
 feedback_properplz = 'Please send a proper syntax: '
+feedback_debug = '`[DEBUGINFO] `'
 
+############################## DEBUGMODE ##############################
+debugmode = False
 
-#####################################################################
 
 def next_available_row(sheet, column):
     cols = sheet.range(3, column, 50, column)
@@ -134,6 +137,19 @@ class Clears(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    # toggle debugmode
+    @commands.command()
+    async def debugmode(self, ctx):
+        channel = ctx.message.channel
+        commander_name = ctx.author.name
+        commander = ctx.author
+        if channel.id in botinit_id:
+            if commander.id in authorized_id:
+                debugmode = not debugmode
+            else:
+                await ctx.send(f'*Nice try pleb.*')
+        else:
+            await ctx.send(f'Wrong channel! Please use #bot.')
 
 
 #    async def sorted(self, ctx):
@@ -291,7 +307,7 @@ class Clears(commands.Cog):
                 elif arglist[1].lower() in list_rg:
                     darole = 'RG'
                 elif arglist[1].lower() in list_rk:
-                        darole = 'RK'
+                    darole = 'RK'
                 elif arglist[1].lower() in list_sc:
                     darole = 'SC'
                 elif arglist[1].lower() in list_sorc:
@@ -357,13 +373,13 @@ For Wanderer: {list_wand}
                     elif count == 3:
                         if no_of_args > 2:
                             cell.value = arglist[2]
-                            optionalcomment = arglist[2]
+                            optionalcomment = f', and Comment: {arglist[2]}'
                         else:
                             cell.value = ""
                             optionalcomment = ""
                     count += 1
                 rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}, and Comment: {optionalcomment}.```')
+                await ctx.send(f'```{ctx.author.name} has enlisted {darole} with IGN: {arglist[0]}{optionalcomment}.```')
                 if change == 1:
                     finding_column2 = celesheet.range("C3:C50".format(celesheet.row_count))
                     finding_columnsilk2 = silk2.range("B4:B51".format(silk2.row_count))
@@ -379,10 +395,6 @@ For Wanderer: {list_wand}
                         silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
                         await ctx.send(
                             f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
-                        cell_list = rostersheet.range(foundign[0].row, 7, foundign[0].row, 10)
-                        for cell in cell_list:
-                            cell.value = ""
-                        rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                         change = 0
                     if foundignsilk4:
                         cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
@@ -391,10 +403,6 @@ For Wanderer: {list_wand}
                         silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
                         await ctx.send(
                             f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
-                        cell_list = rostersheet.range(foundign[0].row, 7, foundign[0].row, 10)
-                        for cell in cell_list:
-                            cell.value = ""
-                        rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                         change = 0
                     if foundign2:
                         cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
@@ -1529,12 +1537,11 @@ Siege Whites
         channel = ctx.message.channel
         commander = ctx.author
         commander_name = commander.name
-        #print('testlel')
+        
         format = "%d/%m/%Y"
         my_time = pytz.timezone('Asia/Kuala_Lumpur')
         my_time_unformatted = datetime.now(my_time)
         my_time_formated = my_time_unformatted.strftime(format)
-        #print('test1')
         
         if channel.id in botinit_id:
             arglist = [x.strip() for x in arguments.split(',')]
@@ -1595,17 +1602,18 @@ For Wanderer: {list_wand}
                     return
                 change = 0
                 next_row = 3
-                cell_list = crsheet.range("A4:G100")
+                cell_list = crsheet.range("A3:G100")
                 
                 # determine if this is update existing or new entry
                 for cell in cell_list:
                     if cell.value == commander_name:
                         change = 1
-                        ign = crsheet.cell(next_row, 3)
+                        ign = crsheet.cell(next_row, 2)
                         break
                     next_row += 1
                 if change == 0:
                     next_row = next_available_row(crsheet, 2)
+                await ctx.send(f'{feedback_debug} change={change} next_row={next_row}')
 
                 count = 0
 
@@ -1632,16 +1640,16 @@ For Wanderer: {list_wand}
                     elif count == 5:
                         if no_of_args > 1:
                             cell.value = arglist[1]
-                            optionalcomment = arglist[1]
+                            optionalcomment = f', with Reason: {arglist[1]}'
                         else:
                             cell.value = ""
                             optionalcomment = ""
                     
                     count += 1
                 crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                await ctx.send(f'```{ctx.author.name} has requested to change to {darole}, with Reason: {optionalcomment} on {my_time_formated}.```')
+                await ctx.send(f'```{ctx.author.name} has requested to change to {darole}{optionalcomment} on {my_time_formated}.```')
                 if change == 1:
-                    finding_column = crsheet.range("A4:G100".format(crsheet.row_count))
+                    finding_column = crsheet.range("A3:G100".format(crsheet.row_count))
                     foundign = [found for found in finding_column if found.value == ign.value]
 
                     if foundign:
@@ -1655,7 +1663,7 @@ For Wanderer: {list_wand}
         else:
             await ctx.send("Wrong channel! Please use #bot.")
         try:
-            crsheet.sort((5, 'asc'), range="A4:G100")
+            crsheet.sort((5, 'asc'), range="A3:G100")
         except Exception as e:
             print(e)
             return

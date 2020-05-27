@@ -1613,10 +1613,13 @@ For Wanderer: {list_wand}
                 next_row = 3
                 cell_list = crsheet.range("A3:A100")
                 for cell in cell_list:
-                    if debugger: await ctx.send(f'{feedback_debug} cell.value={cell.value} commander_name={commander_name}')
+                    if debugger: await ctx.send(f'{feedback_debug} {next_row} cell.value={cell.value} commander_name={commander_name}')
                     if cell.value == commander_name:
                         change = 1
                         ign = crsheet.cell(next_row, 2)
+                        break
+                    elif cell.value == "":
+                        if debugger: await ctx.send(f'{feedback_debug} {commander_name} not found. New entry...')
                         break
                     next_row += 1
                 if change == 0:
@@ -1652,9 +1655,9 @@ For Wanderer: {list_wand}
                             cell.value = ""
                             optionalcomment = ""
                     elif count == 6:
-                        status = " [NEW]"
+                        status = "[NEW]"
                         if change == 1:
-                            cell.value = cell.value + " -->" + status
+                            cell.value = cell.value + " --> " + status
                         else:
                             cell.value = status
                     count += 1

@@ -1607,11 +1607,11 @@ For Wanderer: {list_wand}
 ```
                                     ''')
                     return
+
+                # determine if this is update existing or new entry
                 change = 0
                 next_row = 3
-                cell_list = crsheet.range("A3:G100")
-                
-                # determine if this is update existing or new entry
+                cell_list = crsheet.range("A3:A100")
                 for cell in cell_list:
                     if debugger: await ctx.send(f'{feedback_debug} cell.value={cell.value} commander_name={commander_name}')
                     if cell.value == commander_name:

@@ -1314,6 +1314,7 @@ For Wanderer: {list_wand}
 /celery none = if you want to waive your salary
 /listcelery = list of the salary preferences
 /totalcelery = total list of each of the salary preferences
+/changerequest class, optional reason = files a change request to main a different class. An officer will need some time to process your request, please ask them for updates. 
 PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT. 
 Thank you!```\n""")
         else:
@@ -1622,8 +1623,6 @@ For Wanderer: {list_wand}
                         if debugger: await ctx.send(f'{feedback_debug} {commander_name} not found. New entry...')
                         break
                     next_row += 1
-                if change == 0:
-                    next_row = next_available_row(crsheet, 2)
                 if debugger: await ctx.send(f'{feedback_debug} change={change} next_row={next_row} ign.value={ign.value}')
 
                 ## Change Requests format ##

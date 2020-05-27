@@ -142,6 +142,7 @@ class Clears(commands.Cog):
     # toggle debugmode
     @commands.command()
     async def debugmode(self, ctx):
+        global debugger
         channel = ctx.message.channel
         commander_name = ctx.author.name
         commander = ctx.author

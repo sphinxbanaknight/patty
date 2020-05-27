@@ -1632,7 +1632,7 @@ For Wanderer: {list_wand}
                 # 6 = Reason (arg1)
                 # 7 = Status (not maintained by bot)
                 count = 0
-                cell_list = crsheet.range(next_row, 1, next_row, 6)
+                cell_list = crsheet.range(next_row, 1, next_row, 7)
                 for cell in cell_list:
                     if count == 0:
                         cell.value = commander_name
@@ -1651,21 +1651,19 @@ For Wanderer: {list_wand}
                         else:
                             cell.value = ""
                             optionalcomment = ""
+                    elif count == 6:
+                        status = " [NEW]"
+                        if change == 1:
+                            cell.value = cell.value + " -->" + status
+                        else 
+                            cell.value = status
                     count += 1
-                
                 if debugger: await ctx.send(f'{feedback_debug} change={change} next_row={next_row}')
                 crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                 await ctx.send(f'```{ctx.author.name} has requested to change to {darole}{optionalcomment} on {my_time_formated}.```')
+                
                 if change == 1:
-                    finding_column = crsheet.range("A3:G100".format(crsheet.row_count))
-                    foundign = [found for found in finding_column if found.value == ign.value]
-
-                    if foundign:
-                        cell_list = crsheet.range(foundign[0].row, 1, foundign[0].row, 7)
-                        for cell in cell_list:
-                            cell.value = ""
-                        crsheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        await ctx.send(f'``` I found your previous change request, I have cleared that.```')
+                    await ctx.send(f'``` I found your previous change request, I have cleared that.```')
                     change = 0
 
         else:

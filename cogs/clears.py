@@ -1617,13 +1617,12 @@ For Wanderer: {list_wand}
                     if debugger: await ctx.send(f'{feedback_debug} {next_row} cell.value={cell.value} commander_name={commander_name}')
                     if cell.value == commander_name:
                         change = 1
-                        ign = crsheet.cell(next_row, 2)
                         break
                     elif cell.value == "":
                         if debugger: await ctx.send(f'{feedback_debug} {commander_name} not found. New entry...')
                         break
                     next_row += 1
-                if debugger: await ctx.send(f'{feedback_debug} change={change} next_row={next_row} ign.value={ign.value}')
+                if debugger: await ctx.send(f'{feedback_debug} change={change} next_row={next_row}')
 
                 ## Change Requests format ##
                 # 1 = Discord Tag (user id)

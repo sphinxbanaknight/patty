@@ -77,7 +77,7 @@ list_rebel = ['rebel', 'reb', 'rebellion']
 list_rg = ['rg', 'royal guard', 'devo',]
 list_rk = ['rk', 'rune knight', 'db']
 list_sc = ['sc', 'shadow chaser']
-list_se = ['se', 'soul emperor', 'hater']
+list_se = ['se', 'star emperor', 'hater']
 list_sorc = ['sorc', 'sorcerer']
 list_sr = ['sr', 'soul reaper', 'linker']
 list_sura = ['sura', 'shura', 'asura', 'ashura']
@@ -166,7 +166,7 @@ def get_jobname(input):
     elif input.lower() in list_sc:
         jobname = 'SC'
     elif input.lower() in list_se:
-        jobname = 'Soul Emperor'
+        jobname = 'Star Emperor'
     elif input.lower() in list_sorc:
         jobname = 'Sorc'
     elif input.lower() in list_sr:

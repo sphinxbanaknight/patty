@@ -65,22 +65,26 @@ p3_range = "L32:M43"
 p3role_range = "P32:P43"
 ############### Roles #######################################
 list_ab = ['ab', 'arch bishop', 'arch', 'bishop', 'priest', 'healer', 'buffer']
+list_doram = ['cat', 'doram']
 list_gene = ['gene', 'genetic']
-list_mins = ['mins', 'minstrel' ]
-list_wand = ['wanderer', 'wand', 'wandy']
-list_rg = ['rg', 'royal guard', 'devo',]
 list_gx = ['gx', 'guillotine cross', 'glt. cross']
+list_kage = ['kagerou', 'kage']
+list_mech = ['mech', 'mechanic', 'mado']
+list_mins = ['mins', 'minstrel' ]
+list_obo = ['obo', 'oboro', 'ninja']
+list_ranger = ['ranger', 'range']
+list_rebel = ['rebel', 'reb', 'rebellion']
+list_rg = ['rg', 'royal guard', 'devo',]
 list_rk = ['rk', 'rune knight', 'db']
 list_sc = ['sc', 'shadow chaser']
-list_obo = ['obo', 'oboro', 'ninja']
-list_rebel = ['rebel', 'reb', 'rebellion']
-list_doram = ['cat', 'doram']
+list_se = ['se', 'soul emperor', 'hater']
 list_sorc = ['sorc', 'sorcerer']
+list_sr = ['sr', 'soul reaper', 'linker']
 list_sura = ['sura', 'shura', 'asura', 'ashura']
+list_wand = ['wanderer', 'wand', 'wandy']
 list_wl = ['wl', 'warlock', 'tetra', 'crimson rock', 'cr']
-list_mech = ['mech', 'mechanic', 'mado']
-list_ranger = ['ranger', 'range']
-
+      
+  
 ############# Responses #####################################
 answeryes = ['y', 'yes', 'ya', 'yup', 'ye', 'in', 'g']
 answerno = ['n', 'no', 'nah', 'na', 'nope', 'nuh']
@@ -133,6 +137,50 @@ def next_available_row_p2(sheet, column):
 def next_available_row_p3(sheet, column):
     cols = sheet.range(32, column, 43, column)
     return max([cell.row for cell in cols if cell.value]) + 1
+
+def get_jobname(input):
+    if input.lower() in list_ab:
+        jobname = 'AB'
+    elif input.lower() in list_doram:
+        jobname = 'Doram'
+    elif input.lower() in list_gene:
+        jobname = 'Genetic'
+    elif input.lower() in list_gx:
+        jobname = 'GX'
+    elif input.lower() in list_kage:
+        jobname = 'Kagerou'
+    elif input.lower() in list_mech:
+        jobname = 'Mado'
+    elif input.lower() in list_mins:
+        jobname = 'Minstrel'
+    elif input.lower() in list_obo:
+        jobname = 'Oboro'
+    elif input.lower() in list_ranger:
+        jobname = 'Ranger'
+    elif input.lower() in list_rebel:
+        jobname = 'Rebel'
+    elif input.lower() in list_rg:
+        jobname = 'RG'
+    elif input.lower() in list_rk:
+        jobname = 'RK'
+    elif input.lower() in list_sc:
+        jobname = 'SC'
+    elif input.lower() in list_se:
+        jobname = 'Soul Emperor'
+    elif input.lower() in list_sorc:
+        jobname = 'Sorc'
+    elif input.lower() in list_sr:
+        jobname = 'Soul Reaper'
+    elif input.lower() in list_sura:
+        jobname = 'Sura'
+    elif input.lower() in list_wand:
+        jobname = 'Wanderer'
+    elif input.lower() in list_wl:
+        jobname = 'WL'
+    else:
+        jobname = ''
+    return jobname
+
 
 class Clears(commands.Cog):
     def __init__(self, client):
@@ -298,39 +346,8 @@ class Clears(commands.Cog):
                 await ctx.send(f'{ctx.message.author.mention} {feedback_properplz}`/enlist IGN, role, (optional comment)`')
                 return
             else:
-                if arglist[1].lower() in list_ab:
-                    darole = 'AB'
-                elif arglist[1].lower() in list_doram:
-                    darole = 'Doram'
-                elif arglist[1].lower() in list_gene:
-                    darole = 'Genetic'
-                elif arglist[1].lower() in list_mech:
-                    darole = 'Mado'
-                elif arglist[1].lower() in list_mins:
-                    darole = 'Minstrel'
-                elif arglist[1].lower() in list_ranger:
-                    darole = 'Ranger'
-                elif arglist[1].lower() in list_rg:
-                    darole = 'RG'
-                elif arglist[1].lower() in list_rk:
-                    darole = 'RK'
-                elif arglist[1].lower() in list_sc:
-                    darole = 'SC'
-                elif arglist[1].lower() in list_sorc:
-                    darole = 'Sorc'
-                elif arglist[1].lower() in list_sura:
-                    darole = 'Sura'
-                elif arglist[1].lower() in list_wl:
-                    darole = 'WL'
-                elif arglist[1].lower() in list_obo:
-                    darole = 'Oboro'
-                elif arglist[1].lower() in list_rebel:
-                    darole = 'Rebel'
-                elif arglist[1].lower() in list_gx:
-                    darole = 'GX'
-                elif arglist[1].lower() in list_wand:
-                    darole = 'Wanderer'
-                else:
+                darole = get_jobname(arglist[1])
+                if darole == '':
                     await ctx.send(f'''Here are the allowed classes: 
 ```
 For Doram: {list_doram}
@@ -1479,39 +1496,8 @@ Siege Whites
                 await ctx.send(f'{ctx.message.author.mention} {feedback_properplz}`/changerequest newrole, (optional comment)`')
                 return
             else:
-                if arglist[0].lower() in list_ab:
-                    darole = 'AB'
-                elif arglist[0].lower() in list_doram:
-                    darole = 'Doram'
-                elif arglist[0].lower() in list_gene:
-                    darole = 'Genetic'
-                elif arglist[0].lower() in list_mech:
-                    darole = 'Mado'
-                elif arglist[0].lower() in list_mins:
-                    darole = 'Minstrel'
-                elif arglist[0].lower() in list_ranger:
-                    darole = 'Ranger'
-                elif arglist[0].lower() in list_rg:
-                    darole = 'RG'
-                elif arglist[0].lower() in list_rk:
-                        darole = 'RK'
-                elif arglist[0].lower() in list_sc:
-                    darole = 'SC'
-                elif arglist[0].lower() in list_sorc:
-                    darole = 'Sorc'
-                elif arglist[0].lower() in list_sura:
-                    darole = 'Sura'
-                elif arglist[0].lower() in list_wl:
-                    darole = 'WL'
-                elif arglist[0].lower() in list_obo:
-                    darole = 'Oboro'
-                elif arglist[0].lower() in list_rebel:
-                    darole = 'Rebel'
-                elif arglist[0].lower() in list_gx:
-                    darole = 'GX'
-                elif arglist[0].lower() in list_wand:
-                    darole = 'Wanderer'
-                else:
+                darole = get_jobname(arglist[0])
+                if darole == '':
                     await ctx.send(f'''Here are the allowed classes: 
 ```
 For Doram: {list_doram}

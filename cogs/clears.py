@@ -399,17 +399,18 @@ For Wanderer: {list_wand}
                         for cell in cell_list:
                             cell.value = ""
                         silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        await ctx.send(
-                            f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK2 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
                         change = 0
                     if foundignsilk4:
                         cell_list = silk4.range(foundignsilk4[0].row, 2, foundignsilk4[0].row, 4)
                         for cell in cell_list:
                             cell.value = ""
                         silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        await ctx.send(
-                            f'{ctx.message.author.mention}``` I found another character of yours that answered an attendance for SILK4 already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
                         change = 0
+                    # Notify only once for any missing attendance
+                    if foundignsilk2 or foundignsilk4:
+                        await ctx.send(
+                            f'{ctx.message.author.mention}``` I found another character of yours that answered for attendance already, I have cleared that. Please use /att y/n, y/n again in order to register your attendance.```')
+
                     if foundign2:
                         cell_list = celesheet.range(foundign2[0].row, 2, foundign2[0].row, 20)
                         for cell in cell_list:
@@ -540,7 +541,7 @@ For Wanderer: {list_wand}
                         silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
                         await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 2 with IGN: {ign.value}, and Class: {role.value}.```')
                 else:
-                    await ctx.send('{feedback_properplz}`/att y/n, y/n`')
+                    await ctx.send(f'{feedback_properplz} `/att y/n, y/n`')
                     return
                 yes = 0
                 if arglist[1].lower() in answeryes or arglist[1].lower() in answerno:
@@ -592,11 +593,11 @@ For Wanderer: {list_wand}
                         silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
                         await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 4 with IGN: {ign.value}, and Class: {role.value}.```')
                 else:
-                    await ctx.send('{feedback_properplz}`/att y/n, y/n`')
+                    await ctx.send(f'{feedback_properplz} `/att y/n, y/n`')
                     return
                 yes = 0
             else:
-                await ctx.send('{feedback_properplz}`/att y/n, y/n`')
+                await ctx.send(f'{feedback_properplz} `/att y/n, y/n`')
                 return
         else:
             await ctx.send("Wrong channel! Please use #bot.")

@@ -29,7 +29,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name(data_json, scope)
 gc = gspread.authorize(creds)
 
 takte = gc.open('BK ROSTER')
-sheet = takte.worksheet('WoE Roster')
+rostersheet = takte.worksheet('WoE Roster')
 silk2 = takte.worksheet('WoE Roster 2') 
 silk4 = takte.worksheet('WoE Roster 4')
 
@@ -65,6 +65,7 @@ p3role_range = "P32:P43"
 
 ################ Parameters ################
 isarchived = False # track archiving status
+isremindenabled = True # configuration - turn on/off auto-reminder
 
 
 prefix = ["/"]
@@ -141,7 +142,7 @@ async def on_ready():
                 next_row = 1
             copy_list2 = silk2.range("B4:D51")
             copy_list4 = silk4.range("B4:D51")
-            paste_list = sheet.range(next_row, 1, next_row + 45, 3)
+            paste_list = rostersheet.range(next_row, 1, next_row + 45, 3)
             count = 0
             newformat = "%B %Y"
             ph_time = pytz.timezone('Asia/Manila')
@@ -185,16 +186,38 @@ async def on_ready():
                 count += 1
             wsheet.update_cells(paste_list, value_input_option='USER_ENTERED')
 
-            cell_list = sheet.range(roster_range)
+            cell_list = rostersheet.range(roster_range)
 
             for cell in cell_list:
                 cell.value = ""
 
-            sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+            rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
             isarchived = True
             continue
         elif ph_time_formated == "00:05:00:Monday" or ph_time_formated == "00:05:00:Sunday":
             isarchived = False
+            continue
+        # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
+        elif ph_time_formated == "22:00:00:Wednesday":
+            await botinitsk.send(f'`WIP`')
+            continue
+        # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
+        #jytest elif ph_time_formated == "12:00:00:Saturday":
+        elif ph_time_formated == "01:35:00:Tuesday": #jytesting
+            try:
+                ping_tags = []
+                att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
+                
+                next_row = 3
+                cell_list = rostersheet.range("C3:C50")
+                for cell in cell_list:
+                    if cell.value not in att_igns:
+                        tag = rostersheet.cell(next_row, 2) # discord tag at column 2
+                        ping_tags.append(tag)
+                    next_row += 1
+                await botinitsk.send(f'These mafaks will be angrypinged: `{ping_tags}`')
+            except Exception as e:
+                await botinitsk.send(f'Error: `{e}`')
             continue
             
 
@@ -224,6 +247,24 @@ async def reload(ctx, extension):
     client.unload_extension(f'cogs.{extension}')
     client.load_extension(f'cogs.{extension}')
     await ctx.send(f'Cog: {extension}.py reloaded')
+
+# toggle isremindenabled
+@client.command()
+async def togglereminder(self, ctx):
+    global isremindenabled
+    channel = ctx.message.channel
+    commander = ctx.author
+    if channel.id in botinit_id:
+        if commander.id in authorized_id:
+            try:
+                isremindenabled = not isremindenabled
+            except Exception as e:
+                await ctx.send(e)
+            await ctx.send(f'`Auto-reminder Enabled = {isremindenabled}`')
+        else:
+            await ctx.send(f'*Nice try pleb.*')
+    else:
+        await ctx.send(f'Wrong channel! Please use #bot.')
 
 
 for filename in os.listdir('./cogs'):

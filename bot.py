@@ -41,16 +41,18 @@ bk_server = 691130488483741756
 botinit_id = [401212001239564288, 691205255664500757]
 sk_bot = 401212001239564288
 bk_bot = 691205255664500757
-authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 437617764484513802, 127795095121559552, 437618826897522690, 352073289155346442]
+authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 352073289155346442, 143743232658898944]
 #Asi = 127778244383473665
 #Eba = 130885439308431361
-#Marte = 437617764484513802
-#haclime = 127795095121559552
-#marvs = 437618826897522690
+#1may2020 Marte = 437617764484513802
+#giveme5minutes haclime = 127795095121559552
+#crackedvoice marvs = 437618826897522690
 #red = 352073289155346442
+#jia = 143743232658898944
 
+ch_announcement = 695801936095740024 #BK #announcement
 
-################ Cell placements ###########################
+################ Cell placements ################
 guild_range = "B3:E50"
 roster_range = "G3:I50"
 matk_range = "L3:M14"
@@ -59,6 +61,10 @@ atk_range = "L17:M28"
 p2role_range = "P17:P28"
 p3_range = "L32:M43"
 p3role_range = "P32:P43"
+
+
+################ Parameters ################
+isarchived = False # track archiving status
 
 
 prefix = ["/"]
@@ -73,6 +79,8 @@ def next_available_row(sheet, column):
 
 @client.event
 async def on_ready():
+    global isarchived
+    
     for server in client.guilds:
         if server.id == sk_server:
             sphinx = server
@@ -121,7 +129,7 @@ async def on_ready():
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
         await asyncio.sleep(1)
-        if ph_time_formated == "00:00:00:Monday" or ph_time_formated == "00:00:00:Sunday":
+        if not isarchived and ( ph_time_formated == "00:00:00:Monday" or ph_time_formated == "00:00:00:Sunday" ):
             await botinitsk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
             await botinitsk.send('```An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.```')
             await botinitbk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
@@ -183,7 +191,11 @@ async def on_ready():
                 cell.value = ""
 
             sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
+            isarchived = True
             continue
+        else if ph_time_formated == "00:05:00:Monday" or ph_time_formated == "00:05:00:Sunday":
+            isarchived = False
+            
 
 
 

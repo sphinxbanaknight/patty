@@ -165,7 +165,7 @@ async def on_ready():
                         for cell in cell_list:
                             cell.value = ""
                         #jytest silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        await ctx.send(f'jytest silk2.update_cells')
+                        await botinitsk.send(f'jytest silk2.update_cells')
                     elif ph_time_formated == "00:00:00:Monday":
                         d = ph_time_unformated.strftime("%d")
                         d = int(d)
@@ -176,7 +176,7 @@ async def on_ready():
                         for cell in cell_list:
                             cell.value = ""
                         #jytest silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        await ctx.send(f'jytest silk4.update_cells')
+                        await botinitsk.send(f'jytest silk4.update_cells')
                 elif count == 1:
                     paste.value = ""
                 else:
@@ -186,7 +186,7 @@ async def on_ready():
                         break
                 count += 1
             #jytest wsheet.update_cells(paste_list, value_input_option='USER_ENTERED')
-            await ctx.send(f'jytest wsheet.update_cells')
+            await botinitsk.send(f'jytest wsheet.update_cells')
 
             cell_list = sheet.range(roster_range)
 
@@ -195,11 +195,11 @@ async def on_ready():
 
             #jytest sheet.update_cells(cell_list, value_input_option='USER_ENTERED')
             isarchived = True
-            await ctx.send(f'jytest sheet.update_cells. isarchived={isarchived}')
+            await botinitsk.send(f'jytest sheet.update_cells. isarchived={isarchived}')
             continue
         elif ph_time_formated == "23:45:00:Monday" or ph_time_formated == "00:05:00:Sunday":
             isarchived = False
-            await ctx.send(f'jytest isarchived={isarchived}')
+            await botinitsk.send(f'jytest isarchived={isarchived}')
             continue
             
 

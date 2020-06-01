@@ -197,7 +197,7 @@ async def on_ready():
             isarchived = True
             await ctx.send(f'jytest sheet.update_cells. isarchived={isarchived}')
             continue
-        else if ph_time_formated == "23:45:00:Monday" or ph_time_formated == "00:05:00:Sunday":
+        elif ph_time_formated == "23:45:00:Monday" or ph_time_formated == "00:05:00:Sunday":
             isarchived = False
             await ctx.send(f'jytest isarchived={isarchived}')
             continue

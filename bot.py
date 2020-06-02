@@ -41,6 +41,7 @@ bk_server = 691130488483741756
 botinit_id = [401212001239564288, 691205255664500757]
 sk_bot = 401212001239564288
 bk_bot = 691205255664500757
+bk_ann = 695801936095740024 #BK #announcement
 authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 352073289155346442, 143743232658898944]
 #Asi = 127778244383473665
 #Eba = 130885439308431361
@@ -50,7 +51,6 @@ authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 352
 #red = 352073289155346442
 #jia = 143743232658898944
 
-ch_announcement = 695801936095740024 #BK #announcement
 
 ################ Cell placements ################
 guild_range = "B3:E50"
@@ -66,6 +66,11 @@ p3role_range = "P32:P43"
 ################ Parameters ################
 isarchived = False # track archiving status
 isremindenabled = True # configuration - turn on/off auto-reminder
+
+
+################ Feedbacks ################
+feedback_automsg = '`[Auto-generated message]` '
+feedback_noangrypingplz = 'To avoid <:AngryPing:703193629489102888> from me, please register your attendance by coming Saturday 12PM GMT+8 in #bots. Thank you!'
 
 
 prefix = ["/"]
@@ -93,10 +98,13 @@ async def on_ready():
     for channel in sphinx.channels:
         if channel.id == sk_bot:
             botinitsk = channel
+            botinitbkann = channel #jytest
             break
     for channel in burger.channels:
         if channel.id == bk_bot:
             botinitbk = channel
+        if channel.id == bk_ann:
+            #botinitbkann = channel jytest don't spam
             break
 
     print('Bot is online.')
@@ -198,24 +206,41 @@ async def on_ready():
             isarchived = False
             continue
         # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
-        elif ph_time_formated == "22:00:00:Wednesday":
+        #jytest elif ph_time_formated == "22:00:00:Wednesday":
+        elif ph_time_formated == "23:40:00:Tuesday": #jytest
             await botinitsk.send(f'`WIP`')
+            try:
+                att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
+                nratt = len(att_igns)
+                msg_wed = await botinitbkann.send(f'''{feedback_automsg}
+Hi all,
+
+Currently we have {nratt} members who have registered their attendance, great job!
+For those who haven't: {feedback_noangrypingplz}
+
+Thank you.```''')
+            except Exception as e:
+                await botinitsk.send(f'Error: `{e}`')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #jytest elif ph_time_formated == "12:00:00:Saturday":
-        elif ph_time_formated == "01:35:00:Tuesday": #jytesting
+        elif ph_time_formated == "23:43:00:Tuesday": #jytesting
             try:
+                await msg_wed.delete()
                 ping_tags = []
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
-                
                 next_row = 3
                 cell_list = rostersheet.range("C3:C50")
                 for cell in cell_list:
                     if cell.value not in att_igns:
                         tag = rostersheet.cell(next_row, 2) # discord tag at column 2
-                        ping_tags.append(tag)
+                        ping_tags.append(tag.value)
                     next_row += 1
-                await botinitsk.send(f'These mafaks will be angrypinged: `{ping_tags}`')
+                
+                for tag in ping_tags:
+                    if( tag == "Takudan") #jytest
+                        await botinitsk.send(f'{feedback_automsg} Hi @{tag}, you have not registered your attendance yet. :( {feedback_noangrypingplz}')
+                    #await botinitbk.send(f'{feedback_automsg} Hi @{tag}, you have not registered your attendance yet. :( {feedback_noangrypingplz}')
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
             continue
@@ -250,7 +275,7 @@ async def reload(ctx, extension):
 
 # toggle isremindenabled
 @client.command()
-async def togglereminder(self, ctx):
+async def togglereminder(ctx):
     global isremindenabled
     channel = ctx.message.channel
     commander = ctx.author

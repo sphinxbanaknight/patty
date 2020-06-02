@@ -104,13 +104,12 @@ async def on_ready():
     for channel in sphinx.channels:
         if channel.id == sk_bot:
             botinitsk = channel
-            botinitbkann = channel #jytest
             break
     for channel in burger.channels:
         if channel.id == bk_bot:
             botinitbk = channel
         elif channel.id == bk_ann:
-            #botinitbkann = channel jytest don't spam
+            botinitbkann = channel
             break
 
     print('Bot is online.')
@@ -209,16 +208,14 @@ async def on_ready():
             isarchived = True
             continue
         # Timed event status reset
-        #jytest elif ph_time_formated == "00:05:00:Monday" or ph_time_formated == "00:05:00:Sunday":
-        elif ph_time_formated == "01:00:00:Wednesday" or ph_time_formated == "00:05:00:Sunday":
+        elif ph_time_formated == "00:05:00:Monday" or ph_time_formated == "00:05:00:Sunday":
             isarchived = False
             isreminded_wed = False
             isreminded_sat = False
             await botinitsk.send(f'`[Timed event status reset] isarchived={isarchived} isreminded_wed={isreminded_wed} isreminded_sat={isreminded_sat}`')
             continue
         # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
-        #jytest elif isremindenabled and not isreminded_wed and ph_time_formated == "22:00:00:Wednesday":
-        elif isremindenabled and not isreminded_wed and ph_time_formated == "00:45:00:Wednesday": #jytest
+        elif isremindenabled and not isreminded_wed and ph_time_formated == "22:00:00:Wednesday":
             try:
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 nratt = len(att_igns)
@@ -233,9 +230,9 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #jytest elif isremindenabled and not isreminded_sat and ph_time_formated == "12:00:00:Saturday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "00:47:00:Wednesday": #jytesting
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "00:47:00:Wednesday": #jytest
             try:
-                await msg_wed.delete()
+                await msg_wed.delete() #jytest todo envelop in try-except, because msg_wed may not be found
                 ping_tags = []
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 next_row = 3
@@ -248,7 +245,7 @@ For those who haven't: {feedback_noangrypingplz}''')
                 
                 for discordtag in ping_tags:
                     if discordtag == "Takudan": #jytest
-                        await botinitsk.send(f'{feedback_automsg} Hi @{discordtag} , you have not registered your attendance yet. <:peeposad:702156649992945674> {feedback_noangrypingplz}')
+                        await botinitsk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                     #await botinitbk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 isreminded_sat = True
             except Exception as e:

@@ -103,8 +103,7 @@ async def on_ready():
     for channel in burger.channels:
         if channel.id == bk_bot:
             botinitbk = channel
-            break
-        if channel.id == bk_ann:
+        elif channel.id == bk_ann:
             #botinitbkann = channel jytest don't spam
             break
 
@@ -238,10 +237,10 @@ Thank you.```''')
                         ping_tags.append(tag.value)
                     next_row += 1
                 
-                for tag in ping_tags:
-                    if tag == "Takudan": #jytest
-                        await botinitsk.send(f'{feedback_automsg} Hi @{tag}, you have not registered your attendance yet. :( {feedback_noangrypingplz}')
-                    #await botinitbk.send(f'{feedback_automsg} Hi @{tag}, you have not registered your attendance yet. :( {feedback_noangrypingplz}')
+                for discordtag in ping_tags:
+                    if discordtag == "Takudan": #jytest
+                        await botinitsk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. :( {feedback_noangrypingplz}')
+                    #await botinitbk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. :( {feedback_noangrypingplz}')
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
             continue

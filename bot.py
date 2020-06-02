@@ -64,13 +64,17 @@ p3role_range = "P32:P43"
 
 
 ################ Parameters ################
-isarchived = False # track archiving status
+# These flags are status trackers to avoid duplicate runs in the timed events
+isarchived = False # archiving
+isreminded_wed = False # reminder wed
+isreminded_sat = False # reminder sat
+
 isremindenabled = True # configuration - turn on/off auto-reminder
 
 
 ################ Feedbacks ################
 feedback_automsg = '`[Auto-generated message]` '
-feedback_noangrypingplz = 'To avoid <:AngryPing:703193629489102888> from me, please register your attendance by coming Saturday 12PM GMT+8 in #bots. Thank you!'
+feedback_noangrypingplz = 'to avoid <:AngryPing:703193629489102888> from me, please register your attendance by coming Saturday 12PM GMT+8 in <#691205255664500757>. Thank you!'
 
 
 prefix = ["/"]
@@ -86,6 +90,8 @@ def next_available_row(sheet, column):
 @client.event
 async def on_ready():
     global isarchived
+    global isreminded_wed
+    global isreminded_sat
     
     for server in client.guilds:
         if server.id == sk_server:
@@ -202,13 +208,17 @@ async def on_ready():
             rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
             isarchived = True
             continue
-        elif ph_time_formated == "00:05:00:Monday" or ph_time_formated == "00:05:00:Sunday":
+        # Timed event status reset
+        #jytest elif ph_time_formated == "00:05:00:Monday" or ph_time_formated == "00:05:00:Sunday":
+        elif ph_time_formated == "01:00:00:Wednesday" or ph_time_formated == "00:05:00:Sunday":
             isarchived = False
+            isreminded_wed = False
+            isreminded_sat = False
+            await botinitsk.send(f'`[Timed event status reset] isarchived={isarchived} isreminded_wed={isreminded_wed} isreminded_sat={isreminded_sat}`')
             continue
         # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
-        #jytest elif isremindenabled and ph_time_formated == "22:00:00:Wednesday":
-        elif isremindenabled and ph_time_formated == "23:52:00:Tuesday": #jytest
-            await botinitsk.send(f'`WIP`')
+        #jytest elif isremindenabled and not isreminded_wed and ph_time_formated == "22:00:00:Wednesday":
+        elif isremindenabled and not isreminded_wed and ph_time_formated == "00:45:00:Wednesday": #jytest
             try:
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 nratt = len(att_igns)
@@ -216,15 +226,14 @@ async def on_ready():
 Hi all,
 
 Currently we have {nratt} members who have registered their attendance, great job!
-For those who haven't: {feedback_noangrypingplz}
-
-Thank you.```''')
+For those who haven't: {feedback_noangrypingplz}''')
+                isreminded_wed = True
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
-        #jytest isremindenabled and elif ph_time_formated == "12:00:00:Saturday":
-        elif isremindenabled and ph_time_formated == "23:55:00:Tuesday": #jytesting
+        #jytest elif isremindenabled and not isreminded_sat and ph_time_formated == "12:00:00:Saturday":
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "00:47:00:Wednesday": #jytesting
             try:
                 await msg_wed.delete()
                 ping_tags = []
@@ -239,8 +248,9 @@ Thank you.```''')
                 
                 for discordtag in ping_tags:
                     if discordtag == "Takudan": #jytest
-                        await botinitsk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. :( {feedback_noangrypingplz}')
-                    #await botinitbk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. :( {feedback_noangrypingplz}')
+                        await botinitsk.send(f'{feedback_automsg} Hi @{discordtag} , you have not registered your attendance yet. <:peeposad:702156649992945674> {feedback_noangrypingplz}')
+                    #await botinitbk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                isreminded_sat = True
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
             continue

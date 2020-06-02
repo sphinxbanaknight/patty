@@ -206,8 +206,8 @@ async def on_ready():
             isarchived = False
             continue
         # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
-        #jytest elif ph_time_formated == "22:00:00:Wednesday":
-        elif ph_time_formated == "23:45:00:Tuesday": #jytest
+        #jytest elif isremindenabled and ph_time_formated == "22:00:00:Wednesday":
+        elif isremindenabled and ph_time_formated == "23:52:00:Tuesday": #jytest
             await botinitsk.send(f'`WIP`')
             try:
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
@@ -223,8 +223,8 @@ Thank you.```''')
                 await botinitsk.send(f'Error: `{e}`')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
-        #jytest elif ph_time_formated == "12:00:00:Saturday":
-        elif ph_time_formated == "23:48:00:Tuesday": #jytesting
+        #jytest isremindenabled and elif ph_time_formated == "12:00:00:Saturday":
+        elif isremindenabled and ph_time_formated == "23:55:00:Tuesday": #jytesting
             try:
                 await msg_wed.delete()
                 ping_tags = []

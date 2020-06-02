@@ -103,6 +103,7 @@ async def on_ready():
     for channel in burger.channels:
         if channel.id == bk_bot:
             botinitbk = channel
+            break
         if channel.id == bk_ann:
             #botinitbkann = channel jytest don't spam
             break
@@ -207,7 +208,7 @@ async def on_ready():
             continue
         # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
         #jytest elif ph_time_formated == "22:00:00:Wednesday":
-        elif ph_time_formated == "23:40:00:Tuesday": #jytest
+        elif ph_time_formated == "23:45:00:Tuesday": #jytest
             await botinitsk.send(f'`WIP`')
             try:
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
@@ -224,7 +225,7 @@ Thank you.```''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #jytest elif ph_time_formated == "12:00:00:Saturday":
-        elif ph_time_formated == "23:43:00:Tuesday": #jytesting
+        elif ph_time_formated == "23:48:00:Tuesday": #jytesting
             try:
                 await msg_wed.delete()
                 ping_tags = []
@@ -238,7 +239,7 @@ Thank you.```''')
                     next_row += 1
                 
                 for tag in ping_tags:
-                    if( tag == "Takudan") #jytest
+                    if tag == "Takudan": #jytest
                         await botinitsk.send(f'{feedback_automsg} Hi @{tag}, you have not registered your attendance yet. :( {feedback_noangrypingplz}')
                     #await botinitbk.send(f'{feedback_automsg} Hi @{tag}, you have not registered your attendance yet. :( {feedback_noangrypingplz}')
             except Exception as e:

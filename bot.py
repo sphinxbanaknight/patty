@@ -263,8 +263,9 @@ async def huhubes(ctx):
     
     for ign in ignlist:
         for att in attlist:
-            print(f'{ign.value} = {att.value}')
+            #print(f'{ign.value} = {att.value}')
             if ign.value == att.value:
+                print('check')
                 ign.value = ""
                 gottem = 1
                 break

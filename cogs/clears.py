@@ -227,7 +227,7 @@ class Clears(commands.Cog):
                                 fullofsheet.update_cell(next_row, 2, member.id)
                                 if debugger: await ctx.send(f'{feedback_debug} Updating {cell.value} ID at [{next_row}, 2] to {member.id}')
                                 break
-                        if cell.col == 2:
+                        if cell.col = 2:
                             next_row += 1
                     ids = [member.id for member in guild.members]
                     if debugger: await ctx.send(f'{feedback_debug} {ids}')

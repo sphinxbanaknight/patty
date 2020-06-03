@@ -262,18 +262,17 @@ async def huhubes(ctx):
     #print(f'{attlist} at {ignlist}')
     
     for itam in ignlist:
-        print(f'{itam.value}')
-        #for att in attlist:
-        #    if ign.value == att.value:
-        #        ign.value = ""
-        #        gottem = 1
-        #        break
-        #if gottem == 0:
-        #    dsctag = rostersheet.cell(ign.row, 2).value
-        #else:
-        #    gottem = 0
-        #    
-    #await ctx.send(f'{dsctag}')
+        for att in attlist:
+            if ign == att:
+                ign = ""
+                gottem = 1
+                break
+        if gottem == 0:
+            dsctag = rostersheet.cell(ign.row, 2).value
+        else:
+            gottem = 0
+            
+    await ctx.send(f'{dsctag}')
 
 @client.event
 async def on_member_join(member):

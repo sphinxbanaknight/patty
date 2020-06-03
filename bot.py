@@ -269,7 +269,7 @@ async def huhubes(ctx):
                 break
         if gottem == 0:
             try:
-                dsctag = rostersheet.cell(row, 2).value
+                dsctag = [rostersheet.cell(row, 2).value]
             except Exception as e:
                 print(f'Exception caught at dsctag: {e}')
         else:

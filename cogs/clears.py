@@ -64,7 +64,7 @@ atk_range = "L17:M28"
 p2role_range = "P17:P28"
 p3_range = "L32:M43"
 p3role_range = "P32:P43"
-fullidname_range = "B4:C100"
+fullidname_range = "C4:C100"
 
 ############### Roles #######################################
 list_ab = ['ab', 'arch bishop', 'arch', 'bishop', 'priest', 'healer', 'buffer']

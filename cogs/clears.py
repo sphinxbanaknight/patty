@@ -211,6 +211,30 @@ class Clears(commands.Cog):
         else:
             await ctx.send(f'Wrong channel! Please use #bot.')
 
+    # update discord member IDs
+    @commands.command()
+    async def refreshid(self, ctx):
+        guild = ctx.guild
+        channel = ctx.message.channel
+        commander_name = ctx.author.name
+        commander = ctx.author
+        if channel.id in botinit_id:
+            if commander.id in authorized_id:
+                try:
+                    msgprogress = await ctx.send('Refreshing Discord IDs for all members in BK Roster...')
+                    fullofsheet
+                    cell_list = fullofsheet.range(full_range)
+                    ids = [member.id for member in guild.members]
+                    if debugger: await ctx.send(f'{feedback_debug} {ids}')
+                    await msgprogress.edit(content="Refreshing Discord IDs for all members in BK Roster... Completed.")
+                except Exception as e:
+                    await msgprogress.edit(content="Refreshing Discord IDs for all members in BK Roster... Failed.")
+                    await ctx.send(e)
+                await ctx.send(f'`Debugmode = {debugger}`')
+            else:
+                await ctx.send(f'*Nice try pleb.*')
+        else:
+            await ctx.send(f'Wrong channel! Please use #bot.')
 
 #    async def sorted(self, ctx):
 #        channel = ctx.message.channel

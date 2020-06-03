@@ -307,8 +307,7 @@ async def jytest(ctx):
         if commander.id in authorized_id:
             try:
                 await ctx.send(f'`jytest` start')
-                debugger = clears.get_debugmode()
-                await ctx.send(f'`jytest` end {debugger}')
+                await ctx.send(f'`jytest` end')
             except Exception as e:
                 await ctx.send(f'Error: `{e}`')
         else:

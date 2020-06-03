@@ -265,10 +265,11 @@ async def huhubes(ctx):
         for att in attlist:
             #print(f'{ign.value} = {att.value}')
             if ign.value == att.value:
-                print('check')
                 ign.value = ""
                 gottem = 1
                 break
+                
+        print('check')
         if gottem == 0: 
             dsctag = rostersheet.cell(ign.row, 2).value
         else:

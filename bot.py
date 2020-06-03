@@ -262,9 +262,9 @@ async def huhubes(ctx):
     #print(f'{attlist} at {ignlist}')
     
     for ign in ignlist:
-        print('check')
         for att in attlist:
             if ign.value == att.value:
+                print(f'{ign.value} = {att.value}')
                 ign.value = ""
                 gottem = 1
                 break
@@ -273,7 +273,7 @@ async def huhubes(ctx):
         else:
             gottem = 0
             
-    await ctx.send(f'{dsctag}')
+    #await ctx.send(f'{dsctag}')
 
 @client.event
 async def on_member_join(member):

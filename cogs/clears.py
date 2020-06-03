@@ -215,6 +215,14 @@ class Clears(commands.Cog):
         channel = ctx.message.channel
         commander_name = ctx.author.name
         commander = ctx.author
+        
+        for member in guild.members:
+            if count == len(guild.members):
+                return
+            else:
+                await ctx.send(f'here is a member: {member.name})
+            count += 1
+        
         if channel.id in botinit_id:
             if commander.id in authorized_id:
                 try:
@@ -228,8 +236,6 @@ class Clears(commands.Cog):
                                 fullofsheet.update_cell(next_row, 2, member.id)
                                 #if debugger: await ctx.send(f'{feedback_debug} Updating {cell.value} ID at [{next_row}, 2] to {member.id}')
                                 break
-                            else:
-                                if debugger: await ctx.send(f'{feedback_debug} update {cell.value} ID in row {next_row} seeing member {member.name} with id {member.id}')
                         next_row += 1
                     ids = [member.id for member in guild.members]
                     #if debugger: await ctx.send(f'{feedback_debug} {ids}')

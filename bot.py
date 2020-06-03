@@ -12,8 +12,6 @@ import datetime
 import pytz
 import asyncio
 
-import clears # jytest
-
 
 from pytz import timezone
 from datetime import datetime, timedelta

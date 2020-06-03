@@ -219,7 +219,7 @@ class Clears(commands.Cog):
             if commander.id in authorized_id:
                 try:
                     msgprogress = await ctx.send('Refreshing Discord IDs for all members in BK Roster...')
-                    cell_list = fullofsheet.range(fullidname_range)
+                    cell_list = fullofsheet.range("C4:C100")
                     next_row = 4
                     for cell in cell_list:
                         for member in guild.members:
@@ -227,8 +227,7 @@ class Clears(commands.Cog):
                                 fullofsheet.update_cell(next_row, 2, member.id)
                                 if debugger: await ctx.send(f'{feedback_debug} Updating {cell.value} ID at [{next_row}, 2] to {member.id}')
                                 break
-                        if cell.col == 2:
-                            next_row += 1
+                        next_row += 1
                     ids = [member.id for member in guild.members]
                     if debugger: await ctx.send(f'{feedback_debug} {ids}')
                     await msgprogress.edit(content="Refreshing Discord IDs for all members in BK Roster... Completed.")

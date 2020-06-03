@@ -215,7 +215,7 @@ async def on_ready():
             await botinitsk.send(f'`[Timed event status reset] isarchived={isarchived} isreminded_wed={isreminded_wed} isreminded_sat={isreminded_sat}`')
             continue
         # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
-        elif isremindenabled and not isreminded_wed and ph_time_formated == "22:00:00:Wednesday":
+        elif isremindenabled and not isreminded_wed and ph_time_formated == "22:15:00:Wednesday":
             try:
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 nratt = len(att_igns)

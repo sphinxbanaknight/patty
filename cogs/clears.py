@@ -64,7 +64,8 @@ atk_range = "L17:M28"
 p2role_range = "P17:P28"
 p3_range = "L32:M43"
 p3role_range = "P32:P43"
-fullidname_range = "C4:C100"
+fullidname_range = "B4:C100"
+discordtag_range = "C4:C100"
 
 ############### Roles #######################################
 list_ab = ['ab', 'arch bishop', 'arch', 'bishop', 'priest', 'healer', 'buffer']
@@ -219,7 +220,7 @@ class Clears(commands.Cog):
             if commander.id in authorized_id:
                 try:
                     msgprogress = await ctx.send('Refreshing Discord IDs for all members in BK Roster...')
-                    cell_list = fullofsheet.range(fullidname_range)
+                    cell_list = fullofsheet.range(discordtag_range)
                     next_row = 4
                     for cell in cell_list:
                         for member in guild.members:

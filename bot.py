@@ -262,7 +262,6 @@ async def huhubes(ctx):
     
     for ign in ignlist:
         for att in attlist:
-            print(f'{ign} to {att}')
             if ign == att:
                 ign = ""
                 gottem = 1

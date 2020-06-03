@@ -50,7 +50,7 @@ authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 352
 #marvs = 437618826897522690
 #red = 352073289155346442
 #jia = 143743232658898944
-
+eyooo = 123456789123456789
 
 ############################## DEBUGMODE ##############################
 debugger = False
@@ -210,7 +210,7 @@ class Clears(commands.Cog):
 
     @commands.command()
     async def lmao(self,ctx):
-        fullofsheet.update_cell(70, 2, "123456789123456789")
+        fullofsheet.update_cell(70, 2, eyooo)
 
     # update discord member IDs
     @commands.command()

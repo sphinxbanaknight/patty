@@ -216,13 +216,6 @@ class Clears(commands.Cog):
         commander_name = ctx.author.name
         commander = ctx.author
         
-        for member in guild.members:
-            if count == len(guild.members):
-                return
-            else:
-                await ctx.send(f'here is a member: {member.name} with {len(guild.members)} people inside the server')
-            count += 1
-        
         if channel.id in botinit_id:
             if commander.id in authorized_id:
                 try:
@@ -232,13 +225,12 @@ class Clears(commands.Cog):
                     for cell in cell_list:
                         for member in guild.members:
                             if cell.value == member.name:
-                                if debugger: await ctx.send(f'{feedback_debug} update {cell.value} ID in row {next_row} seeing member {member.name} with id {member.id}')
                                 fullofsheet.update_cell(next_row, 2, member.id)
-                                #if debugger: await ctx.send(f'{feedback_debug} Updating {cell.value} ID at [{next_row}, 2] to {member.id}')
+                                if debugger: await ctx.send(f'{feedback_debug} Updating {cell.value} ID at [{next_row}, 2] to {member.id}')
                                 break
                         next_row += 1
                     ids = [member.id for member in guild.members]
-                    #if debugger: await ctx.send(f'{feedback_debug} {ids}')
+                    if debugger: await ctx.send(f'{feedback_debug} {ids}')
                     await msgprogress.edit(content="Refreshing Discord IDs for all members in BK Roster... Completed.")
                 except Exception as e:
                     await msgprogress.edit(content="Refreshing Discord IDs for all members in BK Roster... Failed.")

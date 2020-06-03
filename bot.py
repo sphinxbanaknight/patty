@@ -12,6 +12,8 @@ import datetime
 import pytz
 import asyncio
 
+import clears # jytest
+
 
 from pytz import timezone
 from datetime import datetime, timedelta
@@ -74,7 +76,7 @@ isremindenabled = True # configuration - turn on/off auto-reminder
 
 ################ Feedbacks ################
 feedback_automsg = '`[Auto-generated message]` '
-feedback_noangrypingplz = 'to avoid <:AngryPing:703193629489102888> from me, please register your attendance by coming Saturday 12PM GMT+8 in <#691205255664500757>. Thank you!'
+feedback_noangrypingplz = 'to avoid <:AngryPing:703193629489102888> from me, please register your attendance before coming Saturday 12PM GMT+8 by `/att y/n, y/n` in <#691205255664500757>. Thank you!'
 
 
 prefix = ["/"]
@@ -215,7 +217,7 @@ async def on_ready():
             await botinitsk.send(f'`[Timed event status reset] isarchived={isarchived} isreminded_wed={isreminded_wed} isreminded_sat={isreminded_sat}`')
             continue
         # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
-        elif isremindenabled and not isreminded_wed and ph_time_formated == "22:15:00:Wednesday":
+        elif isremindenabled and not isreminded_wed and ph_time_formated == "22:00:00:Wednesday":
             try:
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 nratt = len(att_igns)
@@ -293,6 +295,24 @@ async def togglereminder(ctx):
             except Exception as e:
                 await ctx.send(e)
             await ctx.send(f'`Auto-reminder Enabled = {isremindenabled}`')
+        else:
+            await ctx.send(f'*Nice try pleb.*')
+    else:
+        await ctx.send(f'Wrong channel! Please use #bot.')
+
+# jytest test stuff
+@client.command()
+async def jytest(ctx):
+    channel = ctx.message.channel
+    commander = ctx.author
+    if channel.id in botinit_id:
+        if commander.id in authorized_id:
+            try:
+                await ctx.send(f'`jytest` start')
+                debugger = clears.get_debugmode()
+                await ctx.send(f'`jytest` end {debugger}')
+            except Exception as e:
+                await ctx.send(f'Error: `{e}`')
         else:
             await ctx.send(f'*Nice try pleb.*')
     else:

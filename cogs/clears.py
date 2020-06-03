@@ -34,6 +34,7 @@ celesheet = shite.worksheet('Celery Preferences')
 silk2 = shite.worksheet('WoE Roster 2')
 silk4 = shite.worksheet('WoE Roster 4')
 crsheet = shite.worksheet('Change Requests')
+fullofsheet = shite.worksheet('Full IGNs')
 
 ################ Channel, Server, and User IDs ###########################
 sphinx_id = 108381986166431744
@@ -63,6 +64,8 @@ atk_range = "L17:M28"
 p2role_range = "P17:P28"
 p3_range = "L32:M43"
 p3role_range = "P32:P43"
+full_range = "A4:H100"
+
 ############### Roles #######################################
 list_ab = ['ab', 'arch bishop', 'arch', 'bishop', 'priest', 'healer', 'buffer']
 list_doram = ['cat', 'doram']
@@ -138,6 +141,9 @@ def next_available_row_p3(sheet, column):
     cols = sheet.range(32, column, 43, column)
     return max([cell.row for cell in cols if cell.value]) + 1
 
+def get_debugmode():
+    return global debugger
+    
 def get_jobname(input):
     if input.lower() in list_ab:
         jobname = 'AB'

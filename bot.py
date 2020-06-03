@@ -261,8 +261,8 @@ async def huhubes(ctx):
     
     #print(f'{attlist} at {ignlist}')
     
-    for ign in ignlist:
-        print(f'{ign.value}')
+    for itam in ignlist:
+        print(f'{itam.value}')
         #for att in attlist:
         #    if ign.value == att.value:
         #        ign.value = ""

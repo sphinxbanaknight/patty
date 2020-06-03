@@ -259,8 +259,6 @@ async def huhubes(ctx):
     attlist = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
     ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
     
-    print(f'{attlist} at {ignlist}')
-    
     for ign in ignlist:
         for att in attlist:
             print(f'{ign} to {att}')
@@ -269,7 +267,10 @@ async def huhubes(ctx):
                 gottem = 1
                 break
         if gottem == 0:
-            dsctag = rostersheet.cell(ign.row, 2).value
+            try:
+                dsctag = rostersheet.cell(ign.row, 2).value
+            except Exception as e:
+                print(f'Exception caught at dsctag: {e}')
         else:
             gottem = 0
             

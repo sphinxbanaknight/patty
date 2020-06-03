@@ -86,24 +86,6 @@ client.remove_command('help')
 def next_available_row(sheet, column):
     cols = sheet.range(3, column, 1000, column)
     return max([cell.row for cell in cols if cell.value]) + 1
-
-@client.command
-async def pinger(ctx):
-    attlist = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
-    ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
-    
-    for ign in ignlist:
-        for att in attlist:
-            if ign.value == att.value:
-                ign.value = ""
-                gottem = 1
-                break
-        if gottem == 0:
-            dsctag = rostersheet.cell(ign.row, 2).value
-        else:
-            gottem = 0
-            
-    await ctx.send(f'{dsctag}')
     
 
 @client.event
@@ -272,7 +254,23 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
             
 
-
+@client.command
+async def pinger(ctx):
+    attlist = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
+    ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
+    
+    for ign in ignlist:
+        for att in attlist:
+            if ign.value == att.value:
+                ign.value = ""
+                gottem = 1
+                break
+        if gottem == 0:
+            dsctag = rostersheet.cell(ign.row, 2).value
+        else:
+            gottem = 0
+            
+    await ctx.send(f'{dsctag}')
 
 @client.event
 async def on_member_join(member):

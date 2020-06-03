@@ -258,7 +258,7 @@ For those who haven't: {feedback_noangrypingplz}''')
 async def huhubes(ctx):
     attlist = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
     ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
-    
+    print('asdhjaslkdjg')
     for ign in ignlist:
         for att in attlist:
             if ign.value == att.value:

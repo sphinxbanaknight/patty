@@ -275,6 +275,8 @@ async def huhubes(ctx):
         else:
             gottem = 0
         row += 1
+        
+    filter(None, dsctag)
     await ctx.send(f'{dsctag}')
 
 @client.event

@@ -65,7 +65,7 @@ p2role_range = "P17:P28"
 p3_range = "L32:M43"
 p3role_range = "P32:P43"
 fullidname_range = "B4:C100"
-
+id_range = "B4:B100"
 ############### Roles #######################################
 list_ab = ['ab', 'arch bishop', 'arch', 'bishop', 'priest', 'healer', 'buffer']
 list_doram = ['cat', 'doram']
@@ -224,7 +224,7 @@ class Clears(commands.Cog):
                     for cell in cell_list:
                         for member in guild.members:
                             if cell.value == member.name:
-                                fullofsheet.update_cell(next_row, 2, member.id, value_input_option='USER_ENTERED')
+                                fullofsheet.update_cell(next_row, 2, member.id)
                                 if debugger: await ctx.send(f'{feedback_debug} Updating {cell.value} ID at [{next_row}, 2] to {member.id}')
                                 break
                         next_row += 1

@@ -220,7 +220,7 @@ class Clears(commands.Cog):
             if count == len(guild.members):
                 return
             else:
-                await ctx.send(f'here is a member: {member.name} with {len(guild.members) people inside the server')
+                await ctx.send(f'here is a member: {member.name} with {len(guild.members)} people inside the server')
             count += 1
         
         if channel.id in botinit_id:

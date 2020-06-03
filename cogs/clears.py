@@ -224,7 +224,7 @@ class Clears(commands.Cog):
                     for cell in cell_list:
                         for member in guild.members:
                             if cell.value == member.name:
-                                fullofsheet.update_cell(next_row, 2, member.id)
+                                fullofsheet.update_cell(next_row, 2, member.id, value_input_option='USER_ENTERED')
                                 if debugger: await ctx.send(f'{feedback_debug} Updating {cell.value} ID at [{next_row}, 2] to {member.id}')
                                 break
                         next_row += 1

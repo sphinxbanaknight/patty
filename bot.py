@@ -298,24 +298,6 @@ async def togglereminder(ctx):
     else:
         await ctx.send(f'Wrong channel! Please use #bot.')
 
-# jytest test stuff
-@client.command()
-async def jytest(ctx):
-    channel = ctx.message.channel
-    commander = ctx.author
-    if channel.id in botinit_id:
-        if commander.id in authorized_id:
-            try:
-                await ctx.send(f'`jytest` start')
-                await ctx.send(f'`jytest` end')
-            except Exception as e:
-                await ctx.send(f'Error: `{e}`')
-        else:
-            await ctx.send(f'*Nice try pleb.*')
-    else:
-        await ctx.send(f'Wrong channel! Please use #bot.')
-
-
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')

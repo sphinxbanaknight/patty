@@ -64,7 +64,7 @@ atk_range = "L17:M28"
 p2role_range = "P17:P28"
 p3_range = "L32:M43"
 p3role_range = "P32:P43"
-full_range = "B4:H100"
+fullidname_range = "B4:C100"
 
 ############### Roles #######################################
 list_ab = ['ab', 'arch bishop', 'arch', 'bishop', 'priest', 'healer', 'buffer']
@@ -141,9 +141,6 @@ def next_available_row_p3(sheet, column):
     cols = sheet.range(32, column, 43, column)
     return max([cell.row for cell in cols if cell.value]) + 1
 
-def get_debugmode():
-    return global debugger
-    
 def get_jobname(input):
     if input.lower() in list_ab:
         jobname = 'AB'
@@ -222,8 +219,7 @@ class Clears(commands.Cog):
             if commander.id in authorized_id:
                 try:
                     msgprogress = await ctx.send('Refreshing Discord IDs for all members in BK Roster...')
-                    cell_list = fullofsheet.range(full_range)
-                    #full_range = "A4:H100"
+                    cell_list = fullofsheet.range(fullidname_range)
                     next_row = 4
                     for cell in cell_list:
                         for member in guild.members:

@@ -32,6 +32,7 @@ takte = gc.open('BK ROSTER')
 rostersheet = takte.worksheet('WoE Roster')
 silk2 = takte.worksheet('WoE Roster 2') 
 silk4 = takte.worksheet('WoE Roster 4')
+fullofsheet = takte.worksheet('Full IGNs')
 
 ################ Channel, Server, and User IDs ###########################
 sphinx_id = 108381986166431744
@@ -62,7 +63,6 @@ p2role_range = "P17:P28"
 p3_range = "L32:M43"
 p3role_range = "P32:P43"
 
-
 ################ Parameters ################
 # These flags are status trackers to avoid duplicate runs in the timed events
 isarchived = False # archiving
@@ -86,6 +86,25 @@ client.remove_command('help')
 def next_available_row(sheet, column):
     cols = sheet.range(3, column, 1000, column)
     return max([cell.row for cell in cols if cell.value]) + 1
+
+@client.command
+async def pinger(ctx):
+    attlist = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
+    ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
+    
+    for ign in ignlist:
+        for att in attlist:
+            if ign.value == att.value:
+                ign.value = ""
+                gottem = 1
+                break
+        if gottem == 0:
+            dsctag = rostersheet.cell(ign.row, 2).value
+        else:
+            gottem = 0
+            
+    await ctx.send(f'{dsctag}')
+    
 
 @client.event
 async def on_ready():
@@ -230,7 +249,7 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #jytest elif isremindenabled and not isreminded_sat and ph_time_formated == "12:00:00:Saturday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "00:47:00:Wednesday": #jytest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "00:47:00:Thursday": #jytest #pattest
             try:
                 await msg_wed.delete() #jytest todo envelop in try-except, because msg_wed may not be found
                 ping_tags = []

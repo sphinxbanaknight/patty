@@ -208,6 +208,10 @@ class Clears(commands.Cog):
         else:
             await ctx.send(f'Wrong channel! Please use #bot.')
 
+    @commands.command()
+    async def lmao(self,ctx):
+        fullofsheet.update_cell(70, 2, "123456789123456789")
+
     # update discord member IDs
     @commands.command()
     async def refreshid(self, ctx):

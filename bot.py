@@ -124,15 +124,6 @@ def pinger():
     
     return dscid 
 
-@client.command()
-async def keke(ctx):
-    try:
-        lmao = pinger()
-    except Exception as e:
-        print(f'Found exception at keke: {e}')
-    
-    await ctx.send(f'{lmao}')
-
 @client.event
 async def on_ready():
     global isarchived
@@ -283,11 +274,6 @@ For those who haven't: {feedback_noangrypingplz}''')
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 next_row = 3
                 cell_list = rostersheet.range("C3:C50")
-                #for cell in cell_list:
-                #    if cell.value not in att_igns:
-                #        tag = rostersheet.cell(next_row, 2) # discord tag at column 2
-                #        ping_tags.append(tag.value)
-                #    next_row += 1
                 
                 for discordtag in ping_tags:
                     print(f'discordtag: {discordtag}')

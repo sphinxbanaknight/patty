@@ -126,7 +126,10 @@ def pinger():
 
 @client.command()
 async def keke(ctx):
-    lmao = pinger()
+    try:
+        lmao = pinger()
+    except Exception as e:
+        print(f'Found exception at keke: {e}')
     
     await ctx.send(f'{lmao}')
 

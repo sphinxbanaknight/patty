@@ -285,7 +285,7 @@ async def huhubes(ctx):
             if idd == dsc:
                 dscid.append(fullofsheet.cell(row, 2).value)
                 break
-    row += 1
+        row += 1
     
     await ctx.send(f'{dscid}')
 

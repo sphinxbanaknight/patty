@@ -290,6 +290,7 @@ For those who haven't: {feedback_noangrypingplz}''')
                 #    next_row += 1
                 
                 for discordtag in ping_tags:
+                    print("lmao")
                     if discordtag == 143743232658898944 or discordtag == 108381986166431744: #jytest
                         await botinitsk.send(f'{feedback_automsg} Hi <@{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                     #await botinitbk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')

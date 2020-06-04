@@ -258,8 +258,10 @@ For those who haven't: {feedback_noangrypingplz}''')
 async def huhubes(ctx):
     attlist = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
     ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
+    idlist = [item for item in fullofsheet.col_values(3) if item and item != 'UNIQUE:' and item != 'Discord Tag' and item != 'READ THE NOTES AT [README]']
     row = 3
     dsctag = []
+    dscid = []
     
     for ign in ignlist:
         for att in attlist:
@@ -276,7 +278,15 @@ async def huhubes(ctx):
             gottem = 0
         row += 1
         
-    await ctx.send(f'{dsctag}')
+    row = 4
+    for idd in idlist:
+        for dsc in dsctag:
+            if idd == dsc:
+                dscid.append(fullofsheet.cell(row, 2).value)
+                break
+    row += 1
+    
+    await ctx.send(f'{dscid}')
 
 @client.event
 async def on_member_join(member):

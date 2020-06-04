@@ -229,13 +229,10 @@ class Clears(commands.Cog):
                                 if debugger: await ctx.send(f'{feedback_debug} Updating {cell.value} ID at [{next_row}, 2] to {member.id}')
                                 break
                         next_row += 1
-                    ids = [member.id for member in guild.members]
-                    if debugger: await ctx.send(f'{feedback_debug} {ids}')
                     await msgprogress.edit(content="Refreshing Discord IDs for all members in BK Roster... Completed.")
                 except Exception as e:
                     await msgprogress.edit(content="Refreshing Discord IDs for all members in BK Roster... Failed.")
                     await ctx.send(e)
-                await ctx.send(f'`Debugmode = {debugger}`')
             else:
                 await ctx.send(f'*Nice try pleb.*')
         else:

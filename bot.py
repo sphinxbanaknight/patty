@@ -266,21 +266,16 @@ For those who haven't: {feedback_noangrypingplz}''')
                 await botinitsk.send(f'Error: `{e}`')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
-        #jytest elif isremindenabled and not isreminded_sat and ph_time_formated == "12:00:00:Saturday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "10:49:00:Thursday": #jytest #pattest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
             try:
-                #await msg_wed.delete() #jytest todo envelop in try-except, because msg_wed may not be found
-                ping_tags = pinger()
-                att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
-                next_row = 3
-                cell_list = rostersheet.range("C3:C50")
+                try: #msg_wed may not be found
+                    await msg_wed.delete()
+                except NameError as e:
+                    await botinitsk.send(f'Error: unable to delete Wednesday announcement as message could not be found. Please manually delete it.')
                 
+                ping_tags = pinger()
                 for discordtag in ping_tags:
-                    #tags += "<@" + discordtag + ">" 
-                    if discordtag == '143743232658898944' or discordtag == '108381986166431744': #jytest
-                        await botinitsk.send(f'{feedback_automsg} Hi <@{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
-                    #await botinitbk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
-                #await botinitsk.send(f'{feedback_automsg} Hi {tags}, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                    await botinitbk.send(f'{feedback_automsg} Hi <@{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 isreminded_sat = True
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
@@ -326,6 +321,29 @@ async def togglereminder(ctx):
             except Exception as e:
                 await ctx.send(e)
             await ctx.send(f'`Auto-reminder Enabled = {isremindenabled}`')
+        else:
+            await ctx.send(f'*Nice try pleb.*')
+    else:
+        await ctx.send(f'Wrong channel! Please use #bot.')
+
+# for testing purpose
+@client.command()
+async def jytest(ctx):
+    channel = ctx.message.channel
+    commander = ctx.author
+    if channel.id in botinit_id:
+        if commander.id in authorized_id:
+            try:
+                await ctx.send(f'`jytest` start')
+                ping_tags = pinger()
+                await ctx.send(f'`ping_tags` {ping_tags}')
+                
+                ping_set = set(ping_tags)
+                await ctx.send(f'`ping_set` {ping_set}')
+                
+                await ctx.send(f'`jytest` end')
+            except Exception as e:
+                await ctx.send(f'Error: `{e}`')
         else:
             await ctx.send(f'*Nice try pleb.*')
     else:

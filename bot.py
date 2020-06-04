@@ -124,6 +124,12 @@ def pinger():
     
     return dscid 
 
+@client.command()
+async def keke(ctx):
+    lmao = pinger()
+    
+    await ctx.send(f'{lmao}')
+
 @client.event
 async def on_ready():
     global isarchived

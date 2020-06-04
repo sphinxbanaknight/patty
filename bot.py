@@ -283,7 +283,10 @@ async def huhubes(ctx):
         for dsc in dsctag:
             print(f'{idd} to {dsc} has idd of {fullofsheet.cell(row, 2).value}')
             if idd == dsc:
-                dscid.append(fullofsheet.cell(row, 2).value)
+                try:
+                    dscid.append(fullofsheet.cell(row, 2).value)
+                except Exceptions as e:
+                    print(f'Exception caught at dsctag: {e}')
                 break
         row += 1
     

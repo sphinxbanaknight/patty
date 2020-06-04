@@ -267,9 +267,9 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #jytest elif isremindenabled and not isreminded_sat and ph_time_formated == "12:00:00:Saturday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "10:17:00:Thursday": #jytest #pattest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "10:20:00:Thursday": #jytest #pattest
             try:
-                await msg_wed.delete() #jytest todo envelop in try-except, because msg_wed may not be found
+                #await msg_wed.delete() #jytest todo envelop in try-except, because msg_wed may not be found
                 ping_tags = pinger(ctx)
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 next_row = 3

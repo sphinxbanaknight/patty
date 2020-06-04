@@ -340,7 +340,7 @@ async def jytest(ctx):
                 await ctx.send(f'`jytest` start')
                 ping_tags = pinger()
                 for discordtag in ping_tags:
-                    await botinitbk.send(f'{feedback_automsg} Hi <@.{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                    await ctx.send(f'{feedback_automsg} Hi <@.{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 
                 ping_set = set(ping_tags)
                 await ctx.send(f'`ping_set` {ping_set}')

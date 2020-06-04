@@ -281,6 +281,7 @@ async def huhubes(ctx):
     row = 4
     for idd in idlist:
         for dsc in dsctag:
+            print(f'{idd} to {dsc}')
             if idd == dsc:
                 dscid.append(fullofsheet.cell(row, 2).value)
                 break

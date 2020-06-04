@@ -276,7 +276,7 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #jytest elif isremindenabled and not isreminded_sat and ph_time_formated == "12:00:00:Saturday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "10:45:00:Thursday": #jytest #pattest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "10:49:00:Thursday": #jytest #pattest
             try:
                 #await msg_wed.delete() #jytest todo envelop in try-except, because msg_wed may not be found
                 ping_tags = pinger()
@@ -291,7 +291,7 @@ For those who haven't: {feedback_noangrypingplz}''')
                 
                 for discordtag in ping_tags:
                     print(f'discordtag: {discordtag}')
-                    if discordtag == 143743232658898944 or discordtag == 108381986166431744: #jytest
+                    if discordtag == '143743232658898944' or discordtag == '108381986166431744': #jytest
                         await botinitsk.send(f'{feedback_automsg} Hi <@{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                     #await botinitbk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 isreminded_sat = True

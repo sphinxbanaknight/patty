@@ -276,7 +276,6 @@ For those who haven't: {feedback_noangrypingplz}''')
                 cell_list = rostersheet.range("C3:C50")
                 
                 for discordtag in ping_tags:
-                    print(f'discordtag: {discordtag}')
                     if discordtag == '143743232658898944' or discordtag == '108381986166431744': #jytest
                         await botinitsk.send(f'{feedback_automsg} Hi <@{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                     #await botinitbk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')

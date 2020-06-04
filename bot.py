@@ -122,7 +122,10 @@ def pinger():
                 break
         row += 1
     
-    return dscid 
+    # Change to set for unique values only
+    dscid_set = set(dscid)
+    
+    return dscid_set 
 
 @client.event
 async def on_ready():
@@ -336,7 +339,8 @@ async def jytest(ctx):
             try:
                 await ctx.send(f'`jytest` start')
                 ping_tags = pinger()
-                await ctx.send(f'`ping_tags` {ping_tags}')
+                for discordtag in ping_tags:
+                    await botinitbk.send(f'{feedback_automsg} Hi <@.{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 
                 ping_set = set(ping_tags)
                 await ctx.send(f'`ping_set` {ping_set}')

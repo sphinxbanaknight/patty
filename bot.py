@@ -267,22 +267,22 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #jytest elif isremindenabled and not isreminded_sat and ph_time_formated == "12:00:00:Saturday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "00:47:00:Thursday": #jytest #pattest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "10:17:00:Thursday": #jytest #pattest
             try:
                 await msg_wed.delete() #jytest todo envelop in try-except, because msg_wed may not be found
-                ping_tags = []
+                ping_tags = pinger(ctx)
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 next_row = 3
                 cell_list = rostersheet.range("C3:C50")
-                for cell in cell_list:
-                    if cell.value not in att_igns:
-                        tag = rostersheet.cell(next_row, 2) # discord tag at column 2
-                        ping_tags.append(tag.value)
-                    next_row += 1
+                #for cell in cell_list:
+                #    if cell.value not in att_igns:
+                #        tag = rostersheet.cell(next_row, 2) # discord tag at column 2
+                #        ping_tags.append(tag.value)
+                #    next_row += 1
                 
                 for discordtag in ping_tags:
-                    if discordtag == "Takudan": #jytest
-                        await botinitsk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                    if discordtag == 143743232658898944 or discordtag == 108381986166431744: #jytest
+                        await botinitsk.send(f'{feedback_automsg} Hi <@{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                     #await botinitbk.send(f'{feedback_automsg} Hi @{discordtag}, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 isreminded_sat = True
             except Exception as e:

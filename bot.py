@@ -87,7 +87,7 @@ def next_available_row(sheet, column):
     cols = sheet.range(3, column, 1000, column)
     return max([cell.row for cell in cols if cell.value]) + 1
  
-def pinger(ctx):
+def pinger():
     attlist = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
     ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
     idlist = [item for item in fullofsheet.col_values(3) if item and item != 'UNIQUE:' and item != 'Discord Tag' and item != 'READ THE NOTES AT [README]']
@@ -267,10 +267,10 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #jytest elif isremindenabled and not isreminded_sat and ph_time_formated == "12:00:00:Saturday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "10:20:00:Thursday": #jytest #pattest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "10:25:00:Thursday": #jytest #pattest
             try:
                 #await msg_wed.delete() #jytest todo envelop in try-except, because msg_wed may not be found
-                ping_tags = pinger(ctx)
+                ping_tags = pinger()
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 next_row = 3
                 cell_list = rostersheet.range("C3:C50")

@@ -272,23 +272,20 @@ For those who haven't: {feedback_noangrypingplz}''')
                 await botinitsk.send(f'Error: `{e}`')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
-        #jytest elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "01:25:00:Saturday":
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
             try:
                 try: #msg_wed may not be found
                     await msg_wed.delete()
                 except NameError as e:
-                    await botinitsk.send(f'Error: I forgot the message! Attempting to fetch by message ID...')
+                    msg1 = await botinitsk.send(f'Error: I forgot the message! Attempting to fetch by message ID...')
                     try: #find value saved in sheet
                         msgid = datasheet.cell(2,9).value
-                        #msg_wed = await botinitbkann.fetch_message(msgid) jytest
-                        msg_wed = await botinitsk.fetch_message(msgid) #jytest
+                        msg_wed = await botinitbkann.fetch_message(msgid)
                         await msg_wed.delete()
+                        await msg1.edit(content="Message successfully fetched and deleted.")
                     except Exception as e:
                         await botinitsk.send(f'Error: `{e}`')
-                        await botinitsk.send(f'Error: unable to delete Wednesday announcement as message could not be found. Please manually delete it.')
-                        
-                
+                        await botinitsk.send(f'Error: unable to delete Wednesday announcement as message could not be found based on `{msgid}`. Please manually delete it.')
                 
                 ping_tags = pinger()
                 for discordtag in ping_tags:
@@ -352,13 +349,11 @@ async def jytest(ctx):
         if commander.id in authorized_id:
             try:
                 await ctx.send(f'`jytest` start')
-                ping_tags = pinger()
-                for discordtag in ping_tags:
-                    await ctx.send(f'{feedback_automsg} Hi <@.{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
-                
-                ping_set = set(ping_tags)
-                await ctx.send(f'`ping_set` {ping_set}')
-                
+                global isarchived
+                global isreminded_wed
+                global isreminded_sat
+                global isremindenabled
+                await ctx.send(f'isarchived={isarchived}, isreminded_wed={isreminded_wed}, isreminded_sat={isreminded_sat}, isremindenabled={isremindenabled}')
                 await ctx.send(f'`jytest` end')
             except Exception as e:
                 await ctx.send(f'Error: `{e}`')

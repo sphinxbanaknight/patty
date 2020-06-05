@@ -250,24 +250,24 @@ class Clears(commands.Cog):
 #        else:
 #            await ctx.send(f'Wrong channel! Please use #bot.')
 
-    @commands.command()
-    async def sorted(self, ctx):
-        channel = ctx.message.channel
-        commander = ctx.author.name
-            #await ctx.send('test')
-        if channel.id in botinit_id:
-            cell_list = rostersheet.range("B3:E46")
-            try:
-                rostersheet.sort((4, 'asc'), range = "B3:E50")
-            except Exception as e:
-                print(e)
-                return
-            cell_list = rostersheet.range("G3:J50")
-            rostersheet.sort((9, 'des'), (8, 'asc'), range = "G3:J50")
-            celesheet.sort((3, 'asc'), range = "B3:T48")
-            await ctx.send(f'`{commander} has sorted the sheets.`')
-        else:
-            await ctx.send(f'Wrong channel! Please use #bot.')
+#    @commands.command()
+#    async def sorted(self, ctx):
+#        channel = ctx.message.channel
+#        commander = ctx.author.name
+#            #await ctx.send('test')
+#        if channel.id in botinit_id:
+#            cell_list = rostersheet.range("B3:E46")
+#            try:
+#                rostersheet.sort((4, 'asc'), range = "B3:E50")
+#            except Exception as e:
+#                print(e)
+#                return
+#            cell_list = rostersheet.range("G3:J50")
+#            rostersheet.sort((9, 'des'), (8, 'asc'), range = "G3:J50")
+#            celesheet.sort((3, 'asc'), range = "B3:T48")
+#            await ctx.send(f'`{commander} has sorted the sheets.`')
+#        else:
+#            await ctx.send(f'Wrong channel! Please use #bot.')
 
     @commands.command()
     async def clearguild(self, ctx):

@@ -33,6 +33,7 @@ rostersheet = takte.worksheet('WoE Roster')
 silk2 = takte.worksheet('WoE Roster 2') 
 silk4 = takte.worksheet('WoE Roster 4')
 fullofsheet = takte.worksheet('Full IGNs')
+datasheet = takte.worksheet('Data')
 
 ################ Channel, Server, and User IDs ###########################
 sphinx_id = 108381986166431744
@@ -264,6 +265,8 @@ Hi all,
 
 Currently we have {nratt} members who have registered their attendance, great job!
 For those who haven't: {feedback_noangrypingplz}''')
+                datasheet.update_cell(2, 9, msg_wed.id)
+                await botinitsk.send(f'msg_wed ID saved: `{msg_wed.id}`')
                 isreminded_wed = True
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
@@ -274,7 +277,16 @@ For those who haven't: {feedback_noangrypingplz}''')
                 try: #msg_wed may not be found
                     await msg_wed.delete()
                 except NameError as e:
-                    await botinitsk.send(f'Error: unable to delete Wednesday announcement as message could not be found. Please manually delete it.')
+                    await botinitsk.send(f'Error: I forgot the message! Attempting to fetch by message ID...')
+                    try: #find value saved in sheet
+                        msgid = datasheet.cell(2,9).value
+                        #msg_wed = await botinitbkann.fetch_message(msgid) jytest
+                        msg_wed = await botinitsk.fetch_message(msgid) #jytest
+                        await msg_wed.delete()
+                    except Exception as e:
+                        await botinitsk.send(f'Error: `{e}`')
+                        await botinitsk.send(f'Error: unable to delete Wednesday announcement as message could not be found. Please manually delete it.')
+                        
                 
                 
                 ping_tags = pinger()

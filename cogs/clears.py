@@ -245,7 +245,12 @@ class Clears(commands.Cog):
                 print(f'add field reminder returned {e}')
                 return
             
-            await ctx.send(f'Currently there are `{len(remindlist)}` who have not registered their attendance. That is {(len(remindlist)/len(ignlist))*100}% who have not registered.')
+            try:
+                await ctx.send(embed=embeded)
+            except Exception as e:
+                print(f'send embed remind returned {e}')
+            
+            await ctx.send(f'Currently there are `{len(remindlist)}` who have not registered their attendance. {(len(remindlist)/len(ignlist))*100}% of our guild have not registered.')
             
             await msg.delete()
         else:

@@ -125,7 +125,7 @@ def pinger():
     # Change to set for unique values only
     dscid_set = set(dscid)
     
-    return dscid_set 
+    return dscid_set         
 
 @client.event
 async def on_ready():
@@ -275,6 +275,7 @@ For those who haven't: {feedback_noangrypingplz}''')
                     await msg_wed.delete()
                 except NameError as e:
                     await botinitsk.send(f'Error: unable to delete Wednesday announcement as message could not be found. Please manually delete it.')
+                
                 
                 ping_tags = pinger()
                 for discordtag in ping_tags:

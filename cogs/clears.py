@@ -184,10 +184,76 @@ def get_jobname(input):
         jobname = ''
     return jobname
 
+def reminder():
+    attlist = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
+    ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
+    row = 3
+    dsctag = []
+    dscid = []
+    
+    for ign in ignlist:
+        for att in attlist:
+            if ign == att:
+                ign = ""
+                gottem = 1
+                break
+        if gottem == 0:
+            try:
+                dsctag.append(rostersheet.cell(row, 2).value)
+            except Exception as e:
+                print(f'Exception caught at dsctag: {e}')
+        else:
+            gottem = 0
+        row += 1
+        
+    return dsctag
+
 
 class Clears(commands.Cog):
     def __init__(self, client):
         self.client = client
+
+    @commands.command()
+    async def remind(self, ctx):
+    
+        ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
+        global debugger
+        channel = ctx.message.channel
+        commander_name = ctx.author.name
+        commander = ctx.author
+        
+        if channel.id in botinit_id:
+            msg = await ctx.send(f'`Parsing the list. Please refrain from entering other commands.`')
+            try:
+                debugger = not debugger
+            except Exception as e:
+                await ctx.send(e)
+            await ctx.send(f'`Debugmode = {debugger}`')
+            
+            remindlist = reminder()
+            if debugger: await ctx.send(f'{feedback_debug} Parsing... {remindlist}')
+            
+            try:
+                embeded = discord.Embed(title = "Reminder List", description = "A list of people who really should /att y/n, y/n immediately", color = 0x00FF00)
+            except Exception as e:
+                print(f'discord embed reminder returned {e}')
+                return
+            x = 0
+            remlist = ''
+
+            for x in range(len(remindlist)):
+                remlist += remindlist[x] + '\n'
+            try:
+                embeded.add_field(name="Discord Tag", value=f'{remlist}', inline=True)
+            except Exception as e:
+                print(f'add field reminder returned {e}')
+                return
+            
+            await ctx.send(f'Currently there are `{len(remindlist)}` who have not registered their attendance. That is {(len(remindlist)/len(ignlist))*100}% who have not registered.')
+            
+            await msg.delete()
+        else:
+            await ctx.send(f'Wrong channel! Please use #bot.')
 
     # toggle debugmode
     @commands.command()

@@ -227,6 +227,7 @@ class Clears(commands.Cog):
             await ctx.send(f'`Debugmode = {debugger}`')
             
             remindlist = reminder()
+            remindlist.sort()
             if debugger: await ctx.send(f'{feedback_debug} Parsing... {remindlist}')
             
             try:

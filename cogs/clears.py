@@ -224,10 +224,6 @@ class Clears(commands.Cog):
         
         if channel.id in botinit_id:
             msg = await ctx.send(f'`Parsing the list. Please refrain from entering other commands.`')
-            try:
-                debugger = not debugger
-            except Exception as e:
-                await ctx.send(e)
             await ctx.send(f'`Debugmode = {debugger}`')
             
             remindlist = reminder()

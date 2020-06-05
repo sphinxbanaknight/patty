@@ -272,7 +272,8 @@ For those who haven't: {feedback_noangrypingplz}''')
                 await botinitsk.send(f'Error: `{e}`')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
+        #jytest elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "01:25:00:Saturday":
             try:
                 try: #msg_wed may not be found
                     await msg_wed.delete()

@@ -323,7 +323,7 @@ For those who haven't: {feedback_noangrypingplz}''')
                 if debugger: #send to test server if on debugmode
                     dev_list = [sphinx_id, jia_id]
                     for discordtag in ping_tags:
-                        #discordtag = random.choice(dev_list) # for testing purpose, use only the developers' id!
+                        discordtag = random.choice(dev_list) # for testing purpose, use only the developers' id!
                         taglist += '<.@' + str(discordtag) + '>, '
                     if taglist != '':
                         await botinitsk.send(f'{feedback_debug} {feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
@@ -396,70 +396,70 @@ async def togglereminder(ctx):
     else:
         await ctx.send(f'Wrong channel! Please use #bot.')
 
-# # Force a timed event run
-# @client.command()
-# async def forcetimedevent(ctx, *, arguments)
-    # channel = ctx.message.channel
-    # commander = ctx.author
-    # if channel.id in botinit_id:
-        # if commander.id in authorized_id:
-            # arglist = [x.strip() for x in arguments.split(',')]
-            # no_of_args = len(arglist)
-            # #0 = name of timed event
-            # #1 = time to run
-            # tf_archive = ['00:00:00:Monday', '00:00:00:Sunday']
-            # tf_remind1 = ['22:00:00:Wednesday']
-            # tf_remind2 = ['22:00:00:Friday']
-            # tf_reset   = ['00:05:00:Monday', '00:05:00:Sunday']
+# Force a timed event run
+@client.command()
+async def forcetimedevent(ctx, *, arguments)
+    channel = ctx.message.channel
+    commander = ctx.author
+    if channel.id in botinit_id:
+        if commander.id in authorized_id:
+            arglist = [x.strip() for x in arguments.split(',')]
+            no_of_args = len(arglist)
+            #0 = name of timed event
+            #1 = time to run
+            tf_archive = ['00:00:00:Monday', '00:00:00:Sunday']
+            tf_remind1 = ['22:00:00:Wednesday']
+            tf_remind2 = ['22:00:00:Friday']
+            tf_reset   = ['00:05:00:Monday', '00:05:00:Sunday']
 
-            # if no_of_args == 2:
-                # try:
-                    # eventname = arglist[0].lower()
-                    # eventtime = arglist[1].lower()
+            if no_of_args == 2:
+                try:
+                    eventname = arglist[0].lower()
+                    eventtime = arglist[1].lower()
                     
-                    # if not istimedeventformat(eventtime):
-                        # await ctx.send(f'{feedback_properplz} Time format should be in H:M:S:Day, e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`')
-                        # return
+                    if not istimedeventformat(eventtime):
+                        await ctx.send(f'{feedback_properplz} Time format should be in H:M:S:Day, e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`')
+                        return
                     
-                    # if eventname in answer_timedevent_archive:
-                        # global isarchived
-                        # global tf_archive
-                        # isarchived = False
-                        # tf_archive.append(eventtime)
-                        # if debugger: await ctx.send(f'{feedback_debug} Timed event archive added to also run at {eventtime}. All schedules: {tf_archive}')
-                    # elif eventname in answer_timedevent_remind1:
-                        # global isreminded1
-                        # global tf_remind1
-                        # isreminded1 = False
-                        # tf_remind1.append(eventtime)
-                        # if debugger: await ctx.send(f'{feedback_debug} Timed event remind1 added to also run at {eventtime}. All schedules: {tf_remind1}')
-                    # elif eventname in answer_timedevent_remind2:
-                        # global isreminded2
-                        # global tf_remind2
-                        # isreminded2 = False
-                        # tf_remind2.append(eventtime)
-                        # if debugger: await ctx.send(f'{feedback_debug} Timed event remind2 added to also run at {eventtime}. All schedules: {tf_remind2}')
-                    # elif eventname in answer_timedevent_reset:
-                        # global tf_reset
-                        # tf_reset.append(eventtime)
-                        # if debugger: await ctx.send(f'{feedback_debug} Timed event reset added to also run at {eventtime}. All schedules: {tf_reset}')
-                    # else:
-                        # await ctx.send(f'''{feedback_properplz} Name format should be one of the following:
-# `archive` = {tf_archive}
-# `remind1` = {tf_remind1}
-# `remind2` = {tf_remind2}
-# `reset  ` = {tf_reset}
-# e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`''')
-                        # return
-                # except Exception as e:
-                    # await ctx.send(f'Error: `{e}`')
-            # else:
-                # await ctx.send(f'{feedback_properplz} `/forcetimedevent, <name>, <time>`, e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`')
-                # return
-        # else:
-            # await ctx.send(f'*Nice try pleb.*')
-    # else:
-        # await ctx.send(f'Wrong channel! Please use #bot.')
+                    if eventname in answer_timedevent_archive:
+                        global isarchived
+                        global tf_archive
+                        isarchived = False
+                        tf_archive.append(eventtime)
+                        if debugger: await ctx.send(f'{feedback_debug} Timed event archive added to also run at {eventtime}. All schedules: {tf_archive}')
+                    elif eventname in answer_timedevent_remind1:
+                        global isreminded1
+                        global tf_remind1
+                        isreminded1 = False
+                        tf_remind1.append(eventtime)
+                        if debugger: await ctx.send(f'{feedback_debug} Timed event remind1 added to also run at {eventtime}. All schedules: {tf_remind1}')
+                    elif eventname in answer_timedevent_remind2:
+                        global isreminded2
+                        global tf_remind2
+                        isreminded2 = False
+                        tf_remind2.append(eventtime)
+                        if debugger: await ctx.send(f'{feedback_debug} Timed event remind2 added to also run at {eventtime}. All schedules: {tf_remind2}')
+                    elif eventname in answer_timedevent_reset:
+                        global tf_reset
+                        tf_reset.append(eventtime)
+                        if debugger: await ctx.send(f'{feedback_debug} Timed event reset added to also run at {eventtime}. All schedules: {tf_reset}')
+                    else:
+                        await ctx.send(f'''{feedback_properplz} Name format should be one of the following:
+`archive` = {tf_archive}
+`remind1` = {tf_remind1}
+`remind2` = {tf_remind2}
+`reset  ` = {tf_reset}
+e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`''')
+                        return
+                except Exception as e:
+                    await ctx.send(f'Error: `{e}`')
+            else:
+                await ctx.send(f'{feedback_properplz} `/forcetimedevent, <name>, <time>`, e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`')
+                return
+        else:
+            await ctx.send(f'*Nice try pleb.*')
+    else:
+        await ctx.send(f'Wrong channel! Please use #bot.')
 
 # for testing purpose
 @client.command()

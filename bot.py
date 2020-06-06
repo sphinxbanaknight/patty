@@ -193,7 +193,8 @@ async def on_ready():
         ph_time = pytz.timezone('Asia/Manila')
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
-        await asyncio.sleep(1)
+        #await asyncio.sleep(1)
+        await asyncio.sleep(0.1) #jytest mroe frequent to reproduce
         if not isarchived and ( ph_time_formated == "00:00:00:Monday" or ph_time_formated == "00:00:00:Sunday" ):
             await botinitsk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
             await botinitsk.send('```An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.```')
@@ -267,7 +268,7 @@ async def on_ready():
             continue
         # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
         #elif isremindenabled and not isreminded_wed and ph_time_formated == "22:00:00:Wednesday":
-        elif isremindenabled and not isreminded_wed and ph_time_formated == "15:57:00:Saturday": #jytest
+        elif isremindenabled and not isreminded_wed and ph_time_formated == "16:27:00:Saturday": #jytest
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Reminder1 isreminded_wed={isreminded_wed} START')
             try:
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
@@ -286,7 +287,7 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "16:00:00:Saturday": #jytest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "16:30:00:Saturday": #jytest
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} START')
             try:
                 try: #msg_wed may not be found

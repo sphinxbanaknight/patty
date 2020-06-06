@@ -401,28 +401,28 @@ async def togglereminder(ctx):
 async def forcetimedevent(ctx, *, arguments)
     channel = ctx.message.channel
     commander = ctx.author
-    if channel.id in botinit_id:
-        if commander.id in authorized_id:
-            arglist = [x.strip() for x in arguments.split(',')]
-            no_of_args = len(arglist)
-            #0 = name of timed event
-            #1 = time to run
+    # if channel.id in botinit_id:
+        # if commander.id in authorized_id:
+            # arglist = [x.strip() for x in arguments.split(',')]
+            # no_of_args = len(arglist)
+            # #0 = name of timed event
+            # #1 = time to run
             
-            # reinitialise to reset previous forces
-            global tf_archive
-            global tf_remind1
-            global tf_remind2
-            global tf_reset
-            tf_archive = ['00:00:00:Monday', '00:00:00:Sunday']
-            tf_remind1 = ['22:00:00:Wednesday']
-            tf_remind2 = ['22:00:00:Friday']
-            tf_reset   = ['00:05:00:Monday', '00:05:00:Sunday']
+            # # reinitialise to reset previous forces
+            # global tf_archive
+            # global tf_remind1
+            # global tf_remind2
+            # global tf_reset
+            # tf_archive = ['00:00:00:Monday', '00:00:00:Sunday']
+            # tf_remind1 = ['22:00:00:Wednesday']
+            # tf_remind2 = ['22:00:00:Friday']
+            # tf_reset   = ['00:05:00:Monday', '00:05:00:Sunday']
 
-            if no_of_args == 2:
-                try:
-                    eventname = arglist[0].lower()
-                    eventtime = arglist[1].lower()
-                    if debugger: await ctx.send(f'{feedback_debug} input: {eventname}, {eventtime}')
+            # if no_of_args == 2:
+                # try:
+                    # eventname = arglist[0].lower()
+                    # eventtime = arglist[1].lower()
+                    # if debugger: await ctx.send(f'{feedback_debug} input: {eventname}, {eventtime}')
                     
                     # if not istimedeventformat(eventtime):
                         # await ctx.send(f'{feedback_properplz} Time format should be in H:M:S:Day, e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`')
@@ -453,16 +453,16 @@ async def forcetimedevent(ctx, *, arguments)
 # `remind2` = {tf_remind2}
 # `reset  ` = {tf_reset}
 # e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`''')
-                        return
-                except Exception as e:
-                    await ctx.send(f'Error: `{e}`')
-            else:
-                await ctx.send(f'{feedback_properplz} `/forcetimedevent, <name>, <time>`, e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`')
-                return
-        else:
-            await ctx.send(f'*Nice try pleb.*')
-    else:
-        await ctx.send(f'Wrong channel! Please use #bot.')
+                        # return
+                # except Exception as e:
+                    # await ctx.send(f'Error: `{e}`')
+            # else:
+                # await ctx.send(f'{feedback_properplz} `/forcetimedevent, <name>, <time>`, e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`')
+                # return
+        # else:
+            # await ctx.send(f'*Nice try pleb.*')
+    # else:
+        # await ctx.send(f'Wrong channel! Please use #bot.')
 
 # for testing purpose
 @client.command()

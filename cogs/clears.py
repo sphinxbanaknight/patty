@@ -213,6 +213,11 @@ class Clears(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    # get debugmode
+    def get_debugmode(self):
+        return debugger
+
+    
     @commands.command()
     async def remind(self, ctx):
     

@@ -354,6 +354,15 @@ async def jytest(ctx):
                 global isreminded_sat
                 global isremindenabled
                 await ctx.send(f'isarchived={isarchived}, isreminded_wed={isreminded_wed}, isreminded_sat={isreminded_sat}, isremindenabled={isremindenabled}')
+                
+                # get clears cog?
+                clearscog = self.bot.get_cog('Clears')
+                debugmode = clearscog.get_debugmode()
+                await ctx.send(f'`jytest` debugmode={debugmode}')
+                
+                await clearscog.debugmode(ctx)
+                await ctx.send(f'`jytest` new debugmode={debugmode}')
+                
                 await ctx.send(f'`jytest` end')
             except Exception as e:
                 await ctx.send(f'Error: `{e}`')

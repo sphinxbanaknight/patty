@@ -98,12 +98,12 @@ client = commands.Bot(command_prefix = prefix, description = description)
 
 client.remove_command('help')
 
-# def istimedeventformat(input):
-    # try:
-        # time.strptime(input, '%H:%M:%S:%A')
-        # return True
-    # except ValueError:
-        # return False
+def istimedeventformat(input):
+    try:
+        datetime.strptime(input, '%H:%M:%S:%A')
+        return True
+    except ValueError:
+        return False
 
 def next_available_row(sheet, column):
     cols = sheet.range(3, column, 1000, column)

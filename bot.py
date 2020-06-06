@@ -356,7 +356,7 @@ async def jytest(ctx):
                 await ctx.send(f'isarchived={isarchived}, isreminded_wed={isreminded_wed}, isreminded_sat={isreminded_sat}, isremindenabled={isremindenabled}')
                 
                 # get clears cog?
-                clearscog = self.bot.get_cog('Clears')
+                clearscog = client.get_cog('Clears')
                 debugmode = clearscog.get_debugmode()
                 await ctx.send(f'`jytest` debugmode={debugmode}')
                 

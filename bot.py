@@ -194,13 +194,11 @@ async def on_ready():
         ph_time = pytz.timezone('Asia/Manila')
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
+        #await asyncio.sleep(1)
+        await asyncio.sleep(0.5) #jytest more frequent test
         if debugger: #jytest sorry jp im really curious how this worksssss im gonna spam it
-            my_time_milisec = ph_time_unformated.strftime("%H:%M:%S.%f[%A]")
-            rightnow = datetime.now(ph_time).strftime("%H:%M:%S.%f[%A]")
-            await botinitsk.send(f'{feedback_debug} `BEFORE my?{my_time_milisec}... rightnow?{rightnow}` jytestcounter={jytestcounter}')
-        await asyncio.sleep(1)
-        if debugger: #jytest sorry jp im really curious how this worksssss im gonna spam it
-            rightnow = datetime.now(ph_time).strftime("%H:%M:%S.%f[%A]")
+            rightnow = time.now(ph_time).strftime("%H:%M:%S.%f")
+            jytestcounter += 1
             await botinitsk.send(f'{feedback_debug} `AFTER- my?{my_time_milisec}... rightnow?{rightnow}` jytestcounter={jytestcounter}')
             
         if not isarchived and ( ph_time_formated == "00:00:00:Monday" or ph_time_formated == "00:00:00:Sunday" ):
@@ -294,7 +292,7 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "18:15:00:Saturday": #jytest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "18:27:00:Saturday": #jytest
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} START')
             try:
                 try: #msg_wed may not be found

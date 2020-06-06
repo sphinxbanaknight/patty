@@ -199,7 +199,7 @@ async def on_ready():
         if debugger: #jytest sorry jp im really curious how this worksssss im gonna spam it
             rightnow = datetime.now(ph_time).strftime("%H:%M:%S.%f[%A]")
             jytestcounter += 1
-            await botinitsk.send(f'{feedback_debug} `AFTER- rightnow?{rightnow}` jytestcounter={jytestcounter}')
+            await botinitsk.send(f'{feedback_debug} `{rightnow}` jytestcounter={jytestcounter}')
             
         if not isarchived and ( ph_time_formated == "00:00:00:Monday" or ph_time_formated == "00:00:00:Sunday" ):
             await botinitsk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
@@ -292,7 +292,7 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "18:33:00:Saturday": #jytest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "18:35:00:Saturday": #jytest
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} START')
             try:
                 try: #msg_wed may not be found

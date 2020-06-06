@@ -199,7 +199,7 @@ async def on_ready():
         if debugger: #jytest sorry jp im really curious how this worksssss im gonna spam it
             rightnow = datetime.now(ph_time).strftime("%H:%M:%S.%f[%A]")
             jytestcounter += 1
-            await botinitsk.send(f'{feedback_debug} `AFTER- my?{my_time_milisec}... rightnow?{rightnow}` jytestcounter={jytestcounter}')
+            await botinitsk.send(f'{feedback_debug} `AFTER- rightnow?{rightnow}` jytestcounter={jytestcounter}')
             
         if not isarchived and ( ph_time_formated == "00:00:00:Monday" or ph_time_formated == "00:00:00:Sunday" ):
             await botinitsk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')

@@ -74,6 +74,7 @@ isremindenabled = True # configuration - turn on/off auto-reminder
 
 
 ################ Feedbacks ################
+feedback_debug = '`[DEBUGINFO] `'
 feedback_automsg = '`[Auto-generated message]` '
 feedback_noangrypingplz = 'to avoid <:AngryPing:703193629489102888> from me, please register your attendance before coming Saturday 12PM GMT+8 by `/att y/n, y/n` in <#691205255664500757>. Thank you!'
 
@@ -128,12 +129,21 @@ def pinger():
     
     return dscid_set         
 
+# get debugmode from Clears
+def get_debugmode():
+    clearscog = client.get_cog('Clears')
+    debugger = clearscog.get_debugmode()
+    return debugger
+
+
 @client.event
 async def on_ready():
     global isarchived
     global isreminded_wed
     global isreminded_sat
     
+    debugger = get_debugmode()
+
     for server in client.guilds:
         if server.id == sk_server:
             sphinx = server
@@ -272,7 +282,9 @@ For those who haven't: {feedback_noangrypingplz}''')
                 await botinitsk.send(f'Error: `{e}`')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
+        #elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "15:45:00:Saturday":
+            if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} START')
             try:
                 try: #msg_wed may not be found
                     await msg_wed.delete()
@@ -288,11 +300,16 @@ For those who haven't: {feedback_noangrypingplz}''')
                         await botinitsk.send(f'Error: unable to delete Wednesday announcement as message could not be found based on `{msgid}`. Please manually delete it.')
                 
                 ping_tags = pinger()
-                for discordtag in ping_tags:
-                    await botinitbk.send(f'{feedback_automsg} Hi <@{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                # jytest loop more to simulate heavy load
+                for x in range(3):
+                    for discordtag in ping_tags:
+                        await botinitsk.send(f'{feedback_automsg} Hi <@.{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                # for discordtag in ping_tags:
+                    # await botinitbk.send(f'{feedback_automsg} Hi <@{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 isreminded_sat = True
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
+            if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} END')
             continue
             
 

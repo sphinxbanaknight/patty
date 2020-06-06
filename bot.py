@@ -188,20 +188,15 @@ async def on_ready():
 
 
     data_pasted = [""]
-    jytestcounter = 0
     while True:
         debugger = get_debugmode()
         ph_time = pytz.timezone('Asia/Manila')
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
-        #await asyncio.sleep(1)
-        await asyncio.sleep(0.5) #jytest more frequent test
-        if debugger: #jytest sorry jp im really curious how this worksssss im gonna spam it
-            rightnow = datetime.now(ph_time).strftime("%H:%M:%S.%f[%A]")
-            jytestcounter += 1
-            await botinitsk.send(f'{feedback_debug} `{rightnow}` jytestcounter={jytestcounter}')
+        await asyncio.sleep(1)
             
         if not isarchived and ( ph_time_formated == "00:00:00:Monday" or ph_time_formated == "00:00:00:Sunday" ):
+            isarchived = True
             await botinitsk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
             await botinitsk.send('```An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.```')
             await botinitbk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
@@ -263,7 +258,6 @@ async def on_ready():
                 cell.value = ""
 
             rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-            isarchived = True
             continue
         # Timed event status reset
         elif ph_time_formated == "00:05:00:Monday" or ph_time_formated == "00:05:00:Sunday":
@@ -275,6 +269,7 @@ async def on_ready():
         # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
         elif isremindenabled and not isreminded_wed and ph_time_formated == "22:00:00:Wednesday":
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Reminder1 isreminded_wed={isreminded_wed} START')
+            isreminded_wed = True
             try:
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 nratt = len(att_igns)
@@ -285,15 +280,15 @@ Currently we have {nratt} members who have registered their attendance, great jo
 For those who haven't: {feedback_noangrypingplz}''')
                 datasheet.update_cell(2, 9, msg_wed.id)
                 if debugger: await botinitsk.send(f'{feedback_debug} msg_wed ID saved: `{msg_wed.id}`')
-                isreminded_wed = True
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Reminder1 isreminded_wed={isreminded_wed} END')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "18:38:00:Saturday": #jytest
-            if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} START')
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "18:48:00:Saturday": #jytest
+            if debugger: await botinitsk.send(f'{feedback_debug} Angrypinger2 isreminded_sat={isreminded_sat} START')
+            isreminded_sat = True
             try:
                 try: #msg_wed may not be found
                     await msg_wed.delete()
@@ -314,10 +309,9 @@ For those who haven't: {feedback_noangrypingplz}''')
                     await botinitsk.send(f'{feedback_automsg} {discordtag}')
                 # for discordtag in ping_tags:
                     # await botinitbk.send(f'{feedback_automsg} Hi <@{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
-                isreminded_sat = True
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
-            if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} END')
+            if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_unformated.strftime("%H:%M:%S.%f:%A")} Angrypinger2 isreminded_sat={isreminded_sat} END')
             continue            
 
             

@@ -194,8 +194,17 @@ async def on_ready():
         ph_time = pytz.timezone('Asia/Manila')
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
+        if debugger #jytest sorry jp im really curious how this worksssss im gonna spam it
+            my_time_milisec = ph_time_unformated.strftime("%H:%M:%S.%f[%A]")
+            rightnow = datetime.now(ph_time).strftime("%H:%M:%S.%f[%A]")
+            await botinitsk.send(f'{feedback_debug} BEFORE my?{my_time_milisec}... rightnow?{rightnow} jytestcounter={jytestcounter}')
         #await asyncio.sleep(1)
         await asyncio.sleep(0.1) #jytest mroe frequent to reproduce
+        if debugger #jytest sorry jp im really curious how this worksssss im gonna spam it
+            my_time_milisec = ph_time_unformated.strftime("%H:%M:%S.%f[%A]")
+            rightnow = datetime.now(ph_time).strftime("%H:%M:%S.%f[%A]")
+            await botinitsk.send(f'{feedback_debug} AFTER my?{my_time_milisec}... rightnow?{rightnow} jytestcounter={jytestcounter}')
+            
         if not isarchived and ( ph_time_formated == "00:00:00:Monday" or ph_time_formated == "00:00:00:Sunday" ):
             await botinitsk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
             await botinitsk.send('```An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.```')
@@ -287,7 +296,7 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "17:27:00:Saturday": #jytest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "17:42:00:Saturday": #jytest
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} START')
             try:
                 try: #msg_wed may not be found
@@ -314,12 +323,11 @@ For those who haven't: {feedback_noangrypingplz}''')
                 await botinitsk.send(f'Error: `{e}`')
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} END')
             continue
-        elif debugger and ph_time_formated == "17:26:50:Saturday": #jytest sorry jp im really curious how this worksssss im gonna spam it
-            await botinitsk.send(f'{feedback_debug} {ph_time_formated} START')
+        elif debugger and ph_time_formated == "17:41:50:Saturday": #jytest sorry jp im really curious how this worksssss im gonna spam it
             jytestcounter += 1
             my_time_milisec = ph_time_unformated.strftime("%H:%M:%S.%f[%A]")
             rightnow = datetime.now(ph_time).strftime("%H:%M:%S.%f[%A]")
-            await botinitsk.send(f'{feedback_debug} {ph_time_formated} my?{my_time_milisec}... rightnow?{rightnow} jytestcounter={jytestcounter} END')
+            await botinitsk.send(f'{feedback_debug} {ph_time_formated} my?{my_time_milisec}... rightnow?{rightnow} jytestcounter={jytestcounter}')
             
 
             

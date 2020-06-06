@@ -323,7 +323,7 @@ For those who haven't: {feedback_noangrypingplz}''')
                 if debugger: #send to test server if on debugmode
                     dev_list = [sphinx_id, jia_id]
                     for discordtag in ping_tags:
-                        #discordtag = random.choice(dev_list) # for testing purpose, use only the developers' id!
+                        discordtag = random.choice(dev_list) # for testing purpose, use only the developers' id!
                         taglist += '<.@' + str(discordtag) + '>, '
                     if taglist != '':
                         await botinitsk.send(f'{feedback_debug} {feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')

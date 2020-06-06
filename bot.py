@@ -142,8 +142,6 @@ async def on_ready():
     global isreminded_wed
     global isreminded_sat
     
-    debugger = get_debugmode()
-
     for server in client.guilds:
         if server.id == sk_server:
             sphinx = server
@@ -155,12 +153,13 @@ async def on_ready():
     for channel in sphinx.channels:
         if channel.id == sk_bot:
             botinitsk = channel
+            botinitbkann = channel
             break
     for channel in burger.channels:
         if channel.id == bk_bot:
             botinitbk = channel
         elif channel.id == bk_ann:
-            botinitbkann = channel
+            #jytest botinitbkann = channel
             break
 
     print('Bot is online.')
@@ -190,6 +189,7 @@ async def on_ready():
 
     data_pasted = [""]
     while True:
+        debugger = get_debugmode()
         ph_time = pytz.timezone('Asia/Manila')
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
@@ -266,7 +266,9 @@ async def on_ready():
             await botinitsk.send(f'`[Timed event status reset] isarchived={isarchived} isreminded_wed={isreminded_wed} isreminded_sat={isreminded_sat}`')
             continue
         # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
-        elif isremindenabled and not isreminded_wed and ph_time_formated == "22:00:00:Wednesday":
+        #elif isremindenabled and not isreminded_wed and ph_time_formated == "22:00:00:Wednesday":
+        elif isremindenabled and not isreminded_wed and ph_time_formated == "15:57:00:Saturday": #jytest
+            if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Reminder1 isreminded_wed={isreminded_wed} START')
             try:
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 nratt = len(att_igns)
@@ -280,10 +282,11 @@ For those who haven't: {feedback_noangrypingplz}''')
                 isreminded_wed = True
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
+            if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Reminder1 isreminded_wed={isreminded_wed} END')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "15:45:00:Saturday":
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "16:00:00:Saturday": #jytest
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} START')
             try:
                 try: #msg_wed may not be found
@@ -301,9 +304,8 @@ For those who haven't: {feedback_noangrypingplz}''')
                 
                 ping_tags = pinger()
                 # jytest loop more to simulate heavy load
-                for x in range(3):
-                    for discordtag in ping_tags:
-                        await botinitsk.send(f'{feedback_automsg} Hi <@.{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                for discordtag in ping_tags:
+                    await botinitsk.send(f'{feedback_automsg} {discordtag}')
                 # for discordtag in ping_tags:
                     # await botinitbk.send(f'{feedback_automsg} Hi <@{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 isreminded_sat = True
@@ -377,8 +379,8 @@ async def jytest(ctx):
                 debugmode = clearscog.get_debugmode()
                 await ctx.send(f'`jytest` debugmode={debugmode}')
                 
-                await clearscog.debugmode(ctx)
-                await ctx.send(f'`jytest` new debugmode={debugmode}')
+                debugger = get_debugmode()
+                await ctx.send(f'`jytest` get_debugmode={debugger}')
                 
                 await ctx.send(f'`jytest` end')
             except Exception as e:

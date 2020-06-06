@@ -194,7 +194,7 @@ async def on_ready():
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
         #await asyncio.sleep(1)
-        await asyncio.sleep(0.1) #jytest mroe frequent to reproduce
+        await asyncio.sleep(0.01) #jytest mroe frequent to reproduce
         if not isarchived and ( ph_time_formated == "00:00:00:Monday" or ph_time_formated == "00:00:00:Sunday" ):
             await botinitsk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
             await botinitsk.send('```An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.```')
@@ -267,8 +267,7 @@ async def on_ready():
             await botinitsk.send(f'`[Timed event status reset] isarchived={isarchived} isreminded_wed={isreminded_wed} isreminded_sat={isreminded_sat}`')
             continue
         # Timed event [auto-reminder]: a soft reminder message into #announcement. Remove on next event
-        #elif isremindenabled and not isreminded_wed and ph_time_formated == "22:00:00:Wednesday":
-        elif isremindenabled and not isreminded_wed and ph_time_formated == "16:27:00:Saturday": #jytest
+        elif isremindenabled and not isreminded_wed and ph_time_formated == "22:00:00:Wednesday":
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Reminder1 isreminded_wed={isreminded_wed} START')
             try:
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
@@ -279,7 +278,7 @@ Hi all,
 Currently we have {nratt} members who have registered their attendance, great job!
 For those who haven't: {feedback_noangrypingplz}''')
                 datasheet.update_cell(2, 9, msg_wed.id)
-                await botinitsk.send(f'msg_wed ID saved: `{msg_wed.id}`')
+                if debugger: await botinitsk.send(f'{feedback_debug} msg_wed ID saved: `{msg_wed.id}`')
                 isreminded_wed = True
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')

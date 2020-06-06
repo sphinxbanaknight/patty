@@ -153,13 +153,12 @@ async def on_ready():
     for channel in sphinx.channels:
         if channel.id == sk_bot:
             botinitsk = channel
-            botinitbkann = channel
             break
     for channel in burger.channels:
         if channel.id == bk_bot:
             botinitbk = channel
         elif channel.id == bk_ann:
-            #jytest botinitbkann = channel
+            botinitbkann = channel
             break
 
     print('Bot is online.')
@@ -286,7 +285,7 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "18:48:00:Saturday": #jytest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "19:08:00:Saturday": #jytest
             if debugger: await botinitsk.send(f'{feedback_debug} Angrypinger2 isreminded_sat={isreminded_sat} START')
             isreminded_sat = True
             try:
@@ -304,11 +303,15 @@ For those who haven't: {feedback_noangrypingplz}''')
                         await botinitsk.send(f'Error: unable to delete Wednesday announcement as message could not be found based on `{msgid}`. Please manually delete it.')
                 
                 ping_tags = pinger()
-                # jytest loop more to simulate heavy load
-                for discordtag in ping_tags:
-                    await botinitsk.send(f'{feedback_automsg} {discordtag}')
-                # for discordtag in ping_tags:
-                    # await botinitbk.send(f'{feedback_automsg} Hi <@{discordtag}>, you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                taglist = ''
+                if debugger: #send to test server if on debugmode
+                    for discordtag in ping_tags:
+                        taglist += '[@' + str(discordtag) + '], '
+                    await botinitsk.send(f'{feedback_debug} {feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                else:
+                    for discordtag in ping_tags:
+                        taglist += '<@' + str(discordtag) + '>, '
+                    await botinitbk.send(f'{feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_unformated.strftime("%H:%M:%S.%f:%A")} Angrypinger2 isreminded_sat={isreminded_sat} END')
@@ -374,11 +377,6 @@ async def jytest(ctx):
                 global isreminded_sat
                 global isremindenabled
                 await ctx.send(f'isarchived={isarchived}, isreminded_wed={isreminded_wed}, isreminded_sat={isreminded_sat}, isremindenabled={isremindenabled}')
-                
-                # get clears cog?
-                clearscog = client.get_cog('Clears')
-                debugmode = clearscog.get_debugmode()
-                await ctx.send(f'`jytest` debugmode={debugmode}')
                 
                 debugger = get_debugmode()
                 await ctx.send(f'`jytest` get_debugmode={debugger}')

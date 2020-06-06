@@ -98,12 +98,12 @@ client = commands.Bot(command_prefix = prefix, description = description)
 
 client.remove_command('help')
 
-def istimedeventformat(input):
-    try:
-        time.strptime(input, '%H:%M:%S:%A')
-        return True
-    except ValueError:
-        return False
+# def istimedeventformat(input):
+    # try:
+        # time.strptime(input, '%H:%M:%S:%A')
+        # return True
+    # except ValueError:
+        # return False
 
 def next_available_row(sheet, column):
     cols = sheet.range(3, column, 1000, column)
@@ -161,7 +161,11 @@ async def on_ready():
     global isarchived
     global isreminded1
     global isreminded2
-    
+    global tf_archive
+    global tf_remind1
+    global tf_remind2
+    global tf_reset
+
     for server in client.guilds:
         if server.id == sk_server:
             sphinx = server
@@ -317,10 +321,10 @@ For those who haven't: {feedback_noangrypingplz}''')
                 ping_tags = pinger()
                 taglist = ''
                 if debugger: #send to test server if on debugmode
+                    dev_list = [sphinx_id, jia_id]
                     for discordtag in ping_tags:
-                        dev_list = [sphinx_id, jia_id]
-                        discordtag = random.choice(dev_list) # for testing purpose, use only the developers' id!
-                        taglist += '<@' + str(discordtag) + '>, '
+                        #discordtag = random.choice(dev_list) # for testing purpose, use only the developers' id!
+                        taglist += '<.@' + str(discordtag) + '>, '
                     if taglist != '':
                         await botinitsk.send(f'{feedback_debug} {feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 else:
@@ -334,20 +338,16 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue            
         # Timed event status reset
         elif ph_time_formated in tf_reset:
-            global tf_archive
-            global tf_remind1
-            global tf_remind2
-            global tf_reset
             isarchived = False
             isreminded1 = False
             isreminded2 = False
-            if debugger: await botinitsk.send(f'`[Timed event status reset] isarchived={isarchived} isreminded1={isreminded1} isreminded2={isreminded2}`')
+            if debugger: await botinitsk.send(f'{feedback_debug} `[Timed event status reset] isarchived={isarchived} isreminded1={isreminded1} isreminded2={isreminded2}`')
             # Default timed event runtime (format = "%H:%M:%S:%A")
             tf_archive = ['00:00:00:Monday', '00:00:00:Sunday']
             tf_remind1 = ['22:00:00:Wednesday']
             tf_remind2 = ['22:00:00:Friday']
             tf_reset   = ['00:05:00:Monday', '00:05:00:Sunday']
-            if debugger: await botinitsk.send(f'`[Timed event timers reset] tf_archive={tf_archive} tf_remind1={tf_remind1} tf_remind2={tf_remind2} tf_reset={tf_reset}`')
+            if debugger: await botinitsk.send(f'{feedback_debug} `[Timed event timers reset] tf_archive={tf_archive} tf_remind1={tf_remind1} tf_remind2={tf_remind2} tf_reset={tf_reset}`')
             continue
 
             

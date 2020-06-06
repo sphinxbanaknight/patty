@@ -194,13 +194,13 @@ async def on_ready():
         ph_time = pytz.timezone('Asia/Manila')
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
-        if debugger #jytest sorry jp im really curious how this worksssss im gonna spam it
+        if debugger: #jytest sorry jp im really curious how this worksssss im gonna spam it
             my_time_milisec = ph_time_unformated.strftime("%H:%M:%S.%f[%A]")
             rightnow = datetime.now(ph_time).strftime("%H:%M:%S.%f[%A]")
             await botinitsk.send(f'{feedback_debug} BEFORE my?{my_time_milisec}... rightnow?{rightnow} jytestcounter={jytestcounter}')
         #await asyncio.sleep(1)
         await asyncio.sleep(0.1) #jytest mroe frequent to reproduce
-        if debugger #jytest sorry jp im really curious how this worksssss im gonna spam it
+        if debugger: #jytest sorry jp im really curious how this worksssss im gonna spam it
             my_time_milisec = ph_time_unformated.strftime("%H:%M:%S.%f[%A]")
             rightnow = datetime.now(ph_time).strftime("%H:%M:%S.%f[%A]")
             await botinitsk.send(f'{feedback_debug} AFTER my?{my_time_milisec}... rightnow?{rightnow} jytestcounter={jytestcounter}')
@@ -296,7 +296,7 @@ For those who haven't: {feedback_noangrypingplz}''')
             continue
         # Timed event [auto-reminder]: @mention per player who enlisted but not yet confirmed attendance
         #elif isremindenabled and not isreminded_sat and ph_time_formated == "22:00:00:Friday":
-        elif isremindenabled and not isreminded_sat and ph_time_formated == "17:42:00:Saturday": #jytest
+        elif isremindenabled and not isreminded_sat and ph_time_formated == "17:45:00:Saturday": #jytest
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} START')
             try:
                 try: #msg_wed may not be found
@@ -323,7 +323,7 @@ For those who haven't: {feedback_noangrypingplz}''')
                 await botinitsk.send(f'Error: `{e}`')
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Angrypinger2 isreminded_sat={isreminded_sat} END')
             continue
-        elif debugger and ph_time_formated == "17:41:50:Saturday": #jytest sorry jp im really curious how this worksssss im gonna spam it
+        elif debugger and ph_time_formated == "17:44:50:Saturday": #jytest sorry jp im really curious how this worksssss im gonna spam it
             jytestcounter += 1
             my_time_milisec = ph_time_unformated.strftime("%H:%M:%S.%f[%A]")
             rightnow = datetime.now(ph_time).strftime("%H:%M:%S.%f[%A]")

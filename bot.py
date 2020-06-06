@@ -320,12 +320,12 @@ For those who haven't: {feedback_noangrypingplz}''')
                     for discordtag in ping_tags:
                         discordtag = random.choices([sphinx_id, jia_id]) # for testing purpose, use only the developers' id!
                         taglist += '<@' + str(discordtag) + '>, '
-                    if taglist != ''
+                    if taglist != '':
                         await botinitsk.send(f'{feedback_debug} {feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 else:
                     for discordtag in ping_tags:
                         taglist += '<@' + str(discordtag) + '>, '
-                    if taglist != ''
+                    if taglist != '':
                         await botinitbk.send(f'{feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
@@ -442,7 +442,7 @@ async def forcetimedevent(ctx, *, arguments)
                         global tf_reset
                         tf_reset.append(eventtime)
                         if debugger: await ctx.send(f'{feedback_debug} Timed event reset added to also run at {eventtime}. All schedules: {tf_reset}')
-                    else
+                    else:
                         await ctx.send(f'''{feedback_properplz} Name format should be one of the following:
 `archive` = {tf_archive}
 `remind1` = {tf_remind1}

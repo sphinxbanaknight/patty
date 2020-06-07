@@ -1340,23 +1340,48 @@ For Wanderer: {list_wand}
         commander = ctx.author
         commander_name = commander.name
         if channel.id in botinit_id:
-            await ctx.send("""```BOT COMMANDS:
-/enlist IGN, class, optional comment = enlists your Discord ID, IGN, Class, and optional comment in the GSheets
-/att y/n, y/n = registers your attendance (either yes or no) in the GSheets, for silk 2 and 4 respectively.
-/clearguild = clears guild list (ADMIN COMMAND)
-/clearroster = clears attendance list (ADMIN COMMAND)
-/clearparty = clears party list (ADMIN COMMAND)
-/list = parses a list of the current attendance list
-/listpt = parses a list of the current party list divided into ATK, MATK, and SECOND GUILD
-/sorted = sorts the gsheets
-/celery zeny, +10 (you can specify which food) , +20 (you can specify which food), whites, blues = specific salary preferences
-/celery everything = if you prefer all salary
-/celery none = if you want to waive your salary
-/listcelery = list of the salary preferences
-/totalcelery = total list of each of the salary preferences
-/changerequest class, optional reason = files a change request to main a different class. An officer will need some time to process your request, please ask them for updates. 
-PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT. 
-Thank you!```\n""")
+            await ctx.send("""__**BOT COMMANDS**__
+PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
+
+**/enlist** `IGN`, `class`, *`optional comment`*
+> enlists your Discord ID, IGN, Class, and optional comment in the GSheets
+> e.g. `/enlist Ayaneru, Sura`
+**/att** `y/n`, `y/n`
+> registers your attendance (either yes or no) in the GSheets, for silk 2 and 4 respectively.
+> e.g. `/att y, n` *(to attend silk 2, skip silk 4)*
+**/list**
+> parses a list of the current attendance list
+**/listpt**
+> parses a list of the current party list divided into ATK, MATK, and SECOND GUILD
+**/celery** `preferences`
+> **zeny, +10 (you can specify which food) , +20 (you can specify which food), whites, blues** = specific salary preferences
+> **everything** = if you prefer all salary
+> **none** = if you want to waive your salary
+> e.g.  `/celery zeny, +10dex, +20dex, +20int` *(opt to get zeny, +10dex, +20dex and +20int foods)*
+**/listcelery**
+> list of the salary preferences
+**/totalcelery**
+> total list of each of the salary preferences
+**/changerequest** `class`, *`optional reason`*
+> files a change request to main a different class. An officer will need some time to process your request, please ask them for updates. 
+> e.g. `/changerequest SC, I want to learn SC`
+
+__Admin-only commands__
+**/debugmode**
+> For development use. Toggles debugging mode: some features will result in extra feedbacks with `[DEBUGINFO]`
+> Some features will behave differently during debugmode.
+**/clearguild**
+> clears guild list
+**/clearroster**
+> clears attendance list
+**/clearparty**
+> clears party list
+**/forcetimedevent `name`, `time`**
+> **name** = timed event name - one of the following: archive, remind1, remind2, reset
+> **time** = time to schedule, in the format of hh:mm:ss:Day. Case sensitive!
+**/refreshid**
+> updates Discord ID of all members in the list
+""")
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 

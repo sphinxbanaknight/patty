@@ -422,7 +422,7 @@ async def forcetimedevent(ctx, *, arguments):
             if no_of_args == 2:
                 try:
                     eventname = arglist[0].lower()
-                    eventtime = arglist[1].lower()
+                    eventtime = arglist[1]
                     if debugger: await ctx.send(f'{feedback_debug} input: {eventname}, {eventtime}')
                     
                     if not istimedeventformat(eventtime):

@@ -289,11 +289,15 @@ async def on_ready():
             try:
                 att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
                 nratt = len(att_igns)
-                msg_wed = await botinitbkann.send(f'''{feedback_automsg}
+                msgstr = f'''{feedback_automsg}
 Hi all,
 
 Currently we have {nratt} members who have registered their attendance, great job!
-For those who haven't: {feedback_noangrypingplz}''')
+For those who haven't: {feedback_noangrypingplz}'''
+                if debugger: #send to test server if on debugmode
+                    msg_wed = await botinitsk.send(msgstr)
+                else
+                    msg_wed = await botinitbkann.send(msgstr)
                 datasheet.update_cell(2, 9, msg_wed.id)
                 if debugger: await botinitsk.send(f'{feedback_debug} msg_wed ID saved: `{msg_wed.id}`')
             except Exception as e:
@@ -311,7 +315,10 @@ For those who haven't: {feedback_noangrypingplz}''')
                     msg1 = await botinitsk.send(f'Error: I forgot the message! Attempting to fetch by message ID...')
                     try: #find value saved in sheet
                         msgid = datasheet.cell(2,9).value
-                        msg_wed = await botinitbkann.fetch_message(msgid)
+                        if debugger:
+                            msg_wed = await botinitsk.fetch_message(msgid)
+                        else
+                            msg_wed = await botinitbkann.fetch_message(msgid)
                         await msg_wed.delete()
                         await msg1.edit(content="Message successfully fetched and deleted.")
                     except Exception as e:
@@ -324,7 +331,7 @@ For those who haven't: {feedback_noangrypingplz}''')
                     dev_list = [sphinx_id, jia_id]
                     for discordtag in ping_tags:
                         discordtag = random.choice(dev_list) # for testing purpose, use only the developers' id!
-                        taglist += '<.@' + str(discordtag) + '>, '
+                        taglist += '<@' + str(discordtag) + '>, '
                     if taglist != '':
                         await botinitsk.send(f'{feedback_debug} {feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 else:

@@ -399,6 +399,7 @@ async def togglereminder(ctx):
 # Force a timed event run
 @client.command()
 async def forcetimedevent(ctx, *, arguments):
+    debugger = get_debugmode()
     channel = ctx.message.channel
     commander = ctx.author
     if channel.id in botinit_id:

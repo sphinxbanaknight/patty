@@ -1365,8 +1365,9 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
 **/changerequest** `class`, *`optional reason`*
 > files a change request to main a different class. An officer will need some time to process your request, please ask them for updates. 
 > e.g. `/changerequest SC, I want to learn SC`
-
-__Admin-only commands__
+""")
+            if commander.id in authorized_id:
+                msghelpadmin = '''
 **/debugmode**
 > For development use. Toggles debugging mode: some features will result in extra feedbacks with `[DEBUGINFO]`
 > Some features will behave differently during debugmode.
@@ -1380,8 +1381,8 @@ __Admin-only commands__
 > **name** = timed event name - one of the following: archive, remind1, remind2, reset
 > **time** = time to schedule, in the format of hh:mm:ss:Day. Case sensitive!
 **/refreshid**
-> updates Discord ID of all members in the list
-""")
+> updates Discord ID of all members in the list'''
+                await ctx.send(f'Hi boss! Here are the **admin-only commands**:{msghelpadmin}')
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 

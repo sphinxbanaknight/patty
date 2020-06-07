@@ -807,7 +807,7 @@ For Wanderer: {list_wand}
                     noppie += 1
 
             if yuppie == 0 and noppie == 0:
-                await ctx.send('`Attendance not found. `\n{feedback_attplz}')
+                await ctx.send(f'`Attendance not found. `\n{feedback_attplz}')
                 await msg.delete()
                 return
 

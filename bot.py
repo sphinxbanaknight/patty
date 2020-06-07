@@ -296,7 +296,7 @@ Currently we have {nratt} members who have registered their attendance, great jo
 For those who haven't: {feedback_noangrypingplz}'''
                 if debugger: #send to test server if on debugmode
                     msg_wed = await botinitsk.send(msgstr)
-                else
+                else:
                     msg_wed = await botinitbkann.send(msgstr)
                 datasheet.update_cell(2, 9, msg_wed.id)
                 if debugger: await botinitsk.send(f'{feedback_debug} msg_wed ID saved: `{msg_wed.id}`')
@@ -317,7 +317,7 @@ For those who haven't: {feedback_noangrypingplz}'''
                         msgid = datasheet.cell(2,9).value
                         if debugger:
                             msg_wed = await botinitsk.fetch_message(msgid)
-                        else
+                        else:
                             msg_wed = await botinitbkann.fetch_message(msgid)
                         await msg_wed.delete()
                         await msg1.edit(content="Message successfully fetched and deleted.")

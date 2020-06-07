@@ -216,7 +216,7 @@ async def on_ready():
         ph_time = pytz.timezone('Asia/Manila')
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
-        await asyncio.sleep(1)
+        await asyncio.sleep(0.5)
             
         if not isarchived and ph_time_formated in tf_archive:
             isarchived = True

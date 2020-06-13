@@ -298,7 +298,7 @@ For those who haven't: {feedback_noangrypingplz}'''
                     msg_wed = await botinitsk.send(msgstr)
                 else:
                     msg_wed = await botinitbkann.send(msgstr)
-                datasheet.update_cell(2, 9, msg_wed.id)
+                datasheet.update_cell(2, 9, str(msg_wed.id) ) # save as string to avoid Excel nr truncation
                 if debugger: await botinitsk.send(f'{feedback_debug} msg_wed ID saved: `{msg_wed.id}`')
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')

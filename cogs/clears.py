@@ -220,7 +220,6 @@ class Clears(commands.Cog):
     
     @commands.command()
     async def remind(self, ctx):
-    
         ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
         global debugger
         channel = ctx.message.channel
@@ -229,7 +228,6 @@ class Clears(commands.Cog):
         
         if channel.id in botinit_id:
             msg = await ctx.send(f'`Parsing the list. Please refrain from entering other commands.`')
-            await ctx.send(f'`Debugmode = {debugger}`')
             
             remindlist = reminder()
             remindlist.sort()
@@ -239,6 +237,7 @@ class Clears(commands.Cog):
                 embeded = discord.Embed(title = "Reminder List", description = "A list of people who really should /att y/n, y/n immediately", color = 0x00FF00)
             except Exception as e:
                 print(f'discord embed reminder returned {e}')
+                if debugger: await ctx.send(f'{feedback_debug} Error: `{e}`')
                 return
             x = 0
             remlist = ''
@@ -249,14 +248,16 @@ class Clears(commands.Cog):
                 embeded.add_field(name="Discord Tag", value=f'{remlist}', inline=True)
             except Exception as e:
                 print(f'add field reminder returned {e}')
+                if debugger: await ctx.send(f'{feedback_debug} Error: `{e}`')
                 return
             
             try:
                 await ctx.send(embed=embeded)
             except Exception as e:
                 print(f'send embed remind returned {e}')
+                if debugger: await ctx.send(f'{feedback_debug} Error: `{e}`')
             
-            await ctx.send(f'Currently there are `{len(remindlist)}` who have not registered their attendance. {(len(remindlist)/len(ignlist))*100}% of our guild have not registered.')
+            await ctx.send(f'Currently there are `{len(remindlist)}` who have not registered their attendance. {round((len(remindlist)/len(ignlist))*100, 2)}% of our guild have not registered.')
             
             await msg.delete()
         else:
@@ -1365,6 +1366,8 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
 **/changerequest** `class`, *`optional reason`*
 > files a change request to main a different class. An officer will need some time to process your request, please ask them for updates. 
 > e.g. `/changerequest SC, I want to learn SC`
+**/remind**
+> lists down members who have yet to register their attendance.
 """)
             if commander.id in authorized_id:
                 msghelpadmin = '''

@@ -72,8 +72,8 @@ isreminded2 = False # reminder sat
 
 # Default timed event runtime (format = "%H:%M:%S:%A")
 tf_archive = ['00:00:00:Monday', '00:00:00:Sunday']
-tf_remind1 = ['22:00:00:Wednesday']
-tf_remind2 = ['22:00:00:Friday']
+tf_remind1 = ['22:00:00:Tuesday']
+tf_remind2 = ['22:00:00:Thursday']
 tf_reset   = ['00:05:00:Monday', '00:05:00:Sunday']
 
 # Responses
@@ -89,7 +89,7 @@ isremindenabled = True # configuration - turn on/off auto-reminder
 feedback_properplz = 'Please send a proper syntax: '
 feedback_debug = '`[DEBUGINFO] `'
 feedback_automsg = '`[Auto-generated message]` '
-feedback_noangrypingplz = 'to avoid <:AngryPing:703193629489102888> from me, please register your attendance before coming Saturday 12PM GMT+8 by `/att y/n, y/n` in <#691205255664500757>. Thank you!'
+feedback_noangrypingplz = 'to avoid <:AngryPing:703193629489102888> from me, please register your attendance before coming Thursday 12PM GMT+8 by typing `/att y/n, y/n` in <#691205255664500757>. Thank you!'
 
 
 prefix = ["/"]
@@ -220,9 +220,9 @@ async def on_ready():
             
         if not isarchived and ph_time_formated in tf_archive:
             isarchived = True
-            await botinitsk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
+            await botinitsk.send('```Automatically cleared the roster! Please use /att y/n, y/n again to register your attendance.```')
             await botinitsk.send('```An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.```')
-            await botinitbk.send('```Automatically cleared the roster! Please use /att y/n again to register your attendance.```')
+            await botinitbk.send('```Automatically cleared the roster! Please use /att y/n, y/n again to register your attendance.```')
             await botinitbk.send('```An archive of the latest roster was saved in WoE Roster Archive Spreadsheet.```')
             try:
                 next_row = next_available_row(wsheet, 1)
@@ -295,11 +295,11 @@ Hi all,
 Currently we have {nratt} members who have registered their attendance, great job!
 For those who haven't: {feedback_noangrypingplz}'''
                 if debugger: #send to test server if on debugmode
-                    msg_wed = await botinitsk.send(msgstr)
+                    msg1 = await botinitsk.send(msgstr)
                 else:
-                    msg_wed = await botinitbkann.send(msgstr)
-                datasheet.update_cell(2, 9, str(msg_wed.id) ) # save as string to avoid Excel nr truncation
-                if debugger: await botinitsk.send(f'{feedback_debug} msg_wed ID saved: `{msg_wed.id}`')
+                    msg1 = await botinitbkann.send(msgstr)
+                datasheet.update_cell(2, 9, str(msg1.id) ) # save as string to avoid Excel nr truncation
+                if debugger: await botinitsk.send(f'{feedback_debug} msg1 ID saved: `{msg1.id}`')
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Reminder1 isreminded1={isreminded1} END')
@@ -309,21 +309,21 @@ For those who haven't: {feedback_noangrypingplz}'''
             if debugger: await botinitsk.send(f'{feedback_debug} Angrypinger2 isreminded2={isreminded2} START')
             isreminded2 = True
             try:
-                try: #msg_wed may not be found
-                    await msg_wed.delete()
+                try: #msg1 may not be found
+                    await msg1.delete()
                 except NameError as e:
                     msg1 = await botinitsk.send(f'Error: I forgot the message! Attempting to fetch by message ID...')
                     try: #find value saved in sheet
                         msgid = datasheet.cell(2,9).value
                         if debugger:
-                            msg_wed = await botinitsk.fetch_message(msgid)
+                            msg1 = await botinitsk.fetch_message(msgid)
                         else:
-                            msg_wed = await botinitbkann.fetch_message(msgid)
-                        await msg_wed.delete()
+                            msg1 = await botinitbkann.fetch_message(msgid)
+                        await msg1.delete()
                         await msg1.edit(content="Message successfully fetched and deleted.")
                     except Exception as e:
                         await botinitsk.send(f'Error: `{e}`')
-                        await botinitsk.send(f'Error: unable to delete Wednesday announcement as message could not be found based on `{msgid}`. Please manually delete it.')
+                        await botinitsk.send(f'Error: unable to delete first reminder announcement as message could not be found based on `{msgid}`. Please manually delete it.')
                 
                 ping_tags = pinger()
                 taglist = ''
@@ -351,8 +351,8 @@ For those who haven't: {feedback_noangrypingplz}'''
             if debugger: await botinitsk.send(f'{feedback_debug} `[Timed event status reset] isarchived={isarchived} isreminded1={isreminded1} isreminded2={isreminded2}`')
             # Default timed event runtime (format = "%H:%M:%S:%A")
             tf_archive = ['00:00:00:Monday', '00:00:00:Sunday']
-            tf_remind1 = ['22:00:00:Wednesday']
-            tf_remind2 = ['22:00:00:Friday']
+            tf_remind1 = ['22:00:00:Tuesday']
+            tf_remind2 = ['22:00:00:Thursday']
             tf_reset   = ['00:05:00:Monday', '00:05:00:Sunday']
             if debugger: await botinitsk.send(f'{feedback_debug} `[Timed event timers reset] tf_archive={tf_archive} tf_remind1={tf_remind1} tf_remind2={tf_remind2} tf_reset={tf_reset}`')
             continue
@@ -422,8 +422,8 @@ async def forcetimedevent(ctx, *, arguments):
             global tf_remind2
             global tf_reset
             tf_archive = ['00:00:00:Monday', '00:00:00:Sunday']
-            tf_remind1 = ['22:00:00:Wednesday']
-            tf_remind2 = ['22:00:00:Friday']
+            tf_remind1 = ['22:00:00:Tuesday']
+            tf_remind2 = ['22:00:00:Thursday']
             tf_reset   = ['00:05:00:Monday', '00:05:00:Sunday']
 
             if no_of_args == 2:
@@ -433,38 +433,38 @@ async def forcetimedevent(ctx, *, arguments):
                     if debugger: await ctx.send(f'{feedback_debug} input: {eventname}, {eventtime}')
                     
                     if not istimedeventformat(eventtime):
-                        await ctx.send(f'{feedback_properplz} Time format should be in H:M:S:Day, e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`')
+                        await ctx.send(f'{feedback_properplz} Time format should be in H:M:S:Day, e.g. `/forcetimedevent, remind1, 22:00:00:Tuesday`')
                         return
                     
                     if eventname in answer_timedevent_archive:
                         global isarchived
                         isarchived = False
                         tf_archive.append(eventtime)
-                        if debugger: await ctx.send(f'{feedback_debug} Timed event archive added to also run at {eventtime}. All schedules: {tf_archive}')
+                        await ctx.send(f'Timed event archive added to also run at {eventtime}. All schedules: {tf_archive}')
                     elif eventname in answer_timedevent_remind1:
                         global isreminded1
                         isreminded1 = False
                         tf_remind1.append(eventtime)
-                        if debugger: await ctx.send(f'{feedback_debug} Timed event remind1 added to also run at {eventtime}. All schedules: {tf_remind1}')
+                        await ctx.send(f'Timed event remind1 added to also run at {eventtime}. All schedules: {tf_remind1}')
                     elif eventname in answer_timedevent_remind2:
                         global isreminded2
                         isreminded2 = False
                         tf_remind2.append(eventtime)
-                        if debugger: await ctx.send(f'{feedback_debug} Timed event remind2 added to also run at {eventtime}. All schedules: {tf_remind2}')
+                        await ctx.send(f'Timed event remind2 added to also run at {eventtime}. All schedules: {tf_remind2}')
                     elif eventname in answer_timedevent_reset:
                         tf_reset.append(eventtime)
-                        if debugger: await ctx.send(f'{feedback_debug} Timed event reset added to also run at {eventtime}. All schedules: {tf_reset}')
+                        await ctx.send(f'Timed event reset added to also run at {eventtime}. All schedules: {tf_reset}')
                     else:
                         await ctx.send(f'''{feedback_properplz} Name format should be one of the following:
 `archive` = {tf_archive}
 `remind1` = {tf_remind1}
 `remind2` = {tf_remind2}
 `reset  ` = {tf_reset}
-e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`''')
+e.g. `/forcetimedevent, remind1, 22:00:00:Tuesday`''')
                 except Exception as e:
                     await ctx.send(f'Error: `{e}`')
             else:
-                await ctx.send(f'{feedback_properplz} `/forcetimedevent, <name>, <time>`, e.g. `/forcetimedevent, remind1, 22:00:00:Wednesday`')
+                await ctx.send(f'{feedback_properplz} `/forcetimedevent, <name>, <time>`, e.g. `/forcetimedevent, remind1, 22:00:00:Tuesday`')
                 return
         else:
             await ctx.send(f'*Nice try pleb.*')

@@ -118,6 +118,7 @@ def pinger():
     dscid = []
     
     for ign in ignlist:
+        gottem = 0
         for att in attlist:
             if ign == att:
                 ign = ""
@@ -128,8 +129,6 @@ def pinger():
                 dsctag.append(rostersheet.cell(row, 2).value)
             except Exception as e:
                 print(f'Exception caught at dsctag: {e}')
-        else:
-            gottem = 0
         row += 1
         
     row = 4

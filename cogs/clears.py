@@ -643,7 +643,7 @@ For Wanderer: {list_wand}
                                     cell.value = 'No'
                                 re_answer = cell.value
                             count += 1
-                    except:
+                    except Exception as e:
                         await ctx.send(f'Error on SILK 2: `{e}`')
                         return
                     
@@ -658,7 +658,7 @@ For Wanderer: {list_wand}
                         if debugger: await ctx.send(f'{feedback_debug} dayofweek=`{my_dow}` timeonly=`{my_timeonly}` woeendtime=`{woeendtime}`')
                         if my_dow == 'Sunday' and my_timeonly >= woeendtime:
                             isskip = True
-                    except:
+                    except Exception as e:
                         await ctx.send(f'Time check error: `{e}`')
                     
                     if isskip:
@@ -703,7 +703,7 @@ For Wanderer: {list_wand}
                             count += 1
                         silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
                         await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 4 with IGN: {ign.value}, Class: {role.value}.```')
-                    except:
+                    except Exception as e:
                         await ctx.send(f'Error on SILK 4: `{e}`')
                         return
                 else:

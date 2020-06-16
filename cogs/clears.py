@@ -650,7 +650,7 @@ For Wanderer: {list_wand}
                     isskip = False
                     try:
                         my_time = pytz.timezone('Asia/Kuala_Lumpur')
-                        my_time_unformatted = datetime.now(my_time)
+                        my_time_unformatted = datetime.datetime.now(my_time)
                         my_dow = my_time_unformatted.strftime('%A')
                         my_timeonly = my_time_unformatted.time()
                         woeendtime = datetime.time(0, 0) # both silk 2 and 4 end on 00:00:00
@@ -1607,7 +1607,7 @@ Siege Whites
         
         format = "%d/%m/%Y"
         my_time = pytz.timezone('Asia/Kuala_Lumpur')
-        my_time_unformatted = datetime.now(my_time)
+        my_time_unformatted = datetime.datetime.now(my_time)
         my_time_formated = my_time_unformatted.strftime(format)
         
         if channel.id in botinit_id:

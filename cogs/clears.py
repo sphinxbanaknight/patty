@@ -14,7 +14,6 @@ import pytz
 import asyncio
 
 from pytz import timezone
-from datetime import datetime, timedelta
 
 from oauth2client.service_account import ServiceAccountCredentials
 from discord.ext import commands, tasks
@@ -673,7 +672,7 @@ For Wanderer: {list_wand}
                 if arglist[1].lower() in answeryes or arglist[1].lower() in answerno:
                     try:
                         if foundign4:
-                            change_row = foundign4[0]
+                            change_row = foundign4[0].row
                         else:
                             try:
                                 change_row = next_available_row(silk4, 2)

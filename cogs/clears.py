@@ -50,7 +50,6 @@ authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 352
 #marvs = 437618826897522690
 #red = 352073289155346442
 #jia = 143743232658898944
-eyooo = 123456789123456789
 
 ############################## DEBUGMODE ##############################
 debugger = False
@@ -113,7 +112,6 @@ answerdex20 = ['+20 dex', '+20dex']
 answerluk20 = ['+20 luk', '+20luk']
 answerwhites = ['whites', 'hp pots', 'siege whites', 'white', 'siege white']
 answerblues = ['blues', 'sp pots', 'siege blues', 'blue', 'siege blue']
-
 
 
 ############################# FEEDBACKS #############################
@@ -618,51 +616,51 @@ For Wanderer: {list_wand}
                 if arglist[0].lower() in answeryes or arglist[0].lower() in answerno:
                     if foundign2:
                         cell_list = silk2.range(foundign2[0].row, 2, foundign2[0].row, 4)
-                        count = 0
-                        for cell in cell_list:
-                            if count == 0:
-                                cell.value = ign.value
-                            elif count == 1:    
-                                cell.value = role.value
-                            elif count == 2:
-                                if arglist[0].lower() in answeryes:
-                                    cell.value = 'Yes'
-                                    yes = 1
-                                else:
-                                    cell.value = 'No'
-                                re_answer = cell.value
-                            count += 1
-                        silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 2 with IGN: {ign.value}, Class: {role.value}.```')
                     else:
                         try:
                             change_row = next_available_row(silk2, 2)
                         except ValueError as e:
                             change_row = 4
                         cell_list = silk2.range(change_row, 2, change_row, 4)
-                        count = 0
-                        # await ctx.send('test2')
-                        for cell in cell_list:
-                            # await ctx.send(f'test3 {ign.value} {role.value} {count}')
-                            if count == 0:
-                                # await ctx.send(f'test4 {ign.value} {role.value} {count}')
-                                cell.value = ign.value
-                            elif count == 1:
-                                # await ctx.send(f'test5 {ign.value} {role.value} {count}')
-                                cell.value = role.value
-                            elif count == 2:
-                                # await ctx.send(f'test6 {ign.value} {role.value} {count}')
-                                if arglist[0].lower() in answeryes:
-                                    cell.value = 'Yes'
-                                    yes = 1
-                                else:
-                                    cell.value = 'No'
-                                re_answer = cell.value
-                            elif count == 3:
-                                cell.value = ""
-                            count += 1
+                    count = 0
+                    # await ctx.send('test2')
+                    for cell in cell_list:
+                        # await ctx.send(f'test3 {ign.value} {role.value} {count}')
+                        if count == 0:
+                            # await ctx.send(f'test4 {ign.value} {role.value} {count}')
+                            cell.value = ign.value
+                        elif count == 1:
+                            # await ctx.send(f'test5 {ign.value} {role.value} {count}')
+                            cell.value = role.value
+                        elif count == 2:
+                            # await ctx.send(f'test6 {ign.value} {role.value} {count}')
+                            if arglist[0].lower() in answeryes:
+                                cell.value = 'Yes'
+                                yes = 1
+                            else:
+                                cell.value = 'No'
+                            re_answer = cell.value
+                        count += 1
+                    
+                    # Ignore silk 2 entry if entered between post-silk 2 and pre-silk 4 time
+                    isskip = False
+                    try:
+                        my_time = pytz.timezone('Asia/Kuala_Lumpur')
+                        my_time_unformatted = datetime.now(my_time)
+                        my_dow = my_time_unformatted.strftime('%A')
+                        my_timeonly = my_time_unformatted.time()
+                        woeendtime = datetime.time(0, 0) # both silk 2 and 4 end on 00:00:00
+                        if debugger: await ctx.send(f'{feedback_debug} dayofweek=`{my_dow}` timeonly=`{my_timeonly}` woeendtime=`{woeendtime}`')
+                        if my_dow = 'Sunday' and my_timeonly >= woeendtime:
+                            isskip = True
+                    except:
+                        await ctx.send(f'Time check error: `{e}`')
+                    
+                    if isskip:
+                        await ctx.send(f'```Ignoring {ctx.author.name}\'s answer {re_answer} for SILK 2 as the WoE for this week has already passed.```')
+                    else:
                         silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 2 with IGN: {ign.value}, and Class: {role.value}.```')
+                        await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 2 with IGN: {ign.value}, Class: {role.value}.```')
                 else:
                     await ctx.send(f'{feedback_properplz} `/att y/n, y/n`')
                     return
@@ -670,51 +668,33 @@ For Wanderer: {list_wand}
                 if arglist[1].lower() in answeryes or arglist[1].lower() in answerno:
                     if foundign4:
                         cell_list = silk4.range(foundign4[0].row, 2, foundign4[0].row, 4)
-                        count = 0
-                        for cell in cell_list:
-                            if count == 0:
-                                cell.value = ign.value
-                            elif count == 1:
-                                cell.value = role.value
-                            elif count == 2:
-                                if arglist[1].lower() in answeryes:
-                                    cell.value = 'Yes'
-                                    yes = 1
-                                else:
-                                    cell.value = 'No'
-                                re_answer = cell.value
-                            count += 1
-                        silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 4 with IGN: {ign.value}, Class: {role.value}.```')
                     else:
                         try:
                             change_row = next_available_row(silk4, 2)
                         except ValueError as e:
                             change_row = 4
                         cell_list = silk4.range(change_row, 2, change_row, 4)
-                        count = 0
-                        # await ctx.send('test2')
-                        for cell in cell_list:
-                            # await ctx.send(f'test3 {ign.value} {role.value} {count}')
-                            if count == 0:
-                                # await ctx.send(f'test4 {ign.value} {role.value} {count}')
-                                cell.value = ign.value
-                            elif count == 1:
-                                # await ctx.send(f'test5 {ign.value} {role.value} {count}')
-                                cell.value = role.value
-                            elif count == 2:
-                                # await ctx.send(f'test6 {ign.value} {role.value} {count}')
-                                if arglist[1].lower() in answeryes:
-                                    cell.value = 'Yes'
-                                    yes = 1
-                                else:
-                                    cell.value = 'No'
-                                re_answer = cell.value
-                            elif count == 3:
-                                cell.value = ""
-                            count += 1
-                        silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 4 with IGN: {ign.value}, and Class: {role.value}.```')
+                    count = 0
+                    # await ctx.send('test2')
+                    for cell in cell_list:
+                        # await ctx.send(f'test3 {ign.value} {role.value} {count}')
+                        if count == 0:
+                            # await ctx.send(f'test4 {ign.value} {role.value} {count}')
+                            cell.value = ign.value
+                        elif count == 1:
+                            # await ctx.send(f'test5 {ign.value} {role.value} {count}')
+                            cell.value = role.value
+                        elif count == 2:
+                            # await ctx.send(f'test6 {ign.value} {role.value} {count}')
+                            if arglist[1].lower() in answeryes:
+                                cell.value = 'Yes'
+                                yes = 1
+                            else:
+                                cell.value = 'No'
+                            re_answer = cell.value
+                        count += 1
+                    silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
+                    await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 4 with IGN: {ign.value}, Class: {role.value}.```')
                 else:
                     await ctx.send(f'{feedback_properplz} `/att y/n, y/n`')
                     return

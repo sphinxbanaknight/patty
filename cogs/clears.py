@@ -651,7 +651,7 @@ For Wanderer: {list_wand}
                         my_timeonly = my_time_unformatted.time()
                         woeendtime = datetime.time(0, 0) # both silk 2 and 4 end on 00:00:00
                         if debugger: await ctx.send(f'{feedback_debug} dayofweek=`{my_dow}` timeonly=`{my_timeonly}` woeendtime=`{woeendtime}`')
-                        if my_dow = 'Sunday' and my_timeonly >= woeendtime:
+                        if my_dow == 'Sunday' and my_timeonly >= woeendtime:
                             isskip = True
                     except:
                         await ctx.send(f'Time check error: `{e}`')

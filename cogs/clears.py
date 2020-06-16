@@ -614,14 +614,19 @@ For Wanderer: {list_wand}
 
             if no_of_args == 2:
                 if arglist[0].lower() in answeryes or arglist[0].lower() in answerno:
-                    if foundign2:
-                        cell_list = silk2.range(foundign2[0].row, 2, foundign2[0].row, 4)
-                    else:
-                        try:
-                            change_row = next_available_row(silk2, 2)
-                        except ValueError as e:
-                            change_row = 4
-                        cell_list = silk2.range(change_row, 2, change_row, 4)
+                    try:
+                        if foundign2:
+                            change_row = foundign2[0].row
+                        else:
+                            try:
+                                change_row = next_available_row(silk2, 2)
+                            except ValueError as e:
+                                change_row = 4
+                    except:
+                        await ctx.send(f'Error retrieving row: `{e}`')
+                        return
+                    if debugger: await ctx.send(f'{feedback_debug} SILK 2 change_row=`{change_row}`')
+                    cell_list = silk2.range(change_row, 2, change_row, 4)
                     count = 0
                     # await ctx.send('test2')
                     for cell in cell_list:
@@ -666,14 +671,20 @@ For Wanderer: {list_wand}
                     return
                 yes = 0
                 if arglist[1].lower() in answeryes or arglist[1].lower() in answerno:
-                    if foundign4:
-                        cell_list = silk4.range(foundign4[0].row, 2, foundign4[0].row, 4)
-                    else:
-                        try:
-                            change_row = next_available_row(silk4, 2)
-                        except ValueError as e:
-                            change_row = 4
-                        cell_list = silk4.range(change_row, 2, change_row, 4)
+                    try:
+                        if foundign4:
+                            change_row = foundign4[0]
+                        else:
+                            try:
+                                change_row = next_available_row(silk4, 2)
+                            except ValueError as e:
+                                change_row = 4
+                            cell_list = silk4.range(change_row, 2, change_row, 4)
+                    except:
+                        await ctx.send(f'Error retrieving row: `{e}`')
+                        return
+                    if debugger: await ctx.send(f'{feedback_debug} SILK 4 change_row=`{change_row}`')
+                    cell_list = silk4.range(change_row, 2, change_row, 4)
                     count = 0
                     # await ctx.send('test2')
                     for cell in cell_list:

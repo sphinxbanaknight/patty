@@ -1483,7 +1483,7 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
                 if no_of_pref > 7:
                     ignlist += '\n'
-                    if no_of_pref >12
+                    if no_of_pref > 12:
                         ignlist += '\n'
             x = 0
             for x in range(len(role)):

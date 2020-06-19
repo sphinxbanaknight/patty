@@ -1481,7 +1481,7 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
             for x in range(len(ign)):
                 ignlist += ign[x] + '\n'
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
-                if no_of_pref > 7 or (no_of_pref > 6 and len(ign[x]) > 10):
+                if no_of_pref > 7 or (no_of_pref > 6 and len(ign[x]) > 11):
                     ignlist += '\n'
                     if no_of_pref > 12:
                         ignlist += '\n'

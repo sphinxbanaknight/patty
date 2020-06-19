@@ -1492,7 +1492,7 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
                 if no_of_pref > 7 or (no_of_pref > 6 and len(ign[x]) > 11):
                     classlist += '\n'
                     if no_of_pref > 12:
-                        ignlist += '\n'
+                        classlist += '\n'
             x = 0
             for x in range(len(pref)):
                 preflist += pref[x] + '\n'

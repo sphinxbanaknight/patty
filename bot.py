@@ -89,7 +89,7 @@ isremindenabled = True # configuration - turn on/off auto-reminder
 feedback_properplz = 'Please send a proper syntax: '
 feedback_debug = '`[DEBUGINFO] `'
 feedback_automsg = '`[Auto-generated message]` '
-feedback_noangrypingplz = 'to avoid <:AngryPing:703193629489102888> from me, please register your attendance before coming Thursday 12PM GMT+8 by typing `/att y/n, y/n` in <#691205255664500757>. Thank you!'
+feedback_noangrypingplz = 'to avoid <:AngryPing:703193629489102888> from me, please register your attendance before coming Thursday 10PM GMT+8 by typing `/att y/n, y/n` in <#691205255664500757>. Thank you!'
 
 
 prefix = ["/"]

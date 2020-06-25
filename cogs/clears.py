@@ -666,7 +666,7 @@ For Wanderer: {list_wand}
                         silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
                         await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 2 with IGN: {ign.value}, Class: {role.value}.```')
                 else:
-                    await ctx.send(f'{feedback_properplz} `/att y/n, y/n`')
+                    await ctx.send(f'{feedback_properplz} `/att y/n, y/n` *E.g. `/att y, y` to confirm attend both Silk 2 and 4*')
                     return
                 yes = 0
                 if arglist[1].lower() in answeryes or arglist[1].lower() in answerno:
@@ -706,11 +706,11 @@ For Wanderer: {list_wand}
                         await ctx.send(f'Error on SILK 4: `{e}`')
                         return
                 else:
-                    await ctx.send(f'{feedback_properplz} `/att y/n, y/n`')
+                    await ctx.send(f'{feedback_properplz} `/att y/n, y/n` *E.g. `/att y, y` to confirm attend both Silk 2 and 4*')
                     return
                 yes = 0
             else:
-                await ctx.send(f'{feedback_properplz} `/att y/n, y/n`')
+                await ctx.send(f'{feedback_properplz} `/att y/n, y/n` *E.g. `/att y, y` to confirm attend both Silk 2 and 4*')
                 return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
@@ -1349,10 +1349,12 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
 > **everything** = if you prefer all salary
 > **none** = if you want to waive your salary
 > e.g.  `/celery zeny, +10dex, +20dex, +20int` *(opt to get zeny, +10dex, +20dex and +20int foods)*
+**/celeryhelp**
+> lists down available items for salary
 **/listcelery**
-> list of the salary preferences
+> lists down members' salary preferences
 **/totalcelery**
-> total list of each of the salary preferences
+> shows the total amount of supplies needed based on everyone's salary preferences
 **/changerequest** `class`, *`optional reason`*
 > files a change request to main a different class. An officer will need some time to process your request, please ask them for updates. 
 > e.g. `/changerequest SC, I want to learn SC`

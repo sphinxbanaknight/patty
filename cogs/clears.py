@@ -1483,6 +1483,7 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
             for x in range(len(ign)):
                 ignlist += ign[x] + '\n'
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
+                print(f'{x}')
                 print(f'{ignlist[x]}')
                 print(f'{no_of_pref}')
                 if no_of_pref > 7 or (no_of_pref > 6 and len(ign[x]) > 11):

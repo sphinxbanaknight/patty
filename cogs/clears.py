@@ -54,7 +54,7 @@ authorized_id = [108381986166431744, 127778244383473665, 130885439308431361, 352
 debugger = False
 
 ################ Cell placements ###########################
-guild_range = "B3:E50"
+guild_range = "B3:E99"
 roster_range = "G3:J50"
 matk_range = "L3:M14"
 p1role_range = "P3:P14"
@@ -550,9 +550,9 @@ For Wanderer: {list_wand}
 
         else:
             await ctx.send("Wrong channel! Please use #bot.")
-        cell_list = rostersheet.range("B3:E50")
+        cell_list = rostersheet.range("B3:E99")
         try:
-            rostersheet.sort((4, 'asc'), range="B3:E50")
+            rostersheet.sort((4, 'asc'), range="B3:E99")
         except Exception as e:
             print(e)
             return
@@ -1713,6 +1713,8 @@ For Wanderer: {list_wand}
         except Exception as e:
             print(e)
             return
+            
+        
 
 def setup(client):
     client.add_cog(Clears(client))

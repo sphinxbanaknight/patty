@@ -55,7 +55,7 @@ authorized_id = [sphinx_id, jia_id, 127778244383473665, 130885439308431361, 3520
 
 
 ################ Cell placements ################
-guild_range = "B3:E50"
+guild_range = "B3:E99"
 roster_range = "G3:I50"
 matk_range = "L3:M14"
 p1role_range = "P3:P14"

@@ -551,17 +551,17 @@ For Wanderer: {list_wand}
         else:
             await ctx.send("Wrong channel! Please use #bot.")
         cell_list = rostersheet.range("B3:E99")
-        try:
-            rostersheet.sort((4, 'asc'), range="B3:E99")
-        except Exception as e:
-            print(e)
+        #try:
+        #    rostersheet.sort((4, 'asc'), range="B3:E99")
+        #except Exception as e:
+        #    print(e)
             return
-        cell_list = celesheet.range("B3:T48")
-        celesheet.sort((4, 'asc'), range = "B3:T48")
-        cell_list = silk2.range("B4:E50")
-        silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
-        cell_list = silk4.range("B4:E50")
-        silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+        #cell_list = celesheet.range("B3:T48")
+        #celesheet.sort((4, 'asc'), range = "B3:T48")
+        #cell_list = silk2.range("B4:E50")
+        #silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+        #cell_list = silk4.range("B4:E50")
+        #silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
 
     @commands.command()
     async def att(self, ctx, *, arguments):
@@ -714,10 +714,10 @@ For Wanderer: {list_wand}
                 return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
-        cell_list = silk2.range("B4:E50")
-        silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
-        cell_list = silk4.range("B4:E50")
-        silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+        #cell_list = silk2.range("B4:E50")
+        #silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+        #cell_list = silk4.range("B4:E50")
+        #silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
         count = 0
         yes = 0
         no = 0
@@ -755,25 +755,25 @@ For Wanderer: {list_wand}
                         for cell in cell_list:
                             cell.value = ""
                         rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
+                        #rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                     else:
                         cell_list = rostersheet.range(row_a, 7, row_a, 9)
                         for cell in cell_list:
                             cell.value = ""
                         rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
+                        #rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                 elif row_c < row_a:
                     cell_list = rostersheet.range(row_c, 7, row_c, 9)
                     for cell in cell_list:
                         cell.value = ""
                     rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
+                    #rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                 else:
                     cell_list = rostersheet.range(row_a, 7, row_a, 9)
                     for cell in cell_list:
                         cell.value = ""
                     rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
+                    #rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
             try:
                 namae = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
             except Exception as e:
@@ -1315,10 +1315,10 @@ For Wanderer: {list_wand}
                 celery_list = celesheet.cell(change_row, 20).value
                 await ctx.send(f'```{ctx.author.name} wanted {celery_list}with IGN: {ign.value}, and Class: {role.value}.```')
             cell_list = celesheet.range("B3:T48")
-            try:
-                celesheet.sort((3, 'asc'), range = "B3:T48")
-            except Exception as e:
-                print(f'celesheet sort has returned {e}')
+            #try:
+            #    celesheet.sort((3, 'asc'), range = "B3:T48")
+            #except Exception as e:
+            #    print(f'celesheet sort has returned {e}')
                 return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
@@ -1708,10 +1708,10 @@ For Wanderer: {list_wand}
 
         else:
             await ctx.send("Wrong channel! Please use #bot.")
-        try:
-            crsheet.sort((5, 'asc'), range="A3:G100")
-        except Exception as e:
-            print(e)
+        #try:
+        #    crsheet.sort((5, 'asc'), range="A3:G100")
+        #except Exception as e:
+        #    print(e)
             return
             
         

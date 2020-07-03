@@ -555,7 +555,7 @@ For Wanderer: {list_wand}
         #    rostersheet.sort((4, 'asc'), range="B3:E99")
         #except Exception as e:
         #    print(e)
-            return
+        #    return
         #cell_list = celesheet.range("B3:T48")
         #celesheet.sort((4, 'asc'), range = "B3:T48")
         #cell_list = silk2.range("B4:E50")
@@ -1319,7 +1319,7 @@ For Wanderer: {list_wand}
             #    celesheet.sort((3, 'asc'), range = "B3:T48")
             #except Exception as e:
             #    print(f'celesheet sort has returned {e}')
-                return
+            #    return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
         await msg.delete()

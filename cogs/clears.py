@@ -584,7 +584,7 @@ For Wanderer: {list_wand}
             # else:
             next_row = 3
             found = 0
-            cell_list = rostersheet.range("B3:B50")
+            cell_list = rostersheet.range("B3:B97")
             for cell in cell_list:
                 if cell.value == commander_name:
                     found = 1

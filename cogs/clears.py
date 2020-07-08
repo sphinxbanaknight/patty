@@ -476,7 +476,7 @@ For Wanderer: {list_wand}
                 #    next_row = next_available_row(rostersheet, 2)
                     #list_entry = rostersheet.range(next_row, 3, next_row, 4)
                 next_row = 3
-                cell_list = rostersheet.range("B3:B50")
+                cell_list = rostersheet.range("B3:B97")
                 for cell in cell_list:
                     if cell.value == commander_name:
                         change = 1
@@ -999,7 +999,7 @@ For Wanderer: {list_wand}
             no_of_args = len(arglist)
             found = 0
             next_row = 3
-            cell_list = rostersheet.range("B3:B50")
+            cell_list = rostersheet.range("B3:B97")
             for cell in cell_list:
                 if cell.value == commander_name:
                     found = 1

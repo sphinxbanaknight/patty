@@ -571,9 +571,10 @@ For Wanderer: {list_wand}
         
         arglist = [x.strip() for x in arguments.split(',')]
         no_of_args = len(arglist)
-        if no_of_args != 2
-           or not (arglist[0].lower() in answeryes or arglist[0].lower() in answerno)
-           or not (arglist[1].lower() in answeryes or arglist[1].lower() in answerno):
+        if (no_of_args != 2
+                or not (arglist[0].lower() in answeryes or arglist[0].lower() in answerno)
+                or not (arglist[1].lower() in answeryes or arglist[1].lower() in answerno)
+            ):
             await ctx.send(f'{feedback_properplz} `/att y/n, y/n` *E.g. `/att y, y` to confirm attend both Silk 2 and 4*')
             return
         

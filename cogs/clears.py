@@ -141,17 +141,17 @@ def next_available_row_p3(sheet, column):
 def sortsheet(sheet):
     issuccessful = True
     try:
-        if sheet = rostersheet: 
+        if sheet == rostersheet: 
             rostersheet.sort((4, 'asc'), range="B3:E99")
-        elif sheet = celesheet:
+        elif sheet == celesheet:
             celesheet.sort((4, 'asc'), range = "B3:T99")
-        elif sheet = silk2:
+        elif sheet == silk2:
             silk2.sort((4, 'des'), (3, 'asc'), range="B4:E51")
-        elif sheet = silk4:
+        elif sheet == silk4:
             silk4.sort((4, 'des'), (3, 'asc'), range="B4:E51")
-        elif sheet = crsheet:
+        elif sheet == crsheet:
             crsheet.sort((5, 'asc'), range="A3:G100")
-        elif sheet = fullofsheet:
+        elif sheet == fullofsheet:
             fullofsheet.sort((5, 'asc'), range="B4:H100")
         else:
             issuccessful = False
@@ -569,22 +569,21 @@ For Wanderer: {list_wand}
                 else:
                     await ctx.send(f'{ctx.message.author.mention} {feedback_attplz}')
                     await ctx.send(f'{feedback_celeryplz}')
-
+            try: # Auto-sort
+                issuccessful = sortsheet(rostersheet)
+                if debugger: await ctx.send(f'{feedback_debug} Sorting rostersheet issuccessful={issuccessful}')
+                issuccessful = sortsheet(celesheet)
+                if debugger: await ctx.send(f'{feedback_debug} Sorting celesheet issuccessful={issuccessful}')
+                issuccessful = sortsheet(silk2)
+                if debugger: await ctx.send(f'{feedback_debug} Sorting silk2 issuccessful={issuccessful}')
+                issuccessful = sortsheet(silk4)
+                if debugger: await ctx.send(f'{feedback_debug} Sorting silk4 issuccessful={issuccessful}')
+            except Exception as e:
+                print(e)
+                await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
+                return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
-        try: # Auto-sort
-            issuccessful = sortsheet(rostersheet)
-            if debugger: await ctx.send(f'{feedback_debug} Sorting rostersheet issuccessful={issuccessful}')
-            issuccessful = sortsheet(celesheet)
-            if debugger: await ctx.send(f'{feedback_debug} Sorting celesheet issuccessful={issuccessful}')
-            issuccessful = sortsheet(silk2)
-            if debugger: await ctx.send(f'{feedback_debug} Sorting silk2 issuccessful={issuccessful}')
-            issuccessful = sortsheet(silk4)
-            if debugger: await ctx.send(f'{feedback_debug} Sorting silk4 issuccessful={issuccessful}')
-        except Exception as e:
-            print(e)
-            await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
-            return
 
     @commands.command()
     async def att(self, ctx, *, arguments):
@@ -732,6 +731,15 @@ For Wanderer: {list_wand}
                     await ctx.send(f'{feedback_properplz} `/att y/n, y/n` *E.g. `/att y, y` to confirm attend both Silk 2 and 4*')
                     return
                 yes = 0
+                try: # Auto-sort
+                    issuccessful = sortsheet(silk2)
+                    if debugger: await ctx.send(f'{feedback_debug} Sorting silk2 issuccessful={issuccessful}')
+                    issuccessful = sortsheet(silk4)
+                    if debugger: await ctx.send(f'{feedback_debug} Sorting silk4 issuccessful={issuccessful}')
+                except Exception as e:
+                    print(e)
+                    await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
+                    return
             else:
                 await ctx.send(f'{feedback_properplz} `/att y/n, y/n` *E.g. `/att y, y` to confirm attend both Silk 2 and 4*')
                 return
@@ -740,15 +748,6 @@ For Wanderer: {list_wand}
         count = 0
         yes = 0
         no = 0
-        try: # Auto-sort
-            issuccessful = sortsheet(silk2)
-            if debugger: await ctx.send(f'{feedback_debug} Sorting silk2 issuccessful={issuccessful}')
-            issuccessful = sortsheet(silk4)
-            if debugger: await ctx.send(f'{feedback_debug} Sorting silk4 issuccessful={issuccessful}')
-        except Exception as e:
-            print(e)
-            await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
-            return
 
 
 
@@ -1336,7 +1335,6 @@ For Wanderer: {list_wand}
                 celesheet.update_cells(cell_list, value_input_option='USER_ENTERED')
                 celery_list = celesheet.cell(change_row, 20).value
                 await ctx.send(f'```{ctx.author.name} wanted {celery_list}with IGN: {ign.value}, and Class: {role.value}.```')
-            cell_list = celesheet.range("B3:T48")
             try: # Auto-sort
                 issuccessful = sortsheet(celesheet)
                 if debugger: await ctx.send(f'{feedback_debug} Sorting celesheet issuccessful={issuccessful}')
@@ -1729,13 +1727,13 @@ For Wanderer: {list_wand}
                 if change == 1:
                     await ctx.send(f'``` I found your previous change request, I have cleared that.```')
                     change = 0
-            try: # Auto-sort
-                issuccessful = sortsheet(crsheet)
-                if debugger: await ctx.send(f'{feedback_debug} Sorting crsheet issuccessful={issuccessful}')
-            except Exception as e:
-                print(e)
-                await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
-                return
+                try: # Auto-sort
+                    issuccessful = sortsheet(crsheet)
+                    if debugger: await ctx.send(f'{feedback_debug} Sorting crsheet issuccessful={issuccessful}')
+                except Exception as e:
+                    print(e)
+                    await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
+                    return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
             return

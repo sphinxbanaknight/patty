@@ -479,6 +479,9 @@ async def jytest(ctx):
         if commander.id in authorized_id:
             try:
                 await ctx.send(f'`jytest` start')
+                amember = ctx.author
+                await ctx.send(f'You are... name=`{amember.name}` nick=`{amember.nick}` display_name=`{amember.display_name}` id=`{amember.id}` guild=`{amember.guild}` color=`{amember.color}` roles=`{amember.roles}` ')
+                
                 global isarchived
                 global isreminded1
                 global isreminded2

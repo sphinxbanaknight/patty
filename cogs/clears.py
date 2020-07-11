@@ -138,6 +138,28 @@ def next_available_row_p3(sheet, column):
     cols = sheet.range(32, column, 43, column)
     return max([cell.row for cell in cols if cell.value]) + 1
 
+def sortsheet(sheet):
+    issuccessful = True
+    try:
+        if sheet = rostersheet: 
+           rostersheet.sort((4, 'asc'), range="B3:E99")
+        elif sheet = celesheet:
+            celesheet.sort((4, 'asc'), range = "B3:T99")
+        elif sheet = silk2:
+            silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+        elif sheet = silk4:
+            silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+        elif sheet = crsheet:
+            crsheet.sort((5, 'asc'), range="A3:G100")
+        elif sheet = fullofsheet:
+        
+        else:
+            issuccessful = False
+    except Exception as e:
+        print(f'Exception caught at sortsheet: {e}')
+        issuccessful = False
+    return issuccessful
+
 def get_jobname(input):
     if input.lower() in list_ab:
         jobname = 'AB'
@@ -550,18 +572,19 @@ For Wanderer: {list_wand}
 
         else:
             await ctx.send("Wrong channel! Please use #bot.")
-        cell_list = rostersheet.range("B3:E99")
-        #try:
-        #    rostersheet.sort((4, 'asc'), range="B3:E99")
-        #except Exception as e:
-        #    print(e)
-        #    return
-        #cell_list = celesheet.range("B3:T48")
-        #celesheet.sort((4, 'asc'), range = "B3:T48")
-        #cell_list = silk2.range("B4:E50")
-        #silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
-        #cell_list = silk4.range("B4:E50")
-        #silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+        try: # Auto-sort
+            issuccessful = sortsheet(rostersheet)
+            if debugger: await ctx.send(f'{feedback_debug} Sorting rostersheet issuccessful={issuccessful}')
+            issuccessful = sortsheet(celesheet)
+            if debugger: await ctx.send(f'{feedback_debug} Sorting celesheet issuccessful={issuccessful}')
+            issuccessful = sortsheet(silk2)
+            if debugger: await ctx.send(f'{feedback_debug} Sorting silk2 issuccessful={issuccessful}')
+            issuccessful = sortsheet(silk4)
+            if debugger: await ctx.send(f'{feedback_debug} Sorting silk4 issuccessful={issuccessful}')
+        except Exception as e:
+           print(e)
+           await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
+           return
 
     @commands.command()
     async def att(self, ctx, *, arguments):
@@ -714,13 +737,18 @@ For Wanderer: {list_wand}
                 return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
-        #cell_list = silk2.range("B4:E50")
-        #silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
-        #cell_list = silk4.range("B4:E50")
-        #silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
         count = 0
         yes = 0
         no = 0
+        try: # Auto-sort
+            issuccessful = sortsheet(silk2)
+            if debugger: await ctx.send(f'{feedback_debug} Sorting silk2 issuccessful={issuccessful}')
+            issuccessful = sortsheet(silk4)
+            if debugger: await ctx.send(f'{feedback_debug} Sorting silk4 issuccessful={issuccessful}')
+        except Exception as e:
+           print(e)
+           await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
+           return
 
 
 
@@ -743,7 +771,6 @@ For Wanderer: {list_wand}
             except ValueError:
                 row_a = 3
             msg = await ctx.send(f'`Please wait... I am parsing a list of our WOE Roster. Refrain from entering any other commands.`')
-            #await asyncio.sleep(10)
             while row_n != row_c or row_n != row_a:
                 row_n = next_available_row(rostersheet, 7)
                 row_c = next_available_row(rostersheet, 8)
@@ -755,25 +782,21 @@ For Wanderer: {list_wand}
                         for cell in cell_list:
                             cell.value = ""
                         rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        #rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                     else:
                         cell_list = rostersheet.range(row_a, 7, row_a, 9)
                         for cell in cell_list:
                             cell.value = ""
                         rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        #rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                 elif row_c < row_a:
                     cell_list = rostersheet.range(row_c, 7, row_c, 9)
                     for cell in cell_list:
                         cell.value = ""
                     rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    #rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
                 else:
                     cell_list = rostersheet.range(row_a, 7, row_a, 9)
                     for cell in cell_list:
                         cell.value = ""
                     rostersheet.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    #rostersheet.sort((9, 'des'), (8, 'asc'), range="G3:J48")
             try:
                 namae = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
             except Exception as e:
@@ -836,7 +859,6 @@ For Wanderer: {list_wand}
             await ctx.send(f'Total no. of Yes answers: {yuppie}')
             await ctx.send(f'Total no. of No answers: {noppie}')
             await msg.delete()
-            #return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 
@@ -1315,11 +1337,13 @@ For Wanderer: {list_wand}
                 celery_list = celesheet.cell(change_row, 20).value
                 await ctx.send(f'```{ctx.author.name} wanted {celery_list}with IGN: {ign.value}, and Class: {role.value}.```')
             cell_list = celesheet.range("B3:T48")
-            #try:
-            #    celesheet.sort((3, 'asc'), range = "B3:T48")
-            #except Exception as e:
-            #    print(f'celesheet sort has returned {e}')
-            #    return
+            try: # Auto-sort
+                issuccessful = sortsheet(celesheet)
+                if debugger: await ctx.send(f'{feedback_debug} Sorting celesheet issuccessful={issuccessful}')
+            except Exception as e:
+               print(e)
+               await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
+               return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
         await msg.delete()
@@ -1705,16 +1729,17 @@ For Wanderer: {list_wand}
                 if change == 1:
                     await ctx.send(f'``` I found your previous change request, I have cleared that.```')
                     change = 0
-
+            try: # Auto-sort
+                issuccessful = sortsheet(crsheet)
+                if debugger: await ctx.send(f'{feedback_debug} Sorting crsheet issuccessful={issuccessful}')
+            except Exception as e:
+                print(e)
+                await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
+                return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
-        #try:
-        #    crsheet.sort((5, 'asc'), range="A3:G100")
-        #except Exception as e:
-        #    print(e)
             return
-            
-        
+
 
 def setup(client):
     client.add_cog(Clears(client))

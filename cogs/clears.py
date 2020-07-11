@@ -579,19 +579,23 @@ For Wanderer: {list_wand}
                 else:
                     await ctx.send(f'{ctx.message.author.mention} {feedback_attplz}')
                     await ctx.send(f'{feedback_celeryplz}')
-            try: # Auto-sort
-                issuccessful = sortsheet(rostersheet)
-                if debugger: await ctx.send(f'{feedback_debug} Sorting rostersheet issuccessful={issuccessful}')
-                issuccessful = sortsheet(celesheet)
-                if debugger: await ctx.send(f'{feedback_debug} Sorting celesheet issuccessful={issuccessful}')
-                issuccessful = sortsheet(silk2)
-                if debugger: await ctx.send(f'{feedback_debug} Sorting silk2 issuccessful={issuccessful}')
-                issuccessful = sortsheet(silk4)
-                if debugger: await ctx.send(f'{feedback_debug} Sorting silk4 issuccessful={issuccessful}')
-            except Exception as e:
-                print(e)
-                await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
-                return
+            await autosort(rostersheet)
+            await autosort(celesheet)
+            await autosort(silk2)
+            await autosort(silk4)
+            # try: # Auto-sort
+                # issuccessful = sortsheet(rostersheet)
+                # if debugger: await ctx.send(f'{feedback_debug} Sorting rostersheet issuccessful={issuccessful}')
+                # issuccessful = sortsheet(celesheet)
+                # if debugger: await ctx.send(f'{feedback_debug} Sorting celesheet issuccessful={issuccessful}')
+                # issuccessful = sortsheet(silk2)
+                # if debugger: await ctx.send(f'{feedback_debug} Sorting silk2 issuccessful={issuccessful}')
+                # issuccessful = sortsheet(silk4)
+                # if debugger: await ctx.send(f'{feedback_debug} Sorting silk4 issuccessful={issuccessful}')
+            # except Exception as e:
+                # print(e)
+                # await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
+                # return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
 

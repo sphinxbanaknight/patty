@@ -479,18 +479,16 @@ async def jytest(ctx):
         if commander.id in authorized_id:
             try:
                 await ctx.send(f'`jytest` start')
-                amember = ctx.author
-                await ctx.send(f'You are... name=`{amember.name}` nick=`{amember.nick}` display_name=`{amember.display_name}` id=`{amember.id}` guild=`{amember.guild}` color=`{amember.color}` roles=`{amember.roles}` ')
+                checkid = 699337213896294490
+                amember = [member for member in guild.members if member.id == checkid]
+                await ctx.send(f'debug checkid {checkid}... name=`{amember.name}` nick=`{amember.nick}` display_name=`{amember.display_name}` id=`{amember.id}` guild=`{amember.guild}` ')
                 
-                global isarchived
-                global isreminded1
-                global isreminded2
-                global isremindenabled
-                await ctx.send(f'isarchived={isarchived}, isreminded1={isreminded1}, isreminded2={isreminded2}, isremindenabled={isremindenabled}')
-                
-                debugger = get_debugmode()
-                await ctx.send(f'`jytest` get_debugmode={debugger}')
-                
+                # global isarchived
+                # global isreminded1
+                # global isreminded2
+                # global isremindenabled
+                # await ctx.send(f'isarchived={isarchived}, isreminded1={isreminded1}, isreminded2={isreminded2}, isremindenabled={isremindenabled}')
+                                
                 await ctx.send(f'`jytest` end')
             except Exception as e:
                 await ctx.send(f'Error: `{e}`')

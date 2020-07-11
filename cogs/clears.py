@@ -166,7 +166,7 @@ async def autosort(sheet):
         if debugger: await ctx.send(f'{feedback_debug} Sorting {sheet.title} issuccessful={issuccessful}')
     except Exception as e:
         print(e)
-        await ctx.send(f'{feedback_debug} Error on sorting {sheet.title}: `{e}`')
+        await ctx.send(f'{feedback_debug} Error on sorting sheet: `{e}`')
     return
 
 

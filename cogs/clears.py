@@ -127,22 +127,27 @@ def next_available_row(sheet, column):
     cols = sheet.range(3, column, 50, column)
     return max([cell.row for cell in cols if cell.value]) + 1
 
+
 def next_available_row_p1(sheet, column):
     cols = sheet.range(3, column, 14, column)
     return max([cell.row for cell in cols if cell.value]) + 1
 
+
 def next_available_row_p2(sheet, column):
     cols = sheet.range(17, column, 28, column)
     return max([cell.row for cell in cols if cell.value]) + 1
+
+
 def next_available_row_p3(sheet, column):
     cols = sheet.range(32, column, 43, column)
     return max([cell.row for cell in cols if cell.value]) + 1
+
 
 def sortsheet(sheet):
     issuccessful = True
     try:
         if sheet == rostersheet: 
-            rostersheet.sort((4, 'asc'), range="B3:E99")
+            rostersheet.sort((4, 'asc'), range=guild_range)
         elif sheet == celesheet:
             celesheet.sort((3, 'asc'), range = "B3:T99")
         elif sheet == silk2:
@@ -159,6 +164,7 @@ def sortsheet(sheet):
         print(f'Exception caught at sortsheet: {e}')
         issuccessful = False
     return issuccessful
+
 
 async def autosort(ctx, sheet):
     try: # Auto-sort
@@ -213,6 +219,7 @@ def get_jobname(input):
         jobname = ''
     return jobname
 
+
 def reminder():
     attlist = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
     ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
@@ -246,7 +253,6 @@ class Clears(commands.Cog):
     def get_debugmode(self):
         return debugger
 
-    
     @commands.command()
     async def remind(self, ctx):
         ignlist = [item for item in rostersheet.col_values(3) if item and item != 'IGN' and item != 'READ THE NOTES AT [README]']
@@ -341,37 +347,6 @@ class Clears(commands.Cog):
         else:
             await ctx.send(f'Wrong channel! Please use #bot.')
 
-#    async def sorted(self, ctx):
-#        channel = ctx.message.channel
-#        commander = ctx.author.name
-#        if channel.id == botinit_id:
-#            cell_list = rostersheet.range(guild_range)
-#            rostersheet.sort((4, 'asc'), range=guild_range)
-#            cell_list = rostersheet.range(roster_range)
-#            rostersheet.sort((9, 'des'), (8, 'asc'), range=roster_range)
-#            await ctx.send(f'{commander} has sorted the sheets.')
-#        else:
-#            await ctx.send(f'Wrong channel! Please use #bot.')
-
-#    @commands.command()
-#    async def sorted(self, ctx):
-#        channel = ctx.message.channel
-#        commander = ctx.author.name
-#            #await ctx.send('test')
-#        if channel.id in botinit_id:
-#            cell_list = rostersheet.range("B3:E46")
-#            try:
-#                rostersheet.sort((4, 'asc'), range = "B3:E50")
-#            except Exception as e:
-#                print(e)
-#                return
-#            cell_list = rostersheet.range("G3:J50")
-#            rostersheet.sort((9, 'des'), (8, 'asc'), range = "G3:J50")
-#            celesheet.sort((3, 'asc'), range = "B3:T48")
-#            await ctx.send(f'`{commander} has sorted the sheets.`')
-#        else:
-#            await ctx.send(f'Wrong channel! Please use #bot.')
-
     @commands.command()
     async def clearguild(self, ctx):
         channel = ctx.message.channel
@@ -389,8 +364,6 @@ class Clears(commands.Cog):
         else:
             await ctx.send(f'Wrong channel! Please use #bot.')
         # sh.values_clear("Sheet1!B3:E50")
-
-
 
     @commands.command()
     async def clearroster(self, ctx):
@@ -591,159 +564,130 @@ For Wanderer: {list_wand}
         channel = ctx.message.channel
         commander = ctx.author
         commander_name = commander.name
-        if channel.id in botinit_id:
-            arglist = [x.strip() for x in arguments.split(',')]
-
-            no_of_args = len(arglist)
-
-            # await ctx.send(arglist)
-            # await ctx.send(no_of_args)
-            # return
-            yes = 0
-
-            # if no_of_args < 1:
-            #    await ctx.send('{feedback_properplz}``/att y/n, y/n`')
-            #    return
-            # else:
-            next_row = 3
-            found = 0
-            cell_list = rostersheet.range("B3:B97")
-            for cell in cell_list:
-                if cell.value == commander_name:
-                    found = 1
-                    break
-                next_row += 1
-            if found == 0:
-                await ctx.send(f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional comment)`')
-                return
-            #try:
-            #    uname = rostersheet.find(ctx.author.name)
-            #    next_row = uname.row
-            #except gspread.exceptions.CellNotFound:
-            #    await ctx.send(
-            #        f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional comment)`')
-            #    return
-            #        await ctx.send('test1')
-
-            ign = rostersheet.cell(next_row, 3)
-            role = rostersheet.cell(next_row, 4)
-
-            finding_column2 = silk2.range("B3:B50".format(rostersheet.row_count))
-            finding_column4 = silk4.range("B3:B50".format(rostersheet.row_count))
-
-            foundign2 = [found for found in finding_column2 if found.value == ign.value]
-            foundign4 = [found for found in finding_column4 if found.value == ign.value]
-
-            if no_of_args == 2:
-                if arglist[0].lower() in answeryes or arglist[0].lower() in answerno:
-                    try:
-                        if foundign2:
-                            change_row = foundign2[0].row
-                        else:
-                            try:
-                                change_row = next_available_row(silk2, 2)
-                            except ValueError as e:
-                                change_row = 4
-                        if debugger: await ctx.send(f'{feedback_debug} SILK 2 change_row=`{change_row}`')
-                        cell_list = silk2.range(change_row, 2, change_row, 4)
-                        count = 0
-                        # await ctx.send('test2')
-                        for cell in cell_list:
-                            # await ctx.send(f'test3 {ign.value} {role.value} {count}')
-                            if count == 0:
-                                # await ctx.send(f'test4 {ign.value} {role.value} {count}')
-                                cell.value = ign.value
-                            elif count == 1:
-                                # await ctx.send(f'test5 {ign.value} {role.value} {count}')
-                                cell.value = role.value
-                            elif count == 2:
-                                # await ctx.send(f'test6 {ign.value} {role.value} {count}')
-                                if arglist[0].lower() in answeryes:
-                                    cell.value = 'Yes'
-                                    yes = 1
-                                else:
-                                    cell.value = 'No'
-                                re_answer = cell.value
-                            count += 1
-                    except Exception as e:
-                        await ctx.send(f'Error on SILK 2: `{e}`')
-                        return
-                    
-                    # Ignore silk 2 entry if entered between post-silk 2 and pre-silk 4 time
-                    isskip = False
-                    try:
-                        my_time = pytz.timezone('Asia/Kuala_Lumpur')
-                        my_time_unformatted = datetime.datetime.now(my_time)
-                        my_dow = my_time_unformatted.strftime('%A')
-                        my_timeonly = my_time_unformatted.time()
-                        woeendtime = datetime.time(0, 0) # both silk 2 and 4 end on 00:00:00
-                        if debugger: await ctx.send(f'{feedback_debug} dayofweek=`{my_dow}` timeonly=`{my_timeonly}` woeendtime=`{woeendtime}`')
-                        if my_dow == 'Sunday' and my_timeonly >= woeendtime:
-                            isskip = True
-                    except Exception as e:
-                        await ctx.send(f'Time check error: `{e}`')
-                    
-                    if isskip:
-                        await ctx.send(f'```Ignoring {ctx.author.name}\'s answer {re_answer} for SILK 2 as the WoE for this week has already passed.```')
-                    else:
-                        silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 2 with IGN: {ign.value}, Class: {role.value}.```')
-                else:
-                    await ctx.send(f'{feedback_properplz} `/att y/n, y/n` *E.g. `/att y, y` to confirm attend both Silk 2 and 4*')
-                    return
-                yes = 0
-                if arglist[1].lower() in answeryes or arglist[1].lower() in answerno:
-                    try:
-                        if foundign4:
-                            change_row = foundign4[0].row
-                        else:
-                            try:
-                                change_row = next_available_row(silk4, 2)
-                            except ValueError as e:
-                                change_row = 4
-                            cell_list = silk4.range(change_row, 2, change_row, 4)
-                        if debugger: await ctx.send(f'{feedback_debug} SILK 4 change_row=`{change_row}`')
-                        cell_list = silk4.range(change_row, 2, change_row, 4)
-                        count = 0
-                        # await ctx.send('test2')
-                        for cell in cell_list:
-                            # await ctx.send(f'test3 {ign.value} {role.value} {count}')
-                            if count == 0:
-                                # await ctx.send(f'test4 {ign.value} {role.value} {count}')
-                                cell.value = ign.value
-                            elif count == 1:
-                                # await ctx.send(f'test5 {ign.value} {role.value} {count}')
-                                cell.value = role.value
-                            elif count == 2:
-                                # await ctx.send(f'test6 {ign.value} {role.value} {count}')
-                                if arglist[1].lower() in answeryes:
-                                    cell.value = 'Yes'
-                                    yes = 1
-                                else:
-                                    cell.value = 'No'
-                                re_answer = cell.value
-                            count += 1
-                        silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
-                        await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 4 with IGN: {ign.value}, Class: {role.value}.```')
-                    except Exception as e:
-                        await ctx.send(f'Error on SILK 4: `{e}`')
-                        return
-                else:
-                    await ctx.send(f'{feedback_properplz} `/att y/n, y/n` *E.g. `/att y, y` to confirm attend both Silk 2 and 4*')
-                    return
-                yes = 0
-                await autosort(ctx, silk2)
-                await autosort(ctx, silk4)
-            else:
-                await ctx.send(f'{feedback_properplz} `/att y/n, y/n` *E.g. `/att y, y` to confirm attend both Silk 2 and 4*')
-                return
-        else:
+        
+        if not channel.id in botinit_id:
             await ctx.send("Wrong channel! Please use #bot.")
-        count = 0
+            return
+        
+        arglist = [x.strip() for x in arguments.split(',')]
+        no_of_args = len(arglist)
+        if not (no_of_args == 2
+                and arglist[0].lower() in answeryes or arglist[0].lower() in answerno
+                and arglist[1].lower() in answeryes or arglist[1].lower() in answerno):
+            await ctx.send(f'{feedback_properplz} `/att y/n, y/n` *E.g. `/att y, y` to confirm attend both Silk 2 and 4*')
+            return
+        
+        next_row = 3
+        found = 0
+        cell_list = rostersheet.range("B3:B97")
+        for cell in cell_list:
+            if cell.value == commander_name:
+                found = 1
+                break
+            next_row += 1
+        if found == 0:
+            await ctx.send(f'{ctx.message.author.mention} You have not yet enlisted your character. Please enlist via: `/enlist IGN, class, (optional comment)`')
+            return
+        
+        ign = rostersheet.cell(next_row, 3)
+        role = rostersheet.cell(next_row, 4)
+
+        finding_column2 = silk2.range("B3:B50".format(rostersheet.row_count))
+        finding_column4 = silk4.range("B3:B50".format(rostersheet.row_count))
+
+        foundign2 = [found for found in finding_column2 if found.value == ign.value]
+        foundign4 = [found for found in finding_column4 if found.value == ign.value]
+
+        try:
+            if foundign2:
+                change_row = foundign2[0].row
+            else:
+                try:
+                    change_row = next_available_row(silk2, 2)
+                except ValueError as e:
+                    change_row = 4
+            if debugger: await ctx.send(f'{feedback_debug} SILK 2 change_row=`{change_row}`')
+            cell_list = silk2.range(change_row, 2, change_row, 4)
+            count = 0
+            # await ctx.send('test2')
+            for cell in cell_list:
+                # await ctx.send(f'test3 {ign.value} {role.value} {count}')
+                if count == 0:
+                    # await ctx.send(f'test4 {ign.value} {role.value} {count}')
+                    cell.value = ign.value
+                elif count == 1:
+                    # await ctx.send(f'test5 {ign.value} {role.value} {count}')
+                    cell.value = role.value
+                elif count == 2:
+                    # await ctx.send(f'test6 {ign.value} {role.value} {count}')
+                    if arglist[0].lower() in answeryes:
+                        cell.value = 'Yes'
+                        yes = 1
+                    else:
+                        cell.value = 'No'
+                    re_answer = cell.value
+                count += 1
+        except Exception as e:
+            await ctx.send(f'Error on SILK 2: `{e}`')
+            return
+        
+        # Ignore silk 2 entry if entered between post-silk 2 and pre-silk 4 time
+        isskip = False
+        try:
+            my_time = pytz.timezone('Asia/Kuala_Lumpur')
+            my_time_unformatted = datetime.datetime.now(my_time)
+            my_dow = my_time_unformatted.strftime('%A')
+            my_timeonly = my_time_unformatted.time()
+            woeendtime = datetime.time(0, 0) # both silk 2 and 4 end on 00:00:00
+            if debugger: await ctx.send(f'{feedback_debug} dayofweek=`{my_dow}` timeonly=`{my_timeonly}` woeendtime=`{woeendtime}`')
+            if my_dow == 'Sunday' and my_timeonly >= woeendtime:
+                isskip = True
+        except Exception as e:
+            await ctx.send(f'Time check error: `{e}`')
+        
+        if isskip:
+            await ctx.send(f'```Ignoring {ctx.author.name}\'s answer {re_answer} for SILK 2 as the WoE for this week has already passed.```')
+        else:
+            silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
+            await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 2 with IGN: {ign.value}, Class: {role.value}.```')
         yes = 0
-        no = 0
-
-
+        try:
+            if foundign4:
+                change_row = foundign4[0].row
+            else:
+                try:
+                    change_row = next_available_row(silk4, 2)
+                except ValueError as e:
+                    change_row = 4
+                cell_list = silk4.range(change_row, 2, change_row, 4)
+            if debugger: await ctx.send(f'{feedback_debug} SILK 4 change_row=`{change_row}`')
+            cell_list = silk4.range(change_row, 2, change_row, 4)
+            count = 0
+            # await ctx.send('test2')
+            for cell in cell_list:
+                # await ctx.send(f'test3 {ign.value} {role.value} {count}')
+                if count == 0:
+                    # await ctx.send(f'test4 {ign.value} {role.value} {count}')
+                    cell.value = ign.value
+                elif count == 1:
+                    # await ctx.send(f'test5 {ign.value} {role.value} {count}')
+                    cell.value = role.value
+                elif count == 2:
+                    # await ctx.send(f'test6 {ign.value} {role.value} {count}')
+                    if arglist[1].lower() in answeryes:
+                        cell.value = 'Yes'
+                        yes = 1
+                    else:
+                        cell.value = 'No'
+                    re_answer = cell.value
+                count += 1
+            silk4.update_cells(cell_list, value_input_option='USER_ENTERED')
+            await ctx.send(f'```{ctx.author.name} said {re_answer} for SILK 4 with IGN: {ign.value}, Class: {role.value}.```')
+        except Exception as e:
+            await ctx.send(f'Error on SILK 4: `{e}`')
+            return
+        await autosort(ctx, silk2)
+        await autosort(ctx, silk4)
 
     @commands.command()
     async def list(self, ctx):
@@ -1461,15 +1405,15 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
         commander_name = commander.name
         if channel.id in botinit_id:
             msg = await ctx.send(f'`Please wait... I am parsing a list of our Salary Preferences List. Refrain from entering any other commands.`')
-            cell_list = celesheet.range("C3:C48")
+            cell_list = celesheet.range("C3:C99")
             get_ign = [""]
             for cell in cell_list:
                 get_ign.append(cell.value)
-            cell_list = celesheet.range("D3:D48")
+            cell_list = celesheet.range("D3:D99")
             get_class = [""]
             for cell in cell_list:
                 get_class.append(cell.value)
-            cell_list = celesheet.range("T3:T48")
+            cell_list = celesheet.range("T3:T99")
             get_pref = [""]
             for cell in cell_list:
                 get_pref.append(cell.value)

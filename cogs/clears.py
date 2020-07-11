@@ -160,6 +160,16 @@ def sortsheet(sheet):
         issuccessful = False
     return issuccessful
 
+async def autosort(sheet):
+    try: # Auto-sort
+        issuccessful = sortsheet(sheet)
+        if debugger: await ctx.send(f'{feedback_debug} Sorting {sheet.title} issuccessful={issuccessful}')
+    except Exception as e:
+        print(e)
+        await ctx.send(f'{feedback_debug} Error on sorting {sheet.title}: `{e}`')
+    return
+
+
 def get_jobname(input):
     if input.lower() in list_ab:
         jobname = 'AB'
@@ -1638,7 +1648,7 @@ Siege Whites
         commander = ctx.author
         commander_name = commander.name
         
-        format = "%d/%m/%Y"
+        format = "%m/%d/%Y" # google date format
         my_time = pytz.timezone('Asia/Kuala_Lumpur')
         my_time_unformatted = datetime.datetime.now(my_time)
         my_time_formated = my_time_unformatted.strftime(format)

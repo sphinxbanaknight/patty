@@ -142,17 +142,17 @@ def sortsheet(sheet):
     issuccessful = True
     try:
         if sheet = rostersheet: 
-           rostersheet.sort((4, 'asc'), range="B3:E99")
+            rostersheet.sort((4, 'asc'), range="B3:E99")
         elif sheet = celesheet:
             celesheet.sort((4, 'asc'), range = "B3:T99")
         elif sheet = silk2:
-            silk2.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+            silk2.sort((4, 'des'), (3, 'asc'), range="B4:E51")
         elif sheet = silk4:
-            silk4.sort((4, 'des'), (3, 'asc'), range="B4:E50")
+            silk4.sort((4, 'des'), (3, 'asc'), range="B4:E51")
         elif sheet = crsheet:
             crsheet.sort((5, 'asc'), range="A3:G100")
         elif sheet = fullofsheet:
-        
+            fullofsheet.sort((5, 'asc'), range="B4:H100")
         else:
             issuccessful = False
     except Exception as e:
@@ -582,9 +582,9 @@ For Wanderer: {list_wand}
             issuccessful = sortsheet(silk4)
             if debugger: await ctx.send(f'{feedback_debug} Sorting silk4 issuccessful={issuccessful}')
         except Exception as e:
-           print(e)
-           await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
-           return
+            print(e)
+            await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
+            return
 
     @commands.command()
     async def att(self, ctx, *, arguments):
@@ -746,9 +746,9 @@ For Wanderer: {list_wand}
             issuccessful = sortsheet(silk4)
             if debugger: await ctx.send(f'{feedback_debug} Sorting silk4 issuccessful={issuccessful}')
         except Exception as e:
-           print(e)
-           await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
-           return
+            print(e)
+            await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
+            return
 
 
 
@@ -1341,9 +1341,9 @@ For Wanderer: {list_wand}
                 issuccessful = sortsheet(celesheet)
                 if debugger: await ctx.send(f'{feedback_debug} Sorting celesheet issuccessful={issuccessful}')
             except Exception as e:
-               print(e)
-               await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
-               return
+                print(e)
+                await ctx.send(f'{feedback_debug} Error on sorting: `{e}`')
+                return
         else:
             await ctx.send("Wrong channel! Please use #bot.")
         await msg.delete()

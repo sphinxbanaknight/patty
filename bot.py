@@ -505,4 +505,4 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send('Invalid command used.')
 
-Client.run(os.environ[token], reconnect = True)
+client.run(os.environ[token], reconnect = True)

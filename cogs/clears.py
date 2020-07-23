@@ -1441,11 +1441,11 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
                 #print(f'{x}')
                 #print(f'{ign[x]}')
                 #print(f'{no_of_pref}')
-                if no_of_pref > 7 or (no_of_pref > 7 and len(ign[x]) > 11):
+                if no_of_pref > 7 #or (no_of_pref > 7 and len(ign[x]) < 12):
                     ignlist += '\n'
                     #print('pumasok1')
-                    #if no_of_pref > 12:
-                    #    ignlist += '\n'
+                    if no_of_pref > 11:
+                        ignlist += '\n'
                     #    print('pumasok2')
             x = 0
             for x in range(len(role)):
@@ -1453,8 +1453,8 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
                 if no_of_pref > 7 or (no_of_pref > 7 and len(ign[x]) > 11):
                     classlist += '\n'
-                    #if no_of_pref > 12:
-                    #    classlist += '\n'
+                    if no_of_pref > 11:
+                        classlist += '\n'
             x = 0
             for x in range(len(pref)):
                 preflist += pref[x] + '\n'

@@ -1444,7 +1444,7 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
                 if no_of_pref > 6:
                     ignlist += '\n'
                     #print('pumasok1')
-                    if no_of_pref > 11:
+                    if no_of_pref > 12:
                         ignlist += '\n'
                     #    print('pumasok2')
             x = 0
@@ -1453,7 +1453,7 @@ PLEASE MIND THE COMMA, IT ENSURES THAT I SEE EVERY ARGUMENT:
                 no_of_pref = len([x.strip() for x in pref[x].split(';')])
                 if no_of_pref > 6:
                     classlist += '\n'
-                    if no_of_pref > 11:
+                    if no_of_pref > 12:
                         classlist += '\n'
             x = 0
             for x in range(len(pref)):

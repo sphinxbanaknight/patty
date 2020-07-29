@@ -141,7 +141,7 @@ def pinger():
             if idd == dsc:
                 try:
                     dscid.append(fullofsheet.cell(row, 2).value)
-                except Exceptions as e:
+                except Exception as e:
                     print(f'Exception caught at dsctag: {e}')
                 break
         row += 1

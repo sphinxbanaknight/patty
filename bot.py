@@ -320,7 +320,11 @@ For those who haven't: {feedback_noangrypingplz}'''
                         if debugger:
                             msg1 = await botinitsk.fetch_message(msgid)
                         else:
-                            msg1 = await botinitbkann.fetch_message(msgid)
+                            try: # fetch from announcement or bot
+                                msg1 = await botinitbkann.fetch_message(msgid)
+                            except Exception as e:
+                                try:
+                                    msg1 = await botinitbk.fetch_message(msgid)
                         await msg1.delete()
                     except Exception as e:
                         await botinitsk.send(f'Error: `{e}`. Unable to find and delete message based on `{msgid}`. Please manually delete it.')

@@ -323,8 +323,9 @@ For those who haven't: {feedback_noangrypingplz}'''
                             msg1 = await botinitbkann.fetch_message(msgid)
                         await msg1.delete()
                     except Exception as e:
-                        await botinitsk.send(f'Error: `{e}`')
-                        await botinitsk.send(f'Error: unable to find and delete message based on `{msgid}`. Please manually delete it.')
+                        await botinitsk.send(f'Error: `{e}`. Unable to find and delete message based on `{msgid}`. Please manually delete it.')
+                except Exception as e:
+                    await botinitsk.send(f'Error: `{e}`. Skipping message deletion...')
                 
                 ping_tags = pinger()
                 taglist = ''

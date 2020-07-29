@@ -325,6 +325,8 @@ For those who haven't: {feedback_noangrypingplz}'''
                             except Exception as e:
                                 try:
                                     msg1 = await botinitbk.fetch_message(msgid)
+                                except Exception as e:
+                                    pass
                         await msg1.delete()
                     except Exception as e:
                         await botinitsk.send(f'Error: `{e}`. Unable to find and delete message based on `{msgid}`. Please manually delete it.')

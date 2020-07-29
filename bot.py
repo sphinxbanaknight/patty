@@ -52,6 +52,7 @@ sk_bot = 401212001239564288
 bk_bot = 691205255664500757
 bk_ann = 695801936095740024 #BK #announcement
 authorized_id = [sphinx_id, jia_id, 127778244383473665, 130885439308431361, 352073289155346442]
+dev_id = [sphinx_id, jia_id]
 
 
 ################ Cell placements ################
@@ -70,11 +71,13 @@ isarchived = False # archiving
 isreminded1 = False # reminder wed
 isreminded2 = False # reminder sat
 
-# Default timed event runtime (format = "%H:%M:%S:%A")
-tf_archive = ['00:00:00:Monday', '00:00:00:Sunday']
-tf_remind1 = ['22:00:00:Tuesday']
-tf_remind2 = ['22:00:00:Thursday']
-tf_reset   = ['00:05:00:Monday', '00:05:00:Sunday']
+# Default timed event runtime (format = "%H:%M:%A")
+t_silk2_archive = '00:00:Sunday'
+t_silk4_archive = '00:00:Monday'
+tf_archive = [t_silk2_archive, t_silk4_archive]
+tf_remind1 = [t_silk4_archive]
+tf_remind2 = ['22:00:Wednesday', '22:00:Friday']
+tf_reset   = ['00:05:Sunday', '00:05:Monday', '22:05:Wednesday']
 
 # Responses
 answer_timedevent_archive = ['archive', 'archiving']
@@ -89,7 +92,7 @@ isremindenabled = True # configuration - turn on/off auto-reminder
 feedback_properplz = 'Please send a proper syntax: '
 feedback_debug = '`[DEBUGINFO] `'
 feedback_automsg = '`[Auto-generated message]` '
-feedback_noangrypingplz = 'to avoid <:AngryPing:703193629489102888> from me, please register your attendance before coming Thursday 10PM GMT+8 by typing `/att y/n, y/n` in <#691205255664500757>. Thank you!'
+feedback_noangrypingplz = 'to avoid <:AngryPing:703193629489102888> from me, please register your attendance before coming Wed/Fri 10PM GMT+8 by typing `/att y/n, y/n` in <#691205255664500757>. Thank you!'
 
 
 prefix = ["/"]
@@ -100,7 +103,7 @@ client.remove_command('help')
 
 def istimedeventformat(input):
     try:
-        datetime.strptime(input, '%H:%M:%S:%A')
+        datetime.strptime(input, '%H:%M:%A')
         return True
     except ValueError:
         return False
@@ -202,7 +205,7 @@ async def on_ready():
         wsheet.update_cells(kekerino, value_input_option='USER_ENTERED')
 
     print("Automated Clear Roster Begins!")
-    format = "%H:%M:%S:%A"
+    format = "%H:%M:%A"
 
     ph_time = pytz.timezone('Asia/Manila')
     ph_time_unformated = datetime.now(ph_time)
@@ -215,7 +218,7 @@ async def on_ready():
         ph_time = pytz.timezone('Asia/Manila')
         ph_time_unformated = datetime.now(ph_time)
         ph_time_formated = ph_time_unformated.strftime(format)
-        await asyncio.sleep(0.5)
+        await asyncio.sleep(5)
             
         if not isarchived and ph_time_formated in tf_archive:
             isarchived = True
@@ -236,15 +239,15 @@ async def on_ready():
             ph_time = pytz.timezone('Asia/Manila')
             ph_time_unformated = datetime.now(ph_time)
             ph_time_new_formated = ph_time_unformated.strftime(newformat)
-            if ph_time_formated == "00:00:00:Sunday":
+            if ph_time_formated == t_silk2_archive:
                 for copy in copy_list2:
                     data_pasted.append(copy.value)
-            elif ph_time_formated == "00:00:00:Monday":
+            elif ph_time_formated == t_silk4_archive:
                 for copy in copy_list4:
                     data_pasted.append(copy.value)
             for paste in paste_list:
                 if count == 0:
-                    if ph_time_formated == "00:00:00:Sunday":
+                    if ph_time_formated == t_silk2_archive:
                         d = ph_time_unformated.strftime("%d")
                         d = int(d)
                         d -= 1
@@ -254,7 +257,7 @@ async def on_ready():
                         for cell in cell_list:
                             cell.value = ""
                         silk2.update_cells(cell_list, value_input_option='USER_ENTERED')
-                    elif ph_time_formated == "00:00:00:Monday":
+                    elif ph_time_formated == t_silk4_archive:
                         d = ph_time_unformated.strftime("%d")
                         d = int(d)
                         d -= 1
@@ -319,25 +322,25 @@ For those who haven't: {feedback_noangrypingplz}'''
                         else:
                             msg1 = await botinitbkann.fetch_message(msgid)
                         await msg1.delete()
-                        await msg1.edit(content="Message successfully fetched and deleted.")
                     except Exception as e:
                         await botinitsk.send(f'Error: `{e}`')
-                        await botinitsk.send(f'Error: unable to delete first reminder announcement as message could not be found based on `{msgid}`. Please manually delete it.')
+                        await botinitsk.send(f'Error: unable to find and delete message based on `{msgid}`. Please manually delete it.')
                 
                 ping_tags = pinger()
                 taglist = ''
                 if debugger: #send to test server if on debugmode
-                    dev_list = [sphinx_id, jia_id]
                     for discordtag in ping_tags:
-                        discordtag = random.choice(dev_list) # for testing purpose, use only the developers' id!
+                        discordtag = random.choice(dev_id) # for testing purpose, use only the developers' id!
                         taglist += '<@' + str(discordtag) + '>, '
                     if taglist != '':
-                        await botinitsk.send(f'{feedback_debug} {feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                        msg1 = await botinitsk.send(f'{feedback_debug} {feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
                 else:
                     for discordtag in ping_tags:
                         taglist += '<@' + str(discordtag) + '>, '
                     if taglist != '':
-                        await botinitbk.send(f'{feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                        msg1 = await botinitbk.send(f'{feedback_automsg} Hi {taglist}you have not registered your attendance yet. <:peeposad:702156649992945674> Next time, {feedback_noangrypingplz}')
+                datasheet.update_cell(2, 9, str(msg1.id) ) # save as string to avoid Excel nr truncation
+                if debugger: await botinitsk.send(f'{feedback_debug} msg1 ID saved: `{msg1.id}`')
             except Exception as e:
                 await botinitsk.send(f'Error: `{e}`')
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_unformated.strftime("%H:%M:%S.%f:%A")} Angrypinger2 isreminded2={isreminded2} END')
@@ -348,11 +351,11 @@ For those who haven't: {feedback_noangrypingplz}'''
             isreminded1 = False
             isreminded2 = False
             if debugger: await botinitsk.send(f'{feedback_debug} `[Timed event status reset] isarchived={isarchived} isreminded1={isreminded1} isreminded2={isreminded2}`')
-            # Default timed event runtime (format = "%H:%M:%S:%A")
-            tf_archive = ['00:00:00:Monday', '00:00:00:Sunday']
-            tf_remind1 = ['22:00:00:Tuesday']
-            tf_remind2 = ['22:00:00:Thursday']
-            tf_reset   = ['00:05:00:Monday', '00:05:00:Sunday']
+            # Default timed event runtime (format = "%H:%M:%A")
+            tf_archive = [t_silk2_archive, t_silk4_archive]
+            tf_remind1 = [t_silk4_archive]
+            tf_remind2 = ['22:00:Wednesday', '22:00:Friday']
+            tf_reset   = ['00:05:Sunday', '00:05:Monday', '22:05:Wednesday']
             if debugger: await botinitsk.send(f'{feedback_debug} `[Timed event timers reset] tf_archive={tf_archive} tf_remind1={tf_remind1} tf_remind2={tf_remind2} tf_reset={tf_reset}`')
             continue
 
@@ -420,10 +423,10 @@ async def forcetimedevent(ctx, *, arguments):
             global tf_remind1
             global tf_remind2
             global tf_reset
-            tf_archive = ['00:00:00:Monday', '00:00:00:Sunday']
-            tf_remind1 = ['22:00:00:Tuesday']
-            tf_remind2 = ['22:00:00:Thursday']
-            tf_reset   = ['00:05:00:Monday', '00:05:00:Sunday']
+            tf_archive = [t_silk2_archive, t_silk4_archive]
+            tf_remind1 = [t_silk4_archive]
+            tf_remind2 = ['22:00:Wednesday', '22:00:Friday']
+            tf_reset   = ['00:05:Sunday', '00:05:Monday', '22:05:Wednesday']
 
             if no_of_args == 2:
                 try:
@@ -432,7 +435,7 @@ async def forcetimedevent(ctx, *, arguments):
                     if debugger: await ctx.send(f'{feedback_debug} input: {eventname}, {eventtime}')
                     
                     if not istimedeventformat(eventtime):
-                        await ctx.send(f'{feedback_properplz} Time format should be in H:M:S:Day, e.g. `/forcetimedevent, remind1, 22:00:00:Tuesday`')
+                        await ctx.send(f'{feedback_properplz} Time format should be in H:M:Day, e.g. `/forcetimedevent, remind1, 22:00:Tuesday`')
                         return
                     
                     if eventname in answer_timedevent_archive:
@@ -459,11 +462,11 @@ async def forcetimedevent(ctx, *, arguments):
 `remind1` = {tf_remind1}
 `remind2` = {tf_remind2}
 `reset  ` = {tf_reset}
-e.g. `/forcetimedevent, remind1, 22:00:00:Tuesday`''')
+e.g. `/forcetimedevent, remind1, 22:00:Tuesday`''')
                 except Exception as e:
                     await ctx.send(f'Error: `{e}`')
             else:
-                await ctx.send(f'{feedback_properplz} `/forcetimedevent, <name>, <time>`, e.g. `/forcetimedevent, remind1, 22:00:00:Tuesday`')
+                await ctx.send(f'{feedback_properplz} `/forcetimedevent, <name>, <time>`, e.g. `/forcetimedevent, remind1, 22:00:Tuesday`')
                 return
         else:
             await ctx.send(f'*Nice try pleb.*')
@@ -475,24 +478,29 @@ e.g. `/forcetimedevent, remind1, 22:00:00:Tuesday`''')
 async def jytest(ctx):
     channel = ctx.message.channel
     commander = ctx.author
-    if channel.id in botinit_id:
-        if commander.id in authorized_id:
-            try:
-                await ctx.send(f'`jytest` start')
-                
-                # global isarchived
-                # global isreminded1
-                # global isreminded2
-                # global isremindenabled
-                # await ctx.send(f'isarchived={isarchived}, isreminded1={isreminded1}, isreminded2={isreminded2}, isremindenabled={isremindenabled}')
-                                
-                await ctx.send(f'`jytest` end')
-            except Exception as e:
-                await ctx.send(f'Error: `{e}`')
-        else:
-            await ctx.send(f'*Nice try pleb.*')
-    else:
+    if not channel.id in botinit_id:
         await ctx.send(f'Wrong channel! Please use #bot.')
+        return
+    elif not commander.id in authorized_id:
+        await ctx.send(f'*Nice try pleb.*')
+        return
+    
+    try:
+        await ctx.send(f'`jytest` start')
+        global dev_id
+        dev_id = [commander.id]
+        await ctx.send(f'Overwrote dev_id to you. dev_id={dev_id}')
+        
+        
+        global isarchived
+        global isreminded1
+        global isreminded2
+        global isremindenabled
+        await ctx.send(f'isarchived={isarchived}, isreminded1={isreminded1}, isreminded2={isreminded2}, isremindenabled={isremindenabled}')
+                        
+        await ctx.send(f'`jytest` end')
+    except Exception as e:
+        await ctx.send(f'Error: `{e}`')
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):

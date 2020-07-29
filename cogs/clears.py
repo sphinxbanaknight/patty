@@ -82,7 +82,7 @@ list_se = ['se', 'star emperor', 'hater']
 list_sorc = ['sorc', 'sorcerer']
 list_sr = ['sr', 'soul reaper', 'linker']
 list_sura = ['sura', 'shura', 'asura', 'ashura']
-list_wand = ['wanderer', 'wand', 'wandy']
+list_wand = ['wanderer', 'wand', 'wandie', 'wandy']
 list_wl = ['wl', 'warlock', 'tetra', 'crimson rock', 'cr']
       
   
@@ -212,7 +212,7 @@ def get_jobname(input):
     elif input.lower() in list_sura:
         jobname = 'Sura'
     elif input.lower() in list_wand:
-        jobname = 'Wanderer'
+        jobname = 'Wandie'
     elif input.lower() in list_wl:
         jobname = 'WL'
     else:

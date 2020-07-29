@@ -171,10 +171,8 @@ async def on_ready():
     for server in client.guilds:
         if server.id == sk_server:
             sphinx = server
-            continue
-        if server.id == bk_server:
+        elif server.id == bk_server:
             burger = server
-            continue
 
     for channel in sphinx.channels:
         if channel.id == sk_bot:
@@ -185,7 +183,6 @@ async def on_ready():
             botinitbk = channel
         elif channel.id == bk_ann:
             botinitbkann = channel
-            break
 
     print('Bot is online.')
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Getting scolded by Jia'))

@@ -125,7 +125,8 @@ feedback_debug = '`[DEBUGINFO] `'
 
 def next_available_row(sheet, column):
     cols = sheet.range(3, column, 99, column)
-    return max([cell.row for cell in cols if cell.value]) + 1
+    #return max([cell.row for cell in cols if cell.value]) + 1
+    return min([cell.row for cell in cols if cell.value is None])
 
 
 def next_available_row_p1(sheet, column):

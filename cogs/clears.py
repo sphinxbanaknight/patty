@@ -151,7 +151,7 @@ def sortsheet(sheet):
         elif sheet == celesheet:
             celesheet.sort((3, 'asc'), range = "B3:T99")
         elif sheet == silk2:
-            silk2.sort((4, 'des'), (3, 'asc'), (2, 'asc') range="B4:E51")
+            silk2.sort((4, 'des'), (3, 'asc'), (2, 'asc'), range="B4:E51")
         elif sheet == silk4:
             silk4.sort((4, 'des'), (3, 'asc'), (2, 'asc'), range="B4:E51")
         elif sheet == crsheet:

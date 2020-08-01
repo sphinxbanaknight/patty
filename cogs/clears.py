@@ -123,10 +123,9 @@ feedback_debug = '`[DEBUGINFO] `'
 
 
 
-def next_available_row(sheet, column):
-    cols = sheet.range(3, column, 99, column)
-    #return max([cell.row for cell in cols if cell.value]) + 1
-    return min([cell.row for cell in cols if cell.value is None])
+def next_available_row(sheet, column, lastrow):
+    cols = sheet.range(3, column, lastrow, column)
+    return max([cell.row for cell in cols if cell.value]) + 1
 
 
 def next_available_row_p1(sheet, column):
@@ -148,17 +147,17 @@ def sortsheet(sheet):
     issuccessful = True
     try:
         if sheet == rostersheet: 
-            rostersheet.sort((4, 'asc'), range=guild_range)
+            rostersheet.sort((4, 'asc'), (3, 'asc'), range=guild_range)
         elif sheet == celesheet:
             celesheet.sort((3, 'asc'), range = "B3:T99")
         elif sheet == silk2:
-            silk2.sort((4, 'des'), (3, 'asc'), range="B4:E51")
+            silk2.sort((4, 'des'), (3, 'asc'), (2, 'asc') range="B4:E51")
         elif sheet == silk4:
-            silk4.sort((4, 'des'), (3, 'asc'), range="B4:E51")
+            silk4.sort((4, 'des'), (3, 'asc'), (2, 'asc'), range="B4:E51")
         elif sheet == crsheet:
             crsheet.sort((5, 'asc'), range="A3:G100")
         elif sheet == fullofsheet:
-            fullofsheet.sort((5, 'asc'), range="B4:H100")
+            fullofsheet.sort((5, 'asc'), (4, 'asc'), range="B4:H100")
         else:
             issuccessful = False
     except Exception as e:
@@ -472,15 +471,6 @@ For Wanderer: {list_wand}
                                     ''')
                     return
                 change = 0
-                #try:
-                #    uname = rostersheet.find(commander_name)
-                #    if uname:
-                #        next_row = uname.row
-                #        ign = rostersheet.cell(next_row, 3)
-                #        change = 1
-                #except gspread.exceptions.CellNotFound:
-                #    next_row = next_available_row(rostersheet, 2)
-                    #list_entry = rostersheet.range(next_row, 3, next_row, 4)
                 next_row = 3
                 cell_list = rostersheet.range("B3:B99")
                 for cell in cell_list:
@@ -490,7 +480,7 @@ For Wanderer: {list_wand}
                         break
                     next_row += 1
                 if change == 0:
-                    next_row = next_available_row(rostersheet, 2)
+                    next_row = next_available_row(rostersheet, 2, 99)
 
                 count = 0
 
@@ -605,7 +595,7 @@ For Wanderer: {list_wand}
                 change_row = foundign2[0].row
             else:
                 try:
-                    change_row = next_available_row(silk2, 2)
+                    change_row = next_available_row(silk2, 2, 51)
                 except ValueError as e:
                     change_row = 4
             if debugger: await ctx.send(f'{feedback_debug} SILK 2 change_row=`{change_row}`')
@@ -658,7 +648,7 @@ For Wanderer: {list_wand}
                 change_row = foundign4[0].row
             else:
                 try:
-                    change_row = next_available_row(silk4, 2)
+                    change_row = next_available_row(silk4, 2, 51)
                 except ValueError as e:
                     change_row = 4
                 cell_list = silk4.range(change_row, 2, change_row, 4)
@@ -698,22 +688,22 @@ For Wanderer: {list_wand}
         commander_name = commander.name
         if channel.id in botinit_id:
             try:
-                row_n = next_available_row(rostersheet, 7)
+                row_n = next_available_row(rostersheet, 7, 99)
             except ValueError:
                 row_n = 3
             try:
-                row_c = next_available_row(rostersheet, 8)
+                row_c = next_available_row(rostersheet, 8, 99)
             except ValueError:
                 row_c = 3
             try:
-                row_a = next_available_row(rostersheet, 9)
+                row_a = next_available_row(rostersheet, 9, 99)
             except ValueError:
                 row_a = 3
             msg = await ctx.send(f'`Please wait... I am parsing a list of our WOE Roster. Refrain from entering any other commands.`')
             while row_n != row_c or row_n != row_a:
-                row_n = next_available_row(rostersheet, 7)
-                row_c = next_available_row(rostersheet, 8)
-                row_a = next_available_row(rostersheet, 9)
+                row_n = next_available_row(rostersheet, 7, 99)
+                row_c = next_available_row(rostersheet, 8, 99)
+                row_a = next_available_row(rostersheet, 9, 99)
 
                 if row_n < row_c:
                     if row_n < row_a:
@@ -1128,7 +1118,7 @@ For Wanderer: {list_wand}
                 await ctx.send(f'```{ctx.author.name} wanted {celery_list}with IGN: {ign.value}, and Class: {role.value}.```')
             else:
                 try:
-                    change_row = next_available_row(celesheet, 2)
+                    change_row = next_available_row(celesheet, 2, 99)
                 except ValueError as e:
                     change_row = 3
                 cell_list = celesheet.range(change_row, 2, change_row, 26)

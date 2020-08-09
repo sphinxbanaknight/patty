@@ -85,7 +85,7 @@ answer_timedevent_remind1 = ['remind1']
 answer_timedevent_remind2 = ['remind2']
 answer_timedevent_reset = ['reset', 'refresh', 'init']
 
-isremindenabled = True # configuration - turn on/off auto-reminder
+isremindenabled = False # configuration - turn on/off auto-reminder
 
 
 ################ Feedbacks ################
@@ -286,9 +286,13 @@ async def on_ready():
             if debugger: await botinitsk.send(f'{feedback_debug} {ph_time_formated} Reminder1 isreminded1={isreminded1} START')
             isreminded1 = True
             try:
-                att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
-                nratt = len(att_igns)
-                msgstr = f'''{feedback_automsg}
+                # different reminder message depending on timing
+                if ph_time_formated == t_silk4_archive:
+                    msgstr = f'''{feedback_automsg} Hi folks, hope you enjoyed your weekend! For next week, {feedback_noangrypingplz}'''
+                else:
+                    att_igns = [item for item in rostersheet.col_values(7) if item and item != 'IGN' and item != 'Next WOE:']
+                    nratt = len(att_igns)
+                    msgstr = f'''{feedback_automsg}
 Hi all,
 
 Currently we have {nratt} members who have registered their attendance, great job!
